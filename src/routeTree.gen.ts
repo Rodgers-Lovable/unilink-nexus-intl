@@ -16,6 +16,7 @@ import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
 import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
+import { Route as ExplorePathwayAdvisorRouteImport } from './routes/explore.pathway-advisor'
 import { Route as LegalPageRouteImport } from './routes/legal.$page'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
 import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
@@ -59,6 +60,11 @@ const DestinationsIndexRoute = DestinationsIndexRouteImport.update({
 const DestinationsSlugRoute = DestinationsSlugRouteImport.update({
   id: '/destinations/$slug',
   path: '/destinations/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExplorePathwayAdvisorRoute = ExplorePathwayAdvisorRouteImport.update({
+  id: '/explore/pathway-advisor',
+  path: '/explore/pathway-advisor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalPageRoute = LegalPageRouteImport.update({
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
+  '/explore/pathway-advisor': typeof ExplorePathwayAdvisorRoute
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
+  '/explore/pathway-advisor': typeof ExplorePathwayAdvisorRoute
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
+  '/explore/pathway-advisor': typeof ExplorePathwayAdvisorRoute
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -171,6 +180,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/about/team'
     | '/destinations/$slug'
+    | '/explore/pathway-advisor'
     | '/legal/$page'
     | '/resources/$slug'
     | '/services/$slug'
@@ -189,6 +199,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/about/team'
     | '/destinations/$slug'
+    | '/explore/pathway-advisor'
     | '/legal/$page'
     | '/resources/$slug'
     | '/services/$slug'
@@ -207,6 +218,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/about/team'
     | '/destinations/$slug'
+    | '/explore/pathway-advisor'
     | '/legal/$page'
     | '/resources/$slug'
     | '/services/$slug'
@@ -226,6 +238,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   AboutTeamRoute: typeof AboutTeamRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
+  ExplorePathwayAdvisorRoute: typeof ExplorePathwayAdvisorRoute
   LegalPageRoute: typeof LegalPageRoute
   ResourcesSlugRoute: typeof ResourcesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
@@ -288,6 +301,13 @@ declare module '@tanstack/react-router' {
       path: '/destinations/$slug'
       fullPath: '/destinations/$slug'
       preLoaderRoute: typeof DestinationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore/pathway-advisor': {
+      id: '/explore/pathway-advisor'
+      path: '/explore/pathway-advisor'
+      fullPath: '/explore/pathway-advisor'
+      preLoaderRoute: typeof ExplorePathwayAdvisorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal/$page': {
@@ -362,6 +382,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   AboutTeamRoute: AboutTeamRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
+  ExplorePathwayAdvisorRoute: ExplorePathwayAdvisorRoute,
   LegalPageRoute: LegalPageRoute,
   ResourcesSlugRoute: ResourcesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
