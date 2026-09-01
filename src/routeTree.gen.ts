@@ -30,6 +30,7 @@ import { Route as StudyAbroadIndexRouteImport } from './routes/study-abroad.inde
 import { Route as StudyAbroadApplicationProcessRouteImport } from './routes/study-abroad.application-process'
 import { Route as StudyAbroadFaqRouteImport } from './routes/study-abroad.faq'
 import { Route as StudyAbroadHowItWorksRouteImport } from './routes/study-abroad.how-it-works'
+import { Route as StudyAbroadPreparationRouteImport } from './routes/study-abroad.preparation'
 import { Route as SuccessStoriesIndexRouteImport } from './routes/success-stories.index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -139,6 +140,11 @@ const StudyAbroadHowItWorksRoute = StudyAbroadHowItWorksRouteImport.update({
   path: '/study-abroad/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudyAbroadPreparationRoute = StudyAbroadPreparationRouteImport.update({
+  id: '/study-abroad/preparation',
+  path: '/study-abroad/preparation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SuccessStoriesIndexRoute = SuccessStoriesIndexRouteImport.update({
   id: '/success-stories/',
   path: '/success-stories/',
@@ -161,6 +167,7 @@ export interface FileRoutesByFullPath {
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/study-abroad/preparation': typeof StudyAbroadPreparationRoute
   '/about/': typeof AboutIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/explore/': typeof ExploreIndexRoute
@@ -185,6 +192,7 @@ export interface FileRoutesByTo {
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/study-abroad/preparation': typeof StudyAbroadPreparationRoute
   '/about': typeof AboutIndexRoute
   '/destinations': typeof DestinationsIndexRoute
   '/explore': typeof ExploreIndexRoute
@@ -210,6 +218,7 @@ export interface FileRoutesById {
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/study-abroad/preparation': typeof StudyAbroadPreparationRoute
   '/about/': typeof AboutIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/explore/': typeof ExploreIndexRoute
@@ -236,6 +245,7 @@ export interface FileRouteTypes {
     | '/study-abroad/application-process'
     | '/study-abroad/faq'
     | '/study-abroad/how-it-works'
+    | '/study-abroad/preparation'
     | '/about/'
     | '/destinations/'
     | '/explore/'
@@ -260,6 +270,7 @@ export interface FileRouteTypes {
     | '/study-abroad/application-process'
     | '/study-abroad/faq'
     | '/study-abroad/how-it-works'
+    | '/study-abroad/preparation'
     | '/about'
     | '/destinations'
     | '/explore'
@@ -284,6 +295,7 @@ export interface FileRouteTypes {
     | '/study-abroad/application-process'
     | '/study-abroad/faq'
     | '/study-abroad/how-it-works'
+    | '/study-abroad/preparation'
     | '/about/'
     | '/destinations/'
     | '/explore/'
@@ -309,6 +321,7 @@ export interface RootRouteChildren {
   StudyAbroadApplicationProcessRoute: typeof StudyAbroadApplicationProcessRoute
   StudyAbroadFaqRoute: typeof StudyAbroadFaqRoute
   StudyAbroadHowItWorksRoute: typeof StudyAbroadHowItWorksRoute
+  StudyAbroadPreparationRoute: typeof StudyAbroadPreparationRoute
   AboutIndexRoute: typeof AboutIndexRoute
   DestinationsIndexRoute: typeof DestinationsIndexRoute
   ExploreIndexRoute: typeof ExploreIndexRoute
@@ -467,6 +480,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudyAbroadHowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/study-abroad/preparation': {
+      id: '/study-abroad/preparation'
+      path: '/study-abroad/preparation'
+      fullPath: '/study-abroad/preparation'
+      preLoaderRoute: typeof StudyAbroadPreparationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/success-stories/': {
       id: '/success-stories/'
       path: '/success-stories'
@@ -493,6 +513,7 @@ const rootRouteChildren: RootRouteChildren = {
   StudyAbroadApplicationProcessRoute: StudyAbroadApplicationProcessRoute,
   StudyAbroadFaqRoute: StudyAbroadFaqRoute,
   StudyAbroadHowItWorksRoute: StudyAbroadHowItWorksRoute,
+  StudyAbroadPreparationRoute: StudyAbroadPreparationRoute,
   AboutIndexRoute: AboutIndexRoute,
   DestinationsIndexRoute: DestinationsIndexRoute,
   ExploreIndexRoute: ExploreIndexRoute,
