@@ -88,11 +88,6 @@ export default function Home() {
                 </Button>
               </div>
             </RevealImmediate>
-            <RevealImmediate delay={0.32}>
-              <p className="mt-6">
-                <TextLink to="/explore/how-it-works">See how UniLink works</TextLink>
-              </p>
-            </RevealImmediate>
           </div>
           <Reveal delay={0.2} distance={24} className="relative">
             <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
