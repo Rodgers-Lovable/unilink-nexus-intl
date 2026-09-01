@@ -28,7 +28,7 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
-type Status = "idle" | "sending" | "sent" | "error";
+type Status = "idle" | "sending" | "sent" | "skipped" | "error";
 
 function ContactPage() {
   const [status, setStatus] = useState<Status>("idle");
@@ -62,7 +62,9 @@ function ContactPage() {
       }),
     });
 
-    setStatus(result.status === "error" ? "error" : "sent");
+    setStatus(
+      result.status === "error" ? "error" : result.status === "skipped" ? "skipped" : "sent",
+    );
   };
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -108,12 +110,20 @@ function ContactPage() {
           </div>
 
           <Card>
-            {status === "sent" ? (
+            {status === "sent" || status === "skipped" ? (
               <div className="py-8 text-center">
                 <h2 className="text-h3">Message received</h2>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  Thank you for reaching out. A UniLink adviser will respond as soon as possible.
-                </p>
+                {status === "sent" ? (
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    Thank you for reaching out. A UniLink adviser will respond as soon as possible.
+                  </p>
+                ) : (
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    Your message has been recorded, but our email delivery service is not
+                    configured yet — to guarantee a response, please contact us directly using
+                    the phone, WhatsApp or email details shown on this page.
+                  </p>
+                )}
               </div>
             ) : (
               <form onSubmit={submit} className="space-y-4">
