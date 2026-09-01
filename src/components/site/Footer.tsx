@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin, Mail, MessageCircle, Phone } from "lucide-react";
-import { LogoMark } from "./Logo";
+import { Logo } from "./Logo";
 import { contactInfo } from "@/data/site";
 
 const quickLinks = [
@@ -12,10 +12,10 @@ const quickLinks = [
 ];
 
 const legalLinks = [
-  { label: "Privacy Policy", to: "/privacy-policy" },
-  { label: "Terms of Use", to: "/terms" },
-  { label: "Cookie Policy", to: "/cookie-policy" },
-  { label: "Disclaimer", to: "/disclaimer" },
+  { label: "Privacy Policy", page: "privacy-policy" },
+  { label: "Terms of Use", page: "terms" },
+  { label: "Cookie Policy", page: "cookie-policy" },
+  { label: "Disclaimer", page: "disclaimer" },
 ];
 
 export function Footer() {
@@ -23,11 +23,7 @@ export function Footer() {
     <footer className="bg-navy text-white/80">
       <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
-          <div className="flex items-center gap-2.5">
-            <LogoMark />
-            <span className="text-[15px] font-extrabold tracking-tight text-white">UNILINK NEXUS</span>
-          </div>
-          <p className="text-sm text-blue-soft">Your Link to Global Opportunities</p>
+          <Logo variant="light" />
           <p className="max-w-xs text-sm leading-relaxed">
             Personalised international education guidance, from first questions to departure.
           </p>
@@ -86,8 +82,12 @@ export function Footer() {
           <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-white">Legal</h2>
           <ul className="mt-4 space-y-3 text-sm">
             {legalLinks.map((l) => (
-              <li key={l.to}>
-                <Link to={l.to} className="transition-colors hover:text-white">
+              <li key={l.page}>
+                <Link
+                  to="/legal/$page"
+                  params={{ page: l.page }}
+                  className="transition-colors hover:text-white"
+                >
                   {l.label}
                 </Link>
               </li>
