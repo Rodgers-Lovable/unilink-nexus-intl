@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import {
   Compass,
-  Layers,
+  Route as RouteIcon,
+  Globe,
   FileText,
-  ShieldCheck,
-  Luggage,
+  Banknote,
+  Users,
+  School,
   Quote,
   type LucideIcon,
 } from "lucide-react";
@@ -28,10 +30,12 @@ export const destinationImages: Record<string, string> = {
 
 export const serviceIcons: Record<Service["icon"], LucideIcon> = {
   compass: Compass,
-  layers: Layers,
+  route: RouteIcon,
+  globe: Globe,
   fileText: FileText,
-  shieldCheck: ShieldCheck,
-  luggage: Luggage,
+  banknote: Banknote,
+  users: Users,
+  school: School,
 };
 
 export function DestinationCard({ destination, detailed = false }: { destination: Destination; detailed?: boolean }) {
