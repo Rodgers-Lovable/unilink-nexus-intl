@@ -29,6 +29,7 @@ import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as StudyAbroadIndexRouteImport } from './routes/study-abroad.index'
 import { Route as StudyAbroadApplicationProcessRouteImport } from './routes/study-abroad.application-process'
 import { Route as StudyAbroadFaqRouteImport } from './routes/study-abroad.faq'
+import { Route as StudyAbroadHowItWorksRouteImport } from './routes/study-abroad.how-it-works'
 import { Route as SuccessStoriesIndexRouteImport } from './routes/success-stories.index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -133,6 +134,11 @@ const StudyAbroadFaqRoute = StudyAbroadFaqRouteImport.update({
   path: '/study-abroad/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudyAbroadHowItWorksRoute = StudyAbroadHowItWorksRouteImport.update({
+  id: '/study-abroad/how-it-works',
+  path: '/study-abroad/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SuccessStoriesIndexRoute = SuccessStoriesIndexRouteImport.update({
   id: '/success-stories/',
   path: '/success-stories/',
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/services/$slug': typeof ServicesSlugRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
+  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
   '/about/': typeof AboutIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/explore/': typeof ExploreIndexRoute
@@ -177,6 +184,7 @@ export interface FileRoutesByTo {
   '/services/$slug': typeof ServicesSlugRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
+  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
   '/about': typeof AboutIndexRoute
   '/destinations': typeof DestinationsIndexRoute
   '/explore': typeof ExploreIndexRoute
@@ -201,6 +209,7 @@ export interface FileRoutesById {
   '/services/$slug': typeof ServicesSlugRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
+  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
   '/about/': typeof AboutIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/explore/': typeof ExploreIndexRoute
@@ -226,6 +235,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/study-abroad/application-process'
     | '/study-abroad/faq'
+    | '/study-abroad/how-it-works'
     | '/about/'
     | '/destinations/'
     | '/explore/'
@@ -249,6 +259,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/study-abroad/application-process'
     | '/study-abroad/faq'
+    | '/study-abroad/how-it-works'
     | '/about'
     | '/destinations'
     | '/explore'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/study-abroad/application-process'
     | '/study-abroad/faq'
+    | '/study-abroad/how-it-works'
     | '/about/'
     | '/destinations/'
     | '/explore/'
@@ -296,6 +308,7 @@ export interface RootRouteChildren {
   ServicesSlugRoute: typeof ServicesSlugRoute
   StudyAbroadApplicationProcessRoute: typeof StudyAbroadApplicationProcessRoute
   StudyAbroadFaqRoute: typeof StudyAbroadFaqRoute
+  StudyAbroadHowItWorksRoute: typeof StudyAbroadHowItWorksRoute
   AboutIndexRoute: typeof AboutIndexRoute
   DestinationsIndexRoute: typeof DestinationsIndexRoute
   ExploreIndexRoute: typeof ExploreIndexRoute
@@ -447,6 +460,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudyAbroadFaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/study-abroad/how-it-works': {
+      id: '/study-abroad/how-it-works'
+      path: '/study-abroad/how-it-works'
+      fullPath: '/study-abroad/how-it-works'
+      preLoaderRoute: typeof StudyAbroadHowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/success-stories/': {
       id: '/success-stories/'
       path: '/success-stories'
@@ -472,6 +492,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesSlugRoute: ServicesSlugRoute,
   StudyAbroadApplicationProcessRoute: StudyAbroadApplicationProcessRoute,
   StudyAbroadFaqRoute: StudyAbroadFaqRoute,
+  StudyAbroadHowItWorksRoute: StudyAbroadHowItWorksRoute,
   AboutIndexRoute: AboutIndexRoute,
   DestinationsIndexRoute: DestinationsIndexRoute,
   ExploreIndexRoute: ExploreIndexRoute,
