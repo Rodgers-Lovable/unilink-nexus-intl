@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin, Mail, MessageCircle, Phone } from "lucide-react";
-import { LogoMark } from "./Logo";
+import { Logo } from "./Logo";
 import { contactInfo } from "@/data/site";
 
 const quickLinks = [
@@ -23,11 +23,7 @@ export function Footer() {
     <footer className="bg-navy text-white/80">
       <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
-          <div className="flex items-center gap-2.5">
-            <LogoMark />
-            <span className="text-[15px] font-extrabold tracking-tight text-white">UNILINK NEXUS</span>
-          </div>
-          <p className="text-sm text-blue-soft">Your Link to Global Opportunities</p>
+          <Logo variant="light" />
           <p className="max-w-xs text-sm leading-relaxed">
             Personalised international education guidance, from first questions to departure.
           </p>
