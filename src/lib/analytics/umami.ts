@@ -9,10 +9,13 @@
  * local development and previews behave exactly as before.
  */
 
-const WEBSITE_ID = import.meta.env.VITE_UMAMI_WEBSITE_ID as string | undefined;
-const SCRIPT_SRC = import.meta.env.VITE_UMAMI_SRC as string | undefined;
+const WEBSITE_ID = import.meta.env["VITE_UMAMI_WEBSITE_ID"] as string | undefined;
+const SCRIPT_SRC = import.meta.env["VITE_UMAMI_SRC"] as string | undefined;
 
-type UmamiTrack = (eventName?: string, eventData?: Record<string, string | number>) => void;
+type UmamiTrack = (
+  event?: string | ((props: Record<string, unknown>) => Record<string, unknown>),
+  eventData?: Record<string, string | number>,
+) => void;
 
 declare global {
   interface Window {
