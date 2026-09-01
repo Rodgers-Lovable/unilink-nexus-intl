@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Compass, GraduationCap, MapPin, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { storeApplicationHandoff } from "@/lib/application/applicationService";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { QuestionBlock } from "./PathwayShell";
@@ -181,6 +182,20 @@ export function PathwayResults({
             </li>
           ))}
         </ol>
+      </section>
+
+      {/* Ready to apply */}
+      <section className="mt-12 rounded-2xl border border-orange/30 bg-orange/5 p-6 sm:p-8">
+        <h3 className="text-h3">Ready to take the next step?</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          Start your application profile and we&apos;ll carry over what you&apos;ve told us here, so
+          you don&apos;t have to answer the same questions twice.
+        </p>
+        <Button asChild variant="cta" size="lg" className="mt-5">
+          <Link to="/apply" onClick={() => storeApplicationHandoff(profile)}>
+            Start My Application
+          </Link>
+        </Button>
       </section>
 
       {/* Adviser */}

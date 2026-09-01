@@ -64,7 +64,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <Button asChild variant="cta" className="hidden sm:inline-flex">
-            <Link to="/book-consultation">Book a Consultation</Link>
+            <Link to="/apply">Start My Application</Link>
           </Button>
           <button
             type="button"
@@ -126,6 +126,11 @@ export function Navbar() {
             )}
             <div className="grid gap-2 pt-4">
               <Button asChild variant="cta" size="lg" className="w-full">
+                <Link to="/apply" onClick={() => setOpen(false)}>
+                  Start My Application
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="w-full">
                 <Link to="/book-consultation" onClick={() => setOpen(false)}>
                   Book a Consultation
                 </Link>
