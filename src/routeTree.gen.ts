@@ -16,7 +16,7 @@ import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
 import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
-import { Route as LegalRouteImport } from './routes/legal.'
+import { Route as LegalPageRouteImport } from './routes/legal.$page'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
 import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
@@ -63,9 +63,9 @@ const DestinationsSlugRoute = DestinationsSlugRouteImport.update({
   path: '/destinations/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LegalRoute = LegalRouteImport.update({
-  id: '/legal/',
-  path: '/legal/',
+const LegalPageRoute = LegalPageRouteImport.update({
+  id: '/legal/$page',
+  path: '/legal/$page',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
@@ -124,9 +124,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
-  '/legal/': typeof LegalRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
+  '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
@@ -144,9 +144,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
-  '/legal': typeof LegalRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
+  '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
@@ -165,9 +165,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
-  '/legal/': typeof LegalRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
+  '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
@@ -187,9 +187,9 @@ export interface FileRouteTypes {
     | '/'
     | '/book-consultation'
     | '/contact'
-    | '/legal/'
     | '/about/team'
     | '/destinations/$slug'
+    | '/legal/$page'
     | '/resources/$slug'
     | '/services/$slug'
     | '/study-abroad/application-process'
@@ -207,9 +207,9 @@ export interface FileRouteTypes {
     | '/'
     | '/book-consultation'
     | '/contact'
-    | '/legal'
     | '/about/team'
     | '/destinations/$slug'
+    | '/legal/$page'
     | '/resources/$slug'
     | '/services/$slug'
     | '/study-abroad/application-process'
@@ -227,9 +227,9 @@ export interface FileRouteTypes {
     | '/'
     | '/book-consultation'
     | '/contact'
-    | '/legal/'
     | '/about/team'
     | '/destinations/$slug'
+    | '/legal/$page'
     | '/resources/$slug'
     | '/services/$slug'
     | '/study-abroad/application-process'
@@ -248,9 +248,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookConsultationRoute: typeof BookConsultationRoute
   ContactRoute: typeof ContactRoute
-  LegalRoute: typeof LegalRoute
   AboutTeamRoute: typeof AboutTeamRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
+  LegalPageRoute: typeof LegalPageRoute
   ResourcesSlugRoute: typeof ResourcesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   StudyAbroadApplicationProcessRoute: typeof StudyAbroadApplicationProcessRoute
@@ -316,11 +316,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DestinationsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/legal/': {
-      id: '/legal/'
-      path: '/legal'
-      fullPath: '/legal/'
-      preLoaderRoute: typeof LegalRouteImport
+    '/legal/$page': {
+      id: '/legal/$page'
+      path: '/legal/$page'
+      fullPath: '/legal/$page'
+      preLoaderRoute: typeof LegalPageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources/': {
@@ -400,9 +400,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookConsultationRoute: BookConsultationRoute,
   ContactRoute: ContactRoute,
-  LegalRoute: LegalRoute,
   AboutTeamRoute: AboutTeamRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
+  LegalPageRoute: LegalPageRoute,
   ResourcesSlugRoute: ResourcesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   StudyAbroadApplicationProcessRoute: StudyAbroadApplicationProcessRoute,
