@@ -1,63 +1,80 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { PageHero, Breadcrumbs, CTABanner } from "@/components/site/primitives";
+import {
+  Breadcrumbs,
+  PageHero,
+  SectionHeading,
+  Card,
+  Placeholder,
+  CTABanner,
+} from "@/components/site/primitives";
 import { howItWorksStages } from "@/data/site";
 
 export const Route = createFileRoute("/study-abroad/how-it-works")({
   head: () => ({
     meta: [
-      { title: "How It Works — Study Abroad Process | Unilink Nexus" },
+      { title: "How Studying Abroad Works | UniLink Nexus International" },
       {
         name: "description",
         content:
-          "A seven-stage view of the Unilink Nexus study-abroad process, from your first conversation to arriving at your institution.",
+          "A step-by-step view of the international study process — from first conversation to arrival — so you know what happens, when, and what is expected of you.",
       },
-      { property: "og:title", content: "How It Works — Study Abroad Process" },
+      { property: "og:title", content: "How Studying Abroad Works" },
       {
         property: "og:description",
-        content: "From first conversation to arrival: the stages of a supported study-abroad journey.",
+        content: "The international study process, stage by stage.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:url", content: "/study-abroad/how-it-works" },
     ],
     links: [{ rel: "canonical", href: "/study-abroad/how-it-works" }],
   }),
-  component: HowItWorks,
+  component: StudyAbroadHowItWorksPage,
 });
 
-function HowItWorks() {
+function StudyAbroadHowItWorksPage() {
   return (
     <>
       <Breadcrumbs items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "How It Works" }]} />
       <PageHero
-        eyebrow="How It Works"
-        title="A clear path from first question to first day."
-        description="Each stage builds on the last, so nothing important is left until it is too late."
-      />
+        eyebrow="Study Abroad"
+        title="What the process actually looks like"
+        description="Studying abroad is a sequence of manageable steps, not one large decision. Here is the order in which they usually happen."
+      >
+        <Button asChild variant="cta" size="lg">
+          <Link to="/explore/pathway-advisor">Discover My Pathway</Link>
+        </Button>
+        <Button asChild variant="outline" size="lg">
+          <Link to="/study-abroad/application-process">Application Process</Link>
+        </Button>
+      </PageHero>
 
       <section className="section-y">
-        <div className="container-page max-w-3xl">
-          <ol className="relative space-y-10 border-l border-border pl-8">
+        <div className="container-page">
+          <SectionHeading eyebrow="Step by step" title="From first question to first week" />
+          <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {howItWorksStages.map((stage, i) => (
-              <li key={stage.title} className="relative">
-                <span className="absolute -left-[41px] flex size-8 items-center justify-center rounded-full border border-border bg-card text-xs font-extrabold text-blue">
-                  {i + 1}
-                </span>
-                <h2 className="text-h3">{stage.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {stage.description}
-                </p>
+              <li key={stage.title}>
+                <Card className="h-full">
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-sm font-extrabold text-blue-bright">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="text-base font-bold">{stage.title}</h3>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {stage.description}
+                  </p>
+                </Card>
               </li>
             ))}
           </ol>
-
-          <div className="mt-14 rounded-xl border border-border bg-surface p-8 text-center">
-            <h2 className="text-h3">Start with a free consultation</h2>
-            <p className="lead mt-3">
-              A first conversation costs nothing and gives you a realistic view of your options.
-            </p>
-            <Button asChild variant="cta" size="lg" className="mt-6">
-              <Link to="/book-consultation">Book a Consultation</Link>
-            </Button>
+          <div className="mt-10 max-w-2xl">
+            <Placeholder>
+              Timelines and requirements differ by destination, institution and intake. UniLink
+              provides advisory guidance only and does not guarantee admission or visa outcomes.
+            </Placeholder>
           </div>
         </div>
       </section>

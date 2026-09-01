@@ -94,7 +94,7 @@ export function CTABanner({
             <Link to="/book-consultation">Book a Consultation</Link>
           </Button>
           <Button asChild variant="onNavy" size="lg">
-            <Link to="/study-abroad/eligibility">Check My Eligibility</Link>
+            <Link to="/explore/pathway-advisor">Discover My Pathway</Link>
           </Button>
         </div>
       </div>
