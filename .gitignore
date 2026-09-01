@@ -30,3 +30,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.lovable/
+.claude/
+
+.env
+.env.local
