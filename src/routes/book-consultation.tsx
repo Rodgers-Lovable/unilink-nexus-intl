@@ -69,8 +69,8 @@ function BookPage() {
           </div>
           <p className="mt-8 text-sm text-muted-foreground">
             Prefer a quicker start?{" "}
-            <Link to="/study-abroad/eligibility" className="font-semibold text-blue hover:underline">
-              Check your eligibility first
+            <Link to="/explore/pathway-advisor" className="font-semibold text-blue hover:underline">
+              Discover your pathway first
             </Link>
             .
           </p>

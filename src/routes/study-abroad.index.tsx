@@ -66,7 +66,10 @@ function StudyAbroad() {
         description="A clear view of what the process involves, so you can make decisions with context instead of guesswork."
       >
         <Button asChild variant="cta" size="lg">
-          <Link to="/study-abroad/eligibility">Check My Eligibility</Link>
+          <Link to="/explore/pathway-advisor">Discover My Pathway</Link>
+        </Button>
+        <Button asChild variant="outline" size="lg">
+          <Link to="/apply">Start My Application</Link>
         </Button>
         <Button asChild variant="outline" size="lg">
           <Link to="/study-abroad/how-it-works">See How It Works</Link>

@@ -2,28 +2,37 @@ export type NavLink = { label: string; to: string };
 export type NavItem = { label: string; to: string; children?: NavLink[] };
 
 export const navItems: NavItem[] = [
-  { label: "Home", to: "/" },
+  {
+    label: "Explore",
+    to: "/explore",
+    children: [
+      { label: "Explore Overview", to: "/explore" },
+      { label: "UniLink Pathway Advisor", to: "/explore/pathway-advisor" },
+      { label: "Career & Subject Guidance", to: "/explore/career-subject-guidance" },
+      { label: "Destination Explorer", to: "/explore/destinations" },
+      { label: "How It Works", to: "/explore/how-it-works" },
+    ],
+  },
   {
     label: "Study Abroad",
     to: "/study-abroad",
     children: [
       { label: "Overview", to: "/study-abroad" },
-      { label: "Check Your Eligibility", to: "/study-abroad/eligibility" },
       { label: "How It Works", to: "/study-abroad/how-it-works" },
       { label: "Application Process", to: "/study-abroad/application-process" },
+      { label: "Preparation & Requirements", to: "/study-abroad/preparation" },
+      { label: "Destinations", to: "/destinations" },
       { label: "FAQs", to: "/study-abroad/faq" },
     ],
   },
-  { label: "Destinations", to: "/destinations" },
   {
     label: "How We Help",
     to: "/services",
     children: [
-      { label: "Study Counselling", to: "/services/study-counselling" },
-      { label: "Course & University Selection", to: "/services/course-selection" },
-      { label: "Application Support", to: "/services/application-support" },
-      { label: "Visa Guidance", to: "/services/visa-guidance" },
-      { label: "Pre-departure Support", to: "/services/pre-departure" },
+      { label: "All Services", to: "/services" },
+      { label: "For Students", to: "/explore" },
+      { label: "For Parents", to: "/parents" },
+      { label: "For Schools", to: "/schools" },
     ],
   },
   { label: "Resources", to: "/resources" },
@@ -31,7 +40,8 @@ export const navItems: NavItem[] = [
     label: "About",
     to: "/about",
     children: [
-      { label: "About Unilink", to: "/about" },
+      { label: "About UniLink", to: "/about" },
+      { label: "Our Approach", to: "/about/approach" },
       { label: "Our Team", to: "/about/team" },
       { label: "Success Stories", to: "/success-stories" },
       { label: "Contact", to: "/contact" },

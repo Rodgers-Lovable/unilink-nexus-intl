@@ -86,7 +86,7 @@ function ArticlePage() {
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <Button asChild variant="cta">
-                <Link to="/study-abroad/eligibility">Check Eligibility</Link>
+                <Link to="/explore/pathway-advisor">Discover My Pathway</Link>
               </Button>
               <Button asChild variant="outline">
                 <Link to="/book-consultation">Book Consultation</Link>
