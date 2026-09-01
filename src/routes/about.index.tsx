@@ -75,18 +75,18 @@ function AboutPage() {
       <section className="section-y">
         <div className="container-page grid gap-10 lg:grid-cols-2">
           <div>
-            <SectionHeading title="Meet the team" />
+            <SectionHeading title="Our approach" />
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Our advisors work across counselling, applications and student support.
+              Discover, Explore, Plan, Prepare, Connect — the framework behind every conversation.
             </p>
             <Button asChild variant="navy" className="mt-6">
-              <Link to="/about/team">Meet Our Team</Link>
+              <Link to="/about/approach">Read Our Approach</Link>
             </Button>
           </div>
           <div>
             <SectionHeading title="Student outcomes" />
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Read sample stories showing how guidance turns into real study plans.
+              Read stories showing how guidance turns into real study plans.
             </p>
             <Button asChild variant="outline" className="mt-6">
               <Link to="/success-stories">View Success Stories</Link>
@@ -95,8 +95,7 @@ function AboutPage() {
         </div>
         <div className="container-page mt-8 max-w-2xl">
           <Placeholder>
-            Company details, affiliations and statistics must be verified before publication.
-            [Content to be confirmed]
+            Company registration details, affiliations and statistics are pending confirmation.
           </Placeholder>
         </div>
       </section>
