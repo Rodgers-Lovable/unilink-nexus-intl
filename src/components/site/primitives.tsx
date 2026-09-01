@@ -4,6 +4,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion";
+import { heroImages, type HeroImageKey } from "@/components/site/hero-images";
 import { cn } from "@/lib/utils";
 
 export function SectionHeading({
