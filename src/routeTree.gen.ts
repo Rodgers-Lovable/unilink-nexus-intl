@@ -19,6 +19,7 @@ import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slu
 import { Route as ExploreIndexRouteImport } from './routes/explore.index'
 import { Route as ExploreCareerSubjectGuidanceRouteImport } from './routes/explore.career-subject-guidance'
 import { Route as ExploreDestinationsRouteImport } from './routes/explore.destinations'
+import { Route as ExploreHowItWorksRouteImport } from './routes/explore.how-it-works'
 import { Route as ExplorePathwayAdvisorRouteImport } from './routes/explore.pathway-advisor'
 import { Route as LegalPageRouteImport } from './routes/legal.$page'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
@@ -81,6 +82,11 @@ const ExploreDestinationsRoute = ExploreDestinationsRouteImport.update({
   path: '/explore/destinations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExploreHowItWorksRoute = ExploreHowItWorksRouteImport.update({
+  id: '/explore/how-it-works',
+  path: '/explore/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExplorePathwayAdvisorRoute = ExplorePathwayAdvisorRouteImport.update({
   id: '/explore/pathway-advisor',
   path: '/explore/pathway-advisor',
@@ -141,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
   '/explore/destinations': typeof ExploreDestinationsRoute
+  '/explore/how-it-works': typeof ExploreHowItWorksRoute
   '/explore/pathway-advisor': typeof ExplorePathwayAdvisorRoute
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
@@ -163,6 +170,7 @@ export interface FileRoutesByTo {
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
   '/explore/destinations': typeof ExploreDestinationsRoute
+  '/explore/how-it-works': typeof ExploreHowItWorksRoute
   '/explore/pathway-advisor': typeof ExplorePathwayAdvisorRoute
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
@@ -186,6 +194,7 @@ export interface FileRoutesById {
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
   '/explore/destinations': typeof ExploreDestinationsRoute
+  '/explore/how-it-works': typeof ExploreHowItWorksRoute
   '/explore/pathway-advisor': typeof ExplorePathwayAdvisorRoute
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
@@ -210,6 +219,7 @@ export interface FileRouteTypes {
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
     | '/explore/destinations'
+    | '/explore/how-it-works'
     | '/explore/pathway-advisor'
     | '/legal/$page'
     | '/resources/$slug'
@@ -232,6 +242,7 @@ export interface FileRouteTypes {
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
     | '/explore/destinations'
+    | '/explore/how-it-works'
     | '/explore/pathway-advisor'
     | '/legal/$page'
     | '/resources/$slug'
@@ -254,6 +265,7 @@ export interface FileRouteTypes {
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
     | '/explore/destinations'
+    | '/explore/how-it-works'
     | '/explore/pathway-advisor'
     | '/legal/$page'
     | '/resources/$slug'
@@ -277,6 +289,7 @@ export interface RootRouteChildren {
   DestinationsSlugRoute: typeof DestinationsSlugRoute
   ExploreCareerSubjectGuidanceRoute: typeof ExploreCareerSubjectGuidanceRoute
   ExploreDestinationsRoute: typeof ExploreDestinationsRoute
+  ExploreHowItWorksRoute: typeof ExploreHowItWorksRoute
   ExplorePathwayAdvisorRoute: typeof ExplorePathwayAdvisorRoute
   LegalPageRoute: typeof LegalPageRoute
   ResourcesSlugRoute: typeof ResourcesSlugRoute
@@ -364,6 +377,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExploreDestinationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/explore/how-it-works': {
+      id: '/explore/how-it-works'
+      path: '/explore/how-it-works'
+      fullPath: '/explore/how-it-works'
+      preLoaderRoute: typeof ExploreHowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/explore/pathway-advisor': {
       id: '/explore/pathway-advisor'
       path: '/explore/pathway-advisor'
@@ -445,6 +465,7 @@ const rootRouteChildren: RootRouteChildren = {
   DestinationsSlugRoute: DestinationsSlugRoute,
   ExploreCareerSubjectGuidanceRoute: ExploreCareerSubjectGuidanceRoute,
   ExploreDestinationsRoute: ExploreDestinationsRoute,
+  ExploreHowItWorksRoute: ExploreHowItWorksRoute,
   ExplorePathwayAdvisorRoute: ExplorePathwayAdvisorRoute,
   LegalPageRoute: LegalPageRoute,
   ResourcesSlugRoute: ResourcesSlugRoute,
