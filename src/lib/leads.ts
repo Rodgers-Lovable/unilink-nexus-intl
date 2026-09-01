@@ -1,10 +1,15 @@
-import type { EligibilityAssessment, EligibilityProfile } from "./eligibility/types";
+import type { PathwayProfile, PathwayResult } from "./pathway/types";
 
 export type ContactMethod = "WhatsApp" | "Phone call" | "Email";
 export type LeadStatus = "New" | "Contacted" | "In progress" | "Closed";
-export type LeadSource = "eligibility-assessment" | "book-consultation" | "contact-form";
+export type LeadSource =
+  | "pathway-advisor"
+  | "book-consultation"
+  | "contact-form"
+  | "school-programmes"
+  | "parent-guidance";
 
-/** Shape a future CRM / admin dashboard can render directly. */
+/** Shape a future CRM / adviser dashboard can render directly. */
 export type Lead = {
   id: string;
   createdAt: string;
@@ -18,15 +23,13 @@ export type Lead = {
   currentCountry?: string;
   destinationInterest?: string[];
   studyLevel?: string;
-  field?: string;
-  qualification?: string;
-  grade?: string;
-  englishStatus?: string;
+  interests?: string[];
+  subjects?: string[];
   budget?: string;
-  intake?: string;
+  entryYear?: string;
   notes?: string;
-  profile?: EligibilityProfile;
-  assessmentSummary?: string;
+  profile?: PathwayProfile;
+  pathwaySummary?: string;
 };
 
 const STORAGE_KEY = "unilink.leads";
@@ -55,9 +58,9 @@ export async function saveLead(lead: Omit<Lead, "id" | "createdAt" | "status">):
   return record;
 }
 
-export function leadFromAssessment(
-  profile: EligibilityProfile,
-  assessment: EligibilityAssessment,
+export function leadFromPathway(
+  profile: PathwayProfile,
+  result: PathwayResult,
   contact: {
     fullName: string;
     email: string;
@@ -66,20 +69,18 @@ export function leadFromAssessment(
   },
 ): Omit<Lead, "id" | "createdAt" | "status"> {
   return {
-    source: "eligibility-assessment",
+    source: "pathway-advisor",
     ...contact,
     consent: true,
-    currentCountry: profile.currentCountry,
+    currentCountry: profile.country,
     destinationInterest: profile.preferredDestinations,
-    studyLevel: profile.targetStudyLevel,
-    field: profile.targetField,
-    qualification: profile.highestQualification,
-    grade: `${profile.qualificationGrade} ${profile.gradeScale}`.trim(),
-    englishStatus: `${profile.englishTestType} ${profile.englishTestScore}`.trim(),
+    studyLevel: profile.level,
+    interests: profile.interests,
+    subjects: profile.subjects,
     budget: profile.budgetRange,
-    intake: profile.targetIntake,
-    notes: profile.additionalContext,
+    entryYear: profile.targetEntryYear,
+    notes: profile.notes,
     profile,
-    assessmentSummary: assessment.narrative,
+    pathwaySummary: result.narrative,
   };
 }
