@@ -75,7 +75,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         for (const legal of Object.values(legalDocuments)) {
           entries.push({
             path: `/legal/${encodeURIComponent(legal.slug)}`,
-            lastmod: legal.updated,
+            lastmod: isPlaceholder(legal.updated) ? undefined : legal.updated,
             changefreq: "yearly",
             priority: "0.3",
           });
