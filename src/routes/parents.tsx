@@ -7,7 +7,7 @@ import {
   Placeholder,
   CTABanner,
 } from "@/components/site/primitives";
-import { parentTopics, parentQuestions } from "@/data/site";
+import { parentTopics, parentQuestions } from "@/data/programmes";
 
 export const Route = createFileRoute("/parents")({
   head: () => ({

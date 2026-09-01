@@ -8,14 +8,7 @@ import {
   Placeholder,
   CTABanner,
 } from "@/components/site/primitives";
-import { schoolProgrammeFormats } from "@/data/site";
-
-const outcomes = [
-  "Students understand how subject choices affect future options",
-  "Career conversations start earlier and with better information",
-  "Parents receive consistent, accurate guidance",
-  "Staff have a structured framework to refer students to",
-];
+import { schoolProgrammeFormats, schoolOutcomes } from "@/data/programmes";
 
 export const Route = createFileRoute("/schools")({
   head: () => ({
@@ -82,7 +75,7 @@ function SchoolsPage() {
             </p>
           </div>
           <div className="rounded-xl border border-border bg-card p-6 shadow-card">
-            <CheckList items={outcomes} />
+            <CheckList items={schoolOutcomes} />
           </div>
         </div>
       </section>
@@ -90,8 +83,7 @@ function SchoolsPage() {
       <section className="pb-16">
         <div className="container-page max-w-2xl">
           <Placeholder>
-            Programme formats, durations and fees are to be confirmed with each school. [Content to
-            be confirmed]
+            Programme formats, durations and fees are agreed with each school individually.
           </Placeholder>
         </div>
       </section>
