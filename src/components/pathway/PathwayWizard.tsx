@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -94,217 +95,267 @@ export function PathwayWizard() {
     return <PathwayResults profile={profile} result={result} onRestart={restart} />;
   }
 
+  const stepVariants = {
+    initial: { opacity: 0, x: 18 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -12 },
+  };
+
   return (
     <div className="mx-auto max-w-3xl">
       <ProgressBar current={step} />
 
-      {step === 0 && (
-        <>
-          <StepHeader
-            question="What are you curious about?"
-            helper="Pick as many as you like. There are no wrong answers."
-          />
-          <ChoiceCards
-            legend="Interests"
-            options={interestOptions}
-            value={profile.interests}
-            onSelect={toggle("interests")}
-            multiple
-            columns={2}
-          />
-          {errors['interests'] && (
-            <p role="alert" className="mt-3 text-xs font-medium text-destructive">
-              {errors['interests']}
+      <AnimatePresence mode="wait">
+        {step === 0 && (
+          <motion.div
+            key="step-0"
+            variants={stepVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <StepHeader
+              question="What are you curious about?"
+              helper="Pick as many as you like. There are no wrong answers."
+            />
+            <ChoiceCards
+              legend="Interests"
+              options={interestOptions}
+              value={profile.interests}
+              onSelect={toggle("interests")}
+              multiple
+              columns={2}
+            />
+            {errors['interests'] && (
+              <p role="alert" className="mt-3 text-xs font-medium text-destructive">
+                {errors['interests']}
+              </p>
+            )}
+          </motion.div>
+        )}
+
+        {step === 1 && (
+          <motion.div
+            key="step-1"
+            variants={stepVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <StepHeader
+              question="What are you good at or enjoy studying?"
+              helper="Not sure? Choose the subjects you enjoy most."
+            />
+            <ChoiceCards
+              legend="Subjects and strengths"
+              options={subjectOptions}
+              value={profile.subjects}
+              onSelect={toggle("subjects")}
+              multiple
+              columns={2}
+            />
+          </motion.div>
+        )}
+
+        {step === 2 && (
+          <motion.div
+            key="step-2"
+            variants={stepVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <StepHeader
+              question="Where are you in your studies right now?"
+              helper="This helps us keep suggestions realistic for your stage."
+            />
+            <div className="mt-6 space-y-10">
+              <QuestionBlock label="Country of residence" error={errors['country']}>
+                <ChoiceCards
+                  legend="Country of residence"
+                  options={countryOptions}
+                  value={profile.country}
+                  onSelect={(v) => set("country", v)}
+                  columns={2}
+                />
+              </QuestionBlock>
+
+              <QuestionBlock label="What stage are you at?" error={errors['level']}>
+                <ChoiceCards
+                  legend="Stage of study"
+                  options={stageOptions}
+                  value={profile.level}
+                  onSelect={(v) => set("level", v)}
+                  columns={2}
+                />
+              </QuestionBlock>
+
+              <QuestionBlock label="What curriculum or qualification are you following?">
+                <ChoiceCards
+                  legend="Curriculum"
+                  options={curriculumOptions}
+                  value={profile.curriculum}
+                  onSelect={(v) => set("curriculum", v)}
+                  columns={2}
+                />
+              </QuestionBlock>
+
+              <QuestionBlock
+                label="How would you describe your current academic performance?"
+                hint="An honest estimate is enough — exact grades are not needed yet."
+              >
+                <ChoiceCards
+                  legend="Academic performance"
+                  options={performanceOptions}
+                  value={profile.performance}
+                  onSelect={(v) => set("performance", v)}
+                  columns={2}
+                />
+              </QuestionBlock>
+            </div>
+          </motion.div>
+        )}
+
+        {step === 3 && (
+          <motion.div
+            key="step-3"
+            variants={stepVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <StepHeader
+              question="Where would you like to study?"
+              helper="You don't need to choose one country. We can compare several options."
+            />
+            <ChoiceCards
+              legend="Destinations"
+              options={destinationOptions}
+              value={profile.preferredDestinations}
+              onSelect={toggle("preferredDestinations")}
+              multiple
+              columns={3}
+            />
+            {errors['preferredDestinations'] && (
+              <p role="alert" className="mt-3 text-xs font-medium text-destructive">
+                {errors['preferredDestinations']}
+              </p>
+            )}
+            <p className="mt-5 rounded-lg border border-dashed border-border bg-surface p-4 text-xs leading-relaxed text-muted-foreground">
+              These are exploratory destination options. UniLink does not claim to represent
+              institutions in these destinations. [Content to be confirmed]
             </p>
-          )}
-        </>
-      )}
+          </motion.div>
+        )}
 
-      {step === 1 && (
-        <>
-          <StepHeader
-            question="What are you good at or enjoy studying?"
-            helper="Not sure? Choose the subjects you enjoy most."
-          />
-          <ChoiceCards
-            legend="Subjects and strengths"
-            options={subjectOptions}
-            value={profile.subjects}
-            onSelect={toggle("subjects")}
-            multiple
-            columns={2}
-          />
-        </>
-      )}
+        {step === 4 && (
+          <motion.div
+            key="step-4"
+            variants={stepVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <StepHeader
+              question="A few practical preferences"
+              helper="Your budget does not define your potential. It helps us identify realistic routes and understand where funding may matter."
+            />
+            <div className="mt-6 space-y-10">
+              <QuestionBlock label="Approximate annual budget">
+                <ChoiceCards
+                  legend="Budget"
+                  options={budgetOptions}
+                  value={profile.budgetRange}
+                  onSelect={(v) => set("budgetRange", v)}
+                  columns={2}
+                />
+              </QuestionBlock>
 
-      {step === 2 && (
-        <>
-          <StepHeader
-            question="Where are you in your studies right now?"
-            helper="This helps us keep suggestions realistic for your stage."
-          />
-          <div className="mt-6 space-y-10">
-            <QuestionBlock label="Country of residence" error={errors['country']}>
-              <ChoiceCards
-                legend="Country of residence"
-                options={countryOptions}
-                value={profile.country}
-                onSelect={(v) => set("country", v)}
-                columns={2}
-              />
-            </QuestionBlock>
+              <QuestionBlock label="Would funding or a scholarship be important?">
+                <ChoiceCards
+                  legend="Funding importance"
+                  options={scholarshipOptions}
+                  value={profile.scholarshipImportance}
+                  onSelect={(v) => set("scholarshipImportance", v)}
+                  columns={2}
+                />
+              </QuestionBlock>
 
-            <QuestionBlock label="What stage are you at?" error={errors['level']}>
-              <ChoiceCards
-                legend="Stage of study"
-                options={stageOptions}
-                value={profile.level}
-                onSelect={(v) => set("level", v)}
-                columns={2}
-              />
-            </QuestionBlock>
+              <QuestionBlock label="Preferred teaching language">
+                <ChoiceCards
+                  legend="Teaching language"
+                  options={languageOptions}
+                  value={profile.languagePreference}
+                  onSelect={(v) => set("languagePreference", v)}
+                  columns={2}
+                />
+              </QuestionBlock>
 
-            <QuestionBlock label="What curriculum or qualification are you following?">
-              <ChoiceCards
-                legend="Curriculum"
-                options={curriculumOptions}
-                value={profile.curriculum}
-                onSelect={(v) => set("curriculum", v)}
-                columns={2}
-              />
-            </QuestionBlock>
+              <QuestionBlock label="How far are you willing to travel?">
+                <ChoiceCards
+                  legend="Travel preference"
+                  options={travelOptions}
+                  value={profile.travelPreference}
+                  onSelect={(v) => set("travelPreference", v)}
+                  columns={1}
+                />
+              </QuestionBlock>
+            </div>
+          </motion.div>
+        )}
 
-            <QuestionBlock
-              label="How would you describe your current academic performance?"
-              hint="An honest estimate is enough — exact grades are not needed yet."
-            >
-              <ChoiceCards
-                legend="Academic performance"
-                options={performanceOptions}
-                value={profile.performance}
-                onSelect={(v) => set("performance", v)}
-                columns={2}
-              />
-            </QuestionBlock>
-          </div>
-        </>
-      )}
+        {step === 5 && (
+          <motion.div
+            key="step-5"
+            variants={stepVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <StepHeader
+              question="Anything else about your situation?"
+              helper="All optional. Only share information you're comfortable providing."
+            />
+            <div className="mt-6 space-y-10">
+              <QuestionBlock label="Which of these describe you?">
+                <ChoiceCards
+                  legend="Your situation"
+                  options={situationOptions}
+                  value={profile.studentSituation}
+                  onSelect={toggle("studentSituation")}
+                  multiple
+                  columns={2}
+                />
+              </QuestionBlock>
 
-      {step === 3 && (
-        <>
-          <StepHeader
-            question="Where would you like to study?"
-            helper="You don't need to choose one country. We can compare several options."
-          />
-          <ChoiceCards
-            legend="Destinations"
-            options={destinationOptions}
-            value={profile.preferredDestinations}
-            onSelect={toggle("preferredDestinations")}
-            multiple
-            columns={3}
-          />
-          {errors['preferredDestinations'] && (
-            <p role="alert" className="mt-3 text-xs font-medium text-destructive">
-              {errors['preferredDestinations']}
-            </p>
-          )}
-          <p className="mt-5 rounded-lg border border-dashed border-border bg-surface p-4 text-xs leading-relaxed text-muted-foreground">
-            These are exploratory destination options. UniLink does not claim to represent
-            institutions in these destinations. [Content to be confirmed]
-          </p>
-        </>
-      )}
+              <QuestionBlock label="Target study year" hint="For example 2027, or leave blank.">
+                <Input
+                  value={profile.targetEntryYear}
+                  onChange={(e) => set("targetEntryYear", e.target.value)}
+                  inputMode="numeric"
+                  placeholder="2027"
+                  aria-label="Target study year"
+                />
+              </QuestionBlock>
 
-      {step === 4 && (
-        <>
-          <StepHeader
-            question="A few practical preferences"
-            helper="Your budget does not define your potential. It helps us identify realistic routes and understand where funding may matter."
-          />
-          <div className="mt-6 space-y-10">
-            <QuestionBlock label="Approximate annual budget">
-              <ChoiceCards
-                legend="Budget"
-                options={budgetOptions}
-                value={profile.budgetRange}
-                onSelect={(v) => set("budgetRange", v)}
-                columns={2}
-              />
-            </QuestionBlock>
-
-            <QuestionBlock label="Would funding or a scholarship be important?">
-              <ChoiceCards
-                legend="Funding importance"
-                options={scholarshipOptions}
-                value={profile.scholarshipImportance}
-                onSelect={(v) => set("scholarshipImportance", v)}
-                columns={2}
-              />
-            </QuestionBlock>
-
-            <QuestionBlock label="Preferred teaching language">
-              <ChoiceCards
-                legend="Teaching language"
-                options={languageOptions}
-                value={profile.languagePreference}
-                onSelect={(v) => set("languagePreference", v)}
-                columns={2}
-              />
-            </QuestionBlock>
-
-            <QuestionBlock label="How far are you willing to travel?">
-              <ChoiceCards
-                legend="Travel preference"
-                options={travelOptions}
-                value={profile.travelPreference}
-                onSelect={(v) => set("travelPreference", v)}
-                columns={1}
-              />
-            </QuestionBlock>
-          </div>
-        </>
-      )}
-
-      {step === 5 && (
-        <>
-          <StepHeader
-            question="Anything else about your situation?"
-            helper="All optional. Only share information you're comfortable providing."
-          />
-          <div className="mt-6 space-y-10">
-            <QuestionBlock label="Which of these describe you?">
-              <ChoiceCards
-                legend="Your situation"
-                options={situationOptions}
-                value={profile.studentSituation}
-                onSelect={toggle("studentSituation")}
-                multiple
-                columns={2}
-              />
-            </QuestionBlock>
-
-            <QuestionBlock label="Target study year" hint="For example 2027, or leave blank.">
-              <Input
-                value={profile.targetEntryYear}
-                onChange={(e) => set("targetEntryYear", e.target.value)}
-                inputMode="numeric"
-                placeholder="2027"
-                aria-label="Target study year"
-              />
-            </QuestionBlock>
-
-            <QuestionBlock label="Notes" hint="Anything you'd like an adviser to know.">
-              <Textarea
-                rows={4}
-                value={profile.notes}
-                onChange={(e) => set("notes", e.target.value)}
-                aria-label="Additional notes"
-              />
-            </QuestionBlock>
-          </div>
-        </>
-      )}
+              <QuestionBlock label="Notes" hint="Anything you'd like an adviser to know.">
+                <Textarea
+                  rows={4}
+                  value={profile.notes}
+                  onChange={(e) => set("notes", e.target.value)}
+                  aria-label="Additional notes"
+                />
+              </QuestionBlock>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="mt-10 flex flex-col-reverse gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
         <Button variant="outline" size="lg" onClick={back} disabled={step === 0}>

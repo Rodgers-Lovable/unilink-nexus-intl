@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/motion";
 import { cn } from "@/lib/utils";
 
 export function SectionHeading({
@@ -18,11 +20,11 @@ export function SectionHeading({
   className?: string;
 }) {
   return (
-    <div className={cn("max-w-2xl", align === "center" && "mx-auto text-center", className)}>
+    <Reveal className={cn("max-w-2xl", align === "center" && "mx-auto text-center", className)}>
       {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
       <h2 className="text-h2">{title}</h2>
       {description && <p className="lead mt-4">{description}</p>}
-    </div>
+    </Reveal>
   );
 }
 
@@ -40,12 +42,12 @@ export function PageHero({
   return (
     <section className="border-b border-border bg-surface">
       <div className="container-page py-14 lg:py-20">
-        <div className="max-w-3xl reveal">
+        <Reveal className="max-w-3xl">
           {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
           <h1 className="text-h1">{title}</h1>
           {description && <p className="lead mt-5">{description}</p>}
           {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -104,14 +106,16 @@ export function CTABanner({
 
 export function Card({ className, children }: { className?: string; children: ReactNode }) {
   return (
-    <div
+    <motion.div
+      whileHover={{ y: -5, boxShadow: "0 18px 40px -16px color-mix(in oklab, var(--navy) 14%, transparent)" }}
+      transition={{ type: "spring", stiffness: 350, damping: 22 }}
       className={cn(
-        "rounded-xl border border-border bg-card p-6 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift",
+        "rounded-xl border border-border bg-card p-6 shadow-card",
         className,
       )}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 
@@ -119,10 +123,10 @@ export function TextLink({ to, children }: { to: string; children: ReactNode }) 
   return (
     <Link
       to={to as never}
-      className="group inline-flex items-center gap-1.5 text-sm font-semibold text-blue hover:underline"
+      className="group link-underline inline-flex items-center gap-1.5 text-sm font-semibold text-blue"
     >
       {children}
-      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+      <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
     </Link>
   );
 }
