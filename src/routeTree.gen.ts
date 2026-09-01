@@ -23,9 +23,7 @@ import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as StudyAbroadIndexRouteImport } from './routes/study-abroad.index'
 import { Route as StudyAbroadApplicationProcessRouteImport } from './routes/study-abroad.application-process'
-import { Route as StudyAbroadEligibilityRouteImport } from './routes/study-abroad.eligibility'
 import { Route as StudyAbroadFaqRouteImport } from './routes/study-abroad.faq'
-import { Route as StudyAbroadHowItWorksRouteImport } from './routes/study-abroad.how-it-works'
 import { Route as SuccessStoriesIndexRouteImport } from './routes/success-stories.index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -99,19 +97,9 @@ const StudyAbroadApplicationProcessRoute =
     path: '/study-abroad/application-process',
     getParentRoute: () => rootRouteImport,
   } as any)
-const StudyAbroadEligibilityRoute = StudyAbroadEligibilityRouteImport.update({
-  id: '/study-abroad/eligibility',
-  path: '/study-abroad/eligibility',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const StudyAbroadFaqRoute = StudyAbroadFaqRouteImport.update({
   id: '/study-abroad/faq',
   path: '/study-abroad/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StudyAbroadHowItWorksRoute = StudyAbroadHowItWorksRouteImport.update({
-  id: '/study-abroad/how-it-works',
-  path: '/study-abroad/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SuccessStoriesIndexRoute = SuccessStoriesIndexRouteImport.update({
@@ -130,9 +118,7 @@ export interface FileRoutesByFullPath {
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
-  '/study-abroad/eligibility': typeof StudyAbroadEligibilityRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
-  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
   '/about/': typeof AboutIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/resources/': typeof ResourcesIndexRoute
@@ -150,9 +136,7 @@ export interface FileRoutesByTo {
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
-  '/study-abroad/eligibility': typeof StudyAbroadEligibilityRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
-  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
   '/about': typeof AboutIndexRoute
   '/destinations': typeof DestinationsIndexRoute
   '/resources': typeof ResourcesIndexRoute
@@ -171,9 +155,7 @@ export interface FileRoutesById {
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
-  '/study-abroad/eligibility': typeof StudyAbroadEligibilityRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
-  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
   '/about/': typeof AboutIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/resources/': typeof ResourcesIndexRoute
@@ -193,9 +175,7 @@ export interface FileRouteTypes {
     | '/resources/$slug'
     | '/services/$slug'
     | '/study-abroad/application-process'
-    | '/study-abroad/eligibility'
     | '/study-abroad/faq'
-    | '/study-abroad/how-it-works'
     | '/about/'
     | '/destinations/'
     | '/resources/'
@@ -213,9 +193,7 @@ export interface FileRouteTypes {
     | '/resources/$slug'
     | '/services/$slug'
     | '/study-abroad/application-process'
-    | '/study-abroad/eligibility'
     | '/study-abroad/faq'
-    | '/study-abroad/how-it-works'
     | '/about'
     | '/destinations'
     | '/resources'
@@ -233,9 +211,7 @@ export interface FileRouteTypes {
     | '/resources/$slug'
     | '/services/$slug'
     | '/study-abroad/application-process'
-    | '/study-abroad/eligibility'
     | '/study-abroad/faq'
-    | '/study-abroad/how-it-works'
     | '/about/'
     | '/destinations/'
     | '/resources/'
@@ -254,9 +230,7 @@ export interface RootRouteChildren {
   ResourcesSlugRoute: typeof ResourcesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   StudyAbroadApplicationProcessRoute: typeof StudyAbroadApplicationProcessRoute
-  StudyAbroadEligibilityRoute: typeof StudyAbroadEligibilityRoute
   StudyAbroadFaqRoute: typeof StudyAbroadFaqRoute
-  StudyAbroadHowItWorksRoute: typeof StudyAbroadHowItWorksRoute
   AboutIndexRoute: typeof AboutIndexRoute
   DestinationsIndexRoute: typeof DestinationsIndexRoute
   ResourcesIndexRoute: typeof ResourcesIndexRoute
@@ -365,25 +339,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudyAbroadApplicationProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/study-abroad/eligibility': {
-      id: '/study-abroad/eligibility'
-      path: '/study-abroad/eligibility'
-      fullPath: '/study-abroad/eligibility'
-      preLoaderRoute: typeof StudyAbroadEligibilityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/study-abroad/faq': {
       id: '/study-abroad/faq'
       path: '/study-abroad/faq'
       fullPath: '/study-abroad/faq'
       preLoaderRoute: typeof StudyAbroadFaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/study-abroad/how-it-works': {
-      id: '/study-abroad/how-it-works'
-      path: '/study-abroad/how-it-works'
-      fullPath: '/study-abroad/how-it-works'
-      preLoaderRoute: typeof StudyAbroadHowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/success-stories/': {
@@ -406,9 +366,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesSlugRoute: ResourcesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   StudyAbroadApplicationProcessRoute: StudyAbroadApplicationProcessRoute,
-  StudyAbroadEligibilityRoute: StudyAbroadEligibilityRoute,
   StudyAbroadFaqRoute: StudyAbroadFaqRoute,
-  StudyAbroadHowItWorksRoute: StudyAbroadHowItWorksRoute,
   AboutIndexRoute: AboutIndexRoute,
   DestinationsIndexRoute: DestinationsIndexRoute,
   ResourcesIndexRoute: ResourcesIndexRoute,

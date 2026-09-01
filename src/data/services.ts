@@ -1,83 +1,151 @@
+export type ServiceIcon =
+  | "compass"
+  | "route"
+  | "globe"
+  | "fileText"
+  | "banknote"
+  | "users"
+  | "school";
+
+export type ServiceAudience = "Students" | "Parents" | "Schools";
+
 export type Service = {
   slug: string;
   title: string;
   short: string;
-  icon: "compass" | "layers" | "fileText" | "shieldCheck" | "luggage";
+  icon: ServiceIcon;
+  audience: ServiceAudience;
+  stage: "Discover" | "Explore" | "Plan" | "Prepare" | "Connect";
   intro: string;
   expect: string[];
 };
 
 export const services: Service[] = [
   {
-    slug: "study-counselling",
-    title: "Study & Career Counselling",
-    short: "Clarify your goals and understand which study pathways realistically fit your profile.",
+    slug: "career-guidance",
+    title: "Career & Subject Guidance",
+    short:
+      "Help students explore their strengths, subject combinations and possible career directions.",
     icon: "compass",
+    audience: "Students",
+    stage: "Discover",
     intro:
-      "A structured conversation about your academic background, interests and long-term direction, so decisions are made with context rather than guesswork.",
+      "Before choosing a course or a country, it helps to understand what you enjoy, what you are good at and where those strengths can lead.",
     expect: [
-      "A review of your qualifications and study history",
-      "Discussion of study levels and fields that align with your goals",
-      "Honest feedback on where more preparation may be needed",
+      "A structured conversation about interests, strengths and subjects",
+      "Discussion of career families connected to what you enjoy",
+      "Guidance on subject combinations and what they keep open",
       "A shortlist of directions worth exploring further",
     ],
   },
   {
-    slug: "course-selection",
-    title: "Course & University Selection",
-    short: "Compare programmes and institutions against your goals, budget and entry profile.",
-    icon: "layers",
+    slug: "pathway-planning",
+    title: "Education Pathway Planning",
+    short:
+      "Build a realistic roadmap from current studies to future qualifications and career opportunities.",
+    icon: "route",
+    audience: "Students",
+    stage: "Plan",
     intro:
-      "Choosing where to apply matters as much as how you apply. We help you compare options on the criteria that affect your outcome.",
+      "A pathway is a sequence, not a single decision. We map the steps between where you are now and where you would like to be.",
     expect: [
-      "A comparison of programmes across your preferred destinations",
-      "Guidance on entry requirements for each option",
-      "Consideration of budget, intake timing and location",
-      "A prioritised application shortlist",
+      "A review of your current stage, curriculum and performance",
+      "Options for degree, diploma and vocational routes",
+      "A realistic timeline with decision points",
+      "Alternative routes if your first choice does not work out",
+    ],
+  },
+  {
+    slug: "international-education",
+    title: "International Education Guidance",
+    short: "Explore countries, degree options and the practical realities of studying abroad.",
+    icon: "globe",
+    audience: "Students",
+    stage: "Explore",
+    intro:
+      "Studying internationally involves academic, financial and personal considerations. We help you compare them honestly.",
+    expect: [
+      "Comparison of destinations against your profile and budget",
+      "Language, cost and distance considerations",
+      "An overview of study levels and entry expectations",
+      "Guidance on verifying requirements from official sources",
     ],
   },
   {
     slug: "application-support",
     title: "Application Support",
-    short: "Prepare complete, well-presented applications with the right supporting documents.",
+    short: "Prepare documents, understand timelines and navigate the application process.",
     icon: "fileText",
+    audience: "Students",
+    stage: "Prepare",
     intro:
       "Applications are assessed on completeness and clarity. We help you assemble and review each element before submission.",
     expect: [
       "A document checklist tailored to your applications",
       "Support with personal statements and supporting materials",
       "Review before submission",
-      "Tracking of application progress and responses",
+      "Guidance on timelines and tracking responses",
     ],
   },
   {
-    slug: "visa-guidance",
-    title: "Visa Guidance",
-    short: "Understand the student visa process and prepare your documentation carefully.",
-    icon: "shieldCheck",
+    slug: "funding-guidance",
+    title: "Funding & Scholarship Guidance",
+    short:
+      "Explore potential funding routes and understand how to prepare for scholarship opportunities.",
+    icon: "banknote",
+    audience: "Students",
+    stage: "Plan",
     intro:
-      "Visa rules differ by country and change over time. We help you understand the process and prepare, while requirements are always verified against official sources.",
+      "Funding rarely arrives late in the process. Understanding what exists, and what it asks of applicants, changes how you plan.",
     expect: [
-      "An overview of the process for your destination",
-      "Support organising required documentation",
-      "Preparation for interviews where applicable",
-      "Guidance on timelines and sequencing",
+      "An overview of common funding routes to investigate",
+      "How to build a profile that supports funding applications",
+      "Budget planning beyond tuition",
+      "Guidance on verifying availability directly with providers [Content to be confirmed]",
     ],
   },
   {
-    slug: "pre-departure",
-    title: "Pre-departure Support",
-    short: "Get practically ready for travel, accommodation and your first weeks abroad.",
-    icon: "luggage",
+    slug: "parent-guidance",
+    title: "Parent Guidance",
+    short:
+      "Help families understand academic pathways, destinations, costs and important decisions.",
+    icon: "users",
+    audience: "Parents",
+    stage: "Connect",
     intro:
-      "The period between an offer and arrival involves many small decisions. We help you plan them in the right order.",
+      "Families make these decisions together. We give parents the same clarity the student receives, in practical terms.",
     expect: [
-      "A pre-departure checklist",
-      "Guidance on accommodation options",
-      "Orientation on daily life, budgeting and student services",
-      "A point of contact as your departure approaches",
+      "A plain explanation of pathways and qualifications",
+      "Cost and timeline considerations",
+      "Questions worth asking before committing",
+      "A shared plan the whole family understands",
+    ],
+  },
+  {
+    slug: "school-programmes",
+    title: "School Programmes",
+    short:
+      "Career guidance, student profiling, future planning and international education programmes for schools.",
+    icon: "school",
+    audience: "Schools",
+    stage: "Connect",
+    intro:
+      "Structured pathway sessions delivered with schools, designed around the questions students and parents actually ask.",
+    expect: [
+      "Career discovery and subject-selection workshops",
+      "University readiness and pathway sessions",
+      "International education seminars",
+      "Parent information sessions and school visits",
     ],
   },
 ];
 
 export const getService = (slug: string) => services.find((s) => s.slug === slug);
+
+/** Old URLs kept working after the repositioning. */
+export const legacyServiceSlugs: Record<string, string> = {
+  "study-counselling": "career-guidance",
+  "course-selection": "pathway-planning",
+  "visa-guidance": "international-education",
+  "pre-departure": "application-support",
+};
