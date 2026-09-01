@@ -15,6 +15,7 @@ import { Route as BookConsultationRouteImport } from './routes/book-consultation
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ParentsRouteImport } from './routes/parents'
 import { Route as SchoolsRouteImport } from './routes/schools'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutApproachRouteImport } from './routes/about.approach'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
@@ -64,6 +65,11 @@ const ParentsRoute = ParentsRouteImport.update({
 const SchoolsRoute = SchoolsRouteImport.update({
   id: '/schools',
   path: '/schools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
@@ -176,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/parents': typeof ParentsRoute
   '/schools': typeof SchoolsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/about/approach': typeof AboutApproachRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
@@ -204,6 +211,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/parents': typeof ParentsRoute
   '/schools': typeof SchoolsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/about/approach': typeof AboutApproachRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
@@ -233,6 +241,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/parents': typeof ParentsRoute
   '/schools': typeof SchoolsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/about/approach': typeof AboutApproachRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
@@ -263,6 +272,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/parents'
     | '/schools'
+    | '/sitemap.xml'
     | '/about/approach'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
@@ -291,6 +301,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/parents'
     | '/schools'
+    | '/sitemap.xml'
     | '/about/approach'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
@@ -319,6 +330,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/parents'
     | '/schools'
+    | '/sitemap.xml'
     | '/about/approach'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
@@ -348,6 +360,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ParentsRoute: typeof ParentsRoute
   SchoolsRoute: typeof SchoolsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AboutApproachRoute: typeof AboutApproachRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
   ExploreCareerSubjectGuidanceRoute: typeof ExploreCareerSubjectGuidanceRoute
@@ -412,6 +425,13 @@ declare module '@tanstack/react-router' {
       path: '/schools'
       fullPath: '/schools'
       preLoaderRoute: typeof SchoolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about/': {
@@ -564,6 +584,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ParentsRoute: ParentsRoute,
   SchoolsRoute: SchoolsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   AboutApproachRoute: AboutApproachRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
   ExploreCareerSubjectGuidanceRoute: ExploreCareerSubjectGuidanceRoute,
