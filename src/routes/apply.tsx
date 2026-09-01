@@ -46,7 +46,7 @@ const assurances = [
 function ApplyPage() {
   return (
     <>
-      <PageHero
+      <PageHero image="apply"
         eyebrow="Connect"
         title="Start My Application"
         description="Tell us where you are academically and where you'd like to go. A UniLink adviser will review your profile and guide you through the steps that follow."

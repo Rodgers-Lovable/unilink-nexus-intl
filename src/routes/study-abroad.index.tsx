@@ -60,7 +60,7 @@ const blocks = [
 function StudyAbroad() {
   return (
     <>
-      <PageHero
+      <PageHero image="study-abroad"
         eyebrow="Study Abroad"
         title="Study abroad with a plan that fits you."
         description="A clear view of what the process involves, so you can make decisions with context instead of guesswork."

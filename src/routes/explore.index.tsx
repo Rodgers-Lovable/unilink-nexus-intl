@@ -64,7 +64,7 @@ export const Route = createFileRoute("/explore/")({
 function ExplorePage() {
   return (
     <>
-      <PageHero
+      <PageHero image="explore"
         eyebrow="Explore"
         title="Start with what you know today."
         description="You do not need a finished plan. Explore your interests, the subjects you enjoy, the careers they connect to and the places you could study."

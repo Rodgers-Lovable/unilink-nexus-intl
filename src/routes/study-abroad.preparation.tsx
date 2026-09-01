@@ -37,7 +37,7 @@ function PreparationPage() {
   return (
     <>
       <Breadcrumbs items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "Preparation" }]} />
-      <PageHero
+      <PageHero image="destinations"
         eyebrow="Preparation"
         title="Preparation removes most of the stress"
         description="Most difficulties in international study come from late preparation rather than difficult requirements. These are the areas worth starting early."

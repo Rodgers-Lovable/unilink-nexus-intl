@@ -27,7 +27,7 @@ export const Route = createFileRoute("/success-stories/")({
 function StoriesPage() {
   return (
     <>
-      <PageHero
+      <PageHero image="success"
         eyebrow="Success stories"
         title="From first questions to first lectures"
         description="Sample stories showing how structured guidance turns into real study plans."

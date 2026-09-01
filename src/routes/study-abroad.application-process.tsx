@@ -29,7 +29,7 @@ function ApplicationProcess() {
       <Breadcrumbs
         items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "Application Process" }]}
       />
-      <PageHero
+      <PageHero image="apply"
         eyebrow="Application Process"
         title="How an application usually progresses."
         description="Requirements are not identical everywhere. This is the general shape of the process, which your advisor adapts to your destination and institutions."

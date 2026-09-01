@@ -37,7 +37,7 @@ function StudyAbroadHowItWorksPage() {
   return (
     <>
       <Breadcrumbs items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "How It Works" }]} />
-      <PageHero
+      <PageHero image="study-abroad"
         eyebrow="Study Abroad"
         title="What the process actually looks like"
         description="Studying abroad is a sequence of manageable steps, not one large decision. Here is the order in which they usually happen."

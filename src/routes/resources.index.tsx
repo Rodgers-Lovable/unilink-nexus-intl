@@ -31,7 +31,7 @@ function ResourcesPage() {
 
   return (
     <>
-      <PageHero
+      <PageHero image="resources"
         eyebrow="Resources"
         title="Guides for every stage of studying abroad"
         description="Practical, plainly written guides on planning, applications, visas and student life."

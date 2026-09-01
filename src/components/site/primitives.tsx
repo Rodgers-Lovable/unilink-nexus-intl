@@ -4,6 +4,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion";
+import { heroImages, type HeroImageKey } from "@/components/site/hero-images";
 import { cn } from "@/lib/utils";
 
 export function SectionHeading({
@@ -32,22 +33,44 @@ export function PageHero({
   eyebrow,
   title,
   description,
+  image,
   children,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
+  image?: HeroImageKey;
   children?: ReactNode;
 }) {
+  const heroImage = image ? heroImages[image] : undefined;
+
   return (
     <section className="border-b border-border bg-surface">
-      <div className="container-page py-14 lg:py-20">
-        <Reveal className="max-w-3xl">
+      <div
+        className={cn(
+          "container-page py-14 lg:py-20",
+          heroImage && "grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-14",
+        )}
+      >
+        <Reveal className={heroImage ? undefined : "max-w-3xl"}>
           {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
           <h1 className="text-h1">{title}</h1>
           {description && <p className="lead mt-5">{description}</p>}
           {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
         </Reveal>
+        {heroImage && (
+          <Reveal delay={0.15} distance={24} className="relative">
+            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+              <img
+                src={heroImage.src}
+                alt={heroImage.alt}
+                width={1200}
+                height={1000}
+                className="aspect-[6/5] w-full object-cover"
+              />
+            </div>
+          </Reveal>
+        )}
       </div>
     </section>
   );
