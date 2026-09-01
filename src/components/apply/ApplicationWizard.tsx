@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { CheckCircle2, Pencil } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { countries } from "@/data/countries";
@@ -305,243 +306,273 @@ export function ApplicationWizard() {
         <div className="space-y-6 py-8">
           <ErrorSummary errors={errors} />
 
-          {step === "personal" && (
-            <fieldset className="space-y-6">
-              <legend className="sr-only">About you</legend>
-              <TextField
-                label="Full Name"
-                required
-                autoComplete="name"
-                value={draft.personal.fullName}
-                onChange={(v) => setPersonal({ fullName: v })}
-                error={errors["fullName"]}
-                placeholder="As it appears on your academic documents"
-              />
-              <TextField
-                label="Email Address"
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                required
-                value={draft.personal.email}
-                onChange={(v) => setPersonal({ email: v })}
-                error={errors["email"]}
-                placeholder="name@example.com"
-              />
-              <TextField
-                label="Phone / WhatsApp Number"
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
-                required
-                value={draft.personal.phone}
-                onChange={(v) => setPersonal({ phone: v })}
-                error={errors["phone"]}
-                hint="Include your country code so an adviser can reach you."
-                placeholder="+257 00 000 000"
-              />
-              <ComboboxField
-                label="Nationality"
-                required
-                options={countries}
-                value={draft.personal.nationality}
-                onChange={(v) => setPersonal({ nationality: v })}
-                error={errors["nationality"]}
-              />
-              <ComboboxField
-                label="Current Country of Residence"
-                required
-                options={countries}
-                value={draft.personal.countryOfResidence}
-                onChange={(v) => setPersonal({ countryOfResidence: v })}
-                error={errors["countryOfResidence"]}
-              />
-            </fieldset>
-          )}
+          <AnimatePresence mode="wait">
+            {step === "personal" && (
+              <motion.fieldset
+                key="personal"
+                initial={{ opacity: 0, x: 18 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -12 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-6"
+              >
+                <legend className="sr-only">About you</legend>
+                <TextField
+                  label="Full Name"
+                  required
+                  autoComplete="name"
+                  value={draft.personal.fullName}
+                  onChange={(v) => setPersonal({ fullName: v })}
+                  error={errors["fullName"]}
+                  placeholder="As it appears on your academic documents"
+                />
+                <TextField
+                  label="Email Address"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  required
+                  value={draft.personal.email}
+                  onChange={(v) => setPersonal({ email: v })}
+                  error={errors["email"]}
+                  placeholder="name@example.com"
+                />
+                <TextField
+                  label="Phone / WhatsApp Number"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  required
+                  value={draft.personal.phone}
+                  onChange={(v) => setPersonal({ phone: v })}
+                  error={errors["phone"]}
+                  hint="Include your country code so an adviser can reach you."
+                  placeholder="+257 00 000 000"
+                />
+                <ComboboxField
+                  label="Nationality"
+                  required
+                  options={countries}
+                  value={draft.personal.nationality}
+                  onChange={(v) => setPersonal({ nationality: v })}
+                  error={errors["nationality"]}
+                />
+                <ComboboxField
+                  label="Current Country of Residence"
+                  required
+                  options={countries}
+                  value={draft.personal.countryOfResidence}
+                  onChange={(v) => setPersonal({ countryOfResidence: v })}
+                  error={errors["countryOfResidence"]}
+                />
+              </motion.fieldset>
+            )}
 
-          {step === "academic" && (
-            <fieldset className="space-y-6">
-              <legend className="sr-only">Academic background</legend>
-              <SelectField
-                label="Highest Academic Level"
-                required
-                options={academicLevelOptions}
-                value={draft.academic.highestAcademicLevel}
-                onChange={(v) => setAcademic({ highestAcademicLevel: v })}
-                error={errors["highestAcademicLevel"]}
-              />
-              <TextField
-                label="Last Academic Institution Attended"
-                required
-                value={draft.academic.institution}
-                onChange={(v) => setAcademic({ institution: v })}
-                error={errors["institution"]}
-                placeholder="School, college or university name"
-              />
-              <TextField
-                label="Qualification / Programme"
-                value={draft.academic.qualification}
-                onChange={(v) => setAcademic({ qualification: v })}
-                error={errors["qualification"]}
-                placeholder="For example: A-Levels, BSc Economics"
-              />
-              <TextField
-                label="Year Completed or Expected Completion"
-                inputMode="numeric"
-                value={draft.academic.completionYear}
-                onChange={(v) => setAcademic({ completionYear: v })}
-                error={errors["completionYear"]}
-                placeholder="2026"
-              />
-              <SelectField
-                label="Academic performance"
-                options={performanceOptions}
-                value={draft.academic.performance}
-                onChange={(v) => setAcademic({ performance: v })}
-                error={errors["performance"]}
-                hint="A general indication is enough — exact grades are not needed at this stage."
-                placeholder="Optional"
-              />
-            </fieldset>
-          )}
+            {step === "academic" && (
+              <motion.fieldset
+                key="academic"
+                initial={{ opacity: 0, x: 18 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -12 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-6"
+              >
+                <legend className="sr-only">Academic background</legend>
+                <SelectField
+                  label="Highest Academic Level"
+                  required
+                  options={academicLevelOptions}
+                  value={draft.academic.highestAcademicLevel}
+                  onChange={(v) => setAcademic({ highestAcademicLevel: v })}
+                  error={errors["highestAcademicLevel"]}
+                />
+                <TextField
+                  label="Last Academic Institution Attended"
+                  required
+                  value={draft.academic.institution}
+                  onChange={(v) => setAcademic({ institution: v })}
+                  error={errors["institution"]}
+                  placeholder="School, college or university name"
+                />
+                <TextField
+                  label="Qualification / Programme"
+                  value={draft.academic.qualification}
+                  onChange={(v) => setAcademic({ qualification: v })}
+                  error={errors["qualification"]}
+                  placeholder="For example: A-Levels, BSc Economics"
+                />
+                <TextField
+                  label="Year Completed or Expected Completion"
+                  inputMode="numeric"
+                  value={draft.academic.completionYear}
+                  onChange={(v) => setAcademic({ completionYear: v })}
+                  error={errors["completionYear"]}
+                  placeholder="2026"
+                />
+                <SelectField
+                  label="Academic performance"
+                  options={performanceOptions}
+                  value={draft.academic.performance}
+                  onChange={(v) => setAcademic({ performance: v })}
+                  error={errors["performance"]}
+                  hint="A general indication is enough — exact grades are not needed at this stage."
+                  placeholder="Optional"
+                />
+              </motion.fieldset>
+            )}
 
-          {step === "studyPlan" && (
-            <fieldset className="space-y-8">
-              <legend className="sr-only">Study plans</legend>
-              <SelectField
-                label="What level would you like to study?"
-                required
-                options={targetLevelOptions}
-                value={draft.studyPlan.targetLevel}
-                onChange={(v) => setStudyPlan({ targetLevel: v })}
-                error={errors["targetLevel"]}
-              />
-              <TextField
-                label="What would you like to study?"
-                required
-                value={draft.studyPlan.preferredCourse}
-                onChange={(v) => setStudyPlan({ preferredCourse: v })}
-                error={errors["preferredCourse"]}
-                hint="A course, subject or broad field is fine — for example “Data Science” or “something in health”."
-                placeholder="Course or subject area"
-              />
-              <MultiSelectField
-                label="Where would you like to study?"
-                required
-                options={applicationDestinationOptions}
-                values={draft.studyPlan.preferredDestinations}
-                onToggle={toggleDestination}
-                error={errors["preferredDestinations"]}
-                hint="Select as many as you are considering. These are destinations we can advise on, not university partnerships."
-              />
-              <SelectField
-                label="Preferred intake"
-                options={intakeOptions}
-                value={draft.studyPlan.preferredIntake}
-                onChange={(v) => setStudyPlan({ preferredIntake: v })}
-                error={errors["preferredIntake"]}
-                placeholder="Optional"
-              />
-              <TextAreaField
-                label="Anything else you'd like your UniLink adviser to know?"
-                value={draft.additionalInformation}
-                onChange={(v) => setDraft((d) => ({ ...d, additionalInformation: v }))}
-                error={errors["additionalInformation"]}
-                hint="You can tell us about your goals, preferred universities, budget considerations, previous applications, or anything you're unsure about."
-                placeholder="Optional"
-              />
-            </fieldset>
-          )}
+            {step === "studyPlan" && (
+              <motion.fieldset
+                key="studyPlan"
+                initial={{ opacity: 0, x: 18 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -12 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-8"
+              >
+                <legend className="sr-only">Study plans</legend>
+                <SelectField
+                  label="What level would you like to study?"
+                  required
+                  options={targetLevelOptions}
+                  value={draft.studyPlan.targetLevel}
+                  onChange={(v) => setStudyPlan({ targetLevel: v })}
+                  error={errors["targetLevel"]}
+                />
+                <TextField
+                  label="What would you like to study?"
+                  required
+                  value={draft.studyPlan.preferredCourse}
+                  onChange={(v) => setStudyPlan({ preferredCourse: v })}
+                  error={errors["preferredCourse"]}
+                  hint="A course, subject or broad field is fine — for example “Data Science” or “something in health”."
+                  placeholder="Course or subject area"
+                />
+                <MultiSelectField
+                  label="Where would you like to study?"
+                  required
+                  options={applicationDestinationOptions}
+                  values={draft.studyPlan.preferredDestinations}
+                  onToggle={toggleDestination}
+                  error={errors["preferredDestinations"]}
+                  hint="Select as many as you are considering. These are destinations we can advise on, not university partnerships."
+                />
+                <SelectField
+                  label="Preferred intake"
+                  options={intakeOptions}
+                  value={draft.studyPlan.preferredIntake}
+                  onChange={(v) => setStudyPlan({ preferredIntake: v })}
+                  error={errors["preferredIntake"]}
+                  placeholder="Optional"
+                />
+                <TextAreaField
+                  label="Anything else you'd like your UniLink adviser to know?"
+                  value={draft.additionalInformation}
+                  onChange={(v) => setDraft((d) => ({ ...d, additionalInformation: v }))}
+                  error={errors["additionalInformation"]}
+                  hint="You can tell us about your goals, preferred universities, budget considerations, previous applications, or anything you're unsure about."
+                  placeholder="Optional"
+                />
+              </motion.fieldset>
+            )}
 
-          {step === "review" && (
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-h3 font-bold text-navy">Review Your Application</h2>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Check everything below, then confirm your consent to submit.
-                </p>
-              </div>
-
-              <ReviewSection
-                title="Personal Information"
-                onEdit={() => goTo(0)}
-                rows={[
-                  { label: "Full name", value: draft.personal.fullName },
-                  { label: "Email address", value: draft.personal.email },
-                  { label: "Phone / WhatsApp", value: draft.personal.phone },
-                  { label: "Nationality", value: draft.personal.nationality },
-                  { label: "Country of residence", value: draft.personal.countryOfResidence },
-                ]}
-              />
-
-              <ReviewSection
-                title="Academic Background"
-                onEdit={() => goTo(1)}
-                rows={[
-                  { label: "Highest academic level", value: draft.academic.highestAcademicLevel },
-                  { label: "Last institution", value: draft.academic.institution },
-                  { label: "Qualification / programme", value: draft.academic.qualification },
-                  { label: "Completion year", value: draft.academic.completionYear },
-                  { label: "Academic performance", value: draft.academic.performance },
-                ]}
-              />
-
-              <ReviewSection
-                title="Study Plans"
-                onEdit={() => goTo(2)}
-                rows={[
-                  { label: "Target level", value: draft.studyPlan.targetLevel },
-                  { label: "Preferred course", value: draft.studyPlan.preferredCourse },
-                  {
-                    label: "Preferred destinations",
-                    value: draft.studyPlan.preferredDestinations.join(", "),
-                  },
-                  { label: "Preferred intake", value: draft.studyPlan.preferredIntake },
-                  { label: "Additional information", value: draft.additionalInformation },
-                ]}
-              />
-
-              <div className="rounded-xl border border-border p-5">
-                <div className="flex items-start gap-3">
-                  <Checkbox
-                    id="application-consent"
-                    checked={draft.consent}
-                    aria-describedby={errors["consent"] ? "consent-error" : undefined}
-                    onCheckedChange={(checked) =>
-                      setDraft((d) => ({ ...d, consent: checked === true }))
-                    }
-                    className="mt-0.5"
-                  />
-                  <label
-                    htmlFor="application-consent"
-                    className="text-sm leading-relaxed text-foreground"
-                  >
-                    {CONSENT_STATEMENT}
-                  </label>
-                </div>
-                {errors["consent"] && (
-                  <p
-                    id="consent-error"
-                    role="alert"
-                    className="mt-3 text-xs font-medium text-destructive"
-                  >
-                    {errors["consent"]}
+            {step === "review" && (
+              <motion.div
+                key="review"
+                initial={{ opacity: 0, x: 18 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -12 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-6"
+              >
+                <div>
+                  <h2 className="text-h3 font-bold text-navy">Review Your Application</h2>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Check everything below, then confirm your consent to submit.
                   </p>
-                )}
-                <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-                  Please only provide information necessary for your education enquiry. Read our{" "}
-                  <Link
-                    to="/legal/$page"
-                    params={{ page: "privacy-policy" }}
-                    className="font-semibold text-blue hover:underline"
-                  >
-                    Privacy Policy
-                  </Link>
-                  .
-                </p>
-              </div>
-            </div>
-          )}
+                </div>
+
+                <ReviewSection
+                  title="Personal Information"
+                  onEdit={() => goTo(0)}
+                  rows={[
+                    { label: "Full name", value: draft.personal.fullName },
+                    { label: "Email address", value: draft.personal.email },
+                    { label: "Phone / WhatsApp", value: draft.personal.phone },
+                    { label: "Nationality", value: draft.personal.nationality },
+                    { label: "Country of residence", value: draft.personal.countryOfResidence },
+                  ]}
+                />
+
+                <ReviewSection
+                  title="Academic Background"
+                  onEdit={() => goTo(1)}
+                  rows={[
+                    { label: "Highest academic level", value: draft.academic.highestAcademicLevel },
+                    { label: "Last institution", value: draft.academic.institution },
+                    { label: "Qualification / programme", value: draft.academic.qualification },
+                    { label: "Completion year", value: draft.academic.completionYear },
+                    { label: "Academic performance", value: draft.academic.performance },
+                  ]}
+                />
+
+                <ReviewSection
+                  title="Study Plans"
+                  onEdit={() => goTo(2)}
+                  rows={[
+                    { label: "Target level", value: draft.studyPlan.targetLevel },
+                    { label: "Preferred course", value: draft.studyPlan.preferredCourse },
+                    {
+                      label: "Preferred destinations",
+                      value: draft.studyPlan.preferredDestinations.join(", "),
+                    },
+                    { label: "Preferred intake", value: draft.studyPlan.preferredIntake },
+                    { label: "Additional information", value: draft.additionalInformation },
+                  ]}
+                />
+
+                <div className="rounded-xl border border-border p-5">
+                  <div className="flex items-start gap-3">
+                    <Checkbox
+                      id="application-consent"
+                      checked={draft.consent}
+                      aria-describedby={errors["consent"] ? "consent-error" : undefined}
+                      onCheckedChange={(checked) =>
+                        setDraft((d) => ({ ...d, consent: checked === true }))
+                      }
+                      className="mt-0.5"
+                    />
+                    <label
+                      htmlFor="application-consent"
+                      className="text-sm leading-relaxed text-foreground"
+                    >
+                      {CONSENT_STATEMENT}
+                    </label>
+                  </div>
+                  {errors["consent"] && (
+                    <p
+                      id="consent-error"
+                      role="alert"
+                      className="mt-3 text-xs font-medium text-destructive"
+                    >
+                      {errors["consent"]}
+                    </p>
+                  )}
+                  <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+                    Please only provide information necessary for your education enquiry. Read our{" "}
+                    <Link
+                      to="/legal/$page"
+                      params={{ page: "privacy-policy" }}
+                      className="font-semibold text-blue hover:underline"
+                    >
+                      Privacy Policy
+                    </Link>
+                    .
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         <StepNav
