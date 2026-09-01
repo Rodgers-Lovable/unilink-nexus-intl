@@ -10,33 +10,90 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StudyAbroadIndexRouteImport } from './routes/study-abroad.index'
+import { Route as StudyAbroadApplicationProcessRouteImport } from './routes/study-abroad.application-process'
+import { Route as StudyAbroadFaqRouteImport } from './routes/study-abroad.faq'
+import { Route as StudyAbroadHowItWorksRouteImport } from './routes/study-abroad.how-it-works'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudyAbroadIndexRoute = StudyAbroadIndexRouteImport.update({
+  id: '/study-abroad/',
+  path: '/study-abroad/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudyAbroadApplicationProcessRoute =
+  StudyAbroadApplicationProcessRouteImport.update({
+    id: '/study-abroad/application-process',
+    path: '/study-abroad/application-process',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const StudyAbroadFaqRoute = StudyAbroadFaqRouteImport.update({
+  id: '/study-abroad/faq',
+  path: '/study-abroad/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudyAbroadHowItWorksRoute = StudyAbroadHowItWorksRouteImport.update({
+  id: '/study-abroad/how-it-works',
+  path: '/study-abroad/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
+  '/study-abroad/faq': typeof StudyAbroadFaqRoute
+  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/study-abroad/': typeof StudyAbroadIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
+  '/study-abroad/faq': typeof StudyAbroadFaqRoute
+  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/study-abroad': typeof StudyAbroadIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
+  '/study-abroad/faq': typeof StudyAbroadFaqRoute
+  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/study-abroad/': typeof StudyAbroadIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/study-abroad/application-process'
+    | '/study-abroad/faq'
+    | '/study-abroad/how-it-works'
+    | '/study-abroad/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/study-abroad/application-process'
+    | '/study-abroad/faq'
+    | '/study-abroad/how-it-works'
+    | '/study-abroad'
+  id:
+    | '__root__'
+    | '/'
+    | '/study-abroad/application-process'
+    | '/study-abroad/faq'
+    | '/study-abroad/how-it-works'
+    | '/study-abroad/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  StudyAbroadApplicationProcessRoute: typeof StudyAbroadApplicationProcessRoute
+  StudyAbroadFaqRoute: typeof StudyAbroadFaqRoute
+  StudyAbroadHowItWorksRoute: typeof StudyAbroadHowItWorksRoute
+  StudyAbroadIndexRoute: typeof StudyAbroadIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +105,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/study-abroad/': {
+      id: '/study-abroad/'
+      path: '/study-abroad'
+      fullPath: '/study-abroad/'
+      preLoaderRoute: typeof StudyAbroadIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-abroad/application-process': {
+      id: '/study-abroad/application-process'
+      path: '/study-abroad/application-process'
+      fullPath: '/study-abroad/application-process'
+      preLoaderRoute: typeof StudyAbroadApplicationProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-abroad/faq': {
+      id: '/study-abroad/faq'
+      path: '/study-abroad/faq'
+      fullPath: '/study-abroad/faq'
+      preLoaderRoute: typeof StudyAbroadFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-abroad/how-it-works': {
+      id: '/study-abroad/how-it-works'
+      path: '/study-abroad/how-it-works'
+      fullPath: '/study-abroad/how-it-works'
+      preLoaderRoute: typeof StudyAbroadHowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  StudyAbroadApplicationProcessRoute: StudyAbroadApplicationProcessRoute,
+  StudyAbroadFaqRoute: StudyAbroadFaqRoute,
+  StudyAbroadHowItWorksRoute: StudyAbroadHowItWorksRoute,
+  StudyAbroadIndexRoute: StudyAbroadIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
