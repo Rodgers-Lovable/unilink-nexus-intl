@@ -73,7 +73,9 @@ function BookPage() {
       }),
     });
 
-    setStatus(result.status === "error" ? "error" : "sent");
+    setStatus(
+      result.status === "error" ? "error" : result.status === "skipped" ? "skipped" : "sent",
+    );
   };
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
