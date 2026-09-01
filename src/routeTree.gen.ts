@@ -17,6 +17,7 @@ import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
 import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
 import { Route as ExploreIndexRouteImport } from './routes/explore.index'
+import { Route as ExploreCareerSubjectGuidanceRouteImport } from './routes/explore.career-subject-guidance'
 import { Route as ExplorePathwayAdvisorRouteImport } from './routes/explore.pathway-advisor'
 import { Route as LegalPageRouteImport } from './routes/legal.$page'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
@@ -68,6 +69,12 @@ const ExploreIndexRoute = ExploreIndexRouteImport.update({
   path: '/explore/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExploreCareerSubjectGuidanceRoute =
+  ExploreCareerSubjectGuidanceRouteImport.update({
+    id: '/explore/career-subject-guidance',
+    path: '/explore/career-subject-guidance',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ExplorePathwayAdvisorRoute = ExplorePathwayAdvisorRouteImport.update({
   id: '/explore/pathway-advisor',
   path: '/explore/pathway-advisor',
@@ -126,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
+  '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
   '/explore/pathway-advisor': typeof ExplorePathwayAdvisorRoute
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
@@ -146,6 +154,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
+  '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
   '/explore/pathway-advisor': typeof ExplorePathwayAdvisorRoute
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
@@ -167,6 +176,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
+  '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
   '/explore/pathway-advisor': typeof ExplorePathwayAdvisorRoute
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
@@ -189,6 +199,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/about/team'
     | '/destinations/$slug'
+    | '/explore/career-subject-guidance'
     | '/explore/pathway-advisor'
     | '/legal/$page'
     | '/resources/$slug'
@@ -209,6 +220,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/about/team'
     | '/destinations/$slug'
+    | '/explore/career-subject-guidance'
     | '/explore/pathway-advisor'
     | '/legal/$page'
     | '/resources/$slug'
@@ -229,6 +241,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/about/team'
     | '/destinations/$slug'
+    | '/explore/career-subject-guidance'
     | '/explore/pathway-advisor'
     | '/legal/$page'
     | '/resources/$slug'
@@ -250,6 +263,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   AboutTeamRoute: typeof AboutTeamRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
+  ExploreCareerSubjectGuidanceRoute: typeof ExploreCareerSubjectGuidanceRoute
   ExplorePathwayAdvisorRoute: typeof ExplorePathwayAdvisorRoute
   LegalPageRoute: typeof LegalPageRoute
   ResourcesSlugRoute: typeof ResourcesSlugRoute
@@ -321,6 +335,13 @@ declare module '@tanstack/react-router' {
       path: '/explore'
       fullPath: '/explore/'
       preLoaderRoute: typeof ExploreIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore/career-subject-guidance': {
+      id: '/explore/career-subject-guidance'
+      path: '/explore/career-subject-guidance'
+      fullPath: '/explore/career-subject-guidance'
+      preLoaderRoute: typeof ExploreCareerSubjectGuidanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/explore/pathway-advisor': {
@@ -402,6 +423,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   AboutTeamRoute: AboutTeamRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
+  ExploreCareerSubjectGuidanceRoute: ExploreCareerSubjectGuidanceRoute,
   ExplorePathwayAdvisorRoute: ExplorePathwayAdvisorRoute,
   LegalPageRoute: LegalPageRoute,
   ResourcesSlugRoute: ResourcesSlugRoute,

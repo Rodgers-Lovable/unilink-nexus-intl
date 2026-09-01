@@ -81,7 +81,9 @@ function CareerSubjectGuidancePage() {
           <Link to="/explore/pathway-advisor">Discover My Pathway</Link>
         </Button>
         <Button asChild variant="outline" size="lg">
-          <Link to="/services/career-guidance">Career Guidance Service</Link>
+          <Link to="/services/$slug" params={{ slug: "career-guidance" }}>
+            Career Guidance Service
+          </Link>
         </Button>
       </PageHero>
 
