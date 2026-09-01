@@ -60,7 +60,7 @@ const legalPages: Record<string, { title: string; sections: { heading: string; t
   },
 };
 
-export const Route = createFileRoute("/legal")({
+export const Route = createFileRoute("/legal/")({
   loader: ({ params }) => {
     const page = legalPages[params.page];
     if (!page) throw notFound();

@@ -82,8 +82,12 @@ export function Footer() {
           <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-white">Legal</h2>
           <ul className="mt-4 space-y-3 text-sm">
             {legalLinks.map((l) => (
-              <li key={l.to}>
-                <Link to={l.to} className="transition-colors hover:text-white">
+              <li key={l.page}>
+                <Link
+                  to="/legal/$page"
+                  params={{ page: l.page }}
+                  className="transition-colors hover:text-white"
+                >
                   {l.label}
                 </Link>
               </li>

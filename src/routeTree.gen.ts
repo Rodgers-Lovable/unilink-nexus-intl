@@ -12,11 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BookConsultationRouteImport } from './routes/book-consultation'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as LegalRouteImport } from './routes/legal'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
 import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
+import { Route as LegalRouteImport } from './routes/legal.'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
 import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
@@ -43,11 +43,6 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LegalRoute = LegalRouteImport.update({
-  id: '/legal',
-  path: '/legal',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
   id: '/about/',
   path: '/about/',
@@ -66,6 +61,11 @@ const DestinationsIndexRoute = DestinationsIndexRouteImport.update({
 const DestinationsSlugRoute = DestinationsSlugRouteImport.update({
   id: '/destinations/$slug',
   path: '/destinations/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal/',
+  path: '/legal/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
@@ -124,7 +124,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
-  '/legal': typeof LegalRoute
+  '/legal/': typeof LegalRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
@@ -165,7 +165,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
-  '/legal': typeof LegalRoute
+  '/legal/': typeof LegalRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
@@ -187,7 +187,7 @@ export interface FileRouteTypes {
     | '/'
     | '/book-consultation'
     | '/contact'
-    | '/legal'
+    | '/legal/'
     | '/about/team'
     | '/destinations/$slug'
     | '/resources/$slug'
@@ -227,7 +227,7 @@ export interface FileRouteTypes {
     | '/'
     | '/book-consultation'
     | '/contact'
-    | '/legal'
+    | '/legal/'
     | '/about/team'
     | '/destinations/$slug'
     | '/resources/$slug'
@@ -288,13 +288,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/legal': {
-      id: '/legal'
-      path: '/legal'
-      fullPath: '/legal'
-      preLoaderRoute: typeof LegalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/about/': {
       id: '/about/'
       path: '/about'
@@ -321,6 +314,13 @@ declare module '@tanstack/react-router' {
       path: '/destinations/$slug'
       fullPath: '/destinations/$slug'
       preLoaderRoute: typeof DestinationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/': {
+      id: '/legal/'
+      path: '/legal'
+      fullPath: '/legal/'
+      preLoaderRoute: typeof LegalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources/': {
