@@ -5,6 +5,7 @@ import { destinations } from "@/data/destinations";
 import { services } from "@/data/services";
 import { resources } from "@/data/resources";
 import { legalDocuments } from "@/data/legal";
+import { isPlaceholder } from "@/data/company";
 
 const BASE_URL = "https://global-guidance-flow.lovable.app";
 
