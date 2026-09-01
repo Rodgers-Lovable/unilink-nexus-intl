@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BookConsultationRouteImport } from './routes/book-consultation'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ParentsRouteImport } from './routes/parents'
+import { Route as SchoolsRouteImport } from './routes/schools'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
@@ -52,6 +53,11 @@ const ContactRoute = ContactRouteImport.update({
 const ParentsRoute = ParentsRouteImport.update({
   id: '/parents',
   path: '/parents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SchoolsRoute = SchoolsRouteImport.update({
+  id: '/schools',
+  path: '/schools',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
@@ -162,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
   '/parents': typeof ParentsRoute
+  '/schools': typeof SchoolsRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
@@ -188,6 +195,7 @@ export interface FileRoutesByTo {
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
   '/parents': typeof ParentsRoute
+  '/schools': typeof SchoolsRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
@@ -215,6 +223,7 @@ export interface FileRoutesById {
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
   '/parents': typeof ParentsRoute
+  '/schools': typeof SchoolsRoute
   '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
@@ -243,6 +252,7 @@ export interface FileRouteTypes {
     | '/book-consultation'
     | '/contact'
     | '/parents'
+    | '/schools'
     | '/about/team'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
@@ -269,6 +279,7 @@ export interface FileRouteTypes {
     | '/book-consultation'
     | '/contact'
     | '/parents'
+    | '/schools'
     | '/about/team'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
@@ -295,6 +306,7 @@ export interface FileRouteTypes {
     | '/book-consultation'
     | '/contact'
     | '/parents'
+    | '/schools'
     | '/about/team'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
@@ -322,6 +334,7 @@ export interface RootRouteChildren {
   BookConsultationRoute: typeof BookConsultationRoute
   ContactRoute: typeof ContactRoute
   ParentsRoute: typeof ParentsRoute
+  SchoolsRoute: typeof SchoolsRoute
   AboutTeamRoute: typeof AboutTeamRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
   ExploreCareerSubjectGuidanceRoute: typeof ExploreCareerSubjectGuidanceRoute
@@ -372,6 +385,13 @@ declare module '@tanstack/react-router' {
       path: '/parents'
       fullPath: '/parents'
       preLoaderRoute: typeof ParentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schools': {
+      id: '/schools'
+      path: '/schools'
+      fullPath: '/schools'
+      preLoaderRoute: typeof SchoolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about/': {
@@ -522,6 +542,7 @@ const rootRouteChildren: RootRouteChildren = {
   BookConsultationRoute: BookConsultationRoute,
   ContactRoute: ContactRoute,
   ParentsRoute: ParentsRoute,
+  SchoolsRoute: SchoolsRoute,
   AboutTeamRoute: AboutTeamRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
   ExploreCareerSubjectGuidanceRoute: ExploreCareerSubjectGuidanceRoute,
