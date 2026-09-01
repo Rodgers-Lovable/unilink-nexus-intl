@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { PageHero, Card } from "@/components/site/primitives";
 import { contactInfo, company, isPlaceholder } from "@/data/company";
 import { saveLead } from "@/lib/leads";
-import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
+import { formatEmailBody, sendEmail } from "@/lib/email/resend";
 import { trackEvent } from "@/lib/analytics/umami";
 
 export const Route = createFileRoute("/contact")({

@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CheckList } from "@/components/site/primitives";
 import { destinations } from "@/data/destinations";
 import { saveLead } from "@/lib/leads";
-import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
+import { formatEmailBody, sendEmail } from "@/lib/email/resend";
 import { company, contactInfo, isPlaceholder } from "@/data/company";
 import { trackEvent } from "@/lib/analytics/umami";
 

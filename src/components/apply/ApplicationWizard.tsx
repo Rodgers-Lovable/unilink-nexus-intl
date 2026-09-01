@@ -38,7 +38,7 @@ import {
   TextAreaField,
   TextField,
 } from "./fields";
-import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
+import { formatEmailBody, sendEmail } from "@/lib/email/resend";
 import { trackEvent } from "@/lib/analytics/umami";
 import { cn } from "@/lib/utils";
 
