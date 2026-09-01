@@ -1,11 +1,5 @@
 export type ServiceIcon =
-  | "compass"
-  | "route"
-  | "globe"
-  | "fileText"
-  | "banknote"
-  | "users"
-  | "school";
+  "compass" | "route" | "globe" | "fileText" | "banknote" | "users" | "school";
 
 export type ServiceAudience = "Students" | "Parents" | "Schools";
 

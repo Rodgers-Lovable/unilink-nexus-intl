@@ -153,7 +153,15 @@ export function SelectField({ options, ...props }: BaseProps & { options: readon
 export function ComboboxField({ options, ...props }: BaseProps & { options: readonly string[] }) {
   const id = useId();
   const [open, setOpen] = useState(false);
-  const { label, value, onChange, required, hint, error, placeholder = "Search and select" } = props;
+  const {
+    label,
+    value,
+    onChange,
+    required,
+    hint,
+    error,
+    placeholder = "Search and select",
+  } = props;
 
   return (
     <FieldShell id={id} label={label} required={required} hint={hint} error={error}>
@@ -309,13 +317,25 @@ export function StepNav({
   return (
     <div className="flex flex-col-reverse gap-3 border-t border-border pt-6 sm:flex-row sm:justify-between">
       {onBack ? (
-        <Button type="button" variant="outline" size="lg" className="w-full sm:w-auto" onClick={onBack}>
+        <Button
+          type="button"
+          variant="outline"
+          size="lg"
+          className="w-full sm:w-auto"
+          onClick={onBack}
+        >
           {backLabel}
         </Button>
       ) : (
         <span />
       )}
-      <Button type="submit" variant="cta" size="lg" className="w-full sm:w-auto" disabled={submitting}>
+      <Button
+        type="submit"
+        variant="cta"
+        size="lg"
+        className="w-full sm:w-auto"
+        disabled={submitting}
+      >
         {submitting ? "Submitting…" : nextLabel}
       </Button>
     </div>

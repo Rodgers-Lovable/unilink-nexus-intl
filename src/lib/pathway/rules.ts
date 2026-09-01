@@ -16,13 +16,23 @@ const careerCatalogue: Record<string, CareerFamily> = {
     key: "computing",
     title: "Computing & AI",
     description: "Building software, working with data and applying artificial intelligence.",
-    exampleRoles: ["Software developer", "Data analyst", "AI/ML practitioner", "Cybersecurity analyst"],
+    exampleRoles: [
+      "Software developer",
+      "Data analyst",
+      "AI/ML practitioner",
+      "Cybersecurity analyst",
+    ],
   },
   engineering: {
     key: "engineering",
     title: "Engineering & Technology",
     description: "Designing, testing and improving physical systems and infrastructure.",
-    exampleRoles: ["Civil engineer", "Mechanical engineer", "Electrical engineer", "Project engineer"],
+    exampleRoles: [
+      "Civil engineer",
+      "Mechanical engineer",
+      "Electrical engineer",
+      "Project engineer",
+    ],
   },
   business: {
     key: "business",
@@ -52,19 +62,34 @@ const careerCatalogue: Record<string, CareerFamily> = {
     key: "social",
     title: "Psychology & Social Sciences",
     description: "Understanding people, behaviour, communities and social systems.",
-    exampleRoles: ["Psychologist", "Social researcher", "HR specialist", "Community programme lead"],
+    exampleRoles: [
+      "Psychologist",
+      "Social researcher",
+      "HR specialist",
+      "Community programme lead",
+    ],
   },
   environment: {
     key: "environment",
     title: "Environment & Agriculture",
     description: "Food systems, climate, natural resources and sustainable development.",
-    exampleRoles: ["Agronomist", "Environmental officer", "Sustainability analyst", "Food scientist"],
+    exampleRoles: [
+      "Agronomist",
+      "Environmental officer",
+      "Sustainability analyst",
+      "Food scientist",
+    ],
   },
   hospitality: {
     key: "hospitality",
     title: "Aviation, Travel & Hospitality",
     description: "Aviation operations, tourism, events and service management.",
-    exampleRoles: ["Aviation management", "Hospitality manager", "Travel operations", "Events lead"],
+    exampleRoles: [
+      "Aviation management",
+      "Hospitality manager",
+      "Travel operations",
+      "Events lead",
+    ],
   },
   education: {
     key: "education",
@@ -107,53 +132,198 @@ const subjectToCareer: Record<string, string[]> = {
 
 const degreesByCareer: Record<string, DegreeFamily[]> = {
   computing: [
-    { key: "cs", title: "Computer Science", description: "Core computing, algorithms and software foundations.", relatedTo: "Computing & AI" },
-    { key: "ai", title: "Artificial Intelligence", description: "Machine learning, intelligent systems and applied AI.", relatedTo: "Computing & AI" },
-    { key: "ds", title: "Data Science", description: "Statistics, analytics and data-driven decision making.", relatedTo: "Computing & AI" },
-    { key: "se", title: "Software Engineering", description: "Building and maintaining large-scale software systems.", relatedTo: "Computing & AI" },
+    {
+      key: "cs",
+      title: "Computer Science",
+      description: "Core computing, algorithms and software foundations.",
+      relatedTo: "Computing & AI",
+    },
+    {
+      key: "ai",
+      title: "Artificial Intelligence",
+      description: "Machine learning, intelligent systems and applied AI.",
+      relatedTo: "Computing & AI",
+    },
+    {
+      key: "ds",
+      title: "Data Science",
+      description: "Statistics, analytics and data-driven decision making.",
+      relatedTo: "Computing & AI",
+    },
+    {
+      key: "se",
+      title: "Software Engineering",
+      description: "Building and maintaining large-scale software systems.",
+      relatedTo: "Computing & AI",
+    },
   ],
   engineering: [
-    { key: "civil", title: "Civil Engineering", description: "Infrastructure, construction and the built environment.", relatedTo: "Engineering & Technology" },
-    { key: "mech", title: "Mechanical Engineering", description: "Machines, materials, energy and manufacturing.", relatedTo: "Engineering & Technology" },
-    { key: "eee", title: "Electrical & Electronic Engineering", description: "Power, electronics and control systems.", relatedTo: "Engineering & Technology" },
+    {
+      key: "civil",
+      title: "Civil Engineering",
+      description: "Infrastructure, construction and the built environment.",
+      relatedTo: "Engineering & Technology",
+    },
+    {
+      key: "mech",
+      title: "Mechanical Engineering",
+      description: "Machines, materials, energy and manufacturing.",
+      relatedTo: "Engineering & Technology",
+    },
+    {
+      key: "eee",
+      title: "Electrical & Electronic Engineering",
+      description: "Power, electronics and control systems.",
+      relatedTo: "Engineering & Technology",
+    },
   ],
   business: [
-    { key: "bba", title: "Business Administration", description: "Management, strategy and organisational operations.", relatedTo: "Business & Finance" },
-    { key: "fin", title: "Finance & Accounting", description: "Financial analysis, reporting and investment.", relatedTo: "Business & Finance" },
-    { key: "econ", title: "Economics", description: "Markets, policy and quantitative economic analysis.", relatedTo: "Business & Finance" },
+    {
+      key: "bba",
+      title: "Business Administration",
+      description: "Management, strategy and organisational operations.",
+      relatedTo: "Business & Finance",
+    },
+    {
+      key: "fin",
+      title: "Finance & Accounting",
+      description: "Financial analysis, reporting and investment.",
+      relatedTo: "Business & Finance",
+    },
+    {
+      key: "econ",
+      title: "Economics",
+      description: "Markets, policy and quantitative economic analysis.",
+      relatedTo: "Business & Finance",
+    },
   ],
   health: [
-    { key: "nursing", title: "Nursing & Health Sciences", description: "Clinical care and applied health practice.", relatedTo: "Healthcare & Life Sciences" },
-    { key: "biomed", title: "Biomedical Science", description: "Laboratory science underpinning diagnosis and treatment.", relatedTo: "Healthcare & Life Sciences" },
-    { key: "pubhealth", title: "Public Health", description: "Population health, epidemiology and health systems.", relatedTo: "Healthcare & Life Sciences" },
+    {
+      key: "nursing",
+      title: "Nursing & Health Sciences",
+      description: "Clinical care and applied health practice.",
+      relatedTo: "Healthcare & Life Sciences",
+    },
+    {
+      key: "biomed",
+      title: "Biomedical Science",
+      description: "Laboratory science underpinning diagnosis and treatment.",
+      relatedTo: "Healthcare & Life Sciences",
+    },
+    {
+      key: "pubhealth",
+      title: "Public Health",
+      description: "Population health, epidemiology and health systems.",
+      relatedTo: "Healthcare & Life Sciences",
+    },
   ],
   creative: [
-    { key: "design", title: "Design & Visual Communication", description: "Graphic, product and digital design practice.", relatedTo: "Creative Industries" },
-    { key: "media", title: "Media & Communication", description: "Journalism, digital media and storytelling.", relatedTo: "Creative Industries" },
-    { key: "arch", title: "Architecture", description: "Spatial design combining creativity and technical skill.", relatedTo: "Creative Industries" },
+    {
+      key: "design",
+      title: "Design & Visual Communication",
+      description: "Graphic, product and digital design practice.",
+      relatedTo: "Creative Industries",
+    },
+    {
+      key: "media",
+      title: "Media & Communication",
+      description: "Journalism, digital media and storytelling.",
+      relatedTo: "Creative Industries",
+    },
+    {
+      key: "arch",
+      title: "Architecture",
+      description: "Spatial design combining creativity and technical skill.",
+      relatedTo: "Creative Industries",
+    },
   ],
   law: [
-    { key: "law", title: "Law", description: "Legal systems, reasoning and professional practice.", relatedTo: "Law, Policy & Governance" },
-    { key: "ir", title: "International Relations", description: "Diplomacy, global politics and policy.", relatedTo: "Law, Policy & Governance" },
-    { key: "pubadmin", title: "Public Administration", description: "Governance, public services and institutions.", relatedTo: "Law, Policy & Governance" },
+    {
+      key: "law",
+      title: "Law",
+      description: "Legal systems, reasoning and professional practice.",
+      relatedTo: "Law, Policy & Governance",
+    },
+    {
+      key: "ir",
+      title: "International Relations",
+      description: "Diplomacy, global politics and policy.",
+      relatedTo: "Law, Policy & Governance",
+    },
+    {
+      key: "pubadmin",
+      title: "Public Administration",
+      description: "Governance, public services and institutions.",
+      relatedTo: "Law, Policy & Governance",
+    },
   ],
   social: [
-    { key: "psych", title: "Psychology", description: "Human behaviour, cognition and applied psychology.", relatedTo: "Psychology & Social Sciences" },
-    { key: "socio", title: "Sociology & Social Policy", description: "Communities, institutions and social change.", relatedTo: "Psychology & Social Sciences" },
-    { key: "hr", title: "Human Resource Management", description: "People, organisations and workplace development.", relatedTo: "Psychology & Social Sciences" },
+    {
+      key: "psych",
+      title: "Psychology",
+      description: "Human behaviour, cognition and applied psychology.",
+      relatedTo: "Psychology & Social Sciences",
+    },
+    {
+      key: "socio",
+      title: "Sociology & Social Policy",
+      description: "Communities, institutions and social change.",
+      relatedTo: "Psychology & Social Sciences",
+    },
+    {
+      key: "hr",
+      title: "Human Resource Management",
+      description: "People, organisations and workplace development.",
+      relatedTo: "Psychology & Social Sciences",
+    },
   ],
   environment: [
-    { key: "envsci", title: "Environmental Science", description: "Climate, ecosystems and resource management.", relatedTo: "Environment & Agriculture" },
-    { key: "agri", title: "Agriculture & Food Systems", description: "Crop, livestock and food-supply science.", relatedTo: "Environment & Agriculture" },
-    { key: "sustain", title: "Sustainable Development", description: "Policy and practice for long-term development.", relatedTo: "Environment & Agriculture" },
+    {
+      key: "envsci",
+      title: "Environmental Science",
+      description: "Climate, ecosystems and resource management.",
+      relatedTo: "Environment & Agriculture",
+    },
+    {
+      key: "agri",
+      title: "Agriculture & Food Systems",
+      description: "Crop, livestock and food-supply science.",
+      relatedTo: "Environment & Agriculture",
+    },
+    {
+      key: "sustain",
+      title: "Sustainable Development",
+      description: "Policy and practice for long-term development.",
+      relatedTo: "Environment & Agriculture",
+    },
   ],
   hospitality: [
-    { key: "aviation", title: "Aviation Management", description: "Airline, airport and aviation operations.", relatedTo: "Aviation, Travel & Hospitality" },
-    { key: "hosp", title: "Hospitality & Tourism Management", description: "Service operations, tourism and events.", relatedTo: "Aviation, Travel & Hospitality" },
+    {
+      key: "aviation",
+      title: "Aviation Management",
+      description: "Airline, airport and aviation operations.",
+      relatedTo: "Aviation, Travel & Hospitality",
+    },
+    {
+      key: "hosp",
+      title: "Hospitality & Tourism Management",
+      description: "Service operations, tourism and events.",
+      relatedTo: "Aviation, Travel & Hospitality",
+    },
   ],
   education: [
-    { key: "edu", title: "Education", description: "Teaching practice, curriculum and learning.", relatedTo: "Education & Training" },
-    { key: "edtech", title: "Educational Technology", description: "Digital learning design and delivery.", relatedTo: "Education & Training" },
+    {
+      key: "edu",
+      title: "Education",
+      description: "Teaching practice, curriculum and learning.",
+      relatedTo: "Education & Training",
+    },
+    {
+      key: "edtech",
+      title: "Educational Technology",
+      description: "Digital learning design and delivery.",
+      relatedTo: "Education & Training",
+    },
   ],
 };
 
@@ -167,22 +337,134 @@ type DestinationFacts = {
 };
 
 const destinationFacts: DestinationFacts[] = [
-  { name: "Mauritius", region: "Africa", language: "English and French are widely used.", costBand: "lower", distance: "closer", why: "An English- and French-friendly island option relatively close to East Africa." },
-  { name: "South Africa", region: "Africa", language: "English is widely used in teaching.", costBand: "lower", distance: "closer", why: "A regional option with a broad range of study areas." },
-  { name: "Malaysia", region: "Asia", language: "English is widely used in international programmes.", costBand: "lower", distance: "medium", why: "Often explored for lower living costs and English-taught programmes." },
-  { name: "Malta", region: "Europe", language: "English is widely used.", costBand: "moderate", distance: "medium", why: "A small English-speaking European base worth comparing." },
-  { name: "Türkiye", region: "Europe", language: "English-taught programmes exist alongside Turkish.", costBand: "lower", distance: "medium", why: "Frequently explored for cost and a wide programme range." },
-  { name: "India", region: "Asia", language: "English is widely used in teaching.", costBand: "lower", distance: "medium", why: "Large higher-education sector with English-taught options." },
-  { name: "UAE", region: "Middle East", language: "English is widely used.", costBand: "moderate", distance: "medium", why: "Regional hub with international branch campuses." },
-  { name: "China", region: "Asia", language: "English-taught programmes exist alongside Mandarin.", costBand: "moderate", distance: "far", why: "Worth exploring for technology and engineering directions." },
-  { name: "Germany", region: "Europe", language: "German and some English-taught programmes.", costBand: "moderate", distance: "far", why: "Strong engineering and applied-science tradition." },
-  { name: "France", region: "Europe", language: "French, with some English-taught programmes.", costBand: "moderate", distance: "far", why: "A natural option if you study or prefer French." },
-  { name: "Netherlands", region: "Europe", language: "Many English-taught programmes.", costBand: "higher", distance: "far", why: "Known for internationally oriented, English-taught degrees." },
-  { name: "Ireland", region: "Europe", language: "English.", costBand: "higher", distance: "far", why: "English-speaking European option with a technology sector." },
-  { name: "United Kingdom", region: "Europe", language: "English.", costBand: "higher", distance: "far", why: "Widely explored for shorter, focused degree structures." },
-  { name: "Canada", region: "North America", language: "English and French.", costBand: "higher", distance: "far", why: "Bilingual environment with broad programme choice." },
-  { name: "United States", region: "North America", language: "English.", costBand: "higher", distance: "far", why: "Flexible degree structures and wide subject choice." },
-  { name: "Australia", region: "Oceania", language: "English.", costBand: "higher", distance: "far", why: "Large international student community." },
+  {
+    name: "Mauritius",
+    region: "Africa",
+    language: "English and French are widely used.",
+    costBand: "lower",
+    distance: "closer",
+    why: "An English- and French-friendly island option relatively close to East Africa.",
+  },
+  {
+    name: "South Africa",
+    region: "Africa",
+    language: "English is widely used in teaching.",
+    costBand: "lower",
+    distance: "closer",
+    why: "A regional option with a broad range of study areas.",
+  },
+  {
+    name: "Malaysia",
+    region: "Asia",
+    language: "English is widely used in international programmes.",
+    costBand: "lower",
+    distance: "medium",
+    why: "Often explored for lower living costs and English-taught programmes.",
+  },
+  {
+    name: "Malta",
+    region: "Europe",
+    language: "English is widely used.",
+    costBand: "moderate",
+    distance: "medium",
+    why: "A small English-speaking European base worth comparing.",
+  },
+  {
+    name: "Türkiye",
+    region: "Europe",
+    language: "English-taught programmes exist alongside Turkish.",
+    costBand: "lower",
+    distance: "medium",
+    why: "Frequently explored for cost and a wide programme range.",
+  },
+  {
+    name: "India",
+    region: "Asia",
+    language: "English is widely used in teaching.",
+    costBand: "lower",
+    distance: "medium",
+    why: "Large higher-education sector with English-taught options.",
+  },
+  {
+    name: "UAE",
+    region: "Middle East",
+    language: "English is widely used.",
+    costBand: "moderate",
+    distance: "medium",
+    why: "Regional hub with international branch campuses.",
+  },
+  {
+    name: "China",
+    region: "Asia",
+    language: "English-taught programmes exist alongside Mandarin.",
+    costBand: "moderate",
+    distance: "far",
+    why: "Worth exploring for technology and engineering directions.",
+  },
+  {
+    name: "Germany",
+    region: "Europe",
+    language: "German and some English-taught programmes.",
+    costBand: "moderate",
+    distance: "far",
+    why: "Strong engineering and applied-science tradition.",
+  },
+  {
+    name: "France",
+    region: "Europe",
+    language: "French, with some English-taught programmes.",
+    costBand: "moderate",
+    distance: "far",
+    why: "A natural option if you study or prefer French.",
+  },
+  {
+    name: "Netherlands",
+    region: "Europe",
+    language: "Many English-taught programmes.",
+    costBand: "higher",
+    distance: "far",
+    why: "Known for internationally oriented, English-taught degrees.",
+  },
+  {
+    name: "Ireland",
+    region: "Europe",
+    language: "English.",
+    costBand: "higher",
+    distance: "far",
+    why: "English-speaking European option with a technology sector.",
+  },
+  {
+    name: "United Kingdom",
+    region: "Europe",
+    language: "English.",
+    costBand: "higher",
+    distance: "far",
+    why: "Widely explored for shorter, focused degree structures.",
+  },
+  {
+    name: "Canada",
+    region: "North America",
+    language: "English and French.",
+    costBand: "higher",
+    distance: "far",
+    why: "Bilingual environment with broad programme choice.",
+  },
+  {
+    name: "United States",
+    region: "North America",
+    language: "English.",
+    costBand: "higher",
+    distance: "far",
+    why: "Flexible degree structures and wide subject choice.",
+  },
+  {
+    name: "Australia",
+    region: "Oceania",
+    language: "English.",
+    costBand: "higher",
+    distance: "far",
+    why: "Large international student community.",
+  },
 ];
 
 const budgetRank: Record<string, number> = {
@@ -234,10 +516,10 @@ export function evaluateCareerFamilies(profile: PathwayProfile): CareerFamily[] 
   if (ranked.length === 0) {
     // Nothing selected, or "not sure yet" — offer a broad, neutral starting set.
     return [
-      careerCatalogue['business'],
-      careerCatalogue['computing'],
-      careerCatalogue['health'],
-      careerCatalogue['creative'],
+      careerCatalogue["business"],
+      careerCatalogue["computing"],
+      careerCatalogue["health"],
+      careerCatalogue["creative"],
     ].filter((c): c is CareerFamily => Boolean(c));
   }
 
@@ -294,7 +576,8 @@ export function evaluateDestinationPreferences(profile: PathwayProfile): Destina
 
     if (profile.languagePreference === "English" && dest.language.includes("English")) score += 2;
     if (profile.languagePreference === "French" && dest.language.includes("French")) score += 2;
-    if (profile.languagePreference === "English or French" && /English|French/.test(dest.language)) score += 1;
+    if (profile.languagePreference === "English or French" && /English|French/.test(dest.language))
+      score += 1;
     if (profile.languagePreference === "Open to learning another language") score += 1;
 
     if (profile.travelPreference === "Prefer closer to East Africa") {
@@ -322,7 +605,8 @@ export function generateNextSteps(profile: PathwayProfile): NextStep[] {
   const steps: NextStep[] = [
     {
       title: "Explore",
-      description: "Choose 2–4 degree areas that genuinely interest you and read about what they involve.",
+      description:
+        "Choose 2–4 degree areas that genuinely interest you and read about what they involve.",
     },
     {
       title: "Compare",
@@ -340,7 +624,10 @@ export function generateNextSteps(profile: PathwayProfile): NextStep[] {
     },
   ];
 
-  if (profile.scholarshipImportance === "Essential" || profile.scholarshipImportance === "Important") {
+  if (
+    profile.scholarshipImportance === "Essential" ||
+    profile.scholarshipImportance === "Important"
+  ) {
     steps.splice(2, 0, {
       title: "Plan funding early",
       description:

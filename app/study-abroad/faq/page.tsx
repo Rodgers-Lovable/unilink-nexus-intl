@@ -32,7 +32,7 @@ export default function Faq() {
     <>
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger -- static, code-defined JSON-LD, no user input
+
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Breadcrumbs items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "FAQs" }]} />

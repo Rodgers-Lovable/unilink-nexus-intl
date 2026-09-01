@@ -52,8 +52,10 @@
   --color-green-bright: var(--green-bright);
   --color-orange: var(--orange);
 
-  --shadow-card: 0 1px 2px oklch(0.289 0.105 260.6 / 0.04), 0 8px 24px oklch(0.289 0.105 260.6 / 0.06);
-  --shadow-lift: 0 2px 4px oklch(0.289 0.105 260.6 / 0.05), 0 16px 40px oklch(0.289 0.105 260.6 / 0.1);
+  --shadow-card:
+    0 1px 2px oklch(0.289 0.105 260.6 / 0.04), 0 8px 24px oklch(0.289 0.105 260.6 / 0.06);
+  --shadow-lift:
+    0 2px 4px oklch(0.289 0.105 260.6 / 0.05), 0 16px 40px oklch(0.289 0.105 260.6 / 0.1);
 }
 
 :root {

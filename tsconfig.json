@@ -11,11 +11,7 @@
     "target": "ES2022",
     "jsx": "react-jsx",
     "module": "esnext",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": [],
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": false,
@@ -43,9 +39,7 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   }
 }

@@ -16,7 +16,11 @@ const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/explore/how-it-works`, changeFrequency: "monthly", priority: 0.6 },
   { url: `${BASE_URL}/explore/pathway-advisor`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${BASE_URL}/study-abroad`, changeFrequency: "weekly", priority: 0.8 },
-  { url: `${BASE_URL}/study-abroad/application-process`, changeFrequency: "monthly", priority: 0.6 },
+  {
+    url: `${BASE_URL}/study-abroad/application-process`,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
   { url: `${BASE_URL}/study-abroad/faq`, changeFrequency: "monthly", priority: 0.6 },
   { url: `${BASE_URL}/study-abroad/how-it-works`, changeFrequency: "monthly", priority: 0.6 },
   { url: `${BASE_URL}/study-abroad/preparation`, changeFrequency: "monthly", priority: 0.6 },
