@@ -1,4 +1,5 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import Image from "next/image";
 import {
   Compass,
   Route as RouteIcon,
@@ -20,7 +21,7 @@ import auImg from "@/assets/dest-australia.jpg";
 import usImg from "@/assets/dest-united-states.jpg";
 import deImg from "@/assets/dest-germany.jpg";
 
-export const destinationImages: Record<string, string> = {
+export const destinationImages: Record<string, typeof ukImg> = {
   "united-kingdom": ukImg,
   canada: caImg,
   australia: auImg,
@@ -38,18 +39,21 @@ export const serviceIcons: Record<Service["icon"], LucideIcon> = {
   school: School,
 };
 
-export function DestinationCard({ destination, detailed = false }: { destination: Destination; detailed?: boolean }) {
+export function DestinationCard({
+  destination,
+  detailed = false,
+}: {
+  destination: Destination;
+  detailed?: boolean;
+}) {
   const img = destinationImages[destination.slug];
   return (
     <article className="group overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift">
       <div className="aspect-[3/2] overflow-hidden bg-surface">
         {img && (
-          <img
+          <Image
             src={img}
             alt={`${destination.name} study environment`}
-            loading="lazy"
-            width={900}
-            height={600}
             className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         )}
@@ -72,8 +76,7 @@ export function DestinationCard({ destination, detailed = false }: { destination
         )}
         <div className="pt-2">
           <Link
-            to="/destinations/$slug"
-            params={{ slug: destination.slug }}
+            href={`/destinations/${destination.slug}`}
             className="text-sm font-semibold text-blue hover:underline"
           >
             {detailed ? "View Destination" : "Explore Destination"} →
@@ -95,8 +98,7 @@ export function ServiceCard({ service }: { service: Service }) {
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.short}</p>
       <div className="mt-4">
         <Link
-          to="/services/$slug"
-          params={{ slug: service.slug }}
+          href={`/services/${service.slug}`}
           className="text-sm font-semibold text-blue hover:underline"
         >
           Learn More →
@@ -111,12 +113,13 @@ export function ArticleCard({ resource }: { resource: Resource }) {
     <Card className="flex h-full flex-col">
       <p className="eyebrow">{resource.category}</p>
       <h3 className="mt-3 text-base font-bold">{resource.title}</h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{resource.excerpt}</p>
+      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+        {resource.excerpt}
+      </p>
       <p className="mt-4 text-xs text-muted-foreground">{resource.readTime}</p>
       <div className="mt-3">
         <Link
-          to="/resources/$slug"
-          params={{ slug: resource.slug }}
+          href={`/resources/${resource.slug}`}
           className="text-sm font-semibold text-blue hover:underline"
         >
           Read Article →

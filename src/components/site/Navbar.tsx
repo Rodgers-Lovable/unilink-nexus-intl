@@ -1,5 +1,8 @@
+"use client";
+
 import { useState } from "react";
-import { Link, useRouterState } from "@tanstack/react-router";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -11,7 +14,7 @@ import { trackEvent } from "@/lib/analytics/umami";
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const pathname = usePathname();
 
   const isActive = (to: string) => (to === "/" ? pathname === "/" : pathname.startsWith(to));
 
@@ -25,14 +28,17 @@ export function Navbar() {
             item.children ? (
               <div key={item.label} className="group relative">
                 <Link
-                  to={item.to}
+                  href={item.to}
                   className={cn(
                     "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-semibold text-navy/80 transition-colors hover:text-blue",
                     isActive(item.to) && "text-blue",
                   )}
                 >
                   {item.label}
-                  <ChevronDown className="size-3.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true" />
+                  <ChevronDown
+                    className="size-3.5 transition-transform duration-200 group-hover:rotate-180"
+                    aria-hidden="true"
+                  />
                 </Link>
                 <motion.div
                   initial={{ opacity: 0, y: 6 }}
@@ -44,7 +50,7 @@ export function Navbar() {
                     {item.children.map((child) => (
                       <li key={child.to}>
                         <Link
-                          to={child.to}
+                          href={child.to}
                           className="block rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-surface hover:text-blue"
                         >
                           {child.label}
@@ -57,7 +63,7 @@ export function Navbar() {
             ) : (
               <Link
                 key={item.to}
-                to={item.to}
+                href={item.to}
                 className={cn(
                   "relative rounded-md px-3 py-2 text-sm font-semibold text-navy/80 transition-colors hover:text-blue",
                   isActive(item.to) && "text-blue",
@@ -78,8 +84,10 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <Button asChild variant="cta" className="hidden sm:inline-flex">
             <Link
-              to="/apply"
-              onClick={() => trackEvent("cta-clicked", { cta: "start-application", location: "navbar" })}
+              href="/apply"
+              onClick={() =>
+                trackEvent("cta-clicked", { cta: "start-application", location: "navbar" })
+              }
             >
               Start My Application
             </Link>
@@ -125,7 +133,10 @@ export function Navbar() {
                     >
                       {item.label}
                       <ChevronDown
-                        className={cn("size-4 transition-transform duration-200", expanded === item.label && "rotate-180")}
+                        className={cn(
+                          "size-4 transition-transform duration-200",
+                          expanded === item.label && "rotate-180",
+                        )}
                         aria-hidden="true"
                       />
                     </button>
@@ -141,7 +152,7 @@ export function Navbar() {
                           {item.children.map((child) => (
                             <li key={child.to}>
                               <Link
-                                to={child.to}
+                                href={child.to}
                                 onClick={() => setOpen(false)}
                                 className="block py-2.5 text-sm text-muted-foreground hover:text-blue"
                               >
@@ -161,7 +172,7 @@ export function Navbar() {
                     transition={{ delay: i * 0.05, duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Link
-                      to={item.to}
+                      href={item.to}
                       onClick={() => setOpen(false)}
                       className="block border-b border-border/70 px-1 py-3 text-base font-semibold text-navy"
                     >
@@ -178,10 +189,13 @@ export function Navbar() {
               >
                 <Button asChild variant="cta" size="lg" className="w-full">
                   <Link
-                    to="/apply"
+                    href="/apply"
                     onClick={() => {
                       setOpen(false);
-                      trackEvent("cta-clicked", { cta: "start-application", location: "navbar-mobile" });
+                      trackEvent("cta-clicked", {
+                        cta: "start-application",
+                        location: "navbar-mobile",
+                      });
                     }}
                   >
                     Start My Application
@@ -189,10 +203,13 @@ export function Navbar() {
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
                   <Link
-                    to="/book-consultation"
+                    href="/book-consultation"
                     onClick={() => {
                       setOpen(false);
-                      trackEvent("cta-clicked", { cta: "book-consultation", location: "navbar-mobile" });
+                      trackEvent("cta-clicked", {
+                        cta: "book-consultation",
+                        location: "navbar-mobile",
+                      });
                     }}
                   >
                     Book a Consultation
@@ -200,10 +217,13 @@ export function Navbar() {
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
                   <Link
-                    to="/explore/pathway-advisor"
+                    href="/explore/pathway-advisor"
                     onClick={() => {
                       setOpen(false);
-                      trackEvent("cta-clicked", { cta: "pathway-advisor", location: "navbar-mobile" });
+                      trackEvent("cta-clicked", {
+                        cta: "pathway-advisor",
+                        location: "navbar-mobile",
+                      });
                     }}
                   >
                     Discover My Pathway

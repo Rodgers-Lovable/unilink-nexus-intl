@@ -28,7 +28,9 @@ export function JourneyStages() {
               Stage {i + 1}
             </p>
             <h3 className="mt-1 text-base font-bold text-navy">{stage.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{stage.description}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {stage.description}
+            </p>
           </li>
         );
       })}

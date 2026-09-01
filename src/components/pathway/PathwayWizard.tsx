@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -43,22 +45,20 @@ export function PathwayWizard() {
     (option: string) =>
       setProfile((p) => ({
         ...p,
-        [key]: p[key].includes(option)
-          ? p[key].filter((v) => v !== option)
-          : [...p[key], option],
+        [key]: p[key].includes(option) ? p[key].filter((v) => v !== option) : [...p[key], option],
       }));
 
   const validate = () => {
     const next: Record<string, string> = {};
     if (step === 0 && profile.interests.length === 0) {
-      next['interests'] = "Pick at least one — “I'm not sure yet” is a valid answer.";
+      next["interests"] = "Pick at least one — “I'm not sure yet” is a valid answer.";
     }
     if (step === 2) {
-      if (!profile.country) next['country'] = "Please choose where you currently live.";
-      if (!profile.level) next['level'] = "Please choose the stage you're at.";
+      if (!profile.country) next["country"] = "Please choose where you currently live.";
+      if (!profile.level) next["level"] = "Please choose the stage you're at.";
     }
     if (step === 3 && profile.preferredDestinations.length === 0) {
-      next['preferredDestinations'] = "Choose at least one, or select “Show me everything”.";
+      next["preferredDestinations"] = "Choose at least one, or select “Show me everything”.";
     }
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -139,9 +139,9 @@ export function PathwayWizard() {
               multiple
               columns={2}
             />
-            {errors['interests'] && (
+            {errors["interests"] && (
               <p role="alert" className="mt-3 text-xs font-medium text-destructive">
-                {errors['interests']}
+                {errors["interests"]}
               </p>
             )}
           </motion.div>
@@ -185,7 +185,7 @@ export function PathwayWizard() {
               helper="This helps us keep suggestions realistic for your stage."
             />
             <div className="mt-6 space-y-10">
-              <QuestionBlock label="Country of residence" error={errors['country']}>
+              <QuestionBlock label="Country of residence" error={errors["country"]}>
                 <ChoiceCards
                   legend="Country of residence"
                   options={countryOptions}
@@ -195,7 +195,7 @@ export function PathwayWizard() {
                 />
               </QuestionBlock>
 
-              <QuestionBlock label="What stage are you at?" error={errors['level']}>
+              <QuestionBlock label="What stage are you at?" error={errors["level"]}>
                 <ChoiceCards
                   legend="Stage of study"
                   options={stageOptions}
@@ -252,9 +252,9 @@ export function PathwayWizard() {
               multiple
               columns={3}
             />
-            {errors['preferredDestinations'] && (
+            {errors["preferredDestinations"] && (
               <p role="alert" className="mt-3 text-xs font-medium text-destructive">
-                {errors['preferredDestinations']}
+                {errors["preferredDestinations"]}
               </p>
             )}
             <p className="mt-5 rounded-lg border border-dashed border-border bg-surface p-4 text-xs leading-relaxed text-muted-foreground">

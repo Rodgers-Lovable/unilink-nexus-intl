@@ -1,12 +1,15 @@
 import type { ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion";
 import { heroImages, type HeroImageKey } from "@/components/site/hero-images";
 import { cn } from "@/lib/utils";
-import { trackEvent } from "@/lib/analytics/umami";
+import { Card } from "./Card";
+import { TrackedLink } from "./TrackedLink";
+
+export { Card };
 
 export function SectionHeading({
   eyebrow,
@@ -62,12 +65,11 @@ export function PageHero({
         {heroImage && (
           <Reveal delay={0.15} distance={24} className="relative">
             <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
-              <img
+              <Image
                 src={heroImage.src}
                 alt={heroImage.alt}
-                width={1200}
-                height={1000}
                 className="aspect-[6/5] w-full object-cover"
+                priority
               />
             </div>
           </Reveal>
@@ -82,7 +84,7 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
     <nav aria-label="Breadcrumb" className="container-page pt-6">
       <ol className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
         <li>
-          <Link to="/" className="hover:text-blue">
+          <Link href="/" className="hover:text-blue">
             Home
           </Link>
         </li>
@@ -90,7 +92,7 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
           <li key={item.label} className="flex items-center gap-2">
             <span aria-hidden="true">/</span>
             {item.to ? (
-              <Link to={item.to as never} className="hover:text-blue">
+              <Link href={item.to} className="hover:text-blue">
                 {item.label}
               </Link>
             ) : (
@@ -117,20 +119,14 @@ export function CTABanner({
         <p className="lead mx-auto mt-4 max-w-2xl text-blue-soft">{description}</p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Button asChild variant="cta" size="lg">
-            <Link
-              to="/book-consultation"
-              onClick={() => trackEvent("cta-clicked", { cta: "book-consultation", location: "cta-banner" })}
-            >
+            <TrackedLink href="/book-consultation" cta="book-consultation" location="cta-banner">
               Book a Consultation
-            </Link>
+            </TrackedLink>
           </Button>
           <Button asChild variant="onNavy" size="lg">
-            <Link
-              to="/explore/pathway-advisor"
-              onClick={() => trackEvent("cta-clicked", { cta: "pathway-advisor", location: "cta-banner" })}
-            >
+            <TrackedLink href="/explore/pathway-advisor" cta="pathway-advisor" location="cta-banner">
               Discover My Pathway
-            </Link>
+            </TrackedLink>
           </Button>
         </div>
       </div>
@@ -138,29 +134,17 @@ export function CTABanner({
   );
 }
 
-export function Card({ className, children }: { className?: string; children: ReactNode }) {
-  return (
-    <motion.div
-      whileHover={{ y: -5, boxShadow: "0 18px 40px -16px color-mix(in oklab, var(--navy) 14%, transparent)" }}
-      transition={{ type: "spring", stiffness: 350, damping: 22 }}
-      className={cn(
-        "rounded-xl border border-border bg-card p-6 shadow-card",
-        className,
-      )}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 export function TextLink({ to, children }: { to: string; children: ReactNode }) {
   return (
     <Link
-      to={to as never}
+      href={to}
       className="group link-underline inline-flex items-center gap-1.5 text-sm font-semibold text-blue"
     >
       {children}
-      <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+      <ArrowRight
+        className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"
+        aria-hidden="true"
+      />
     </Link>
   );
 }

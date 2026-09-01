@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { ArrowRight, Compass, GraduationCap, MapPin, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { storeApplicationHandoff } from "@/lib/application/applicationService";
@@ -7,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { QuestionBlock } from "./PathwayShell";
 import { leadFromPathway, saveLead, type ContactMethod } from "@/lib/leads";
-import { formatEmailBody, sendEmail } from "@/lib/email/resend";
+import { formatEmailBody } from "@/lib/email/format";
+import { sendEmail } from "@/lib/email/resend";
 import { company } from "@/data/company";
 import { trackEvent } from "@/lib/analytics/umami";
 import type { PathwayProfile, PathwayResult } from "@/lib/pathway/types";
@@ -33,8 +36,8 @@ export function PathwayResults({
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const next: Record<string, string> = {};
-    if (!form.fullName.trim()) next['fullName'] = "Please add your name.";
-    if (!form.email.trim()) next['email'] = "Please add an email address.";
+    if (!form.fullName.trim()) next["fullName"] = "Please add your name.";
+    if (!form.email.trim()) next["email"] = "Please add an email address.";
     setErrors(next);
     if (Object.keys(next).length) return;
 
@@ -129,10 +132,7 @@ export function PathwayResults({
         <h3 className="text-h3">Career areas worth exploring</h3>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {result.careerFamilies.map((career) => (
-            <article
-              key={career.key}
-              className="rounded-xl border border-border bg-card p-6 shadow-card"
-            >
+            <article key={career.key} className="rounded-xl border border-border bg-card p-6 shadow-card">
               <span className="mb-4 inline-flex size-10 items-center justify-center rounded-lg bg-blue/8 text-blue">
                 <Compass className="size-5" aria-hidden="true" />
               </span>
@@ -153,10 +153,7 @@ export function PathwayResults({
         <h3 className="text-h3">Degree pathways worth investigating</h3>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {result.degreeFamilies.map((degree) => (
-            <article
-              key={degree.key}
-              className="rounded-xl border border-border bg-card p-5 shadow-card"
-            >
+            <article key={degree.key} className="rounded-xl border border-border bg-card p-5 shadow-card">
               <span className="inline-flex items-center gap-2 text-xs font-semibold text-green">
                 <GraduationCap className="size-4" aria-hidden="true" />
                 {degree.relatedTo}
@@ -241,7 +238,7 @@ export function PathwayResults({
         </p>
         <Button asChild variant="cta" size="lg" className="mt-5">
           <Link
-            to="/apply"
+            href="/apply"
             onClick={() => {
               storeApplicationHandoff(profile);
               trackEvent("cta-clicked", { cta: "start-application", location: "pathway-results" });
@@ -268,7 +265,7 @@ export function PathwayResults({
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <Button asChild variant="cta">
-                <Link to="/book-consultation">Book a Consultation</Link>
+                <Link href="/book-consultation">Book a Consultation</Link>
               </Button>
               <Button variant="outline" onClick={onRestart}>
                 <RotateCcw className="size-4" aria-hidden="true" />
@@ -279,7 +276,7 @@ export function PathwayResults({
         ) : (
           <form className="mt-6 space-y-5" onSubmit={submit} noValidate>
             <div className="grid gap-5 sm:grid-cols-2">
-              <QuestionBlock label="Full name" error={errors['fullName']}>
+              <QuestionBlock label="Full name" error={errors["fullName"]}>
                 <Input
                   value={form.fullName}
                   onChange={(e) => setForm((f) => ({ ...f, fullName: e.target.value }))}
@@ -287,7 +284,7 @@ export function PathwayResults({
                   aria-label="Full name"
                 />
               </QuestionBlock>
-              <QuestionBlock label="Email" error={errors['email']}>
+              <QuestionBlock label="Email" error={errors["email"]}>
                 <Input
                   type="email"
                   value={form.email}
@@ -341,11 +338,7 @@ export function PathwayResults({
             <p className="text-xs leading-relaxed text-muted-foreground">
               By submitting, you agree that {company.shortName} may use your details and pathway
               answers to advise you, as described in our{" "}
-              <Link
-                to="/legal/$page"
-                params={{ page: "privacy-policy" }}
-                className="font-semibold text-blue hover:underline"
-              >
+              <Link href="/legal/privacy-policy" className="font-semibold text-blue hover:underline">
                 Privacy Policy
               </Link>
               .

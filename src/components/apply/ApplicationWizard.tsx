@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { CheckCircle2, Pencil } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -38,7 +40,8 @@ import {
   TextAreaField,
   TextField,
 } from "./fields";
-import { formatEmailBody, sendEmail } from "@/lib/email/resend";
+import { formatEmailBody } from "@/lib/email/format";
+import { sendEmail } from "@/lib/email/resend";
 import { trackEvent } from "@/lib/analytics/umami";
 import { cn } from "@/lib/utils";
 
@@ -285,10 +288,10 @@ export function ApplicationWizard() {
           )}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Button asChild variant="cta" size="lg">
-              <Link to="/resources">Explore Resources</Link>
+              <Link href="/resources">Explore Resources</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to="/">Return Home</Link>
+              <Link href="/">Return Home</Link>
             </Button>
           </div>
         </div>
@@ -573,8 +576,7 @@ export function ApplicationWizard() {
                   <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
                     Please only provide information necessary for your education enquiry. Read our{" "}
                     <Link
-                      to="/legal/$page"
-                      params={{ page: "privacy-policy" }}
+                      href="/legal/privacy-policy"
                       className="font-semibold text-blue hover:underline"
                     >
                       Privacy Policy

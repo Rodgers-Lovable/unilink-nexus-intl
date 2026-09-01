@@ -1,3 +1,5 @@
+"use client";
+
 import type { ReactNode } from "react";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -70,8 +72,7 @@ export function ChoiceCards({
   multiple?: boolean;
   columns?: 1 | 2 | 3;
 }) {
-  const isSelected = (opt: string) =>
-    Array.isArray(value) ? value.includes(opt) : value === opt;
+  const isSelected = (opt: string) => (Array.isArray(value) ? value.includes(opt) : value === opt);
 
   return (
     <fieldset className="mt-6">

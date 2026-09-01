@@ -1,3 +1,5 @@
+"use client";
+
 import { useId, useState, type ReactNode } from "react";
 import { AlertCircle, Check, ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -122,10 +124,7 @@ export function TextAreaField(props: BaseProps & { rows?: number }) {
 }
 
 /** Native select — reliable, accessible and comfortable on mobile. */
-export function SelectField({
-  options,
-  ...props
-}: BaseProps & { options: readonly string[] }) {
+export function SelectField({ options, ...props }: BaseProps & { options: readonly string[] }) {
   const id = useId();
   const { label, value, onChange, required, hint, error, placeholder = "Select an option" } = props;
   return (
@@ -151,10 +150,7 @@ export function SelectField({
 }
 
 /** Searchable single-select, used for country fields. */
-export function ComboboxField({
-  options,
-  ...props
-}: BaseProps & { options: readonly string[] }) {
+export function ComboboxField({ options, ...props }: BaseProps & { options: readonly string[] }) {
   const id = useId();
   const [open, setOpen] = useState(false);
   const { label, value, onChange, required, hint, error, placeholder = "Search and select" } = props;

@@ -1,4 +1,6 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { Facebook, Instagram, Mail, MessageCircle, Phone } from "lucide-react";
 import { Logo } from "./Logo";
 import { contactInfo, socialLinks, company } from "@/data/company";
@@ -47,13 +49,13 @@ export function Footer() {
           <ul className="mt-4 space-y-3 text-sm">
             {quickLinks.map((l) => (
               <li key={l.to}>
-                <Link to={l.to} className="transition-colors hover:text-white">
+                <Link href={l.to} className="transition-colors hover:text-white">
                   {l.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link to="/contact" className="transition-colors hover:text-white">
+              <Link href="/contact" className="transition-colors hover:text-white">
                 Contact
               </Link>
             </li>
@@ -84,11 +86,7 @@ export function Footer() {
           <ul className="mt-4 space-y-3 text-sm">
             {legalLinks.map((l) => (
               <li key={l.page}>
-                <Link
-                  to="/legal/$page"
-                  params={{ page: l.page }}
-                  className="transition-colors hover:text-white"
-                >
+                <Link href={`/legal/${l.page}`} className="transition-colors hover:text-white">
                   {l.label}
                 </Link>
               </li>
@@ -99,7 +97,9 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-2 py-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {company.legalName}. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} {company.legalName}. All rights reserved.
+          </p>
           <p>Guidance only — requirements vary by country, institution and programme.</p>
         </div>
       </div>

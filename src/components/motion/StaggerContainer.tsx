@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, type HTMLMotionProps } from "framer-motion";
 import { staggerContainerVariants } from "@/lib/motion";
 import { cn } from "@/lib/utils";
