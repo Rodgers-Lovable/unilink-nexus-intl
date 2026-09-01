@@ -9,6 +9,7 @@ import { services } from "@/data/services";
 import { resources } from "@/data/resources";
 import { journeyEntryCards, audienceCards, whyUnilink, successStories } from "@/data/site";
 import { Reveal, RevealImmediate, StaggerContainer, StaggerItem, ParallaxImage } from "@/components/motion";
+import { trackEvent } from "@/lib/analytics/umami";
 import heroImg from "@/assets/hero-network.jpg";
 
 const audienceIcons: Record<string, LucideIcon> = {
@@ -65,10 +66,20 @@ function Home() {
             <RevealImmediate delay={0.24}>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Button asChild variant="cta" size="lg" className="w-full sm:w-auto">
-                  <Link to="/explore/pathway-advisor">Discover My Pathway</Link>
+                  <Link
+                    to="/explore/pathway-advisor"
+                    onClick={() => trackEvent("cta-clicked", { cta: "pathway-advisor", location: "home-hero" })}
+                  >
+                    Discover My Pathway
+                  </Link>
                 </Button>
                 <Button asChild variant="navy" size="lg" className="w-full sm:w-auto">
-                  <Link to="/book-consultation">Talk to an Advisor</Link>
+                  <Link
+                    to="/book-consultation"
+                    onClick={() => trackEvent("cta-clicked", { cta: "book-consultation", location: "home-hero" })}
+                  >
+                    Talk to an Advisor
+                  </Link>
                 </Button>
               </div>
             </RevealImmediate>

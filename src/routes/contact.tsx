@@ -8,6 +8,7 @@ import { PageHero, Card } from "@/components/site/primitives";
 import { contactInfo, company, isPlaceholder } from "@/data/company";
 import { saveLead } from "@/lib/leads";
 import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
+import { trackEvent } from "@/lib/analytics/umami";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -64,6 +65,13 @@ function ContactPage() {
 
     setStatus(
       result.status === "error" ? "error" : result.status === "skipped" ? "skipped" : "sent",
+    );
+    trackEvent(
+      result.status === "error"
+        ? "contact-failed"
+        : result.status === "skipped"
+          ? "contact-skipped"
+          : "contact-submitted",
     );
   };
 

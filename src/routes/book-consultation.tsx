@@ -8,6 +8,7 @@ import { destinations } from "@/data/destinations";
 import { saveLead } from "@/lib/leads";
 import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
 import { company, contactInfo, isPlaceholder } from "@/data/company";
+import { trackEvent } from "@/lib/analytics/umami";
 
 export const Route = createFileRoute("/book-consultation")({
   head: () => ({
@@ -75,6 +76,14 @@ function BookPage() {
 
     setStatus(
       result.status === "error" ? "error" : result.status === "skipped" ? "skipped" : "sent",
+    );
+    trackEvent(
+      result.status === "error"
+        ? "consultation-failed"
+        : result.status === "skipped"
+          ? "consultation-skipped"
+          : "consultation-submitted",
+      { destination: values.destination || "Not sure", studyLevel: values.studyLevel },
     );
   };
 

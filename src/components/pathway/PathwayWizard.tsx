@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ChoiceCards, ProgressBar, QuestionBlock, StepHeader, stepLabels } from "./PathwayShell";
 import { PathwayResults } from "./PathwayResults";
 import { pathwayService } from "@/lib/pathway/pathwayService";
+import { trackEvent } from "@/lib/analytics/umami";
 import {
   budgetOptions,
   countryOptions,
@@ -33,6 +34,7 @@ export function PathwayWizard() {
   const [result, setResult] = useState<PathwayResult | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const startedTracked = useRef(false);
 
   const set = <K extends keyof PathwayProfile>(key: K, value: PathwayProfile[K]) =>
     setProfile((p) => ({ ...p, [key]: value }));
@@ -68,11 +70,21 @@ export function PathwayWizard() {
 
   const next = async () => {
     if (!validate()) return;
+    if (!startedTracked.current) {
+      startedTracked.current = true;
+      trackEvent("pathway-advisor-started");
+    }
     if (step === LAST_STEP - 1) {
       setLoading(true);
       const generated = await pathwayService.generatePathway(profile);
       setResult(generated);
       setLoading(false);
+      trackEvent("pathway-advisor-completed", {
+        country: profile.country,
+        level: profile.level,
+        careerFamilies: generated.careerFamilies.map((c) => c.title).join(", "),
+        destinations: generated.destinations.map((d) => d.name).join(", "),
+      });
     }
     setStep((s) => Math.min(s + 1, LAST_STEP));
     scrollUp();

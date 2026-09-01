@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion";
 import { heroImages, type HeroImageKey } from "@/components/site/hero-images";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics/umami";
 
 export function SectionHeading({
   eyebrow,
@@ -116,10 +117,20 @@ export function CTABanner({
         <p className="lead mx-auto mt-4 max-w-2xl text-blue-soft">{description}</p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Button asChild variant="cta" size="lg">
-            <Link to="/book-consultation">Book a Consultation</Link>
+            <Link
+              to="/book-consultation"
+              onClick={() => trackEvent("cta-clicked", { cta: "book-consultation", location: "cta-banner" })}
+            >
+              Book a Consultation
+            </Link>
           </Button>
           <Button asChild variant="onNavy" size="lg">
-            <Link to="/explore/pathway-advisor">Discover My Pathway</Link>
+            <Link
+              to="/explore/pathway-advisor"
+              onClick={() => trackEvent("cta-clicked", { cta: "pathway-advisor", location: "cta-banner" })}
+            >
+              Discover My Pathway
+            </Link>
           </Button>
         </div>
       </div>

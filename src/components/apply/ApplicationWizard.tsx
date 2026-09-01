@@ -39,6 +39,7 @@ import {
   TextField,
 } from "./fields";
 import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
+import { trackEvent } from "@/lib/analytics/umami";
 import { cn } from "@/lib/utils";
 
 function ProgressHeader({ current }: { current: number }) {
@@ -130,6 +131,7 @@ export function ApplicationWizard() {
   const [source, setSource] = useState<ApplicationSource>("direct_application");
   const [prefilled, setPrefilled] = useState(false);
   const headingRef = useRef<HTMLDivElement>(null);
+  const startedTracked = useRef(false);
 
   const intakeOptions = useMemo(() => getIntakeOptions(), []);
   const step = applicationSteps[stepIndex]?.key as ApplicationStepKey;
@@ -168,6 +170,11 @@ export function ApplicationWizard() {
     if (Object.keys(stepErrors).length > 0) return;
 
     if (step !== "review") {
+      if (!startedTracked.current) {
+        startedTracked.current = true;
+        trackEvent("application-started", { source });
+      }
+      trackEvent("application-step-completed", { step: stepIndex + 1 });
       goTo(stepIndex + 1);
       return;
     }
@@ -209,6 +216,11 @@ export function ApplicationWizard() {
 
       if (delivery.status === "error") setDeliveryFailed(true);
 
+      trackEvent("application-submitted", {
+        source: record.source,
+        delivery: delivery.status,
+        targetLevel: record.studyPlan.targetLevel,
+      });
       setSubmitted(record);
       requestAnimationFrame(() => {
         headingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
