@@ -25,9 +25,9 @@ export function FieldShell({
 }: {
   id: string;
   label: string;
-  required?: boolean;
-  hint?: string;
-  error?: string;
+  required?: boolean | undefined;
+  hint?: string | undefined;
+  error?: string | undefined;
   children: ReactNode;
 }) {
   return (
@@ -65,10 +65,10 @@ type BaseProps = {
   label: string;
   value: string;
   onChange: (value: string) => void;
-  required?: boolean;
-  hint?: string;
-  error?: string;
-  placeholder?: string;
+  required?: boolean | undefined;
+  hint?: string | undefined;
+  error?: string | undefined;
+  placeholder?: string | undefined;
 };
 
 export function TextField({
@@ -221,9 +221,9 @@ export function MultiSelectField({
   options: readonly string[];
   values: string[];
   onToggle: (value: string) => void;
-  required?: boolean;
-  hint?: string;
-  error?: string;
+  required?: boolean | undefined;
+  hint?: string | undefined;
+  error?: string | undefined;
 }) {
   const id = useId();
   return (
