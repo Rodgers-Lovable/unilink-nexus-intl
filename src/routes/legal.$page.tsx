@@ -1,80 +1,27 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Breadcrumbs, PageHero } from "@/components/site/primitives";
-
-const legalPages: Record<string, { title: string; sections: { heading: string; text: string }[] }> = {
-  "privacy-policy": {
-    title: "Privacy Policy",
-    sections: [
-      {
-        heading: "Overview",
-        text: "This Privacy Policy explains how Unilink Nexus International collects, uses and protects personal information submitted through this website. [Full policy text to be confirmed with legal review]",
-      },
-      {
-        heading: "Information we collect",
-        text: "Contact details, academic background and enquiry information you provide through forms and the eligibility assessment. [Content to be confirmed]",
-      },
-      {
-        heading: "How we use information",
-        text: "To respond to enquiries, provide guidance and arrange consultations. We do not sell personal information. [Content to be confirmed]",
-      },
-    ],
-  },
-  terms: {
-    title: "Terms of Use",
-    sections: [
-      {
-        heading: "Overview",
-        text: "These terms govern the use of the Unilink Nexus International website. [Full terms text to be confirmed with legal review]",
-      },
-      {
-        heading: "Guidance disclaimer",
-        text: "Website content is for general guidance only and does not constitute a guarantee of admission, scholarship or visa approval.",
-      },
-    ],
-  },
-  "cookie-policy": {
-    title: "Cookie Policy",
-    sections: [
-      {
-        heading: "Overview",
-        text: "This policy explains how cookies and similar technologies are used on this website. [Full policy text to be confirmed]",
-      },
-      {
-        heading: "Your choices",
-        text: "You can control cookies through your browser settings. [Content to be confirmed]",
-      },
-    ],
-  },
-  disclaimer: {
-    title: "Disclaimer",
-    sections: [
-      {
-        heading: "General guidance",
-        text: "Information on this website is provided for general guidance only. Admission, scholarship and visa outcomes depend on institutions and authorities, and requirements change over time.",
-      },
-      {
-        heading: "No guarantees",
-        text: "Unilink Nexus International does not guarantee admission, scholarships or visa approval. [Content to be confirmed]",
-      },
-    ],
-  },
-};
+import { legalDocuments, legalLinks, type LegalBlock } from "@/data/legal";
+import { company, isPlaceholder } from "@/data/company";
 
 export const Route = createFileRoute("/legal/$page")({
   loader: ({ params }) => {
-    const page = legalPages[params.page];
-    if (!page) throw notFound();
-    return { page };
+    const doc = legalDocuments[params.page];
+    if (!doc) throw notFound();
+    return { doc };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
       return { meta: [{ title: "Page unavailable" }, { name: "robots", content: "noindex" }] };
     }
+    const { doc } = loaderData;
     return {
       meta: [
-        { title: `${loaderData.page.title} | Unilink Nexus International` },
-        { name: "description", content: loaderData.page.sections[0]?.text ?? "" },
-        { name: "robots", content: "noindex" },
+        { title: `${doc.title} | ${company.legalName}` },
+        { name: "description", content: doc.summary },
+        { property: "og:title", content: `${doc.title} | ${company.legalName}` },
+        { property: "og:description", content: doc.summary },
+        { property: "og:type", content: "article" },
+        { name: "twitter:card", content: "summary" },
       ],
     };
   },
@@ -89,24 +36,69 @@ export const Route = createFileRoute("/legal/$page")({
   component: LegalPage,
 });
 
+function Block({ block }: { block: LegalBlock }) {
+  if (block.type === "h3") {
+    return <h3 className="mt-8 text-base font-bold text-navy">{block.text}</h3>;
+  }
+  if (block.type === "list") {
+    return (
+      <ul className="mt-4 space-y-2 pl-5">
+        {block.items.map((item) => (
+          <li key={item} className="list-disc text-sm leading-relaxed text-muted-foreground">
+            {item}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+  return <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{block.text}</p>;
+}
+
 function LegalPage() {
-  const { page } = Route.useLoaderData();
+  const { doc } = Route.useLoaderData();
+  const others = legalLinks.filter((l) => l.page !== doc.slug);
+
   return (
     <>
-      <Breadcrumbs items={[{ label: page.title }]} />
-      <PageHero eyebrow="Legal" title={page.title} />
+      <Breadcrumbs items={[{ label: doc.title }]} />
+      <PageHero eyebrow="Legal" title={doc.title} description={doc.summary} />
+
       <section className="section-y">
-        <div className="container-page max-w-3xl space-y-10">
-          {page.sections.map((s) => (
-            <div key={s.heading}>
-              <h2 className="text-h3">{s.heading}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
-            </div>
-          ))}
-          <p className="text-xs text-muted-foreground">
-            Last updated: [date to be confirmed]. This is placeholder legal content pending
-            professional review.
+        <div className="container-page max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            Last updated: {doc.updated}
+            {isPlaceholder(doc.updated) ? " — pending confirmation" : ""}
           </p>
+
+          <div className="mt-10 space-y-12">
+            {doc.sections.map((section) => (
+              <section key={section.heading}>
+                <h2 className="text-h3">{section.heading}</h2>
+                {section.blocks.map((block, i) => (
+                  <Block key={`${section.heading}-${i}`} block={block} />
+                ))}
+              </section>
+            ))}
+          </div>
+
+          <nav aria-label="Other legal pages" className="mt-16 border-t border-border pt-8">
+            <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-navy">
+              Related policies
+            </h2>
+            <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+              {others.map((l) => (
+                <li key={l.page}>
+                  <Link
+                    to="/legal/$page"
+                    params={{ page: l.page }}
+                    className="font-semibold text-blue hover:underline"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </section>
     </>
