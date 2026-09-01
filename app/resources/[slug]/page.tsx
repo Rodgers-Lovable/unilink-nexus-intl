@@ -54,7 +54,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <>
       <script
         type="application/ld+json"
-
+        // Static, code-defined JSON-LD — no user input reaches this.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <Breadcrumbs items={[{ label: "Resources", to: "/resources" }, { label: resource.title }]} />
