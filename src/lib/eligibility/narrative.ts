@@ -21,11 +21,16 @@ export const localNarrativeGenerator: NarrativeGenerator = async (profile, evalu
       ? profile.preferredDestinations.join(", ")
       : "the destinations you are considering";
 
+  const find = (key: string) => evaluation.criteria.find((c) => c.key === key);
+  const academic = find("academicReadiness");
+  const language = find("languagePreparation");
+  const timeline = find("timeline");
+
   const parts: string[] = [];
 
   parts.push(
     `Based on ${qualification.toLowerCase()} and an interest in studying at ${level.toLowerCase()} level${field}, your academic progression appears ${
-      evaluation.criteria[0].status === "Strong" ? "reasonable" : "worth reviewing in more detail"
+      academic?.status === "Strong" ? "reasonable" : "worth reviewing in more detail"
     }.`,
   );
 
@@ -33,16 +38,14 @@ export const localNarrativeGenerator: NarrativeGenerator = async (profile, evalu
     `${destinations} may have different language and admission requirements, so each should be reviewed individually rather than assumed to be equivalent.`,
   );
 
-  const language = evaluation.criteria[1];
   parts.push(
-    language.status === "Strong"
+    language?.status === "Strong"
       ? "Your recorded language result supports applications where English evidence is requested, although each institution sets its own minimum."
       : "Language evidence is one of the most common causes of delay, so confirming what each institution accepts early is worthwhile.",
   );
 
-  const timeline = evaluation.criteria[3];
   parts.push(
-    timeline.status === "Strong"
+    timeline?.status === "Strong"
       ? "Your intended intake leaves reasonable time to prepare documents and complete any outstanding requirements."
       : "Your timeline is tight enough that preparation should begin in parallel rather than sequentially.",
   );

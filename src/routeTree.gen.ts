@@ -10,33 +10,155 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
+import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as StudyAbroadIndexRouteImport } from './routes/study-abroad.index'
+import { Route as StudyAbroadApplicationProcessRouteImport } from './routes/study-abroad.application-process'
+import { Route as StudyAbroadEligibilityRouteImport } from './routes/study-abroad.eligibility'
+import { Route as StudyAbroadFaqRouteImport } from './routes/study-abroad.faq'
+import { Route as StudyAbroadHowItWorksRouteImport } from './routes/study-abroad.how-it-works'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DestinationsIndexRoute = DestinationsIndexRouteImport.update({
+  id: '/destinations/',
+  path: '/destinations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DestinationsSlugRoute = DestinationsSlugRouteImport.update({
+  id: '/destinations/$slug',
+  path: '/destinations/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/services/$slug',
+  path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudyAbroadIndexRoute = StudyAbroadIndexRouteImport.update({
+  id: '/study-abroad/',
+  path: '/study-abroad/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudyAbroadApplicationProcessRoute =
+  StudyAbroadApplicationProcessRouteImport.update({
+    id: '/study-abroad/application-process',
+    path: '/study-abroad/application-process',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const StudyAbroadEligibilityRoute = StudyAbroadEligibilityRouteImport.update({
+  id: '/study-abroad/eligibility',
+  path: '/study-abroad/eligibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudyAbroadFaqRoute = StudyAbroadFaqRouteImport.update({
+  id: '/study-abroad/faq',
+  path: '/study-abroad/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudyAbroadHowItWorksRoute = StudyAbroadHowItWorksRouteImport.update({
+  id: '/study-abroad/how-it-works',
+  path: '/study-abroad/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/destinations/$slug': typeof DestinationsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
+  '/study-abroad/eligibility': typeof StudyAbroadEligibilityRoute
+  '/study-abroad/faq': typeof StudyAbroadFaqRoute
+  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/destinations/': typeof DestinationsIndexRoute
+  '/services/': typeof ServicesIndexRoute
+  '/study-abroad/': typeof StudyAbroadIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/destinations/$slug': typeof DestinationsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
+  '/study-abroad/eligibility': typeof StudyAbroadEligibilityRoute
+  '/study-abroad/faq': typeof StudyAbroadFaqRoute
+  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/destinations': typeof DestinationsIndexRoute
+  '/services': typeof ServicesIndexRoute
+  '/study-abroad': typeof StudyAbroadIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/destinations/$slug': typeof DestinationsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
+  '/study-abroad/eligibility': typeof StudyAbroadEligibilityRoute
+  '/study-abroad/faq': typeof StudyAbroadFaqRoute
+  '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/destinations/': typeof DestinationsIndexRoute
+  '/services/': typeof ServicesIndexRoute
+  '/study-abroad/': typeof StudyAbroadIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/destinations/$slug'
+    | '/services/$slug'
+    | '/study-abroad/application-process'
+    | '/study-abroad/eligibility'
+    | '/study-abroad/faq'
+    | '/study-abroad/how-it-works'
+    | '/destinations/'
+    | '/services/'
+    | '/study-abroad/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/destinations/$slug'
+    | '/services/$slug'
+    | '/study-abroad/application-process'
+    | '/study-abroad/eligibility'
+    | '/study-abroad/faq'
+    | '/study-abroad/how-it-works'
+    | '/destinations'
+    | '/services'
+    | '/study-abroad'
+  id:
+    | '__root__'
+    | '/'
+    | '/destinations/$slug'
+    | '/services/$slug'
+    | '/study-abroad/application-process'
+    | '/study-abroad/eligibility'
+    | '/study-abroad/faq'
+    | '/study-abroad/how-it-works'
+    | '/destinations/'
+    | '/services/'
+    | '/study-abroad/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DestinationsSlugRoute: typeof DestinationsSlugRoute
+  ServicesSlugRoute: typeof ServicesSlugRoute
+  StudyAbroadApplicationProcessRoute: typeof StudyAbroadApplicationProcessRoute
+  StudyAbroadEligibilityRoute: typeof StudyAbroadEligibilityRoute
+  StudyAbroadFaqRoute: typeof StudyAbroadFaqRoute
+  StudyAbroadHowItWorksRoute: typeof StudyAbroadHowItWorksRoute
+  DestinationsIndexRoute: typeof DestinationsIndexRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
+  StudyAbroadIndexRoute: typeof StudyAbroadIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +170,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/destinations/': {
+      id: '/destinations/'
+      path: '/destinations'
+      fullPath: '/destinations/'
+      preLoaderRoute: typeof DestinationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations/$slug': {
+      id: '/destinations/$slug'
+      path: '/destinations/$slug'
+      fullPath: '/destinations/$slug'
+      preLoaderRoute: typeof DestinationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-abroad/': {
+      id: '/study-abroad/'
+      path: '/study-abroad'
+      fullPath: '/study-abroad/'
+      preLoaderRoute: typeof StudyAbroadIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-abroad/application-process': {
+      id: '/study-abroad/application-process'
+      path: '/study-abroad/application-process'
+      fullPath: '/study-abroad/application-process'
+      preLoaderRoute: typeof StudyAbroadApplicationProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-abroad/eligibility': {
+      id: '/study-abroad/eligibility'
+      path: '/study-abroad/eligibility'
+      fullPath: '/study-abroad/eligibility'
+      preLoaderRoute: typeof StudyAbroadEligibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-abroad/faq': {
+      id: '/study-abroad/faq'
+      path: '/study-abroad/faq'
+      fullPath: '/study-abroad/faq'
+      preLoaderRoute: typeof StudyAbroadFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-abroad/how-it-works': {
+      id: '/study-abroad/how-it-works'
+      path: '/study-abroad/how-it-works'
+      fullPath: '/study-abroad/how-it-works'
+      preLoaderRoute: typeof StudyAbroadHowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DestinationsSlugRoute: DestinationsSlugRoute,
+  ServicesSlugRoute: ServicesSlugRoute,
+  StudyAbroadApplicationProcessRoute: StudyAbroadApplicationProcessRoute,
+  StudyAbroadEligibilityRoute: StudyAbroadEligibilityRoute,
+  StudyAbroadFaqRoute: StudyAbroadFaqRoute,
+  StudyAbroadHowItWorksRoute: StudyAbroadHowItWorksRoute,
+  DestinationsIndexRoute: DestinationsIndexRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
+  StudyAbroadIndexRoute: StudyAbroadIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
