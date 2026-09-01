@@ -12,10 +12,10 @@ const quickLinks = [
 ];
 
 const legalLinks = [
-  { label: "Privacy Policy", to: "/privacy-policy" },
-  { label: "Terms of Use", to: "/terms" },
-  { label: "Cookie Policy", to: "/cookie-policy" },
-  { label: "Disclaimer", to: "/disclaimer" },
+  { label: "Privacy Policy", page: "privacy-policy" },
+  { label: "Terms of Use", page: "terms" },
+  { label: "Cookie Policy", page: "cookie-policy" },
+  { label: "Disclaimer", page: "disclaimer" },
 ];
 
 export function Footer() {

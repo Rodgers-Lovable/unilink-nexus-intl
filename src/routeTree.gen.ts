@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BookConsultationRouteImport } from './routes/book-consultation'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as LegalRouteImport } from './routes/legal'
+import { Route as AboutIndexRouteImport } from './routes/about.index'
+import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
 import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
@@ -23,6 +26,7 @@ import { Route as StudyAbroadApplicationProcessRouteImport } from './routes/stud
 import { Route as StudyAbroadEligibilityRouteImport } from './routes/study-abroad.eligibility'
 import { Route as StudyAbroadFaqRouteImport } from './routes/study-abroad.faq'
 import { Route as StudyAbroadHowItWorksRouteImport } from './routes/study-abroad.how-it-works'
+import { Route as SuccessStoriesIndexRouteImport } from './routes/success-stories.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -37,6 +41,21 @@ const BookConsultationRoute = BookConsultationRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutIndexRoute = AboutIndexRouteImport.update({
+  id: '/about/',
+  path: '/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutTeamRoute = AboutTeamRouteImport.update({
+  id: '/about/team',
+  path: '/about/team',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DestinationsIndexRoute = DestinationsIndexRouteImport.update({
@@ -95,11 +114,18 @@ const StudyAbroadHowItWorksRoute = StudyAbroadHowItWorksRouteImport.update({
   path: '/study-abroad/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SuccessStoriesIndexRoute = SuccessStoriesIndexRouteImport.update({
+  id: '/success-stories/',
+  path: '/success-stories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
+  '/legal': typeof LegalRoute
+  '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -107,15 +133,19 @@ export interface FileRoutesByFullPath {
   '/study-abroad/eligibility': typeof StudyAbroadEligibilityRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/about/': typeof AboutIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/study-abroad/': typeof StudyAbroadIndexRoute
+  '/success-stories/': typeof SuccessStoriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
+  '/legal': typeof LegalRoute
+  '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -123,16 +153,20 @@ export interface FileRoutesByTo {
   '/study-abroad/eligibility': typeof StudyAbroadEligibilityRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/about': typeof AboutIndexRoute
   '/destinations': typeof DestinationsIndexRoute
   '/resources': typeof ResourcesIndexRoute
   '/services': typeof ServicesIndexRoute
   '/study-abroad': typeof StudyAbroadIndexRoute
+  '/success-stories': typeof SuccessStoriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/book-consultation': typeof BookConsultationRoute
   '/contact': typeof ContactRoute
+  '/legal': typeof LegalRoute
+  '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -140,10 +174,12 @@ export interface FileRoutesById {
   '/study-abroad/eligibility': typeof StudyAbroadEligibilityRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
+  '/about/': typeof AboutIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/study-abroad/': typeof StudyAbroadIndexRoute
+  '/success-stories/': typeof SuccessStoriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +187,8 @@ export interface FileRouteTypes {
     | '/'
     | '/book-consultation'
     | '/contact'
+    | '/legal'
+    | '/about/team'
     | '/destinations/$slug'
     | '/resources/$slug'
     | '/services/$slug'
@@ -158,15 +196,19 @@ export interface FileRouteTypes {
     | '/study-abroad/eligibility'
     | '/study-abroad/faq'
     | '/study-abroad/how-it-works'
+    | '/about/'
     | '/destinations/'
     | '/resources/'
     | '/services/'
     | '/study-abroad/'
+    | '/success-stories/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/book-consultation'
     | '/contact'
+    | '/legal'
+    | '/about/team'
     | '/destinations/$slug'
     | '/resources/$slug'
     | '/services/$slug'
@@ -174,15 +216,19 @@ export interface FileRouteTypes {
     | '/study-abroad/eligibility'
     | '/study-abroad/faq'
     | '/study-abroad/how-it-works'
+    | '/about'
     | '/destinations'
     | '/resources'
     | '/services'
     | '/study-abroad'
+    | '/success-stories'
   id:
     | '__root__'
     | '/'
     | '/book-consultation'
     | '/contact'
+    | '/legal'
+    | '/about/team'
     | '/destinations/$slug'
     | '/resources/$slug'
     | '/services/$slug'
@@ -190,16 +236,20 @@ export interface FileRouteTypes {
     | '/study-abroad/eligibility'
     | '/study-abroad/faq'
     | '/study-abroad/how-it-works'
+    | '/about/'
     | '/destinations/'
     | '/resources/'
     | '/services/'
     | '/study-abroad/'
+    | '/success-stories/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookConsultationRoute: typeof BookConsultationRoute
   ContactRoute: typeof ContactRoute
+  LegalRoute: typeof LegalRoute
+  AboutTeamRoute: typeof AboutTeamRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
   ResourcesSlugRoute: typeof ResourcesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
@@ -207,10 +257,12 @@ export interface RootRouteChildren {
   StudyAbroadEligibilityRoute: typeof StudyAbroadEligibilityRoute
   StudyAbroadFaqRoute: typeof StudyAbroadFaqRoute
   StudyAbroadHowItWorksRoute: typeof StudyAbroadHowItWorksRoute
+  AboutIndexRoute: typeof AboutIndexRoute
   DestinationsIndexRoute: typeof DestinationsIndexRoute
   ResourcesIndexRoute: typeof ResourcesIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   StudyAbroadIndexRoute: typeof StudyAbroadIndexRoute
+  SuccessStoriesIndexRoute: typeof SuccessStoriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -234,6 +286,27 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about/'
+      preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/team': {
+      id: '/about/team'
+      path: '/about/team'
+      fullPath: '/about/team'
+      preLoaderRoute: typeof AboutTeamRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/destinations/': {
@@ -313,6 +386,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudyAbroadHowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/success-stories/': {
+      id: '/success-stories/'
+      path: '/success-stories'
+      fullPath: '/success-stories/'
+      preLoaderRoute: typeof SuccessStoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -320,6 +400,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookConsultationRoute: BookConsultationRoute,
   ContactRoute: ContactRoute,
+  LegalRoute: LegalRoute,
+  AboutTeamRoute: AboutTeamRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
   ResourcesSlugRoute: ResourcesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
@@ -327,10 +409,12 @@ const rootRouteChildren: RootRouteChildren = {
   StudyAbroadEligibilityRoute: StudyAbroadEligibilityRoute,
   StudyAbroadFaqRoute: StudyAbroadFaqRoute,
   StudyAbroadHowItWorksRoute: StudyAbroadHowItWorksRoute,
+  AboutIndexRoute: AboutIndexRoute,
   DestinationsIndexRoute: DestinationsIndexRoute,
   ResourcesIndexRoute: ResourcesIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   StudyAbroadIndexRoute: StudyAbroadIndexRoute,
+  SuccessStoriesIndexRoute: SuccessStoriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
