@@ -46,9 +46,9 @@ export const journeyEntryCards = [
   },
   {
     title: "I'm ready to apply",
-    copy: "I have a clearer direction and need support with applications, preparation and next steps.",
-    cta: "Talk to an Advisor",
-    to: "/book-consultation",
+    copy: "I have a clearer idea of what I want to study and need support preparing my next steps.",
+    cta: "Start My Application",
+    to: "/apply",
   },
 ] as const;
 
@@ -64,14 +64,14 @@ export const audienceCards = [
     title: "Parents",
     copy: "Understand education pathways, timelines, destination choices and the decisions that matter.",
     cta: "Explore Parent Guidance",
-    to: "/services/parent-guidance",
+    to: "/parents",
     icon: "users" as const,
   },
   {
     title: "Schools",
     copy: "Bring career guidance, pathway planning and international education programmes to your students.",
     cta: "Explore School Programmes",
-    to: "/services/school-programmes",
+    to: "/schools",
     icon: "school" as const,
   },
 ] as const;
