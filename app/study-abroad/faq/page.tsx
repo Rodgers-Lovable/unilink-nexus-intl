@@ -32,7 +32,7 @@ export default function Faq() {
     <>
       <script
         type="application/ld+json"
-
+        // Static, code-defined JSON-LD — no user input reaches this.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Breadcrumbs items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "FAQs" }]} />

@@ -16,9 +16,10 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Unilink Nexus International — Study Abroad Guidance",
+  metadataBase: new URL(process.env["SITE_URL"] || "https://example.com"),
+  title: "Unilink Nexus International: Study Abroad Guidance",
   description:
-    "Personalised international education guidance: explore destinations, check your eligibility and plan your study-abroad journey with Unilink Nexus International.",
+    "Personalised international education guidance: explore destinations, check your eligibility and plan a realistic path to studying abroad with Unilink Nexus International.",
   openGraph: {
     siteName: "Unilink Nexus International",
     type: "website",
@@ -46,7 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger -- static, code-defined JSON-LD, no user input
+          // Static, code-defined JSON-LD — no user input reaches this.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>

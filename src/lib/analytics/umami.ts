@@ -9,8 +9,8 @@
  * local development and previews behave exactly as before.
  */
 
-const WEBSITE_ID = process.env["NEXT_PUBLIC_UMAMI_WEBSITE_ID"];
-const SCRIPT_SRC = process.env["NEXT_PUBLIC_UMAMI_SRC"];
+export const WEBSITE_ID = process.env["NEXT_PUBLIC_UMAMI_WEBSITE_ID"];
+export const SCRIPT_SRC = process.env["NEXT_PUBLIC_UMAMI_SRC"];
 
 type UmamiTrack = (
   event?: string | ((props: Record<string, unknown>) => Record<string, unknown>),
@@ -24,22 +24,6 @@ declare global {
 }
 
 export const umamiEnabled = Boolean(WEBSITE_ID && SCRIPT_SRC);
-
-let injected = false;
-
-/** Inject the Umami tracker script. Call once on app mount (client only). */
-export function initUmami(): void {
-  if (typeof document === "undefined" || injected || !umamiEnabled) return;
-  injected = true;
-
-  const script = document.createElement("script");
-  script.defer = true;
-  script.src = SCRIPT_SRC!;
-  script.setAttribute("data-website-id", WEBSITE_ID!);
-  // We report SPA pageviews manually via router events.
-  script.setAttribute("data-auto-track", "false");
-  document.head.appendChild(script);
-}
 
 /** Track a custom event. No-ops when Umami is not configured or not loaded yet. */
 export function trackEvent(name: string, data?: Record<string, string | number>): void {
