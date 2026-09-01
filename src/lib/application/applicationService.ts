@@ -141,7 +141,7 @@ function buildReference(date: Date): string {
 
 /**
  * Mock persistence. Replace the storage block with a server function backed by
- * Lovable Cloud when the adviser dashboard is introduced — the signature and
+ * a real backend when the adviser dashboard is introduced — the signature and
  * the returned record stay identical.
  */
 export async function submitApplication(

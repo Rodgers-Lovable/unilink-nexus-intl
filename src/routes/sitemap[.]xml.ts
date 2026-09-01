@@ -7,7 +7,8 @@ import { resources } from "@/data/resources";
 import { legalDocuments } from "@/data/legal";
 import { isPlaceholder } from "@/data/company";
 
-const BASE_URL = "https://global-guidance-flow.lovable.app";
+// TODO: set SITE_URL to the real production domain once it's confirmed.
+const BASE_URL = process.env["SITE_URL"] || "https://example.com";
 
 interface SitemapEntry {
   path: string;
