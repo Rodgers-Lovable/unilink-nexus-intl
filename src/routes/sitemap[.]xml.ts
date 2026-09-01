@@ -11,9 +11,9 @@ const BASE_URL = "https://global-guidance-flow.lovable.app";
 
 interface SitemapEntry {
   path: string;
-  lastmod?: string;
+  lastmod?: string | undefined;
   changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
-  priority?: string;
+  priority?: string | undefined;
 }
 
 const staticRoutes: SitemapEntry[] = [
