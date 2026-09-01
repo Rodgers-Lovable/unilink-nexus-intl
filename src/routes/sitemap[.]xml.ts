@@ -40,7 +40,7 @@ const staticRoutes: SitemapEntry[] = [
   { path: "/contact", changefreq: "monthly", priority: "0.6" },
 ];
 
-export const Route = createFileRoute("/sitemap/xml")({
+export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {

@@ -15,6 +15,7 @@ import { Route as BookConsultationRouteImport } from './routes/book-consultation
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ParentsRouteImport } from './routes/parents'
 import { Route as SchoolsRouteImport } from './routes/schools'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutApproachRouteImport } from './routes/about.approach'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
@@ -29,7 +30,6 @@ import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
 import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
-import { Route as SitemapXmlRouteImport } from './routes/sitemap.xml'
 import { Route as StudyAbroadIndexRouteImport } from './routes/study-abroad.index'
 import { Route as StudyAbroadApplicationProcessRouteImport } from './routes/study-abroad.application-process'
 import { Route as StudyAbroadFaqRouteImport } from './routes/study-abroad.faq'
@@ -65,6 +65,11 @@ const ParentsRoute = ParentsRouteImport.update({
 const SchoolsRoute = SchoolsRouteImport.update({
   id: '/schools',
   path: '/schools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
@@ -138,11 +143,6 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapXmlRoute = SitemapXmlRouteImport.update({
-  id: '/sitemap/xml',
-  path: '/sitemap/xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const StudyAbroadIndexRoute = StudyAbroadIndexRouteImport.update({
   id: '/study-abroad/',
   path: '/study-abroad/',
@@ -182,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/parents': typeof ParentsRoute
   '/schools': typeof SchoolsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/about/approach': typeof AboutApproachRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
@@ -191,7 +192,6 @@ export interface FileRoutesByFullPath {
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
-  '/sitemap/xml': typeof SitemapXmlRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
@@ -211,6 +211,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/parents': typeof ParentsRoute
   '/schools': typeof SchoolsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/about/approach': typeof AboutApproachRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
@@ -220,7 +221,6 @@ export interface FileRoutesByTo {
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
-  '/sitemap/xml': typeof SitemapXmlRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
@@ -241,6 +241,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/parents': typeof ParentsRoute
   '/schools': typeof SchoolsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/about/approach': typeof AboutApproachRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
@@ -250,7 +251,6 @@ export interface FileRoutesById {
   '/legal/$page': typeof LegalPageRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
-  '/sitemap/xml': typeof SitemapXmlRoute
   '/study-abroad/application-process': typeof StudyAbroadApplicationProcessRoute
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/study-abroad/how-it-works': typeof StudyAbroadHowItWorksRoute
@@ -272,6 +272,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/parents'
     | '/schools'
+    | '/sitemap.xml'
     | '/about/approach'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
@@ -281,7 +282,6 @@ export interface FileRouteTypes {
     | '/legal/$page'
     | '/resources/$slug'
     | '/services/$slug'
-    | '/sitemap/xml'
     | '/study-abroad/application-process'
     | '/study-abroad/faq'
     | '/study-abroad/how-it-works'
@@ -301,6 +301,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/parents'
     | '/schools'
+    | '/sitemap.xml'
     | '/about/approach'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
@@ -310,7 +311,6 @@ export interface FileRouteTypes {
     | '/legal/$page'
     | '/resources/$slug'
     | '/services/$slug'
-    | '/sitemap/xml'
     | '/study-abroad/application-process'
     | '/study-abroad/faq'
     | '/study-abroad/how-it-works'
@@ -330,6 +330,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/parents'
     | '/schools'
+    | '/sitemap.xml'
     | '/about/approach'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
@@ -339,7 +340,6 @@ export interface FileRouteTypes {
     | '/legal/$page'
     | '/resources/$slug'
     | '/services/$slug'
-    | '/sitemap/xml'
     | '/study-abroad/application-process'
     | '/study-abroad/faq'
     | '/study-abroad/how-it-works'
@@ -360,6 +360,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ParentsRoute: typeof ParentsRoute
   SchoolsRoute: typeof SchoolsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AboutApproachRoute: typeof AboutApproachRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
   ExploreCareerSubjectGuidanceRoute: typeof ExploreCareerSubjectGuidanceRoute
@@ -369,7 +370,6 @@ export interface RootRouteChildren {
   LegalPageRoute: typeof LegalPageRoute
   ResourcesSlugRoute: typeof ResourcesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
-  SitemapXmlRoute: typeof SitemapXmlRoute
   StudyAbroadApplicationProcessRoute: typeof StudyAbroadApplicationProcessRoute
   StudyAbroadFaqRoute: typeof StudyAbroadFaqRoute
   StudyAbroadHowItWorksRoute: typeof StudyAbroadHowItWorksRoute
@@ -425,6 +425,13 @@ declare module '@tanstack/react-router' {
       path: '/schools'
       fullPath: '/schools'
       preLoaderRoute: typeof SchoolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about/': {
@@ -525,13 +532,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sitemap/xml': {
-      id: '/sitemap/xml'
-      path: '/sitemap/xml'
-      fullPath: '/sitemap/xml'
-      preLoaderRoute: typeof SitemapXmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/study-abroad/': {
       id: '/study-abroad/'
       path: '/study-abroad'
@@ -584,6 +584,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ParentsRoute: ParentsRoute,
   SchoolsRoute: SchoolsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   AboutApproachRoute: AboutApproachRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
   ExploreCareerSubjectGuidanceRoute: ExploreCareerSubjectGuidanceRoute,
@@ -593,7 +594,6 @@ const rootRouteChildren: RootRouteChildren = {
   LegalPageRoute: LegalPageRoute,
   ResourcesSlugRoute: ResourcesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
-  SitemapXmlRoute: SitemapXmlRoute,
   StudyAbroadApplicationProcessRoute: StudyAbroadApplicationProcessRoute,
   StudyAbroadFaqRoute: StudyAbroadFaqRoute,
   StudyAbroadHowItWorksRoute: StudyAbroadHowItWorksRoute,
