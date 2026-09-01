@@ -64,7 +64,7 @@ function DestinationExplorerPage() {
   return (
     <>
       <Breadcrumbs items={[{ label: "Explore", to: "/explore" }, { label: "Destination Explorer" }]} />
-      <PageHero
+      <PageHero image="destinations"
         eyebrow="Destination Explorer"
         title="Compare places, not reputations."
         description="A destination is a study environment, a language, a cost and a distance. Explore each of those before narrowing your list."

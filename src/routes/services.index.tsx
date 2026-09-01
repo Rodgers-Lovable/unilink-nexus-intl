@@ -28,7 +28,7 @@ export const Route = createFileRoute("/services/")({
 function ServicesPage() {
   return (
     <>
-      <PageHero
+      <PageHero image="counselling"
         eyebrow="How We Help"
         title="Support for every stage of your study journey."
         description="Five services that cover the full path from your first questions to your first week abroad."

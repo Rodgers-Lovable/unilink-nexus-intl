@@ -27,7 +27,7 @@ export const Route = createFileRoute("/about/")({
 function AboutPage() {
   return (
     <>
-      <PageHero
+      <PageHero image="about"
         eyebrow="About us"
         title="Your link to global opportunities"
         description="Unilink Nexus International exists to make international education decisions clearer, calmer and more personal."

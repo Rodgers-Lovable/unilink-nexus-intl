@@ -27,7 +27,7 @@ export const Route = createFileRoute("/destinations/")({
 function DestinationsPage() {
   return (
     <>
-      <PageHero
+      <PageHero image="destinations"
         eyebrow="Destinations"
         title="Explore study destinations"
         description="Compare popular international study destinations and discover which environment may suit your goals."

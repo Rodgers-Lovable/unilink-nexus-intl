@@ -72,7 +72,7 @@ function CareerSubjectGuidancePage() {
   return (
     <>
       <Breadcrumbs items={[{ label: "Explore", to: "/explore" }, { label: "Career & Subject Guidance" }]} />
-      <PageHero
+      <PageHero image="explore"
         eyebrow="Career & Subject Guidance"
         title="Subjects open doors. Understand which ones."
         description="Subject choices quietly decide which degrees stay available later. This is a plain map from what you enjoy studying to the directions it can lead."

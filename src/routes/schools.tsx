@@ -36,7 +36,7 @@ export const Route = createFileRoute("/schools")({
 function SchoolsPage() {
   return (
     <>
-      <PageHero
+      <PageHero image="schools"
         eyebrow="For Schools"
         title="Career guidance your students can act on"
         description="UniLink works with schools to deliver structured career, subject and pathway guidance — in formats that fit a school calendar."

@@ -37,7 +37,7 @@ function ApproachPage() {
   return (
     <>
       <Breadcrumbs items={[{ label: "About", to: "/about" }, { label: "Our Approach" }]} />
-      <PageHero
+      <PageHero image="about"
         eyebrow="Our Approach"
         title="Help students understand where they are, where they could go, and how to get there."
         description="That sentence is the whole method. Everything on this site — the advisor tool, the guidance pages, the consultations — exists to answer one of those three questions."

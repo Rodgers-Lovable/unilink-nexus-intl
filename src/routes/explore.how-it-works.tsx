@@ -49,7 +49,7 @@ function ExploreHowItWorksPage() {
   return (
     <>
       <Breadcrumbs items={[{ label: "Explore", to: "/explore" }, { label: "How It Works" }]} />
-      <PageHero
+      <PageHero image="explore"
         eyebrow="How It Works"
         title="Where you are, where you could go, how to get there."
         description="UniLink Nexus is a student pathway and international education advisory service. Guidance follows five stages, and you can join at whichever one fits you today."

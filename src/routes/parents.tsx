@@ -35,7 +35,7 @@ export const Route = createFileRoute("/parents")({
 function ParentsPage() {
   return (
     <>
-      <PageHero
+      <PageHero image="parents"
         eyebrow="For Parents"
         title="Support the decision without making it for them"
         description="Parents carry much of the worry and most of the cost. UniLink gives you a clear view of the pathways available, what they require and how the timeline works."

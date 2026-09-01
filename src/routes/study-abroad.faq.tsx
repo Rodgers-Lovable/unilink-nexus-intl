@@ -42,7 +42,7 @@ function Faq() {
   return (
     <>
       <Breadcrumbs items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "FAQs" }]} />
-      <PageHero
+      <PageHero image="resources"
         eyebrow="FAQs"
         title="Questions students ask most."
         description="If your question is not answered here, a consultation is the fastest way to get a clear response."

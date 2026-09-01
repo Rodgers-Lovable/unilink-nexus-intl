@@ -74,7 +74,7 @@ function ContactPage() {
 
   return (
     <>
-      <PageHero
+      <PageHero image="counselling"
         eyebrow="Contact"
         title="Talk to us about your study plans"
         description="Questions, timelines or simply where to start — we're happy to help."
