@@ -31,7 +31,7 @@ export const Route = createFileRoute("/book-consultation")({
 });
 
 function BookPage() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "skipped" | "error">("idle");
 
   const send = async (data: FormData) => {
     setStatus("sending");
