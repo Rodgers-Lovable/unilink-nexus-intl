@@ -114,12 +114,42 @@ function BookPage() {
         </div>
 
         <Card className="bg-card">
-          {status === "sent" ? (
+          {status === "sent" || status === "skipped" ? (
             <div className="py-8 text-center">
               <h2 className="text-h3">Request received</h2>
-              <p className="mt-3 text-sm text-muted-foreground">
-                Thank you — a UniLink adviser will be in touch to arrange your consultation.
-              </p>
+              {status === "sent" ? (
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Thank you — a UniLink adviser will be in touch to arrange your consultation.
+                </p>
+              ) : (
+                <div className="mt-3 space-y-3 text-sm text-muted-foreground">
+                  <p>
+                    Your details have been recorded, but our email delivery service is not
+                    configured yet, so we may not see your request right away.
+                  </p>
+                  <p className="font-semibold text-navy">
+                    To guarantee a response, please contact us directly:
+                  </p>
+                  <ul className="space-y-1">
+                    {!isPlaceholder(contactInfo.phone) && <li>Phone: {contactInfo.phone}</li>}
+                    {!isPlaceholder(contactInfo.whatsapp) && (
+                      <li>WhatsApp: {contactInfo.whatsapp}</li>
+                    )}
+                    {!isPlaceholder(contactInfo.email) && <li>Email: {contactInfo.email}</li>}
+                    {isPlaceholder(contactInfo.phone) &&
+                      isPlaceholder(contactInfo.whatsapp) &&
+                      isPlaceholder(contactInfo.email) && (
+                        <li>
+                          Reach us via our{" "}
+                          <Link to="/contact" className="font-semibold text-blue hover:underline">
+                            contact page
+                          </Link>
+                          .
+                        </li>
+                      )}
+                  </ul>
+                </div>
+              )}
             </div>
           ) : (
             <form onSubmit={submit} className="space-y-4">
