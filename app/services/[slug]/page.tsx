@@ -44,7 +44,12 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
   return (
     <>
       <Breadcrumbs items={[{ label: "How We Help", to: "/services" }, { label: service.title }]} />
-      <PageHero image="counselling" eyebrow="Service" title={service.title} description={service.intro}>
+      <PageHero
+        image="counselling"
+        eyebrow="Service"
+        title={service.title}
+        description={service.intro}
+      >
         {service.slug === "application-support" ? (
           <>
             <Button asChild variant="cta" size="lg">

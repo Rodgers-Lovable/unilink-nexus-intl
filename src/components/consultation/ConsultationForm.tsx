@@ -57,7 +57,9 @@ export function ConsultationForm() {
       }),
     });
 
-    setStatus(result.status === "error" ? "error" : result.status === "skipped" ? "skipped" : "sent");
+    setStatus(
+      result.status === "error" ? "error" : result.status === "skipped" ? "skipped" : "sent",
+    );
     trackEvent(
       result.status === "error"
         ? "consultation-failed"
@@ -96,7 +98,10 @@ export function ConsultationForm() {
           </div>
           <p className="mt-8 text-sm text-muted-foreground">
             Prefer a quicker start?{" "}
-            <Link href="/explore/pathway-advisor" className="font-semibold text-blue hover:underline">
+            <Link
+              href="/explore/pathway-advisor"
+              className="font-semibold text-blue hover:underline"
+            >
               Discover your pathway first
             </Link>
             .
@@ -109,20 +114,22 @@ export function ConsultationForm() {
               <h2 className="text-h3">Request received</h2>
               {status === "sent" ? (
                 <p className="mt-3 text-sm text-muted-foreground">
-                  Thank you — a UniLink adviser will be in touch to arrange your consultation.
+                  Thank you. A UniLink adviser will be in touch to arrange your consultation.
                 </p>
               ) : (
                 <div className="mt-3 space-y-3 text-sm text-muted-foreground">
                   <p>
-                    Your details have been recorded, but our email delivery service is not
-                    configured yet, so we may not see your request right away.
+                    Your details have been recorded, but our email delivery service isn&apos;t set
+                    up yet, so we may not see your request right away.
                   </p>
                   <p className="font-semibold text-navy">
                     To guarantee a response, please contact us directly:
                   </p>
                   <ul className="space-y-1">
                     {!isPlaceholder(contactInfo.phone) && <li>Phone: {contactInfo.phone}</li>}
-                    {!isPlaceholder(contactInfo.whatsapp) && <li>WhatsApp: {contactInfo.whatsapp}</li>}
+                    {!isPlaceholder(contactInfo.whatsapp) && (
+                      <li>WhatsApp: {contactInfo.whatsapp}</li>
+                    )}
                     {!isPlaceholder(contactInfo.email) && <li>Email: {contactInfo.email}</li>}
                     {isPlaceholder(contactInfo.phone) &&
                       isPlaceholder(contactInfo.whatsapp) &&
@@ -142,7 +149,13 @@ export function ConsultationForm() {
           ) : (
             <form onSubmit={submit} className="space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
-                <Input name="fullName" required placeholder="Full name" className="h-12" aria-label="Full name" />
+                <Input
+                  name="fullName"
+                  required
+                  placeholder="Full name"
+                  className="h-12"
+                  aria-label="Full name"
+                />
                 <Input
                   name="email"
                   type="email"
@@ -152,7 +165,13 @@ export function ConsultationForm() {
                   aria-label="Email address"
                 />
               </div>
-              <Input name="phone" required placeholder="Phone or WhatsApp" className="h-12" aria-label="Phone number" />
+              <Input
+                name="phone"
+                required
+                placeholder="Phone or WhatsApp"
+                className="h-12"
+                aria-label="Phone number"
+              />
               <div className="grid gap-4 sm:grid-cols-2">
                 <select
                   name="studyLevel"
@@ -164,11 +183,13 @@ export function ConsultationForm() {
                   <option value="" disabled>
                     Intended study level
                   </option>
-                  {["Bachelor's", "Master's", "PhD", "Diploma / Certificate", "Not sure yet"].map((o) => (
-                    <option key={o} value={o}>
-                      {o}
-                    </option>
-                  ))}
+                  {["Bachelor's", "Master's", "PhD", "Diploma / Certificate", "Not sure yet"].map(
+                    (o) => (
+                      <option key={o} value={o}>
+                        {o}
+                      </option>
+                    ),
+                  )}
                 </select>
                 <select
                   name="destination"
@@ -207,12 +228,19 @@ export function ConsultationForm() {
                 className="w-full"
                 disabled={status === "sending"}
               >
-                {status === "sending" ? "Sending…" : status === "error" ? "Try again" : "Request My Consultation"}
+                {status === "sending"
+                  ? "Sending…"
+                  : status === "error"
+                    ? "Try again"
+                    : "Request My Consultation"}
               </Button>
               <p className="text-xs leading-relaxed text-muted-foreground">
                 By submitting, you agree that {company.shortName} may use your details to arrange
                 and prepare for this consultation, as described in our{" "}
-                <Link href="/legal/privacy-policy" className="font-semibold text-blue hover:underline">
+                <Link
+                  href="/legal/privacy-policy"
+                  className="font-semibold text-blue hover:underline"
+                >
                   Privacy Policy
                 </Link>
                 .

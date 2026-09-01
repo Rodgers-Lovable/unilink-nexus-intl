@@ -34,7 +34,7 @@ export function ProgressBar({ current }: { current: number }) {
         aria-label="Pathway advisor progress"
       >
         <div
-          className="h-full rounded-full bg-gradient-to-r from-blue to-green transition-all duration-500"
+          className="h-full rounded-full bg-linear-to-r from-blue to-green transition-all duration-500"
           style={{ width: `${pct}%` }}
         />
       </div>

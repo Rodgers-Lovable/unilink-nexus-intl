@@ -13,11 +13,13 @@ export const parentTopics: ProgrammeItem[] = [
   },
   {
     title: "Career and degree pathways",
-    description: "How subject choices connect to degree families, and how degrees connect to careers.",
+    description:
+      "How subject choices connect to degree families, and how degrees connect to careers.",
   },
   {
     title: "Choosing study destinations",
-    description: "Academic fit, language, cost and distance — compared plainly rather than by reputation.",
+    description:
+      "Academic fit, language, cost and distance, compared plainly rather than by reputation.",
   },
   {
     title: "Understanding costs",

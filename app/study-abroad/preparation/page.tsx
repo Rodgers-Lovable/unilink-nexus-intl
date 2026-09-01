@@ -31,7 +31,9 @@ export const metadata: Metadata = {
 export default function PreparationPage() {
   return (
     <>
-      <Breadcrumbs items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "Preparation" }]} />
+      <Breadcrumbs
+        items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "Preparation" }]}
+      />
       <PageHero
         image="destinations"
         eyebrow="Preparation"

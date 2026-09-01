@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Breadcrumbs, PageHero, SectionHeading, Placeholder, CTABanner } from "@/components/site/primitives";
+import {
+  Breadcrumbs,
+  PageHero,
+  SectionHeading,
+  Placeholder,
+  CTABanner,
+} from "@/components/site/primitives";
 import { Card } from "@/components/site/Card";
 import { howItWorksStages } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "How Studying Abroad Works | UniLink Nexus International",
   description:
-    "A step-by-step view of the international study process — from first conversation to arrival — so you know what happens, when, and what is expected of you.",
+    "A step-by-step view of the international study process (from first conversation to arrival) so you know what happens, when, and what is expected of you.",
   openGraph: {
     title: "How Studying Abroad Works",
     description: "The international study process, stage by stage.",
@@ -26,7 +32,9 @@ export const metadata: Metadata = {
 export default function StudyAbroadHowItWorksPage() {
   return (
     <>
-      <Breadcrumbs items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "How It Works" }]} />
+      <Breadcrumbs
+        items={[{ label: "Study Abroad", to: "/study-abroad" }, { label: "How It Works" }]}
+      />
       <PageHero
         image="study-abroad"
         eyebrow="Study Abroad"

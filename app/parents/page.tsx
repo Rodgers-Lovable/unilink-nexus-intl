@@ -8,9 +8,9 @@ import { parentTopics, parentQuestions } from "@/data/programmes";
 export const metadata: Metadata = {
   title: "For Parents | UniLink Nexus International",
   description:
-    "Clear, pressure-free guidance for parents supporting a student's education decisions — pathways, timelines, costs and how to help without deciding for them.",
+    "Clear, pressure-free guidance for parents supporting a student's education decisions: pathways, timelines, costs and how to help without deciding for them.",
   openGraph: {
-    title: "For Parents — Supporting Your Child's Pathway",
+    title: "For Parents: Supporting Your Child's Pathway",
     description: "Understand education pathways, timelines and the decisions that actually matter.",
     type: "website",
     url: "/parents",
@@ -61,7 +61,7 @@ export default function ParentsPage() {
           <SectionHeading
             eyebrow="Common questions"
             title="Questions worth asking early"
-            description="Bring these to a consultation — they usually shape the plan more than the choice of country."
+            description="Bring these to a consultation. They usually shape the plan more than the choice of country."
           />
           <ul className="mt-10 grid gap-4 sm:grid-cols-2">
             {parentQuestions.map((q) => (
@@ -83,7 +83,7 @@ export default function ParentsPage() {
 
       <CTABanner
         title="Talk it through as a family"
-        description="A consultation covers the pathway, the timeline and the realistic options — with everyone in the room."
+        description="A consultation covers the pathway, the timeline and the realistic options, with everyone in the room."
       />
     </>
   );

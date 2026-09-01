@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
-import { PageHero, Breadcrumbs, SectionHeading, CTABanner, CheckList, Placeholder } from "@/components/site/primitives";
+import {
+  PageHero,
+  Breadcrumbs,
+  SectionHeading,
+  CTABanner,
+  CheckList,
+  Placeholder,
+} from "@/components/site/primitives";
 import { Card } from "@/components/site/Card";
 import { applicationStages, documentChecklist } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Application Process — Studying Abroad | Unilink Nexus",
+  title: "Application Process: Studying Abroad | Unilink Nexus",
   description:
     "How an international application typically progresses, from initial consultation and document preparation to offer review and pre-departure.",
   openGraph: {
-    title: "Application Process — Studying Abroad",
+    title: "Application Process: Studying Abroad",
     description: "The general shape of an international application, stage by stage.",
     url: "/study-abroad/application-process",
   },
@@ -78,7 +85,7 @@ export default function ApplicationProcess() {
             </ol>
             <div className="mt-6">
               <Placeholder>
-                Indicative only — actual timelines vary by destination and intake. [Content to be
+                Indicative only. Actual timelines vary by destination and intake. [Content to be
                 confirmed]
               </Placeholder>
             </div>

@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Breadcrumbs, PageHero, SectionHeading, Placeholder, CTABanner } from "@/components/site/primitives";
+import {
+  Breadcrumbs,
+  PageHero,
+  SectionHeading,
+  Placeholder,
+  CTABanner,
+} from "@/components/site/primitives";
 import { Card } from "@/components/site/Card";
 import { DestinationCard } from "@/components/site/cards";
 import { destinations } from "@/data/destinations";
@@ -35,7 +41,7 @@ const lenses = [
 export const metadata: Metadata = {
   title: "Destination Explorer | UniLink Nexus International",
   description:
-    "Explore study destinations through language, budget, distance, study environment and international orientation — high-level guidance, not a university database.",
+    "Explore study destinations through language, budget, distance, study environment and international orientation. This is high-level guidance, not a university database.",
   openGraph: {
     title: "Destination Explorer",
     description: "Compare study destinations on the criteria that actually affect your experience.",
@@ -53,7 +59,9 @@ export const metadata: Metadata = {
 export default function DestinationExplorerPage() {
   return (
     <>
-      <Breadcrumbs items={[{ label: "Explore", to: "/explore" }, { label: "Destination Explorer" }]} />
+      <Breadcrumbs
+        items={[{ label: "Explore", to: "/explore" }, { label: "Destination Explorer" }]}
+      />
       <PageHero
         image="destinations"
         eyebrow="Destination Explorer"

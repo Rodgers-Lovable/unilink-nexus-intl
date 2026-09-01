@@ -100,7 +100,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {company.legalName}. All rights reserved.
           </p>
-          <p>Guidance only — requirements vary by country, institution and programme.</p>
+          <p>Guidance only. Requirements vary by country, institution and programme.</p>
         </div>
       </div>
     </footer>

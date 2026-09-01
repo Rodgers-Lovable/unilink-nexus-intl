@@ -54,7 +54,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <>
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger -- static, code-defined JSON-LD, no user input
+
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <Breadcrumbs items={[{ label: "Resources", to: "/resources" }, { label: resource.title }]} />
@@ -81,7 +81,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           ))}
 
           <div className="mt-12 rounded-xl border border-border bg-surface p-6">
-            <p className="text-sm font-semibold text-navy">Planning your own journey?</p>
+            <p className="text-sm font-semibold text-navy">Planning your next step?</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Get a preliminary view of your options in about three minutes.
             </p>

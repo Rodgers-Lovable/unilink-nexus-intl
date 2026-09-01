@@ -12,7 +12,8 @@ export function ResourceList({
   categories: readonly string[];
 }) {
   const [category, setCategory] = useState<string>("All");
-  const filtered = category === "All" ? resources : resources.filter((r) => r.category === category);
+  const filtered =
+    category === "All" ? resources : resources.filter((r) => r.category === category);
 
   return (
     <>

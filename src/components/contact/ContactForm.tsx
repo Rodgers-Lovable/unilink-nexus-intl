@@ -48,7 +48,9 @@ export function ContactForm() {
       }),
     });
 
-    setStatus(result.status === "error" ? "error" : result.status === "skipped" ? "skipped" : "sent");
+    setStatus(
+      result.status === "error" ? "error" : result.status === "skipped" ? "skipped" : "sent",
+    );
     trackEvent(
       result.status === "error"
         ? "contact-failed"
@@ -71,7 +73,7 @@ export function ContactForm() {
         image="counselling"
         eyebrow="Contact"
         title="Talk to us about your study plans"
-        description="Questions, timelines or simply where to start — we're happy to help."
+        description="Questions, timelines, or simply where to start. We're happy to help."
       />
 
       <section className="section-y">
@@ -93,7 +95,9 @@ export function ContactForm() {
                 </li>
               </ul>
               <p className="mt-4 text-sm text-muted-foreground">{showDetail(contactInfo.hours)}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{showDetail(contactInfo.address)}</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {showDetail(contactInfo.address)}
+              </p>
             </Card>
             <p className="text-sm leading-relaxed text-muted-foreground">
               {company.legalName} provides education advisory guidance. We do not guarantee
@@ -111,9 +115,9 @@ export function ContactForm() {
                   </p>
                 ) : (
                   <p className="mt-3 text-sm text-muted-foreground">
-                    Your message has been recorded, but our email delivery service is not
-                    configured yet — to guarantee a response, please contact us directly using
-                    the phone, WhatsApp or email details shown on this page.
+                    Your message has been recorded, but our email delivery service isn&apos;t set up
+                    yet. To guarantee a response, please contact us directly using the phone,
+                    WhatsApp or email details shown on this page.
                   </p>
                 )}
               </div>
@@ -172,12 +176,19 @@ export function ContactForm() {
                   className="w-full"
                   disabled={status === "sending"}
                 >
-                  {status === "sending" ? "Sending…" : status === "error" ? "Try again" : "Send Message"}
+                  {status === "sending"
+                    ? "Sending…"
+                    : status === "error"
+                      ? "Try again"
+                      : "Send Message"}
                 </Button>
                 <p className="text-xs leading-relaxed text-muted-foreground">
                   By submitting, you agree that {company.shortName} may use your details to respond
                   to this enquiry, as described in our{" "}
-                  <Link href="/legal/privacy-policy" className="font-semibold text-blue hover:underline">
+                  <Link
+                    href="/legal/privacy-policy"
+                    className="font-semibold text-blue hover:underline"
+                  >
                     Privacy Policy
                   </Link>
                   .

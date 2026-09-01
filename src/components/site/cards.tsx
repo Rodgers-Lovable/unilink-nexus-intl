@@ -49,7 +49,7 @@ export function DestinationCard({
   const img = destinationImages[destination.slug];
   return (
     <article className="group overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift">
-      <div className="aspect-[3/2] overflow-hidden bg-surface">
+      <div className="aspect-3/2 overflow-hidden bg-surface">
         {img && (
           <Image
             src={img}
@@ -167,7 +167,7 @@ export function TeamCard({
   return (
     <Card>
       <div
-        className="mb-4 flex aspect-[4/3] items-center justify-center rounded-lg bg-surface text-xs font-semibold text-muted-foreground"
+        className="mb-4 flex aspect-4/3 items-center justify-center rounded-lg bg-surface text-xs font-semibold text-muted-foreground"
         aria-hidden="true"
       >
         Photo placeholder

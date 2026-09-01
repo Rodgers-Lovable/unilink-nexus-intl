@@ -41,7 +41,8 @@ export function PathwayWizard() {
   const set = <K extends keyof PathwayProfile>(key: K, value: PathwayProfile[K]) =>
     setProfile((p) => ({ ...p, [key]: value }));
 
-  const toggle = (key: "interests" | "subjects" | "preferredDestinations" | "studentSituation") =>
+  const toggle =
+    (key: "interests" | "subjects" | "preferredDestinations" | "studentSituation") =>
     (option: string) =>
       setProfile((p) => ({
         ...p,
@@ -51,7 +52,7 @@ export function PathwayWizard() {
   const validate = () => {
     const next: Record<string, string> = {};
     if (step === 0 && profile.interests.length === 0) {
-      next["interests"] = "Pick at least one — “I'm not sure yet” is a valid answer.";
+      next["interests"] = "Pick at least one. “I'm not sure yet” is a valid answer.";
     }
     if (step === 2) {
       if (!profile.country) next["country"] = "Please choose where you currently live.";
@@ -217,7 +218,7 @@ export function PathwayWizard() {
 
               <QuestionBlock
                 label="How would you describe your current academic performance?"
-                hint="An honest estimate is enough — exact grades are not needed yet."
+                hint="An honest estimate is enough. Exact grades are not needed yet."
               >
                 <ChoiceCards
                   legend="Academic performance"

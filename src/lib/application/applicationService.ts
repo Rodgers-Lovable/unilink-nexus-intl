@@ -57,13 +57,8 @@ export function draftFromPathwayProfile(profile: PathwayProfile): Partial<Applic
     "Not sure yet": "Prefer to discuss with an adviser",
   };
 
-  const destinations = profile.preferredDestinations.filter((d) =>
-    ![
-      "Show me everything",
-      "Europe",
-      "Asia",
-      "Africa",
-    ].includes(d),
+  const destinations = profile.preferredDestinations.filter(
+    (d) => !["Show me everything", "Europe", "Asia", "Africa"].includes(d),
   );
 
   return {

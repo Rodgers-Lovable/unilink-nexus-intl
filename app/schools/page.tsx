@@ -14,9 +14,9 @@ import { schoolProgrammeFormats, schoolOutcomes } from "@/data/programmes";
 export const metadata: Metadata = {
   title: "For Schools | UniLink Nexus International",
   description:
-    "Career guidance, pathway planning and international education sessions delivered to schools — workshops, parent evenings and adviser-led programmes.",
+    "Career guidance, pathway planning and international education sessions delivered to schools: workshops, parent evenings and adviser-led programmes.",
   openGraph: {
-    title: "For Schools — Career & Pathway Programmes",
+    title: "For Schools: Career & Pathway Programmes",
     description: "Bring structured career and pathway guidance to your students.",
     type: "website",
     url: "/schools",
@@ -36,7 +36,7 @@ export default function SchoolsPage() {
         image="schools"
         eyebrow="For Schools"
         title="Career guidance your students can act on"
-        description="UniLink works with schools to deliver structured career, subject and pathway guidance — in formats that fit a school calendar."
+        description="UniLink works with schools to deliver structured career, subject and pathway guidance in formats that fit a school calendar."
       >
         <Button asChild variant="cta" size="lg">
           <Link href="/contact">Enquire About Programmes</Link>

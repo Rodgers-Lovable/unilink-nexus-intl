@@ -4,11 +4,11 @@ import { ApplicationWizard } from "@/components/apply/ApplicationWizard";
 import { PageHero } from "@/components/site/primitives";
 
 export const metadata: Metadata = {
-  title: "Start My Application — UniLink Nexus International",
+  title: "Start My Application | UniLink Nexus International",
   description:
     "Begin your student application profile with UniLink Nexus International. Share your academic background and study goals, and an adviser will guide your next steps.",
   openGraph: {
-    title: "Start My Application — UniLink Nexus International",
+    title: "Start My Application | UniLink Nexus International",
     description:
       "A guided four-step intake covering your background, study plans and goals so a UniLink adviser can support your application.",
     type: "website",
@@ -32,7 +32,7 @@ const assurances = [
   {
     icon: ShieldCheck,
     title: "Advisory review, not an admission",
-    body: "This starts a conversation with an adviser — it is not a university application.",
+    body: "This starts a conversation with an adviser. It is not a university application.",
   },
 ];
 
@@ -50,7 +50,10 @@ export default function ApplyPage() {
         <div className="container-page">
           <ul className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-3">
             {assurances.map((item) => (
-              <li key={item.title} className="rounded-xl border border-border bg-card p-5 shadow-card">
+              <li
+                key={item.title}
+                className="rounded-xl border border-border bg-card p-5 shadow-card"
+              >
                 <item.icon className="size-5 text-blue" aria-hidden="true" />
                 <h2 className="mt-3 text-sm font-bold text-navy">{item.title}</h2>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{item.body}</p>

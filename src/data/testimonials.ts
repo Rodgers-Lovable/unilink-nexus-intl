@@ -32,7 +32,7 @@ export const testimonials: Testimonial[] = [
     challenge: "Sample placeholder: uncertainty about which postgraduate field to pursue.",
     help: "Sample placeholder: pathway exploration, shortlisting and application review support.",
     outcome: "Sample placeholder: enrolled in a taught postgraduate programme.",
-    quote: "Sample quote placeholder — to be replaced with a verified student testimonial.",
+    quote: "Sample quote placeholder, to be replaced with a verified student testimonial.",
     verified: false,
   },
   {
@@ -45,7 +45,7 @@ export const testimonials: Testimonial[] = [
     challenge: "Sample placeholder: comparing college and university pathways.",
     help: "Sample placeholder: destination comparison and document preparation.",
     outcome: "Sample placeholder: commenced a diploma programme.",
-    quote: "Sample quote placeholder — to be replaced with a verified student testimonial.",
+    quote: "Sample quote placeholder, to be replaced with a verified student testimonial.",
     verified: false,
   },
   {
@@ -58,7 +58,7 @@ export const testimonials: Testimonial[] = [
     challenge: "Sample placeholder: language of instruction and entry requirements.",
     help: "Sample placeholder: pathway planning and timeline preparation.",
     outcome: "Sample placeholder: began an undergraduate programme.",
-    quote: "Sample quote placeholder — to be replaced with a verified student testimonial.",
+    quote: "Sample quote placeholder, to be replaced with a verified student testimonial.",
     verified: false,
   },
 ];

@@ -8,7 +8,7 @@ import { whyUnilink } from "@/data/site";
 export const metadata: Metadata = {
   title: "About Unilink Nexus International",
   description:
-    "Unilink Nexus International provides personalised study abroad guidance — your link to global opportunities.",
+    "Unilink Nexus International provides personalised study abroad guidance: your link to global opportunities.",
   openGraph: {
     title: "About Unilink Nexus International",
     description:
@@ -37,7 +37,7 @@ export default function AboutPage() {
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               Unilink Nexus International is an international education consultancy supporting
               students who want to study abroad. We combine structured guidance with a genuinely
-              personal approach — your goals, qualifications and circumstances shape every
+              personal approach: your goals, qualifications and circumstances shape every
               recommendation.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
@@ -48,8 +48,8 @@ export default function AboutPage() {
             <SectionHeading title="Our mission" />
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               To connect ambitious students with the international study opportunities that fit
-              them — not just the ones that are popular — and to support them honestly at every
-              stage from planning to departure.
+              them, not just the ones that are popular, and to support them honestly at every stage
+              from planning to departure.
             </p>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function AboutPage() {
           <div>
             <SectionHeading title="Our approach" />
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Discover, Explore, Plan, Prepare, Connect — the framework behind every conversation.
+              Discover, Explore, Plan, Prepare, Connect: the framework behind every conversation.
             </p>
             <Button asChild variant="navy" className="mt-6">
               <Link href="/about/approach">Read Our Approach</Link>

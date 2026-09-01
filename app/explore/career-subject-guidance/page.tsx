@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Breadcrumbs, PageHero, SectionHeading, Placeholder, CTABanner } from "@/components/site/primitives";
+import {
+  Breadcrumbs,
+  PageHero,
+  SectionHeading,
+  Placeholder,
+  CTABanner,
+} from "@/components/site/primitives";
 import { Card } from "@/components/site/Card";
 
 const careerFamilies = [
@@ -50,7 +56,7 @@ const careerFamilies = [
 export const metadata: Metadata = {
   title: "Career & Subject Guidance | UniLink Nexus International",
   description:
-    "See how the subjects you enjoy connect to career families and the degree pathways that lead there — before you commit to a course or country.",
+    "See how the subjects you enjoy connect to career families and the degree pathways that lead there, before you commit to a course or country.",
   openGraph: {
     title: "Career & Subject Guidance",
     description: "Connect subjects to careers and degree pathways worth exploring.",

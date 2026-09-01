@@ -39,7 +39,13 @@ export const destinations: Destination[] = [
     ],
     educationSystem:
       "Undergraduate, taught postgraduate and research pathways, with entry usually assessed on prior qualifications and English proficiency. [Content to be confirmed]",
-    popularAreas: ["Business & Management", "Computing & Data", "Engineering", "Health Sciences", "Law"],
+    popularAreas: [
+      "Business & Management",
+      "Computing & Data",
+      "Engineering",
+      "Health Sciences",
+      "Law",
+    ],
     studyLevels: ["Foundation", "Bachelor's", "Master's", "PhD"],
     entryRequirements: [
       "Recognised prior qualification for the intended study level",
@@ -80,14 +86,21 @@ export const destinations: Destination[] = [
     ],
     educationSystem:
       "Provincially regulated institutions offering diplomas, bachelor's, master's and doctoral programmes. [Content to be confirmed]",
-    popularAreas: ["Computing & IT", "Business", "Engineering Technology", "Healthcare", "Hospitality"],
+    popularAreas: [
+      "Computing & IT",
+      "Business",
+      "Engineering Technology",
+      "Healthcare",
+      "Hospitality",
+    ],
     studyLevels: ["Diploma", "Bachelor's", "Master's", "PhD"],
     entryRequirements: [
       "Academic transcripts for your highest completed qualification",
       "Language proficiency evidence where required",
       "Programme-specific documents",
     ],
-    costsPlaceholder: "Costs differ by province, institution and programme. [Content to be confirmed]",
+    costsPlaceholder:
+      "Costs differ by province, institution and programme. [Content to be confirmed]",
     intakes: ["September", "January", "May (selected programmes)"],
     visaOverview:
       "Study permit requirements are determined by Canadian immigration authorities and should be verified directly. [Content to be confirmed]",
@@ -116,14 +129,21 @@ export const destinations: Destination[] = [
     ],
     educationSystem:
       "Qualifications are mapped to a national framework covering certificates, diplomas, bachelor's and postgraduate awards. [Content to be confirmed]",
-    popularAreas: ["Nursing & Health", "Information Technology", "Engineering", "Education", "Business"],
+    popularAreas: [
+      "Nursing & Health",
+      "Information Technology",
+      "Engineering",
+      "Education",
+      "Business",
+    ],
     studyLevels: ["Diploma", "Bachelor's", "Master's", "PhD"],
     entryRequirements: [
       "Prior qualification at an accepted level",
       "English proficiency evidence where required",
       "Genuine study intention documentation",
     ],
-    costsPlaceholder: "Tuition and living costs vary widely by city and provider. [Content to be confirmed]",
+    costsPlaceholder:
+      "Tuition and living costs vary widely by city and provider. [Content to be confirmed]",
     intakes: ["February", "July"],
     visaOverview:
       "Student visa conditions are set by Australian authorities and should be reviewed at the time of application. [Content to be confirmed]",
@@ -152,7 +172,13 @@ export const destinations: Destination[] = [
     ],
     educationSystem:
       "Associate, bachelor's, master's and doctoral degrees offered by public and private institutions. [Content to be confirmed]",
-    popularAreas: ["Computer Science", "Business & Finance", "Engineering", "Public Health", "Media"],
+    popularAreas: [
+      "Computer Science",
+      "Business & Finance",
+      "Engineering",
+      "Public Health",
+      "Media",
+    ],
     studyLevels: ["Associate", "Bachelor's", "Master's", "PhD"],
     entryRequirements: [
       "Academic records and, for some institutions, standardised tests",
@@ -189,7 +215,13 @@ export const destinations: Destination[] = [
     ],
     educationSystem:
       "Bachelor's, master's and doctoral degrees, with applied-science institutions offering practice-oriented study. [Content to be confirmed]",
-    popularAreas: ["Mechanical Engineering", "Computer Science", "Renewable Energy", "Business", "Architecture"],
+    popularAreas: [
+      "Mechanical Engineering",
+      "Computer Science",
+      "Renewable Energy",
+      "Business",
+      "Architecture",
+    ],
     studyLevels: ["Bachelor's", "Master's", "PhD"],
     entryRequirements: [
       "Recognised secondary or tertiary qualification",

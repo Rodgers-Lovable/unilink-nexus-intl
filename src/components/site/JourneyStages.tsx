@@ -1,4 +1,11 @@
-import { ClipboardCheck, Compass, Link2, Map, Route as RouteIcon, type LucideIcon } from "lucide-react";
+import {
+  ClipboardCheck,
+  Compass,
+  Link2,
+  Map,
+  Route as RouteIcon,
+  type LucideIcon,
+} from "lucide-react";
 import { unilinkJourney } from "@/data/site";
 
 const icons: Record<string, LucideIcon> = {
@@ -15,7 +22,7 @@ export function JourneyStages() {
     <ol className="relative grid gap-6 md:grid-cols-5">
       <span
         aria-hidden="true"
-        className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-blue/20 via-blue/40 to-green/40 md:block"
+        className="absolute left-0 right-0 top-6 hidden h-px bg-linear-to-r from-blue/20 via-blue/40 to-green/40 md:block"
       />
       {unilinkJourney.map((stage, i) => {
         const Icon = icons[stage.icon] ?? Compass;
