@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { navItems } from "./nav-data";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics/umami";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -76,7 +77,12 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <Button asChild variant="cta" className="hidden sm:inline-flex">
-            <Link to="/apply">Start My Application</Link>
+            <Link
+              to="/apply"
+              onClick={() => trackEvent("cta-clicked", { cta: "start-application", location: "navbar" })}
+            >
+              Start My Application
+            </Link>
           </Button>
           <button
             type="button"
@@ -171,17 +177,35 @@ export function Navbar() {
                 className="grid gap-2 pt-4"
               >
                 <Button asChild variant="cta" size="lg" className="w-full">
-                  <Link to="/apply" onClick={() => setOpen(false)}>
+                  <Link
+                    to="/apply"
+                    onClick={() => {
+                      setOpen(false);
+                      trackEvent("cta-clicked", { cta: "start-application", location: "navbar-mobile" });
+                    }}
+                  >
                     Start My Application
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
-                  <Link to="/book-consultation" onClick={() => setOpen(false)}>
+                  <Link
+                    to="/book-consultation"
+                    onClick={() => {
+                      setOpen(false);
+                      trackEvent("cta-clicked", { cta: "book-consultation", location: "navbar-mobile" });
+                    }}
+                  >
                     Book a Consultation
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
-                  <Link to="/explore/pathway-advisor" onClick={() => setOpen(false)}>
+                  <Link
+                    to="/explore/pathway-advisor"
+                    onClick={() => {
+                      setOpen(false);
+                      trackEvent("cta-clicked", { cta: "pathway-advisor", location: "navbar-mobile" });
+                    }}
+                  >
                     Discover My Pathway
                   </Link>
                 </Button>

@@ -9,6 +9,7 @@ import { QuestionBlock } from "./PathwayShell";
 import { leadFromPathway, saveLead, type ContactMethod } from "@/lib/leads";
 import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
 import { company } from "@/data/company";
+import { trackEvent } from "@/lib/analytics/umami";
 import type { PathwayProfile, PathwayResult } from "@/lib/pathway/types";
 
 const contactMethods: ContactMethod[] = ["WhatsApp", "Phone call", "Email"];
@@ -84,8 +85,14 @@ export function PathwayResults({
     setSaving(false);
     if (delivery.status === "error") {
       setSendError(true);
+      trackEvent("pathway-lead-failed");
       return;
     }
+    trackEvent("pathway-lead-submitted", {
+      delivery: delivery.status,
+      contactMethod: method,
+      country: profile.country,
+    });
     setSent(true);
   };
 
@@ -233,7 +240,13 @@ export function PathwayResults({
           you don&apos;t have to answer the same questions twice.
         </p>
         <Button asChild variant="cta" size="lg" className="mt-5">
-          <Link to="/apply" onClick={() => storeApplicationHandoff(profile)}>
+          <Link
+            to="/apply"
+            onClick={() => {
+              storeApplicationHandoff(profile);
+              trackEvent("cta-clicked", { cta: "start-application", location: "pathway-results" });
+            }}
+          >
             Start My Application
           </Link>
         </Button>

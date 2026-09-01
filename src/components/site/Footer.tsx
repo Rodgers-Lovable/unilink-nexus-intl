@@ -3,6 +3,7 @@ import { Facebook, Instagram, Mail, MessageCircle, Phone } from "lucide-react";
 import { Logo } from "./Logo";
 import { contactInfo, socialLinks, company } from "@/data/company";
 import { legalLinks } from "@/data/legal";
+import { trackEvent } from "@/lib/analytics/umami";
 
 const quickLinks = [
   { label: "Study Abroad", to: "/study-abroad" },
@@ -30,6 +31,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackEvent("outbound-social-click", { network: social.label })}
                   aria-label={`${company.shortName} on ${social.label}`}
                   className="inline-flex size-10 items-center justify-center rounded-lg border border-white/20 transition-colors hover:bg-white/10"
                 >
