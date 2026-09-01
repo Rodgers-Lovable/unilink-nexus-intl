@@ -16,6 +16,7 @@ import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
 import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
+import { Route as ExploreIndexRouteImport } from './routes/explore.index'
 import { Route as ExplorePathwayAdvisorRouteImport } from './routes/explore.pathway-advisor'
 import { Route as LegalPageRouteImport } from './routes/legal.$page'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
@@ -60,6 +61,11 @@ const DestinationsIndexRoute = DestinationsIndexRouteImport.update({
 const DestinationsSlugRoute = DestinationsSlugRouteImport.update({
   id: '/destinations/$slug',
   path: '/destinations/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreIndexRoute = ExploreIndexRouteImport.update({
+  id: '/explore/',
+  path: '/explore/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExplorePathwayAdvisorRoute = ExplorePathwayAdvisorRouteImport.update({
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/about/': typeof AboutIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
+  '/explore/': typeof ExploreIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/study-abroad/': typeof StudyAbroadIndexRoute
@@ -147,6 +154,7 @@ export interface FileRoutesByTo {
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/about': typeof AboutIndexRoute
   '/destinations': typeof DestinationsIndexRoute
+  '/explore': typeof ExploreIndexRoute
   '/resources': typeof ResourcesIndexRoute
   '/services': typeof ServicesIndexRoute
   '/study-abroad': typeof StudyAbroadIndexRoute
@@ -167,6 +175,7 @@ export interface FileRoutesById {
   '/study-abroad/faq': typeof StudyAbroadFaqRoute
   '/about/': typeof AboutIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
+  '/explore/': typeof ExploreIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/study-abroad/': typeof StudyAbroadIndexRoute
@@ -188,6 +197,7 @@ export interface FileRouteTypes {
     | '/study-abroad/faq'
     | '/about/'
     | '/destinations/'
+    | '/explore/'
     | '/resources/'
     | '/services/'
     | '/study-abroad/'
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
     | '/study-abroad/faq'
     | '/about'
     | '/destinations'
+    | '/explore'
     | '/resources'
     | '/services'
     | '/study-abroad'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/study-abroad/faq'
     | '/about/'
     | '/destinations/'
+    | '/explore/'
     | '/resources/'
     | '/services/'
     | '/study-abroad/'
@@ -246,6 +258,7 @@ export interface RootRouteChildren {
   StudyAbroadFaqRoute: typeof StudyAbroadFaqRoute
   AboutIndexRoute: typeof AboutIndexRoute
   DestinationsIndexRoute: typeof DestinationsIndexRoute
+  ExploreIndexRoute: typeof ExploreIndexRoute
   ResourcesIndexRoute: typeof ResourcesIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   StudyAbroadIndexRoute: typeof StudyAbroadIndexRoute
@@ -301,6 +314,13 @@ declare module '@tanstack/react-router' {
       path: '/destinations/$slug'
       fullPath: '/destinations/$slug'
       preLoaderRoute: typeof DestinationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore/': {
+      id: '/explore/'
+      path: '/explore'
+      fullPath: '/explore/'
+      preLoaderRoute: typeof ExploreIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/explore/pathway-advisor': {
@@ -390,6 +410,7 @@ const rootRouteChildren: RootRouteChildren = {
   StudyAbroadFaqRoute: StudyAbroadFaqRoute,
   AboutIndexRoute: AboutIndexRoute,
   DestinationsIndexRoute: DestinationsIndexRoute,
+  ExploreIndexRoute: ExploreIndexRoute,
   ResourcesIndexRoute: ResourcesIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   StudyAbroadIndexRoute: StudyAbroadIndexRoute,
