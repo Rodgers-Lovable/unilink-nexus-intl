@@ -12,13 +12,14 @@ export const company = {
   tagline: "Your Link to Global Opportunities",
 
   /** Contact channels. */
-  email: "[general email]",
-  legalEmail: "[general/legal email]",
-  privacyEmail: "[privacy email]",
-  phone: "[telephone number]",
-  whatsapp: "[WhatsApp number]",
-  address: "[registered/business address]",
-  hours: "[opening hours]",
+  email: "info@unilink-nexus.com",
+  legalEmail: "info@unilink-nexus.com",
+  privacyEmail: "info@unilink-nexus.com",
+  phone: "+25766518377, +254717425553",
+  whatsapp: "25766518377",
+  address:
+    "Burundi: Patrice Lumumba Ave. Opp KCB Siege, Nairobi: Westlands, Waiyaki Way. Dunhill Towers",
+  hours: "Mon - Fri: 9:00AM - 6:00PM, Sat & Sun: 11:00AM - 4:00PM",
 
   /** Registration / jurisdiction. */
   registrationNumber: "[company registration number]",
@@ -26,10 +27,10 @@ export const company = {
   jurisdiction: "[jurisdiction to be confirmed]",
 
   /** Policy dates. */
-  privacyPolicyUpdated: "[Date]",
-  termsUpdated: "[Date]",
-  cookiePolicyUpdated: "[Date]",
-  disclaimerUpdated: "[Date]",
+  privacyPolicyUpdated: "01/09/2026",
+  termsUpdated: "01/09/2026",
+  cookiePolicyUpdated: "01/09/2026",
+  disclaimerUpdated: "01/09/2026",
 } as const;
 
 /** True when a field still holds a bracketed placeholder. */
