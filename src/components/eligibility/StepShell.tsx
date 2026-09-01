@@ -43,9 +43,9 @@ export function Field({
   children,
 }: {
   label: string;
-  htmlFor?: string;
-  hint?: string;
-  error?: string;
+  htmlFor?: string | undefined;
+  hint?: string | undefined;
+  error?: string | undefined;
   children: ReactNode;
 }) {
   return (

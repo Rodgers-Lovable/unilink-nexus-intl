@@ -38,9 +38,9 @@ export function AssessmentResult({
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const next: Record<string, string> = {};
-    if (!contact.fullName.trim()) next.fullName = "Please enter your full name.";
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(contact.email)) next.email = "Please enter a valid email address.";
-    if (contact.phone.trim().length < 6) next.phone = "Please enter a contact number.";
+    if (!contact.fullName.trim()) next['fullName'] = "Please enter your full name.";
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(contact.email)) next['email'] = "Please enter a valid email address.";
+    if (contact.phone.trim().length < 6) next['phone'] = "Please enter a contact number.";
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
@@ -119,7 +119,7 @@ export function AssessmentResult({
           <p className="text-sm text-muted-foreground">
             Your answers and assessment will be attached to your enquiry.
           </p>
-          <Field label="Full name" htmlFor="lead-name" error={errors.fullName}>
+          <Field label="Full name" htmlFor="lead-name" error={errors['fullName']}>
             <Input
               id="lead-name"
               className="h-12"
@@ -127,7 +127,7 @@ export function AssessmentResult({
               onChange={(e) => setContact({ ...contact, fullName: e.target.value })}
             />
           </Field>
-          <Field label="Email" htmlFor="lead-email" error={errors.email}>
+          <Field label="Email" htmlFor="lead-email" error={errors['email']}>
             <Input
               id="lead-email"
               type="email"
@@ -136,7 +136,7 @@ export function AssessmentResult({
               onChange={(e) => setContact({ ...contact, email: e.target.value })}
             />
           </Field>
-          <Field label="Phone / WhatsApp" htmlFor="lead-phone" error={errors.phone}>
+          <Field label="Phone / WhatsApp" htmlFor="lead-phone" error={errors['phone']}>
             <Input
               id="lead-phone"
               type="tel"
