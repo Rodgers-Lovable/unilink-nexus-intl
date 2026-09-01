@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { QuestionBlock } from "./PathwayShell";
 import { leadFromPathway, saveLead, type ContactMethod } from "@/lib/leads";
-import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
+import { formatEmailBody, sendEmail } from "@/lib/email/resend";
 import { company } from "@/data/company";
 import { trackEvent } from "@/lib/analytics/umami";
 import type { PathwayProfile, PathwayResult } from "@/lib/pathway/types";
