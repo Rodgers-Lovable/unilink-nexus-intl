@@ -66,7 +66,7 @@ export default async function LegalPage({ params }: { params: Promise<{ page: st
         <div className="container-page max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
             Last updated: {doc.updated}
-            {isPlaceholder(doc.updated) ? " — pending confirmation" : ""}
+            {isPlaceholder(doc.updated) ? " (pending confirmation)" : ""}
           </p>
 
           <div className="mt-10 space-y-12">
@@ -87,7 +87,10 @@ export default async function LegalPage({ params }: { params: Promise<{ page: st
             <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
               {others.map((l) => (
                 <li key={l.page}>
-                  <Link href={`/legal/${l.page}`} className="font-semibold text-blue hover:underline">
+                  <Link
+                    href={`/legal/${l.page}`}
+                    className="font-semibold text-blue hover:underline"
+                  >
                     {l.label}
                   </Link>
                 </li>

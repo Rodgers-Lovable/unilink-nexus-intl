@@ -32,7 +32,7 @@ const exploreCards = [
   },
   {
     title: "How It Works",
-    description: "See how the UniLink journey moves from discovery to a practical education plan.",
+    description: "See how the UniLink process moves from discovery to a practical education plan.",
     to: "/explore/how-it-works" as const,
     cta: "See How It Works",
     icon: RouteIcon,
@@ -42,10 +42,10 @@ const exploreCards = [
 export const metadata: Metadata = {
   title: "Explore Your Options | UniLink Nexus International",
   description:
-    "Explore interests, subjects, careers, degree pathways and study destinations. Start where you are — you don't need a decided plan.",
+    "Explore interests, subjects, careers, degree pathways and study destinations. Start where you are. You don't need a decided plan.",
   openGraph: {
     title: "Explore your options with UniLink",
-    description: "Interests, subjects, careers, degrees and destinations — explored in one place.",
+    description: "Interests, subjects, careers, degrees and destinations, explored in one place.",
     type: "website",
     url: "/explore",
   },
@@ -105,7 +105,7 @@ export default function ExplorePage() {
       <section className="section-y bg-surface">
         <div className="container-page">
           <SectionHeading
-            eyebrow="The UniLink journey"
+            eyebrow="The UniLink framework"
             title="Discover, Explore, Plan, Prepare, Connect"
             align="center"
           />

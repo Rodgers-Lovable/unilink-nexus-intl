@@ -27,7 +27,7 @@ const principles = [
 export const metadata: Metadata = {
   title: "How UniLink Works | UniLink Nexus International",
   description:
-    "Discover, Explore, Plan, Prepare, Connect — how UniLink Nexus guides students from early uncertainty to a clear, realistic education pathway.",
+    "Discover, Explore, Plan, Prepare, Connect: how UniLink Nexus guides students from early uncertainty to a clear, realistic education pathway.",
   openGraph: {
     title: "How UniLink Works",
     description: "The five stages behind UniLink's student pathway advisory approach.",
@@ -63,7 +63,7 @@ export default function ExploreHowItWorksPage() {
       <section className="section-y">
         <div className="container-page">
           <SectionHeading
-            eyebrow="The UniLink journey"
+            eyebrow="The UniLink framework"
             title="Five stages, one direction"
             align="center"
           />

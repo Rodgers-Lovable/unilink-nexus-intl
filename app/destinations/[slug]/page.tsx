@@ -36,11 +36,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function DestinationDetail({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function DestinationDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const destination = getDestination(slug);
   if (!destination) notFound();
@@ -49,7 +45,9 @@ export default async function DestinationDetail({
 
   return (
     <>
-      <Breadcrumbs items={[{ label: "Destinations", to: "/destinations" }, { label: destination.name }]} />
+      <Breadcrumbs
+        items={[{ label: "Destinations", to: "/destinations" }, { label: destination.name }]}
+      />
 
       <section className="border-b border-border bg-surface">
         <div className="container-page grid items-center gap-10 py-12 lg:grid-cols-2 lg:py-16">
@@ -124,8 +122,9 @@ export default async function DestinationDetail({
             <div>
               <h2 className="text-h3">How Unilink can help</h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                From shortlisting institutions in {destination.name} to preparing documents and
-                planning your departure, guidance is matched to this destination's process.
+                Guidance is matched to this destination&apos;s process, from shortlisting
+                institutions in {destination.name} to preparing documents and planning your
+                departure.
               </p>
               <p className="mt-4">
                 <Link href="/services" className="text-sm font-semibold text-blue hover:underline">

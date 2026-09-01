@@ -8,11 +8,11 @@ import { services } from "@/data/services";
 import { destinations } from "@/data/destinations";
 
 export const metadata: Metadata = {
-  title: "Study Abroad — Plan Your Journey | Unilink Nexus International",
+  title: "Study Abroad: A Plan That Fits You | Unilink Nexus International",
   description:
     "Understand destinations, study levels, entry requirements, finances, timelines and visa preparation before you apply to study abroad.",
   openGraph: {
-    title: "Study Abroad — Plan Your Journey",
+    title: "Study Abroad: A Plan That Fits You",
     description: "A structured overview of the study-abroad process, from planning to departure.",
     url: "/study-abroad",
   },

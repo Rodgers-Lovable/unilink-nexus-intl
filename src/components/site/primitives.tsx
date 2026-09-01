@@ -107,7 +107,7 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
 
 export function CTABanner({
   title = "Ready to explore your options?",
-  description = "Speak with a Unilink advisor and take the next step toward your international education goals.",
+  description = "Speak with a UniLink advisor and take the next step toward your international education goals.",
 }: {
   title?: string;
   description?: string;
@@ -124,7 +124,11 @@ export function CTABanner({
             </TrackedLink>
           </Button>
           <Button asChild variant="onNavy" size="lg">
-            <TrackedLink href="/explore/pathway-advisor" cta="pathway-advisor" location="cta-banner">
+            <TrackedLink
+              href="/explore/pathway-advisor"
+              cta="pathway-advisor"
+              location="cta-banner"
+            >
               Discover My Pathway
             </TrackedLink>
           </Button>

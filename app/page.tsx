@@ -27,11 +27,11 @@ const audienceIcons: Record<string, LucideIcon> = {
 };
 
 export const metadata: Metadata = {
-  title: "UniLink Nexus International — Your Link to Global Opportunities",
+  title: "UniLink Nexus International: Your Link to Global Opportunities",
   description:
-    "A student pathway and international education advisory service. Understand where you are, where you could go and how to get there — with guidance for students, parents and schools.",
+    "A student pathway and international education advisory service. Understand where you are, where you could go and how to get there, with guidance for students, parents and schools.",
   openGraph: {
-    title: "UniLink Nexus International — Student Pathway Advisory",
+    title: "UniLink Nexus International: Student Pathway Advisory",
     description:
       "Discover, explore, plan, prepare and connect. Personalised education pathway guidance for students, parents and schools.",
     type: "website",
@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="border-b border-border bg-gradient-to-b from-surface to-background">
+      <section className="border-b border-border bg-linear-to-b from-surface to-background">
         <div className="container-page grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
           <div>
             <RevealImmediate delay={0}>
@@ -62,8 +62,8 @@ export default function Home() {
             </RevealImmediate>
             <RevealImmediate delay={0.16}>
               <p className="lead mt-6 max-w-xl">
-                UniLink Nexus International helps students explore careers, subjects, degree pathways
-                and international study options — and turn that into a realistic plan.
+                UniLink Nexus International helps students explore careers, subjects, degree
+                pathways and international study options, then turn that into a realistic plan.
               </p>
             </RevealImmediate>
             <RevealImmediate delay={0.24}>
@@ -112,7 +112,7 @@ export default function Home() {
         <div className="container-page">
           <SectionHeading
             eyebrow="Start where you are"
-            title="Where are you on your journey?"
+            title="Where are you starting from?"
             align="center"
           />
           <StaggerContainer className="mt-12 grid gap-6 md:grid-cols-3">
@@ -143,7 +143,7 @@ export default function Home() {
       <section className="section-y bg-surface">
         <div className="container-page">
           <SectionHeading
-            eyebrow="The UniLink journey"
+            eyebrow="The UniLink framework"
             title="Discover. Explore. Plan. Prepare. Connect."
             description="One framework that runs through every conversation, tool and page on this site."
             align="center"
@@ -206,7 +206,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="Destinations"
             title="Where could your education take you?"
-            description="Compare study environments, languages, costs and distance — not rankings."
+            description="Compare study environments, languages, costs and distance, not rankings."
           />
           <StaggerContainer className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {destinations.slice(0, 3).map((d) => (
@@ -245,7 +245,7 @@ export default function Home() {
         <div className="container-page">
           <SectionHeading
             eyebrow="Success Stories"
-            title="Student journeys"
+            title="Student stories"
             description="Sample stories shown as editable placeholders until verified student stories are supplied."
           />
           <StaggerContainer className="mt-10 grid gap-6 md:grid-cols-3">

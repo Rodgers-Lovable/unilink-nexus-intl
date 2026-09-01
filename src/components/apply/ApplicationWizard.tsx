@@ -113,7 +113,7 @@ function ReviewSection({
       <dl className="mt-4 space-y-3">
         {rows.map((row) => (
           <div key={row.label} className="grid gap-1 sm:grid-cols-[220px_1fr] sm:gap-4">
-            <dt className="text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground">
+            <dt className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
               {row.label}
             </dt>
             <dd className="text-sm text-foreground">{row.value || "—"}</dd>
@@ -263,8 +263,8 @@ export function ApplicationWizard() {
           </span>
           <h2 className="text-h2 mt-6">Your application profile has been submitted.</h2>
           <p className="lead mt-4">
-            A UniLink adviser will review your academic background and study goals and contact you
-            regarding the next steps.
+            A UniLink adviser will review your academic background and study goals, then reach out
+            about next steps.
           </p>
           <div className="mt-8 rounded-xl border border-border bg-surface p-5">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
@@ -274,7 +274,7 @@ export function ApplicationWizard() {
               {submitted.reference}
             </p>
             <p className="mt-2 text-xs text-muted-foreground">
-              Keep this reference for any follow-up correspondence.
+              Keep this reference for any follow-up.
             </p>
           </div>
           {deliveryFailed && (
@@ -306,8 +306,8 @@ export function ApplicationWizard() {
     <div ref={headingRef} className="mx-auto max-w-3xl">
       {prefilled && (
         <p className="mb-6 rounded-lg border border-green/30 bg-green/5 px-4 py-3 text-sm text-navy">
-          We&apos;ve carried over what you told the Pathway Advisor. Please review and change
-          anything that has since moved on.
+          We&apos;ve carried over what you told the Pathway Advisor. Review it and update anything
+          that&apos;s changed.
         </p>
       )}
 
@@ -430,7 +430,7 @@ export function ApplicationWizard() {
                   value={draft.academic.performance}
                   onChange={(v) => setAcademic({ performance: v })}
                   error={errors["performance"]}
-                  hint="A general indication is enough — exact grades are not needed at this stage."
+                  hint="A general indication is enough. Exact grades are not needed at this stage."
                   placeholder="Optional"
                 />
               </motion.fieldset>
@@ -460,7 +460,7 @@ export function ApplicationWizard() {
                   value={draft.studyPlan.preferredCourse}
                   onChange={(v) => setStudyPlan({ preferredCourse: v })}
                   error={errors["preferredCourse"]}
-                  hint="A course, subject or broad field is fine — for example “Data Science” or “something in health”."
+                  hint="A course, subject or broad field is fine. For example, “Data Science” or “something in health”."
                   placeholder="Course or subject area"
                 />
                 <MultiSelectField
@@ -596,9 +596,7 @@ export function ApplicationWizard() {
         />
       </form>
 
-      <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
-        {APPLICATION_DISCLAIMER}
-      </p>
+      <p className="mt-6 text-xs leading-relaxed text-muted-foreground">{APPLICATION_DISCLAIMER}</p>
     </div>
   );
 }

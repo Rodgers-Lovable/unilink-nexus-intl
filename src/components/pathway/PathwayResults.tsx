@@ -132,7 +132,10 @@ export function PathwayResults({
         <h3 className="text-h3">Career areas worth exploring</h3>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {result.careerFamilies.map((career) => (
-            <article key={career.key} className="rounded-xl border border-border bg-card p-6 shadow-card">
+            <article
+              key={career.key}
+              className="rounded-xl border border-border bg-card p-6 shadow-card"
+            >
               <span className="mb-4 inline-flex size-10 items-center justify-center rounded-lg bg-blue/8 text-blue">
                 <Compass className="size-5" aria-hidden="true" />
               </span>
@@ -153,7 +156,10 @@ export function PathwayResults({
         <h3 className="text-h3">Degree pathways worth investigating</h3>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {result.degreeFamilies.map((degree) => (
-            <article key={degree.key} className="rounded-xl border border-border bg-card p-5 shadow-card">
+            <article
+              key={degree.key}
+              className="rounded-xl border border-border bg-card p-5 shadow-card"
+            >
               <span className="inline-flex items-center gap-2 text-xs font-semibold text-green">
                 <GraduationCap className="size-4" aria-hidden="true" />
                 {degree.relatedTo}
@@ -171,8 +177,8 @@ export function PathwayResults({
       <section className="mt-12">
         <h3 className="text-h3">Destinations to explore</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          Exploratory options based on your budget, language and travel preferences — not confirmed
-          placements.
+          Exploratory options based on your budget, language and travel preferences. These
+          aren&apos;t confirmed placements.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {result.destinations.map((destination) => (
@@ -259,7 +265,7 @@ export function PathwayResults({
 
         {sent ? (
           <div className="mt-6 rounded-xl border border-green/30 bg-green/8 p-5">
-            <p className="text-sm font-bold text-navy">Thank you — your pathway has been saved.</p>
+            <p className="text-sm font-bold text-navy">Thank you. Your pathway has been saved.</p>
             <p className="mt-1 text-sm text-muted-foreground">
               A UniLink adviser will follow up using your preferred contact method.
             </p>
@@ -338,7 +344,10 @@ export function PathwayResults({
             <p className="text-xs leading-relaxed text-muted-foreground">
               By submitting, you agree that {company.shortName} may use your details and pathway
               answers to advise you, as described in our{" "}
-              <Link href="/legal/privacy-policy" className="font-semibold text-blue hover:underline">
+              <Link
+                href="/legal/privacy-policy"
+                className="font-semibold text-blue hover:underline"
+              >
                 Privacy Policy
               </Link>
               .

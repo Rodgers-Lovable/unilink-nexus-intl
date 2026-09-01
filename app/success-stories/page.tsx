@@ -5,8 +5,7 @@ import { testimonials, hasUnverifiedTestimonials } from "@/data/testimonials";
 
 export const metadata: Metadata = {
   title: "Student Success Stories | Unilink Nexus",
-  description:
-    "See how Unilink Nexus International has supported students on their journey to studying abroad.",
+  description: "See how Unilink Nexus International has supported students studying abroad.",
   openGraph: {
     title: "Student Success Stories",
     description: "How guidance turns into real study plans and successful departures.",

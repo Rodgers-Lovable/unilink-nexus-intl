@@ -6,12 +6,12 @@ import { serviceIcons } from "@/components/site/cards";
 import { services } from "@/data/services";
 
 export const metadata: Metadata = {
-  title: "How We Help — Study Abroad Services | Unilink Nexus",
+  title: "How We Help: Study Abroad Services | Unilink Nexus",
   description:
     "Counselling, course and university selection, application support, visa guidance and pre-departure support for international students.",
   openGraph: {
-    title: "How We Help — Study Abroad Services",
-    description: "Support for every stage of your study journey, from counselling to departure.",
+    title: "How We Help: Study Abroad Services",
+    description: "Support for every stage of studying abroad, from counselling to departure.",
     url: "/services",
   },
   alternates: {
@@ -25,7 +25,7 @@ export default function ServicesPage() {
       <PageHero
         image="counselling"
         eyebrow="How We Help"
-        title="Support for every stage of your study journey."
+        title="Support for every stage of studying abroad."
         description="Five services that cover the full path from your first questions to your first week abroad."
       >
         <Button asChild variant="cta" size="lg">
@@ -36,7 +36,10 @@ export default function ServicesPage() {
       {services.map((service, i) => {
         const Icon = serviceIcons[service.icon];
         return (
-          <section key={service.slug} className={i % 2 === 1 ? "section-y bg-surface" : "section-y"}>
+          <section
+            key={service.slug}
+            className={i % 2 === 1 ? "section-y bg-surface" : "section-y"}
+          >
             <div className="container-page grid gap-10 lg:grid-cols-2">
               <div>
                 <span className="mb-5 inline-flex size-12 items-center justify-center rounded-xl bg-blue/8 text-blue">

@@ -6,7 +6,7 @@ import { destinations } from "@/data/destinations";
 export const metadata: Metadata = {
   title: "Study Destinations | Unilink Nexus International",
   description:
-    "Compare popular international study destinations — study levels, intakes and what makes each environment different — and find one that suits your goals.",
+    "Compare popular international study destinations on study levels, intakes and what makes each environment different, and find one that suits your goals.",
   openGraph: {
     title: "Explore Study Destinations",
     description: "Compare international study destinations and discover which may suit your goals.",

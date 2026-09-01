@@ -22,7 +22,7 @@ export type Resource = {
 export const resources: Resource[] = [
   {
     slug: "how-to-start-planning-your-study-abroad-journey",
-    title: "How to Start Planning Your Study Abroad Journey",
+    title: "How to Start Planning Your Study Abroad",
     category: "Study Guides",
     excerpt:
       "A calm, step-by-step way to move from a general idea about studying abroad to a realistic plan.",
@@ -129,8 +129,7 @@ export const resources: Resource[] = [
     slug: "planning-the-cost-of-studying-abroad",
     title: "Planning the Cost of Studying Abroad",
     category: "Financial Planning",
-    excerpt:
-      "How to build a realistic budget that covers more than tuition alone.",
+    excerpt: "How to build a realistic budget that covers more than tuition alone.",
     readTime: "6 min read",
     date: "2026-03-02",
     body: [

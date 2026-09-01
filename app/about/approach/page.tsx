@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Breadcrumbs, PageHero, SectionHeading, Placeholder, CTABanner } from "@/components/site/primitives";
+import {
+  Breadcrumbs,
+  PageHero,
+  SectionHeading,
+  Placeholder,
+  CTABanner,
+} from "@/components/site/primitives";
 import { Card } from "@/components/site/Card";
 import { JourneyStages } from "@/components/site/JourneyStages";
 import { whyUnilink } from "@/data/site";
@@ -7,7 +13,7 @@ import { whyUnilink } from "@/data/site";
 export const metadata: Metadata = {
   title: "Our Approach | UniLink Nexus International",
   description:
-    "UniLink's advisory approach: help students understand where they are, where they could go, and how to get there — through Discover, Explore, Plan, Prepare, Connect.",
+    "UniLink's advisory approach: help students understand where they are, where they could go, and how to get there, through Discover, Explore, Plan, Prepare, Connect.",
   openGraph: {
     title: "Our Approach",
     description: "The philosophy behind UniLink's student pathway advisory service.",
@@ -30,7 +36,7 @@ export default function ApproachPage() {
         image="about"
         eyebrow="Our Approach"
         title="Help students understand where they are, where they could go, and how to get there."
-        description="That sentence is the whole method. Everything on this site — the advisor tool, the guidance pages, the consultations — exists to answer one of those three questions."
+        description="That sentence is the whole method. Everything on this site (the advisor tool, the guidance pages, the consultations) exists to answer one of those three questions."
       />
 
       <section className="section-y">
@@ -61,8 +67,8 @@ export default function ApproachPage() {
           </div>
           <div className="mt-10 max-w-2xl">
             <Placeholder>
-              UniLink Nexus International is an education advisory service. Guidance is informational
-              and does not guarantee admission, scholarships or visa outcomes.
+              UniLink Nexus International is an education advisory service. Guidance is
+              informational and does not guarantee admission, scholarships or visa outcomes.
             </Placeholder>
           </div>
         </div>
