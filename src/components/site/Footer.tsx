@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Linkedin, Mail, MessageCircle, Phone } from "lucide-react";
+import { Facebook, Instagram, Mail, MessageCircle, Phone } from "lucide-react";
 import { Logo } from "./Logo";
-import { contactInfo } from "@/data/site";
+import { contactInfo, socialLinks, company } from "@/data/company";
+import { legalLinks } from "@/data/legal";
 
 const quickLinks = [
   { label: "Study Abroad", to: "/study-abroad" },
@@ -9,13 +10,6 @@ const quickLinks = [
   { label: "How We Help", to: "/services" },
   { label: "Resources", to: "/resources" },
   { label: "About", to: "/about" },
-];
-
-const legalLinks = [
-  { label: "Privacy Policy", page: "privacy-policy" },
-  { label: "Terms of Use", page: "terms" },
-  { label: "Cookie Policy", page: "cookie-policy" },
-  { label: "Disclaimer", page: "disclaimer" },
 ];
 
 export function Footer() {
@@ -28,16 +22,21 @@ export function Footer() {
             Personalised international education guidance, from first questions to departure.
           </p>
           <div className="flex gap-2 pt-1">
-            {[Linkedin, Instagram, Facebook].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                aria-label="Social profile placeholder"
-                className="inline-flex size-10 items-center justify-center rounded-lg border border-white/20 transition-colors hover:bg-white/10"
-              >
-                <Icon className="size-4" aria-hidden="true" />
-              </a>
-            ))}
+            {socialLinks.map((social) => {
+              const Icon = social.icon === "instagram" ? Instagram : Facebook;
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${company.shortName} on ${social.label}`}
+                  className="inline-flex size-10 items-center justify-center rounded-lg border border-white/20 transition-colors hover:bg-white/10"
+                >
+                  <Icon className="size-4" aria-hidden="true" />
+                </a>
+              );
+            })}
           </div>
         </div>
 
@@ -98,7 +97,7 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-2 py-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Unilink Nexus International. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {company.legalName}. All rights reserved.</p>
           <p>Guidance only — requirements vary by country, institution and programme.</p>
         </div>
       </div>

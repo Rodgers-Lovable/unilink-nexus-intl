@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, CTABanner, Placeholder } from "@/components/site/primitives";
 import { StoryCard } from "@/components/site/cards";
-import { successStories } from "@/data/site";
+import { testimonials, hasUnverifiedTestimonials } from "@/data/testimonials";
 
 export const Route = createFileRoute("/success-stories/")({
   head: () => ({
@@ -36,16 +36,18 @@ function StoriesPage() {
       <section className="section-y">
         <div className="container-page">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {successStories.map((s) => (
+            {testimonials.map((s) => (
               <StoryCard key={s.slug} story={s} />
             ))}
           </div>
-          <div className="mt-10 max-w-2xl">
-            <Placeholder>
-              Stories shown are sample placeholders and must be replaced with verified, consented
-              student testimonials before publication. [Content to be confirmed]
-            </Placeholder>
-          </div>
+          {hasUnverifiedTestimonials && (
+            <div className="mt-10 max-w-2xl">
+              <Placeholder>
+                Some stories shown are samples, pending verified and consented student
+                testimonials.
+              </Placeholder>
+            </div>
+          )}
         </div>
       </section>
 

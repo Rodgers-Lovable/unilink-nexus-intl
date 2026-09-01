@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { QuestionBlock } from "./PathwayShell";
 import { leadFromPathway, saveLead, type ContactMethod } from "@/lib/leads";
+import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
+import { company } from "@/data/company";
 import type { PathwayProfile, PathwayResult } from "@/lib/pathway/types";
 
 const contactMethods: ContactMethod[] = ["WhatsApp", "Phone call", "Email"];
@@ -25,6 +27,7 @@ export function PathwayResults({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +38,9 @@ export function PathwayResults({
     if (Object.keys(next).length) return;
 
     setSaving(true);
+    setSendError(false);
+
+    const notes = [profile.notes, form.notes].filter(Boolean).join(" | ");
     await saveLead({
       ...leadFromPathway(profile, result, {
         fullName: form.fullName,
@@ -42,9 +48,44 @@ export function PathwayResults({
         phone: form.phone,
         preferredContactMethod: method,
       }),
-      notes: [profile.notes, form.notes].filter(Boolean).join(" | "),
+      notes,
     });
+
+    const delivery = await sendEmail("pathway", {
+      form_name: "Pathway Advisor enquiry",
+      from_name: form.fullName,
+      reply_to: form.email,
+      phone: form.phone || "Not provided",
+      message: notes || "No additional notes",
+      summary: formatEmailBody({
+        "Full name": form.fullName,
+        Email: form.email,
+        "Phone / WhatsApp": form.phone,
+        "Preferred contact method": method,
+        Country: profile.country,
+        "Academic stage": profile.level,
+        Curriculum: profile.curriculum,
+        Performance: profile.performance,
+        Subjects: profile.subjects,
+        Interests: profile.interests,
+        "Preferred destinations": profile.preferredDestinations,
+        Budget: profile.budgetRange,
+        "Scholarship importance": profile.scholarshipImportance,
+        "Language preference": profile.languagePreference,
+        "Travel preference": profile.travelPreference,
+        "Target entry year": profile.targetEntryYear,
+        "Pathway headline": result.headline,
+        "Pathway summary": result.narrative,
+        Notes: notes,
+        Submitted: new Date().toLocaleString(),
+      }),
+    });
+
     setSaving(false);
+    if (delivery.status === "error") {
+      setSendError(true);
+      return;
+    }
     setSent(true);
   };
 
@@ -278,9 +319,27 @@ export function PathwayResults({
                 aria-label="Notes for your adviser"
               />
             </QuestionBlock>
+            {sendError && (
+              <p role="alert" className="text-sm font-semibold text-destructive">
+                We couldn&apos;t send your details just now. Please try again, or book a
+                consultation instead.
+              </p>
+            )}
+            <p className="text-xs leading-relaxed text-muted-foreground">
+              By submitting, you agree that {company.shortName} may use your details and pathway
+              answers to advise you, as described in our{" "}
+              <Link
+                to="/legal/$page"
+                params={{ page: "privacy-policy" }}
+                className="font-semibold text-blue hover:underline"
+              >
+                Privacy Policy
+              </Link>
+              .
+            </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button type="submit" variant="cta" size="lg" disabled={saving}>
-                {saving ? "Sending…" : "Talk to a UniLink Advisor"}
+                {saving ? "Sending…" : sendError ? "Try again" : "Talk to a UniLink Advisor"}
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Button>
               <Button type="button" variant="outline" size="lg" onClick={onRestart}>

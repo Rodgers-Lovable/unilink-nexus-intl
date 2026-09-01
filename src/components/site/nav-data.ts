@@ -42,7 +42,7 @@ export const navItems: NavItem[] = [
     children: [
       { label: "About UniLink", to: "/about" },
       { label: "Our Approach", to: "/about/approach" },
-      { label: "Our Team", to: "/about/team" },
+      
       { label: "Success Stories", to: "/success-stories" },
       { label: "Contact", to: "/contact" },
     ],
