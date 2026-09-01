@@ -69,7 +69,7 @@ function DestinationDetail() {
                 <Link to="/book-consultation">Book Consultation</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link to="/study-abroad/eligibility">Check Eligibility</Link>
+                <Link to="/explore/pathway-advisor">Discover My Pathway</Link>
               </Button>
             </div>
           </div>
@@ -194,7 +194,7 @@ function DestinationDetail() {
               <Link to="/book-consultation">Book Consultation</Link>
             </Button>
             <Button asChild variant="onNavy" size="lg">
-              <Link to="/study-abroad/eligibility">Check Eligibility</Link>
+              <Link to="/explore/pathway-advisor">Discover My Pathway</Link>
             </Button>
           </div>
         </div>

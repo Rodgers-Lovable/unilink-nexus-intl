@@ -131,8 +131,8 @@ export function Navbar() {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="w-full">
-                <Link to="/study-abroad/eligibility" onClick={() => setOpen(false)}>
-                  Check My Eligibility
+                <Link to="/explore/pathway-advisor" onClick={() => setOpen(false)}>
+                  Discover My Pathway
                 </Link>
               </Button>
             </div>
