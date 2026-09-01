@@ -69,6 +69,9 @@ function StudyAbroad() {
           <Link to="/explore/pathway-advisor">Discover My Pathway</Link>
         </Button>
         <Button asChild variant="outline" size="lg">
+          <Link to="/apply">Start My Application</Link>
+        </Button>
+        <Button asChild variant="outline" size="lg">
           <Link to="/study-abroad/how-it-works">See How It Works</Link>
         </Button>
       </PageHero>

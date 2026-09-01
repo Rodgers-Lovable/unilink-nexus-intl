@@ -46,9 +46,20 @@ function ServiceDetail() {
     <>
       <Breadcrumbs items={[{ label: "How We Help", to: "/services" }, { label: service.title }]} />
       <PageHero eyebrow="Service" title={service.title} description={service.intro}>
-        <Button asChild variant="cta" size="lg">
-          <Link to="/book-consultation">Book a Consultation</Link>
-        </Button>
+        {service.slug === "application-support" ? (
+          <>
+            <Button asChild variant="cta" size="lg">
+              <Link to="/apply">Start My Application</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link to="/book-consultation">Book a Consultation</Link>
+            </Button>
+          </>
+        ) : (
+          <Button asChild variant="cta" size="lg">
+            <Link to="/book-consultation">Book a Consultation</Link>
+          </Button>
+        )}
       </PageHero>
 
       <section className="section-y">
