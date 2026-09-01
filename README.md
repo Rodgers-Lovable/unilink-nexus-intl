@@ -6,14 +6,13 @@ advisor, and application/consultation lead capture.
 
 ## Stack
 
-- [TanStack Start](https://tanstack.com/start) (React 19, file-based routing, SSR)
-  on [Nitro](https://nitro.build), deployed as a Cloudflare Worker
+- [Next.js](https://nextjs.org) (App Router, React 19, Turbopack)
 - [Tailwind CSS v4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com) on Radix primitives
-- [Resend](https://resend.com) for server-side form email delivery
+- [Resend](https://resend.com) for server-side form email delivery, via a Next.js Server Action
 - [Umami](https://umami.is) for analytics
 
-A migration to Next.js (App Router) is planned; this repo is being cleaned up in
-preparation for that (see recent commit history).
+Migrated from TanStack Start in September 2026 — see commit history on `develop` for
+the route-by-route port.
 
 ## Development
 
@@ -29,16 +28,18 @@ are unset, so the app runs fully without any of them.
 ## Scripts
 
 - `npm run dev` — start the dev server
-- `npm run build` — production build (Nitro/Cloudflare Worker output)
+- `npm run build` — production build
+- `npm run start` — serve the production build locally
 - `npm run lint` — ESLint
 - `npm run format` — Prettier, write mode
 
 ## Structure
 
-- `src/routes/` — file-based routes (TanStack Router conventions: `.` for nested
-  segments, `$slug` for dynamic segments, `index` for index routes)
+- `app/` — routes (App Router file conventions: folders for segments, `[slug]` for
+  dynamic segments, `page.tsx`/`not-found.tsx`/`error.tsx` per route)
 - `src/components/` — `ui/` (shadcn primitives), `site/` (layout, cards, nav),
-  `apply/` and `pathway/` (the two multi-step wizards), `motion/` (framer-motion helpers)
+  `apply/`, `pathway/`, `contact/`, `consultation/` (the interactive forms and
+  wizards), `motion/` (framer-motion helpers)
 - `src/data/` — static, code-defined content (destinations, services, resources, etc.)
 - `src/lib/` — application/pathway business logic, email delivery, analytics
 
