@@ -37,6 +37,7 @@ import {
   TextAreaField,
   TextField,
 } from "./fields";
+import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
 import { cn } from "@/lib/utils";
 
 function ProgressHeader({ current }: { current: number }) {
@@ -123,6 +124,7 @@ export function ApplicationWizard() {
   const [draft, setDraft] = useState<ApplicationDraft>(emptyApplicationDraft);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
+  const [deliveryFailed, setDeliveryFailed] = useState(false);
   const [submitted, setSubmitted] = useState<StudentApplication | null>(null);
   const [source, setSource] = useState<ApplicationSource>("direct_application");
   const [prefilled, setPrefilled] = useState(false);
@@ -170,8 +172,42 @@ export function ApplicationWizard() {
     }
 
     setSubmitting(true);
+    setDeliveryFailed(false);
     try {
       const record = await submitApplication(draft, source);
+
+      const delivery = await sendEmail("application", {
+        form_name: "Student application profile",
+        from_name: record.personal.fullName,
+        reply_to: record.personal.email,
+        phone: record.personal.phone,
+        reference: record.reference,
+        message: record.additionalInformation || "No additional information",
+        summary: formatEmailBody({
+          Reference: record.reference,
+          Source: record.source,
+          "Full name": record.personal.fullName,
+          Email: record.personal.email,
+          "Phone / WhatsApp": record.personal.phone,
+          Nationality: record.personal.nationality,
+          "Country of residence": record.personal.countryOfResidence,
+          "Highest academic level": record.academic.highestAcademicLevel,
+          Institution: record.academic.institution,
+          Qualification: record.academic.qualification,
+          "Completion year": record.academic.completionYear,
+          Performance: record.academic.performance,
+          "Target level": record.studyPlan.targetLevel,
+          "Preferred course": record.studyPlan.preferredCourse,
+          "Preferred destinations": record.studyPlan.preferredDestinations,
+          "Preferred intake": record.studyPlan.preferredIntake,
+          "Additional information": record.additionalInformation,
+          "Consent given": record.consent ? "Yes" : "No",
+          Submitted: new Date(record.createdAt).toLocaleString(),
+        }),
+      });
+
+      if (delivery.status === "error") setDeliveryFailed(true);
+
       setSubmitted(record);
       requestAnimationFrame(() => {
         headingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -225,6 +261,15 @@ export function ApplicationWizard() {
               Keep this reference for any follow-up correspondence.
             </p>
           </div>
+          {deliveryFailed && (
+            <p
+              role="alert"
+              className="mt-6 rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm leading-relaxed text-destructive"
+            >
+              Your profile is saved with the reference above, but our email notification did not go
+              through. Please quote this reference when you contact us so we can pick it up quickly.
+            </p>
+          )}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Button asChild variant="cta" size="lg">
               <Link to="/resources">Explore Resources</Link>
