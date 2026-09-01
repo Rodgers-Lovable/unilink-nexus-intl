@@ -2,15 +2,15 @@
  * Umami analytics integration.
  *
  * Configure with two environment variables (see .env.example / project settings):
- *   VITE_UMAMI_WEBSITE_ID — website ID from your Umami dashboard
- *   VITE_UMAMI_SRC        — tracker script URL, e.g. https://cloud.umami.is/script.js
+ *   NEXT_PUBLIC_UMAMI_WEBSITE_ID — website ID from your Umami dashboard
+ *   NEXT_PUBLIC_UMAMI_SRC        — tracker script URL, e.g. https://cloud.umami.is/script.js
  *
  * When either variable is missing, every function here is a safe no-op so
  * local development and previews behave exactly as before.
  */
 
-const WEBSITE_ID = import.meta.env["VITE_UMAMI_WEBSITE_ID"] as string | undefined;
-const SCRIPT_SRC = import.meta.env["VITE_UMAMI_SRC"] as string | undefined;
+const WEBSITE_ID = process.env["NEXT_PUBLIC_UMAMI_WEBSITE_ID"];
+const SCRIPT_SRC = process.env["NEXT_PUBLIC_UMAMI_SRC"];
 
 type UmamiTrack = (
   event?: string | ((props: Record<string, unknown>) => Record<string, unknown>),
