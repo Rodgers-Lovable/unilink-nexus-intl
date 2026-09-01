@@ -187,54 +187,6 @@ export const whyUnilink = [
   },
 ];
 
-export const parentTopics = [
-  {
-    title: "Understanding your child's options",
-    description:
-      "Subjects, strengths and interests translate into a wider set of routes than most families expect.",
-  },
-  {
-    title: "Career and degree pathways",
-    description: "How subject choices connect to degree families, and how degrees connect to careers.",
-  },
-  {
-    title: "Choosing study destinations",
-    description: "Academic fit, language, cost and distance — compared plainly rather than by reputation.",
-  },
-  {
-    title: "Understanding costs",
-    description:
-      "Tuition is only part of the picture. Living costs, travel and insurance belong in the plan. [Content to be confirmed]",
-  },
-  {
-    title: "Application timelines",
-    description: "What happens when, and which decisions cannot be left late.",
-  },
-  {
-    title: "Preparing for international study",
-    description: "Practical and personal readiness for living and studying in a new country.",
-  },
-];
-
-export const parentQuestions = [
-  "What does my child actually enjoy studying, and what does that keep open?",
-  "Which pathways are realistic given their current performance and curriculum?",
-  "What is the total cost, not just tuition?",
-  "What are the deadlines we cannot miss?",
-  "What happens if the first choice does not work out?",
-  "How will we verify requirements from official sources?",
-];
-
-export const schoolProgrammeFormats = [
-  { title: "Career discovery workshops", description: "Group sessions helping students connect strengths to career families." },
-  { title: "Subject-selection guidance", description: "Support for students choosing subject combinations." },
-  { title: "University readiness sessions", description: "What applications ask for, and how to prepare in advance." },
-  { title: "International education seminars", description: "An overview of studying abroad and what it involves." },
-  { title: "Student pathway assessments", description: "Structured profiling using the UniLink Pathway Advisor." },
-  { title: "Parent information sessions", description: "Practical briefings for families supporting decisions." },
-  { title: "School visits", description: "In-person sessions arranged with your school calendar." },
-  { title: "Group pathway programmes", description: "Multi-session programmes across a year group or cohort." },
-];
 
 export const studyAbroadFaqs = [
   {
@@ -263,90 +215,11 @@ export const studyAbroadFaqs = [
   },
 ];
 
-export const successStories = [
-  {
-    slug: "sample-story-one",
-    student: "Sample Student A",
-    destination: "United Kingdom",
-    programme: "MSc Data Analytics",
-    level: "Master's",
-    excerpt:
-      "Sample story content: moving from an undergraduate degree at home to a taught postgraduate programme abroad.",
-    challenge: "Sample placeholder: uncertainty about which postgraduate field to pursue.",
-    help: "Sample placeholder: pathway exploration, shortlisting and application review support.",
-    outcome: "Sample placeholder: enrolled in a taught postgraduate programme.",
-    quote: "Sample quote placeholder — to be replaced with a verified student testimonial.",
-  },
-  {
-    slug: "sample-story-two",
-    student: "Sample Student B",
-    destination: "Canada",
-    programme: "Diploma in Health Administration",
-    level: "Diploma",
-    excerpt: "Sample story content: choosing a college pathway with an applied component.",
-    challenge: "Sample placeholder: comparing college and university pathways.",
-    help: "Sample placeholder: destination comparison and document preparation.",
-    outcome: "Sample placeholder: commenced a diploma programme.",
-    quote: "Sample quote placeholder — to be replaced with a verified student testimonial.",
-  },
-  {
-    slug: "sample-story-three",
-    student: "Sample Student C",
-    destination: "Germany",
-    programme: "BSc Mechanical Engineering",
-    level: "Bachelor's",
-    excerpt: "Sample story content: planning an undergraduate engineering pathway in Europe.",
-    challenge: "Sample placeholder: language of instruction and entry requirements.",
-    help: "Sample placeholder: pathway planning and timeline preparation.",
-    outcome: "Sample placeholder: began an undergraduate programme.",
-    quote: "Sample quote placeholder — to be replaced with a verified student testimonial.",
-  },
-];
+/** Organisation details live in company.ts; re-exported for existing imports. */
+export { contactInfo, socialLinks, company } from "./company";
 
-export const team = [
-  {
-    name: "[Name to be confirmed]",
-    role: "Founder & Lead Education Adviser",
-    expertise: "Pathway planning, destination comparison",
-    bio: "Placeholder biography. Replace with verified professional background before publication.",
-  },
-  {
-    name: "[Name to be confirmed]",
-    role: "Career & Subject Guidance Adviser",
-    expertise: "Career discovery and subject selection",
-    bio: "Placeholder biography. Replace with verified professional background before publication.",
-  },
-  {
-    name: "[Name to be confirmed]",
-    role: "Applications Adviser",
-    expertise: "Application preparation and document review",
-    bio: "Placeholder biography. Replace with verified professional background before publication.",
-  },
-  {
-    name: "[Name to be confirmed]",
-    role: "School Programmes Coordinator",
-    expertise: "School workshops and parent sessions",
-    bio: "Placeholder biography. Replace with verified professional background before publication.",
-  },
-];
+/** Audience programme content lives in programmes.ts. */
+export { parentTopics, parentQuestions, schoolProgrammeFormats, schoolOutcomes } from "./programmes";
 
-export const socialLinks = [
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/unilink_nexus_international",
-    icon: "instagram" as const,
-  },
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/profile.php?id=100076369803778",
-    icon: "facebook" as const,
-  },
-];
-
-export const contactInfo = {
-  phone: "[Phone number to be confirmed]",
-  whatsapp: "[WhatsApp number to be confirmed]",
-  email: "[Email address to be confirmed]",
-  hours: "[Opening hours to be confirmed]",
-  address: "[Office location to be confirmed]",
-};
+/** Student stories live in testimonials.ts. */
+export { testimonials as successStories, hasUnverifiedTestimonials } from "./testimonials";

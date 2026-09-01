@@ -17,7 +17,6 @@ import { Route as ParentsRouteImport } from './routes/parents'
 import { Route as SchoolsRouteImport } from './routes/schools'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutApproachRouteImport } from './routes/about.approach'
-import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
 import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
 import { Route as ExploreIndexRouteImport } from './routes/explore.index'
@@ -75,11 +74,6 @@ const AboutIndexRoute = AboutIndexRouteImport.update({
 const AboutApproachRoute = AboutApproachRouteImport.update({
   id: '/about/approach',
   path: '/about/approach',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutTeamRoute = AboutTeamRouteImport.update({
-  id: '/about/team',
-  path: '/about/team',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DestinationsIndexRoute = DestinationsIndexRouteImport.update({
@@ -183,7 +177,6 @@ export interface FileRoutesByFullPath {
   '/parents': typeof ParentsRoute
   '/schools': typeof SchoolsRoute
   '/about/approach': typeof AboutApproachRoute
-  '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
   '/explore/destinations': typeof ExploreDestinationsRoute
@@ -212,7 +205,6 @@ export interface FileRoutesByTo {
   '/parents': typeof ParentsRoute
   '/schools': typeof SchoolsRoute
   '/about/approach': typeof AboutApproachRoute
-  '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
   '/explore/destinations': typeof ExploreDestinationsRoute
@@ -242,7 +234,6 @@ export interface FileRoutesById {
   '/parents': typeof ParentsRoute
   '/schools': typeof SchoolsRoute
   '/about/approach': typeof AboutApproachRoute
-  '/about/team': typeof AboutTeamRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/explore/career-subject-guidance': typeof ExploreCareerSubjectGuidanceRoute
   '/explore/destinations': typeof ExploreDestinationsRoute
@@ -273,7 +264,6 @@ export interface FileRouteTypes {
     | '/parents'
     | '/schools'
     | '/about/approach'
-    | '/about/team'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
     | '/explore/destinations'
@@ -302,7 +292,6 @@ export interface FileRouteTypes {
     | '/parents'
     | '/schools'
     | '/about/approach'
-    | '/about/team'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
     | '/explore/destinations'
@@ -331,7 +320,6 @@ export interface FileRouteTypes {
     | '/parents'
     | '/schools'
     | '/about/approach'
-    | '/about/team'
     | '/destinations/$slug'
     | '/explore/career-subject-guidance'
     | '/explore/destinations'
@@ -361,7 +349,6 @@ export interface RootRouteChildren {
   ParentsRoute: typeof ParentsRoute
   SchoolsRoute: typeof SchoolsRoute
   AboutApproachRoute: typeof AboutApproachRoute
-  AboutTeamRoute: typeof AboutTeamRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
   ExploreCareerSubjectGuidanceRoute: typeof ExploreCareerSubjectGuidanceRoute
   ExploreDestinationsRoute: typeof ExploreDestinationsRoute
@@ -439,13 +426,6 @@ declare module '@tanstack/react-router' {
       path: '/about/approach'
       fullPath: '/about/approach'
       preLoaderRoute: typeof AboutApproachRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about/team': {
-      id: '/about/team'
-      path: '/about/team'
-      fullPath: '/about/team'
-      preLoaderRoute: typeof AboutTeamRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/destinations/': {
@@ -585,7 +565,6 @@ const rootRouteChildren: RootRouteChildren = {
   ParentsRoute: ParentsRoute,
   SchoolsRoute: SchoolsRoute,
   AboutApproachRoute: AboutApproachRoute,
-  AboutTeamRoute: AboutTeamRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
   ExploreCareerSubjectGuidanceRoute: ExploreCareerSubjectGuidanceRoute,
   ExploreDestinationsRoute: ExploreDestinationsRoute,
