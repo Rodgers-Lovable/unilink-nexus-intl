@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CheckList } from "@/components/site/primitives";
 import { destinations } from "@/data/destinations";
 import { saveLead } from "@/lib/leads";
+import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
+import { company, contactInfo, isPlaceholder } from "@/data/company";
 
 export const Route = createFileRoute("/book-consultation")({
   head: () => ({
@@ -29,24 +31,57 @@ export const Route = createFileRoute("/book-consultation")({
 });
 
 function BookPage() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    saveLead({
+  const send = async (data: FormData) => {
+    setStatus("sending");
+    const values = {
       fullName: String(data.get("fullName") ?? ""),
       email: String(data.get("email") ?? ""),
       phone: String(data.get("phone") ?? ""),
       studyLevel: String(data.get("studyLevel") ?? ""),
-      destinationInterest: [String(data.get("destination") ?? "")],
-      notes: String(data.get("message") ?? ""),
+      destination: String(data.get("destination") ?? ""),
+      message: String(data.get("message") ?? ""),
+    };
+
+    await saveLead({
+      fullName: values.fullName,
+      email: values.email,
+      phone: values.phone,
+      studyLevel: values.studyLevel,
+      destinationInterest: [values.destination],
+      notes: values.message,
       source: "book-consultation",
       preferredContactMethod: "Phone call",
       consent: true,
     });
-    setSent(true);
+
+    const result = await sendEmail("consultation", {
+      form_name: "Consultation request",
+      from_name: values.fullName,
+      reply_to: values.email,
+      phone: values.phone,
+      message: values.message || "No additional notes",
+      summary: formatEmailBody({
+        "Full name": values.fullName,
+        Email: values.email,
+        "Phone / WhatsApp": values.phone,
+        "Intended study level": values.studyLevel,
+        "Preferred destination": values.destination,
+        Notes: values.message,
+        Submitted: new Date().toLocaleString(),
+      }),
+    });
+
+    setStatus(result.status === "error" ? "error" : "sent");
   };
+
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    void send(new FormData(e.currentTarget));
+  };
+
+  const contactEmail = isPlaceholder(contactInfo.email) ? "our contact page" : contactInfo.email;
 
   return (
     <section className="section-y bg-surface min-h-screen">
@@ -77,12 +112,11 @@ function BookPage() {
         </div>
 
         <Card className="bg-card">
-          {sent ? (
+          {status === "sent" ? (
             <div className="py-8 text-center">
               <h2 className="text-h3">Request received</h2>
               <p className="mt-3 text-sm text-muted-foreground">
-                Thank you — we will be in touch to arrange your consultation. (Demo mode —
-                submissions are stored locally.)
+                Thank you — a UniLink adviser will be in touch to arrange your consultation.
               </p>
             </div>
           ) : (
@@ -116,12 +150,36 @@ function BookPage() {
                 </select>
               </div>
               <Textarea name="message" rows={4} placeholder="Anything you'd like us to prepare for? (optional)" aria-label="Additional message" />
-              <Button type="submit" variant="cta" size="lg" className="w-full">
-                Request My Consultation
+              {status === "error" && (
+                <p role="alert" className="text-sm font-semibold text-destructive">
+                  We couldn&apos;t send your request just now. Please try again, or reach us at{" "}
+                  {contactEmail}.
+                </p>
+              )}
+              <Button
+                type="submit"
+                variant="cta"
+                size="lg"
+                className="w-full"
+                disabled={status === "sending"}
+              >
+                {status === "sending"
+                  ? "Sending…"
+                  : status === "error"
+                    ? "Try again"
+                    : "Request My Consultation"}
               </Button>
-              <p className="text-xs text-muted-foreground">
-                By submitting, you agree to be contacted about your enquiry. [Placeholder privacy
-                note]
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                By submitting, you agree that {company.shortName} may use your details to arrange
+                and prepare for this consultation, as described in our{" "}
+                <Link
+                  to="/legal/$page"
+                  params={{ page: "privacy-policy" }}
+                  className="font-semibold text-blue hover:underline"
+                >
+                  Privacy Policy
+                </Link>
+                .
               </p>
             </form>
           )}
