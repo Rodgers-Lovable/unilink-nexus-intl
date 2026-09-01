@@ -36,9 +36,10 @@ function ContactPage() {
       fullName: String(data.get("fullName") ?? ""),
       email: String(data.get("email") ?? ""),
       phone: String(data.get("phone") ?? ""),
-      message: String(data.get("message") ?? ""),
-      source: "contact-page",
-      createdAt: new Date().toISOString(),
+      notes: String(data.get("message") ?? ""),
+      source: "contact-form",
+      preferredContactMethod: "Email",
+      consent: true,
     });
     setSent(true);
   };

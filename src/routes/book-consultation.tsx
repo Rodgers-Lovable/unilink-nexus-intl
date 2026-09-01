@@ -39,10 +39,11 @@ function BookPage() {
       email: String(data.get("email") ?? ""),
       phone: String(data.get("phone") ?? ""),
       studyLevel: String(data.get("studyLevel") ?? ""),
-      destination: String(data.get("destination") ?? ""),
-      message: String(data.get("message") ?? ""),
+      destinationInterest: [String(data.get("destination") ?? "")],
+      notes: String(data.get("message") ?? ""),
       source: "book-consultation",
-      createdAt: new Date().toISOString(),
+      preferredContactMethod: "Phone call",
+      consent: true,
     });
     setSent(true);
   };
