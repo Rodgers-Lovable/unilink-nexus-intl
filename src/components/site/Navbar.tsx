@@ -40,12 +40,7 @@ export function Navbar() {
                     aria-hidden="true"
                   />
                 </Link>
-                <motion.div
-                  initial={{ opacity: 0, y: 6 }}
-                  whileHover={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="pointer-events-none absolute left-0 top-full w-64 pt-2 opacity-0 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100"
-                >
+                <div className="pointer-events-none absolute left-0 top-full w-64 -translate-y-1.5 pt-2 opacity-0 transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
                   <ul className="rounded-xl border border-border bg-popover p-2 shadow-lift">
                     {item.children.map((child) => (
                       <li key={child.to}>
@@ -58,7 +53,7 @@ export function Navbar() {
                       </li>
                     ))}
                   </ul>
-                </motion.div>
+                </div>
               </div>
             ) : (
               <Link
