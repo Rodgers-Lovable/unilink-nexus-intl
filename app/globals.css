@@ -208,6 +208,15 @@
     transform: scaleX(1);
     transform-origin: left;
   }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @keyframes reveal-up {

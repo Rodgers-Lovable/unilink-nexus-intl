@@ -16,19 +16,37 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  /** "inverted" is for headings sitting directly on a dark photo background. */
+  tone = "default",
   className,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   align?: "left" | "center";
+  tone?: "default" | "inverted";
   className?: string;
 }) {
+  const inverted = tone === "inverted";
   return (
     <Reveal className={cn("max-w-2xl", align === "center" && "mx-auto text-center", className)}>
-      {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
-      <h2 className="text-h2">{title}</h2>
-      {description && <p className="lead mt-4">{description}</p>}
+      {eyebrow && (
+        <p
+          className={
+            inverted
+              ? "mb-3 text-[0.8125rem] font-bold tracking-[0.12em] text-white/80 uppercase"
+              : "eyebrow mb-3"
+          }
+        >
+          {eyebrow}
+        </p>
+      )}
+      <h2 className={cn("text-h2", inverted && "text-white")}>{title}</h2>
+      {description && (
+        <p className={inverted ? "mt-4 text-[1.0625rem] leading-[1.7] text-white/80" : "lead mt-4"}>
+          {description}
+        </p>
+      )}
     </Reveal>
   );
 }
