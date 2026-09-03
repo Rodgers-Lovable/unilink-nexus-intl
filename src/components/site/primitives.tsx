@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion";
 import { heroImages, type HeroImageKey } from "@/components/site/hero-images";
@@ -142,13 +142,15 @@ export function TextLink({ to, children }: { to: string; children: ReactNode }) 
   return (
     <Link
       href={to}
-      className="group link-underline inline-flex items-center gap-1.5 text-sm font-semibold text-blue"
+      className="group link-underline inline-flex items-center gap-1 text-sm font-semibold text-blue"
     >
       {children}
-      <ArrowRight
-        className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"
+      <span
+        className="inline-block transition-transform duration-200 group-hover:translate-x-0.5"
         aria-hidden="true"
-      />
+      >
+        →
+      </span>
     </Link>
   );
 }

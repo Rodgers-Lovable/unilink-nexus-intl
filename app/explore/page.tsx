@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Compass, GraduationCap, Map, Route as RouteIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PageHero, SectionHeading, CTABanner } from "@/components/site/primitives";
+import { PageHero, SectionHeading, CTABanner, TextLink } from "@/components/site/primitives";
 import { Card } from "@/components/site/Card";
 import { JourneyStages } from "@/components/site/JourneyStages";
 
@@ -92,9 +92,7 @@ export default function ExplorePage() {
                   {card.description}
                 </p>
                 <div className="mt-5">
-                  <Link href={card.to} className="text-sm font-semibold text-blue hover:underline">
-                    {card.cta} →
-                  </Link>
+                  <TextLink to={card.to}>{card.cta}</TextLink>
                 </div>
               </Card>
             ))}

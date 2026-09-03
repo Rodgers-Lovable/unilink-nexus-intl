@@ -3,7 +3,13 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Breadcrumbs, CheckList, Placeholder, SectionHeading } from "@/components/site/primitives";
+import {
+  Breadcrumbs,
+  CheckList,
+  Placeholder,
+  SectionHeading,
+  TextLink,
+} from "@/components/site/primitives";
 import { Card } from "@/components/site/Card";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { destinationImages } from "@/components/site/cards";
@@ -127,9 +133,7 @@ export default async function DestinationDetail({ params }: { params: Promise<{ 
                 departure.
               </p>
               <p className="mt-4">
-                <Link href="/services" className="text-sm font-semibold text-blue hover:underline">
-                  See how we help →
-                </Link>
+                <TextLink to="/services">See how we help</TextLink>
               </p>
             </div>
             <div>

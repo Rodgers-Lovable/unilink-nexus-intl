@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import {
   Compass,
@@ -75,12 +74,9 @@ export function DestinationCard({
           </dl>
         )}
         <div className="pt-2">
-          <Link
-            href={`/destinations/${destination.slug}`}
-            className="text-sm font-semibold text-blue hover:underline"
-          >
-            {detailed ? "View Destination" : "Explore Destination"} →
-          </Link>
+          <TextLink to={`/destinations/${destination.slug}`}>
+            {detailed ? "View Destination" : "Explore Destination"}
+          </TextLink>
         </div>
       </div>
     </article>
@@ -97,12 +93,7 @@ export function ServiceCard({ service }: { service: Service }) {
       <h3 className="text-base font-bold">{service.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.short}</p>
       <div className="mt-4">
-        <Link
-          href={`/services/${service.slug}`}
-          className="text-sm font-semibold text-blue hover:underline"
-        >
-          Learn More →
-        </Link>
+        <TextLink to={`/services/${service.slug}`}>Learn More</TextLink>
       </div>
     </Card>
   );
@@ -118,12 +109,7 @@ export function ArticleCard({ resource }: { resource: Resource }) {
       </p>
       <p className="mt-4 text-xs text-muted-foreground">{resource.readTime}</p>
       <div className="mt-3">
-        <Link
-          href={`/resources/${resource.slug}`}
-          className="text-sm font-semibold text-blue hover:underline"
-        >
-          Read Article →
-        </Link>
+        <TextLink to={`/resources/${resource.slug}`}>Read Article</TextLink>
       </div>
     </Card>
   );
