@@ -83,7 +83,7 @@ export default function ExplorePage() {
           />
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {exploreCards.map(({ icon: Icon, ...card }) => (
-              <Card key={card.title} className="flex h-full flex-col">
+              <Card key={card.title} interactive className="flex h-full flex-col">
                 <span className="mb-4 inline-flex size-11 items-center justify-center rounded-lg bg-blue/8 text-blue">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>

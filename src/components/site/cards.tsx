@@ -90,7 +90,7 @@ export function DestinationCard({
 export function ServiceCard({ service }: { service: Service }) {
   const Icon = serviceIcons[service.icon];
   return (
-    <Card>
+    <Card interactive>
       <span className="mb-4 inline-flex size-11 items-center justify-center rounded-lg bg-blue/8 text-blue">
         <Icon className="size-5" aria-hidden="true" />
       </span>
@@ -110,7 +110,7 @@ export function ServiceCard({ service }: { service: Service }) {
 
 export function ArticleCard({ resource }: { resource: Resource }) {
   return (
-    <Card className="flex h-full flex-col">
+    <Card interactive className="flex h-full flex-col">
       <p className="eyebrow">{resource.category}</p>
       <h3 className="mt-3 text-base font-bold">{resource.title}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
@@ -135,7 +135,7 @@ export function StoryCard({
   story: { slug: string; student: string; destination: string; programme: string; excerpt: string };
 }) {
   return (
-    <Card className="flex h-full flex-col">
+    <Card interactive className="flex h-full flex-col">
       <div className="mb-4 flex items-center gap-3">
         <div
           className="flex size-12 items-center justify-center rounded-full bg-blue-soft/50 text-xs font-bold text-navy"

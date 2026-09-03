@@ -113,7 +113,7 @@ export default function Home() {
           <StaggerContainer className="mt-12 grid gap-6 md:grid-cols-3">
             {journeyEntryCards.map((card) => (
               <StaggerItem key={card.title}>
-                <Card className="flex h-full flex-col">
+                <Card interactive className="flex h-full flex-col">
                   <h3 className="text-lg font-bold text-navy">{card.title}</h3>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                     {card.copy}
@@ -158,7 +158,7 @@ export default function Home() {
               const Icon = audienceIcons[card.icon] ?? GraduationCap;
               return (
                 <StaggerItem key={card.title}>
-                  <Card className="flex h-full flex-col">
+                  <Card interactive className="flex h-full flex-col">
                     <span className="inline-flex size-11 items-center justify-center rounded-lg bg-blue/10 text-blue">
                       <Icon className="size-5" aria-hidden="true" />
                     </span>
