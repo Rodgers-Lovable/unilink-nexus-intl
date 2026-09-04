@@ -85,8 +85,7 @@ export default function ApplicationProcess() {
             </ol>
             <div className="mt-6">
               <Placeholder>
-                Indicative only. Actual timelines vary by destination and intake. [Content to be
-                confirmed]
+                Indicative only. Actual timelines vary by destination and intake.
               </Placeholder>
             </div>
           </div>

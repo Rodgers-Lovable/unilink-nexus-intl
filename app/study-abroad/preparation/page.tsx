@@ -77,7 +77,6 @@ export default function PreparationPage() {
           <Placeholder>
             Visa, financial and language requirements must be verified with official sources for
             each destination. UniLink provides guidance only and does not guarantee visa approval.
-            [Content to be confirmed]
           </Placeholder>
         </div>
       </section>
