@@ -20,7 +20,7 @@ export function Footer() {
     <footer className="bg-navy text-white/80">
       <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
-          <Logo variant="light" size="h-40" />
+          <Logo variant="light" size="h-30" />
           <p className="max-w-xs text-sm leading-relaxed">
             Personalised international education guidance, from first questions to departure.
           </p>
