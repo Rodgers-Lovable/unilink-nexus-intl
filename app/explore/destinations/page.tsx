@@ -104,11 +104,11 @@ export default function DestinationExplorerPage() {
               <DestinationCard key={d.slug} destination={d} />
             ))}
           </div>
-          <div className="mt-10 max-w-2xl">
+          <div className="mt-10 max-w-4xl mx-auto text-center">
             <Placeholder>
               Destination content is high-level guidance until verified. Costs, requirements and
               visa details must be confirmed from official sources. UniLink does not claim to
-              represent institutions in these destinations. [Content to be confirmed]
+              represent institutions in these destinations.
             </Placeholder>
           </div>
         </div>
