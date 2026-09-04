@@ -172,6 +172,7 @@ export function ComboboxField({ options, ...props }: BaseProps & { options: read
             type="button"
             role="combobox"
             aria-expanded={open}
+            aria-controls={`${id}-listbox`}
             aria-invalid={error ? true : undefined}
             aria-describedby={cn(hint && `${id}-hint`, error && `${id}-error`) || undefined}
             className="flex h-12 w-full items-center justify-between rounded-md border border-input bg-background px-3 text-left text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
@@ -183,7 +184,7 @@ export function ComboboxField({ options, ...props }: BaseProps & { options: read
         <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
           <Command>
             <CommandInput placeholder={`Search ${label.toLowerCase()}…`} />
-            <CommandList>
+            <CommandList id={`${id}-listbox`}>
               <CommandEmpty>No match found.</CommandEmpty>
               <CommandGroup>
                 {options.map((option) => (
