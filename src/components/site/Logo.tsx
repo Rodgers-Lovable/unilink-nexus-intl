@@ -8,9 +8,12 @@ import { cn } from "@/lib/utils";
  */
 export function Logo({
   variant = "dark",
+  size = "h-14",
   className,
 }: {
   variant?: "dark" | "light";
+  /** Tailwind height class controlling the mark's rendered size. */
+  size?: string;
   className?: string;
 }) {
   const logoSrc = "/unilink-logo.png";
@@ -28,7 +31,7 @@ export function Logo({
             alt="Unilink Nexus International — Your Link to Global Opportunities"
             width={500}
             height={500}
-            className="h-14 w-auto"
+            className={cn(size, "w-auto")}
           />
         </span>
       ) : (
@@ -37,7 +40,7 @@ export function Logo({
           alt="Unilink Nexus International — Your Link to Global Opportunities"
           width={500}
           height={500}
-          className="h-14 w-auto"
+          className={cn(size, "w-auto")}
           priority
         />
       )}
