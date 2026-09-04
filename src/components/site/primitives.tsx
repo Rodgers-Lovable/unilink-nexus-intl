@@ -1,31 +1,52 @@
 import type { ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
-import { ArrowRight, Check } from "lucide-react";
-import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion";
 import { heroImages, type HeroImageKey } from "@/components/site/hero-images";
 import { cn } from "@/lib/utils";
-import { trackEvent } from "@/lib/analytics/umami";
+import { Card } from "./Card";
+import { TrackedLink } from "./TrackedLink";
+
+export { Card };
 
 export function SectionHeading({
   eyebrow,
   title,
   description,
   align = "left",
+  /** "inverted" is for headings sitting directly on a dark photo background. */
+  tone = "default",
   className,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   align?: "left" | "center";
+  tone?: "default" | "inverted";
   className?: string;
 }) {
+  const inverted = tone === "inverted";
   return (
     <Reveal className={cn("max-w-2xl", align === "center" && "mx-auto text-center", className)}>
-      {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
-      <h2 className="text-h2">{title}</h2>
-      {description && <p className="lead mt-4">{description}</p>}
+      {eyebrow && (
+        <p
+          className={
+            inverted
+              ? "mb-3 text-[0.8125rem] font-bold tracking-[0.12em] text-white/80 uppercase"
+              : "eyebrow mb-3"
+          }
+        >
+          {eyebrow}
+        </p>
+      )}
+      <h2 className={cn("text-h2", inverted && "text-white")}>{title}</h2>
+      {description && (
+        <p className={inverted ? "mt-4 text-[1.0625rem] leading-[1.7] text-white/80" : "lead mt-4"}>
+          {description}
+        </p>
+      )}
     </Reveal>
   );
 }
@@ -62,12 +83,11 @@ export function PageHero({
         {heroImage && (
           <Reveal delay={0.15} distance={24} className="relative">
             <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
-              <img
+              <Image
                 src={heroImage.src}
                 alt={heroImage.alt}
-                width={1200}
-                height={1000}
-                className="aspect-[6/5] w-full object-cover"
+                className="aspect-6/5 w-full object-cover"
+                priority
               />
             </div>
           </Reveal>
@@ -82,7 +102,7 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
     <nav aria-label="Breadcrumb" className="container-page pt-6">
       <ol className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
         <li>
-          <Link to="/" className="hover:text-blue">
+          <Link href="/" className="hover:text-blue">
             Home
           </Link>
         </li>
@@ -90,7 +110,7 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
           <li key={item.label} className="flex items-center gap-2">
             <span aria-hidden="true">/</span>
             {item.to ? (
-              <Link to={item.to as never} className="hover:text-blue">
+              <Link href={item.to} className="hover:text-blue">
                 {item.label}
               </Link>
             ) : (
@@ -105,7 +125,7 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
 
 export function CTABanner({
   title = "Ready to explore your options?",
-  description = "Speak with a Unilink advisor and take the next step toward your international education goals.",
+  description = "Speak with a UniLink advisor and take the next step toward your international education goals.",
 }: {
   title?: string;
   description?: string;
@@ -117,20 +137,18 @@ export function CTABanner({
         <p className="lead mx-auto mt-4 max-w-2xl text-blue-soft">{description}</p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Button asChild variant="cta" size="lg">
-            <Link
-              to="/book-consultation"
-              onClick={() => trackEvent("cta-clicked", { cta: "book-consultation", location: "cta-banner" })}
-            >
+            <TrackedLink href="/book-consultation" cta="book-consultation" location="cta-banner">
               Book a Consultation
-            </Link>
+            </TrackedLink>
           </Button>
           <Button asChild variant="onNavy" size="lg">
-            <Link
-              to="/explore/pathway-advisor"
-              onClick={() => trackEvent("cta-clicked", { cta: "pathway-advisor", location: "cta-banner" })}
+            <TrackedLink
+              href="/explore/pathway-advisor"
+              cta="pathway-advisor"
+              location="cta-banner"
             >
               Discover My Pathway
-            </Link>
+            </TrackedLink>
           </Button>
         </div>
       </div>
@@ -138,29 +156,19 @@ export function CTABanner({
   );
 }
 
-export function Card({ className, children }: { className?: string; children: ReactNode }) {
-  return (
-    <motion.div
-      whileHover={{ y: -5, boxShadow: "0 18px 40px -16px color-mix(in oklab, var(--navy) 14%, transparent)" }}
-      transition={{ type: "spring", stiffness: 350, damping: 22 }}
-      className={cn(
-        "rounded-xl border border-border bg-card p-6 shadow-card",
-        className,
-      )}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 export function TextLink({ to, children }: { to: string; children: ReactNode }) {
   return (
     <Link
-      to={to as never}
-      className="group link-underline inline-flex items-center gap-1.5 text-sm font-semibold text-blue"
+      href={to}
+      className="group link-underline inline-flex items-center gap-1 text-sm font-semibold text-blue"
     >
       {children}
-      <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+      <span
+        className="inline-block transition-transform duration-200 group-hover:translate-x-0.5"
+        aria-hidden="true"
+      >
+        →
+      </span>
     </Link>
   );
 }

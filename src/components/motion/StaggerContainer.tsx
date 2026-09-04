@@ -1,5 +1,6 @@
+"use client";
+
 import { motion, type HTMLMotionProps } from "framer-motion";
-import { staggerContainerVariants } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 type StaggerContainerProps = HTMLMotionProps<"div"> & {
@@ -40,11 +41,7 @@ export function StaggerContainer({
   );
 }
 
-export function StaggerItem({
-  children,
-  className,
-  ...props
-}: HTMLMotionProps<"div">) {
+export function StaggerItem({ children, className, ...props }: HTMLMotionProps<"div">) {
   return (
     <motion.div
       variants={{

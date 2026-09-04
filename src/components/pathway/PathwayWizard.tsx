@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,6 +13,7 @@ import { trackEvent } from "@/lib/analytics/umami";
 import {
   budgetOptions,
   countryOptions,
+  countryFlags,
   curriculumOptions,
   destinationOptions,
   emptyPathwayProfile,
@@ -39,26 +42,25 @@ export function PathwayWizard() {
   const set = <K extends keyof PathwayProfile>(key: K, value: PathwayProfile[K]) =>
     setProfile((p) => ({ ...p, [key]: value }));
 
-  const toggle = (key: "interests" | "subjects" | "preferredDestinations" | "studentSituation") =>
+  const toggle =
+    (key: "interests" | "subjects" | "preferredDestinations" | "studentSituation") =>
     (option: string) =>
       setProfile((p) => ({
         ...p,
-        [key]: p[key].includes(option)
-          ? p[key].filter((v) => v !== option)
-          : [...p[key], option],
+        [key]: p[key].includes(option) ? p[key].filter((v) => v !== option) : [...p[key], option],
       }));
 
   const validate = () => {
     const next: Record<string, string> = {};
     if (step === 0 && profile.interests.length === 0) {
-      next['interests'] = "Pick at least one — “I'm not sure yet” is a valid answer.";
+      next["interests"] = "Pick at least one. “I'm not sure yet” is a valid answer.";
     }
     if (step === 2) {
-      if (!profile.country) next['country'] = "Please choose where you currently live.";
-      if (!profile.level) next['level'] = "Please choose the stage you're at.";
+      if (!profile.country) next["country"] = "Please choose where you currently live.";
+      if (!profile.level) next["level"] = "Please choose the stage you're at.";
     }
     if (step === 3 && profile.preferredDestinations.length === 0) {
-      next['preferredDestinations'] = "Choose at least one, or select “Show me everything”.";
+      next["preferredDestinations"] = "Choose at least one, or select “Show me everything”.";
     }
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -70,15 +72,19 @@ export function PathwayWizard() {
 
   const next = async () => {
     if (!validate()) return;
+
     if (!startedTracked.current) {
       startedTracked.current = true;
       trackEvent("pathway-advisor-started");
     }
+
     if (step === LAST_STEP - 1) {
       setLoading(true);
+
       const generated = await pathwayService.generatePathway(profile);
       setResult(generated);
       setLoading(false);
+
       trackEvent("pathway-advisor-completed", {
         country: profile.country,
         level: profile.level,
@@ -86,13 +92,14 @@ export function PathwayWizard() {
         destinations: generated.destinations.map((d) => d.name).join(", "),
       });
     }
+
     setStep((s) => Math.min(s + 1, LAST_STEP));
-    scrollUp();
+    // scrollUp();
   };
 
   const back = () => {
     setStep((s) => Math.max(s - 1, 0));
-    scrollUp();
+    // scrollUp();
   };
 
   const restart = () => {
@@ -139,9 +146,9 @@ export function PathwayWizard() {
               multiple
               columns={2}
             />
-            {errors['interests'] && (
+            {errors["interests"] && (
               <p role="alert" className="mt-3 text-xs font-medium text-destructive">
-                {errors['interests']}
+                {errors["interests"]}
               </p>
             )}
           </motion.div>
@@ -185,17 +192,18 @@ export function PathwayWizard() {
               helper="This helps us keep suggestions realistic for your stage."
             />
             <div className="mt-6 space-y-10">
-              <QuestionBlock label="Country of residence" error={errors['country']}>
+              <QuestionBlock label="Country of residence" error={errors["country"]}>
                 <ChoiceCards
                   legend="Country of residence"
                   options={countryOptions}
                   value={profile.country}
                   onSelect={(v) => set("country", v)}
                   columns={2}
+                  flags={countryFlags}
                 />
               </QuestionBlock>
 
-              <QuestionBlock label="What stage are you at?" error={errors['level']}>
+              <QuestionBlock label="What stage are you at?" error={errors["level"]}>
                 <ChoiceCards
                   legend="Stage of study"
                   options={stageOptions}
@@ -217,7 +225,7 @@ export function PathwayWizard() {
 
               <QuestionBlock
                 label="How would you describe your current academic performance?"
-                hint="An honest estimate is enough — exact grades are not needed yet."
+                hint="An honest estimate is enough. Exact grades are not needed yet."
               >
                 <ChoiceCards
                   legend="Academic performance"
@@ -251,15 +259,16 @@ export function PathwayWizard() {
               onSelect={toggle("preferredDestinations")}
               multiple
               columns={3}
+              flags={countryFlags}
             />
-            {errors['preferredDestinations'] && (
+            {errors["preferredDestinations"] && (
               <p role="alert" className="mt-3 text-xs font-medium text-destructive">
-                {errors['preferredDestinations']}
+                {errors["preferredDestinations"]}
               </p>
             )}
             <p className="mt-5 rounded-lg border border-dashed border-border bg-surface p-4 text-xs leading-relaxed text-muted-foreground">
               These are exploratory destination options. UniLink does not claim to represent
-              institutions in these destinations. [Content to be confirmed]
+              institutions in these destinations.
             </p>
           </motion.div>
         )}

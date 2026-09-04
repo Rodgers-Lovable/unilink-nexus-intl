@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, type HTMLMotionProps } from "framer-motion";
 import { fadeUpVariants, transitions } from "@/lib/motion";
 import { cn } from "@/lib/utils";

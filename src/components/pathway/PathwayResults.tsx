@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { ArrowRight, Compass, GraduationCap, MapPin, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { storeApplicationHandoff } from "@/lib/application/applicationService";
@@ -7,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { QuestionBlock } from "./PathwayShell";
 import { leadFromPathway, saveLead, type ContactMethod } from "@/lib/leads";
-import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
+import { sendEmail } from "@/lib/email/sendgrid";
 import { company } from "@/data/company";
 import { trackEvent } from "@/lib/analytics/umami";
 import type { PathwayProfile, PathwayResult } from "@/lib/pathway/types";
@@ -33,8 +35,8 @@ export function PathwayResults({
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const next: Record<string, string> = {};
-    if (!form.fullName.trim()) next['fullName'] = "Please add your name.";
-    if (!form.email.trim()) next['email'] = "Please add an email address.";
+    if (!form.fullName.trim()) next["fullName"] = "Please add your name.";
+    if (!form.email.trim()) next["email"] = "Please add an email address.";
     setErrors(next);
     if (Object.keys(next).length) return;
 
@@ -56,9 +58,7 @@ export function PathwayResults({
       form_name: "Pathway Advisor enquiry",
       from_name: form.fullName,
       reply_to: form.email,
-      phone: form.phone || "Not provided",
-      message: notes || "No additional notes",
-      summary: formatEmailBody({
+      details: {
         "Full name": form.fullName,
         Email: form.email,
         "Phone / WhatsApp": form.phone,
@@ -79,7 +79,7 @@ export function PathwayResults({
         "Pathway summary": result.narrative,
         Notes: notes,
         Submitted: new Date().toLocaleString(),
-      }),
+      },
     });
 
     setSaving(false);
@@ -100,7 +100,7 @@ export function PathwayResults({
 
   return (
     <div className="mx-auto max-w-4xl">
-      <div className="rounded-2xl border border-border bg-gradient-to-br from-surface to-background p-6 shadow-card sm:p-10">
+      <div className="rounded-2xl border border-border bg-linear-to-br from-surface to-background p-6 shadow-card sm:p-10">
         <p className="eyebrow">Your UniLink pathway</p>
         <h2 className="text-h2 mt-3">{result.headline}</h2>
         <p className="lead mt-4">{result.narrative}</p>
@@ -174,8 +174,8 @@ export function PathwayResults({
       <section className="mt-12">
         <h3 className="text-h3">Destinations to explore</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          Exploratory options based on your budget, language and travel preferences — not confirmed
-          placements.
+          Exploratory options based on your budget, language and travel preferences. These
+          aren&apos;t confirmed placements.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {result.destinations.map((destination) => (
@@ -241,7 +241,7 @@ export function PathwayResults({
         </p>
         <Button asChild variant="cta" size="lg" className="mt-5">
           <Link
-            to="/apply"
+            href="/apply"
             onClick={() => {
               storeApplicationHandoff(profile);
               trackEvent("cta-clicked", { cta: "start-application", location: "pathway-results" });
@@ -262,13 +262,13 @@ export function PathwayResults({
 
         {sent ? (
           <div className="mt-6 rounded-xl border border-green/30 bg-green/8 p-5">
-            <p className="text-sm font-bold text-navy">Thank you — your pathway has been saved.</p>
+            <p className="text-sm font-bold text-navy">Thank you. Your pathway has been saved.</p>
             <p className="mt-1 text-sm text-muted-foreground">
               A UniLink adviser will follow up using your preferred contact method.
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <Button asChild variant="cta">
-                <Link to="/book-consultation">Book a Consultation</Link>
+                <Link href="/book-consultation">Book a Consultation</Link>
               </Button>
               <Button variant="outline" onClick={onRestart}>
                 <RotateCcw className="size-4" aria-hidden="true" />
@@ -279,7 +279,7 @@ export function PathwayResults({
         ) : (
           <form className="mt-6 space-y-5" onSubmit={submit} noValidate>
             <div className="grid gap-5 sm:grid-cols-2">
-              <QuestionBlock label="Full name" error={errors['fullName']}>
+              <QuestionBlock label="Full name" error={errors["fullName"]}>
                 <Input
                   value={form.fullName}
                   onChange={(e) => setForm((f) => ({ ...f, fullName: e.target.value }))}
@@ -287,7 +287,7 @@ export function PathwayResults({
                   aria-label="Full name"
                 />
               </QuestionBlock>
-              <QuestionBlock label="Email" error={errors['email']}>
+              <QuestionBlock label="Email" error={errors["email"]}>
                 <Input
                   type="email"
                   value={form.email}
@@ -342,8 +342,7 @@ export function PathwayResults({
               By submitting, you agree that {company.shortName} may use your details and pathway
               answers to advise you, as described in our{" "}
               <Link
-                to="/legal/$page"
-                params={{ page: "privacy-policy" }}
+                href="/legal/privacy-policy"
                 className="font-semibold text-blue hover:underline"
               >
                 Privacy Policy

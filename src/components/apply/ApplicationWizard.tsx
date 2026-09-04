@@ -1,7 +1,10 @@
+"use client";
+
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { CheckCircle2, Pencil } from "lucide-react";
+import Link from "next/link";
+import { Check, CheckCircle2, Copy, Pencil } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { countries } from "@/data/countries";
@@ -38,9 +41,10 @@ import {
   TextAreaField,
   TextField,
 } from "./fields";
-import { formatEmailBody, sendEmail } from "@/lib/email/emailjs";
+import { sendEmail } from "@/lib/email/sendgrid";
 import { trackEvent } from "@/lib/analytics/umami";
 import { cn } from "@/lib/utils";
+import { Placeholder } from "../site/primitives";
 
 function ProgressHeader({ current }: { current: number }) {
   const total = applicationSteps.length;
@@ -88,6 +92,38 @@ function ProgressHeader({ current }: { current: number }) {
   );
 }
 
+function ReferenceCode({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      toast.success("Reference copied");
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("Couldn't copy reference");
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      className="mt-2 inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 font-mono text-lg font-extrabold tracking-wide text-navy transition-colors hover:border-blue/40 hover:bg-blue/5"
+      title="Copy reference number"
+    >
+      <span>{value}</span>
+      {copied ? (
+        <Check className="size-4 text-green" aria-hidden="true" />
+      ) : (
+        <Copy className="size-4 text-muted-foreground" aria-hidden="true" />
+      )}
+      <span className="sr-only">{copied ? "Copied" : "Copy reference number"}</span>
+    </button>
+  );
+}
+
 function ReviewSection({
   title,
   onEdit,
@@ -110,7 +146,7 @@ function ReviewSection({
       <dl className="mt-4 space-y-3">
         {rows.map((row) => (
           <div key={row.label} className="grid gap-1 sm:grid-cols-[220px_1fr] sm:gap-4">
-            <dt className="text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground">
+            <dt className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
               {row.label}
             </dt>
             <dd className="text-sm text-foreground">{row.value || "—"}</dd>
@@ -144,9 +180,13 @@ export function ApplicationWizard() {
     if (saved) next = mergeDraft(next, saved);
     if (handoff) {
       next = mergeDraft(next, handoff);
+      clearApplicationHandoff();
+      /* eslint-disable react-hooks/set-state-in-effect -- one-time hydration from a
+         localStorage-backed handoff on mount; must stay in an effect to avoid an
+         SSR/hydration mismatch. */
       setSource("pathway_advisor");
       setPrefilled(true);
-      clearApplicationHandoff();
+      /* eslint-enable react-hooks/set-state-in-effect */
     }
     setDraft(next);
   }, []);
@@ -174,6 +214,7 @@ export function ApplicationWizard() {
         startedTracked.current = true;
         trackEvent("application-started", { source });
       }
+
       trackEvent("application-step-completed", { step: stepIndex + 1 });
       goTo(stepIndex + 1);
       return;
@@ -181,6 +222,7 @@ export function ApplicationWizard() {
 
     setSubmitting(true);
     setDeliveryFailed(false);
+
     try {
       const record = await submitApplication(draft, source);
 
@@ -188,10 +230,7 @@ export function ApplicationWizard() {
         form_name: "Student application profile",
         from_name: record.personal.fullName,
         reply_to: record.personal.email,
-        phone: record.personal.phone,
-        reference: record.reference,
-        message: record.additionalInformation || "No additional information",
-        summary: formatEmailBody({
+        details: {
           Reference: record.reference,
           Source: record.source,
           "Full name": record.personal.fullName,
@@ -211,7 +250,7 @@ export function ApplicationWizard() {
           "Additional information": record.additionalInformation,
           "Consent given": record.consent ? "Yes" : "No",
           Submitted: new Date(record.createdAt).toLocaleString(),
-        }),
+        },
       });
 
       if (delivery.status === "error") setDeliveryFailed(true);
@@ -221,6 +260,7 @@ export function ApplicationWizard() {
         delivery: delivery.status,
         targetLevel: record.studyPlan.targetLevel,
       });
+
       setSubmitted(record);
       requestAnimationFrame(() => {
         headingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -260,18 +300,16 @@ export function ApplicationWizard() {
           </span>
           <h2 className="text-h2 mt-6">Your application profile has been submitted.</h2>
           <p className="lead mt-4">
-            A UniLink adviser will review your academic background and study goals and contact you
-            regarding the next steps.
+            A UniLink adviser will review your academic background and study goals, then reach out
+            about next steps.
           </p>
           <div className="mt-8 rounded-xl border border-border bg-surface p-5">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
               Your reference number
             </p>
-            <p className="mt-2 text-lg font-extrabold tracking-wide text-navy">
-              {submitted.reference}
-            </p>
+            <ReferenceCode value={submitted.reference} />
             <p className="mt-2 text-xs text-muted-foreground">
-              Keep this reference for any follow-up correspondence.
+              Keep this reference for any follow-up.
             </p>
           </div>
           {deliveryFailed && (
@@ -285,15 +323,15 @@ export function ApplicationWizard() {
           )}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Button asChild variant="cta" size="lg">
-              <Link to="/resources">Explore Resources</Link>
+              <Link href="/resources">Explore Resources</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to="/">Return Home</Link>
+              <Link href="/">Return Home</Link>
             </Button>
           </div>
         </div>
         <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground">
-          {APPLICATION_DISCLAIMER}
+          <Placeholder>{APPLICATION_DISCLAIMER}</Placeholder>
         </p>
       </div>
     );
@@ -303,8 +341,8 @@ export function ApplicationWizard() {
     <div ref={headingRef} className="mx-auto max-w-3xl">
       {prefilled && (
         <p className="mb-6 rounded-lg border border-green/30 bg-green/5 px-4 py-3 text-sm text-navy">
-          We&apos;ve carried over what you told the Pathway Advisor. Please review and change
-          anything that has since moved on.
+          We&apos;ve carried over what you told the Pathway Advisor. Review it and update anything
+          that&apos;s changed.
         </p>
       )}
 
@@ -427,7 +465,7 @@ export function ApplicationWizard() {
                   value={draft.academic.performance}
                   onChange={(v) => setAcademic({ performance: v })}
                   error={errors["performance"]}
-                  hint="A general indication is enough — exact grades are not needed at this stage."
+                  hint="A general indication is enough. Exact grades are not needed at this stage."
                   placeholder="Optional"
                 />
               </motion.fieldset>
@@ -457,7 +495,7 @@ export function ApplicationWizard() {
                   value={draft.studyPlan.preferredCourse}
                   onChange={(v) => setStudyPlan({ preferredCourse: v })}
                   error={errors["preferredCourse"]}
-                  hint="A course, subject or broad field is fine — for example “Data Science” or “something in health”."
+                  hint="A course, subject or broad field is fine. For example, “Data Science” or “something in health”."
                   placeholder="Course or subject area"
                 />
                 <MultiSelectField
@@ -573,8 +611,7 @@ export function ApplicationWizard() {
                   <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
                     Please only provide information necessary for your education enquiry. Read our{" "}
                     <Link
-                      to="/legal/$page"
-                      params={{ page: "privacy-policy" }}
+                      href="/legal/privacy-policy"
                       className="font-semibold text-blue hover:underline"
                     >
                       Privacy Policy
@@ -594,9 +631,9 @@ export function ApplicationWizard() {
         />
       </form>
 
-      <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
-        {APPLICATION_DISCLAIMER}
-      </p>
+      <div className="mt-10 max-w-4xl mx-auto">
+        <Placeholder>{APPLICATION_DISCLAIMER}</Placeholder>
+      </div>
     </div>
   );
 }

@@ -7,9 +7,7 @@
 import { company, serviceLines } from "./company";
 
 export type LegalBlock =
-  | { type: "p"; text: string }
-  | { type: "h3"; text: string }
-  | { type: "list"; items: string[] };
+  { type: "p"; text: string } | { type: "h3"; text: string } | { type: "list"; items: string[] };
 
 export type LegalSection = { heading: string; blocks: LegalBlock[] };
 
@@ -296,7 +294,12 @@ const privacyPolicy: LegalDocument = {
         { type: "p", text: "Including detecting:" },
         {
           type: "list",
-          items: ["misuse;", "fraudulent information;", "security threats; and", "unauthorised access."],
+          items: [
+            "misuse;",
+            "fraudulent information;",
+            "security threats; and",
+            "unauthorised access.",
+          ],
         },
         { type: "h3", text: "Meet legal obligations" },
         {
@@ -315,10 +318,10 @@ const privacyPolicy: LegalDocument = {
         {
           type: "list",
           items: [
-            "Consent — where you have agreed to a particular use of your information.",
-            "Providing requested services — where processing is necessary to respond to your enquiry or provide a service you requested.",
-            "Legitimate operational purposes — where appropriate and permitted by law, such as securing and improving our services.",
-            "Legal obligations — where processing is necessary to comply with applicable law.",
+            "Consent: where you have agreed to a particular use of your information.",
+            "Providing requested services: where processing is necessary to respond to your enquiry or provide a service you requested.",
+            "Legitimate operational purposes: where appropriate and permitted by law, such as securing and improving our services.",
+            "Legal obligations: where processing is necessary to comply with applicable law.",
           ],
         },
         {
@@ -719,7 +722,10 @@ const termsOfUse: LegalDocument = {
     {
       heading: "4. UniLink Pathway Advisor",
       blocks: [
-        { type: "p", text: "The UniLink Pathway Advisor is designed to help users explore possible:" },
+        {
+          type: "p",
+          text: "The UniLink Pathway Advisor is designed to help users explore possible:",
+        },
         {
           type: "list",
           items: [
@@ -829,7 +835,10 @@ const termsOfUse: LegalDocument = {
           type: "p",
           text: "You agree to provide information that is, to the best of your knowledge:",
         },
-        { type: "list", items: ["accurate;", "current;", "complete; and", "not deliberately misleading."] },
+        {
+          type: "list",
+          items: ["accurate;", "current;", "complete; and", "not deliberately misleading."],
+        },
         { type: "p", text: "You must not knowingly provide:" },
         {
           type: "list",
@@ -1264,7 +1273,7 @@ const disclaimer: LegalDocument = {
       blocks: [
         {
           type: "p",
-          text: "The UniLink Pathway Advisor and similar tools produce exploratory suggestions using rules and, where applicable, artificial intelligence. Results indicate directions worth investigating — they are not eligibility assessments, admission decisions or professional advice.",
+          text: "The UniLink Pathway Advisor and similar tools produce exploratory suggestions using rules and, where applicable, artificial intelligence. Results indicate directions worth investigating. They are not eligibility assessments, admission decisions or professional advice.",
         },
       ],
     },

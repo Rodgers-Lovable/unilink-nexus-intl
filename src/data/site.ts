@@ -56,7 +56,7 @@ export const audienceCards = [
   {
     title: "Students",
     copy: "Explore careers, subjects, degree pathways, destinations and international education opportunities.",
-    cta: "Start Your Journey",
+    cta: "Start Exploring",
     to: "/explore/pathway-advisor",
     icon: "graduation" as const,
   },
@@ -94,7 +94,8 @@ export const howItWorksStages = [
   },
   {
     title: "Build your pathway",
-    description: "Turn the shortlist into a sequence with timelines, prerequisites and decision points.",
+    description:
+      "Turn the shortlist into a sequence with timelines, prerequisites and decision points.",
   },
   {
     title: "Prepare properly",
@@ -107,25 +108,44 @@ export const howItWorksStages = [
   },
   {
     title: "Move forward with support",
-    description: "Take the next step — applications, preparation or departure — with guidance in place.",
+    description:
+      "Take the next step: applications, preparation or departure, with guidance in place.",
   },
 ];
 
 export const applicationStages = [
-  { title: "Initial conversation", description: "A first discussion about your direction, timeline and questions." },
-  { title: "Academic profile review", description: "A structured review of your qualifications and results." },
+  {
+    title: "Initial conversation",
+    description: "A first discussion about your direction, timeline and questions.",
+  },
+  {
+    title: "Academic profile review",
+    description: "A structured review of your qualifications and results.",
+  },
   {
     title: "Destination and course exploration",
     description: "Comparison of realistic destinations and programmes against your profile.",
   },
-  { title: "Document preparation", description: "Collecting, organising and reviewing required documents." },
-  { title: "Application submission", description: "Submitting applications and tracking their progress." },
-  { title: "Offer review", description: "Understanding conditions attached to offers and deciding next steps." },
+  {
+    title: "Document preparation",
+    description: "Collecting, organising and reviewing required documents.",
+  },
+  {
+    title: "Application submission",
+    description: "Submitting applications and tracking their progress.",
+  },
+  {
+    title: "Offer review",
+    description: "Understanding conditions attached to offers and deciding next steps.",
+  },
   {
     title: "Visa preparation",
-    description: "Preparing documentation according to the destination's process. [Content to be confirmed]",
+    description: "Preparing documentation according to the destination's process.",
   },
-  { title: "Pre-departure", description: "Final preparation for travel, accommodation and arrival." },
+  {
+    title: "Pre-departure",
+    description: "Final preparation for travel, accommodation and arrival.",
+  },
 ];
 
 export const documentChecklist = [
@@ -135,7 +155,7 @@ export const documentChecklist = [
   "Personal statement or motivation letter, where required",
   "References or recommendation letters, where required",
   "Curriculum vitae, where required",
-  "Financial documentation, where required [Content to be confirmed]",
+  "Financial documentation, where required",
 ];
 
 export const preparationTopics = [
@@ -147,15 +167,17 @@ export const preparationTopics = [
   {
     title: "Language preparation",
     description:
-      "Language expectations differ by destination and programme. Confirm requirements from official sources. [Content to be confirmed]",
+      "Language expectations differ by destination and programme. Confirm requirements from official sources.",
   },
   {
     title: "Financial planning",
-    description: "Plan tuition, living costs and travel in ranges, and revisit as your shortlist narrows.",
+    description:
+      "Plan tuition, living costs and travel in ranges, and revisit as your shortlist narrows.",
   },
   {
     title: "Documentation",
-    description: "Keep clearly named digital copies of transcripts, certificates and identification in one place.",
+    description:
+      "Keep clearly named digital copies of transcripts, certificates and identification in one place.",
   },
   {
     title: "Practical readiness",
@@ -163,7 +185,8 @@ export const preparationTopics = [
   },
   {
     title: "Personal readiness",
-    description: "Living independently in a new environment takes preparation as much as paperwork.",
+    description:
+      "Living independently in a new environment takes preparation as much as paperwork.",
   },
 ];
 
@@ -175,18 +198,19 @@ export const whyUnilink = [
   },
   {
     title: "Exploration Before Applications",
-    description: "We help you investigate directions properly before committing to a course or country.",
+    description:
+      "We help you investigate directions properly before committing to a course or country.",
   },
   {
     title: "Honest, Student-First Advice",
-    description: "Recommendations are based on suitability, not on what is popular or easiest to place.",
+    description:
+      "Recommendations are based on suitability, not on what is popular or easiest to place.",
   },
   {
     title: "Support for Families and Schools",
     description: "Parents and schools are part of the decision, so they are part of the guidance.",
   },
 ];
-
 
 export const studyAbroadFaqs = [
   {
@@ -195,7 +219,7 @@ export const studyAbroadFaqs = [
   },
   {
     q: "When should I start planning?",
-    a: "Earlier planning generally provides more options, particularly around subject choices, testing and document preparation. Timelines vary by destination and intake. [Content to be confirmed]",
+    a: "Earlier planning generally provides more options, particularly around subject choices, testing and document preparation. Timelines vary by destination and intake.",
   },
   {
     q: "Is the Pathway Advisor a guarantee of anything?",
@@ -203,7 +227,7 @@ export const studyAbroadFaqs = [
   },
   {
     q: "Which destinations can I explore?",
-    a: "A range of destinations across Africa, Europe, Asia, the Middle East, North America and Oceania are included as exploratory options. Supported destinations are listed on the Destinations page. [Content to be confirmed]",
+    a: "A range of destinations across Africa, Europe, Asia, the Middle East, North America and Oceania are included as exploratory options. Supported destinations are listed on the Destinations page.",
   },
   {
     q: "What does a conversation with an adviser involve?",
@@ -211,7 +235,7 @@ export const studyAbroadFaqs = [
   },
   {
     q: "What if my grades are not strong?",
-    a: "Pathway, foundation and vocational options exist in several destinations. Suitability depends on your specific profile. [Content to be confirmed]",
+    a: "Pathway, foundation and vocational options exist in several destinations. Suitability depends on your specific profile.",
   },
 ];
 
@@ -219,7 +243,12 @@ export const studyAbroadFaqs = [
 export { contactInfo, socialLinks, company } from "./company";
 
 /** Audience programme content lives in programmes.ts. */
-export { parentTopics, parentQuestions, schoolProgrammeFormats, schoolOutcomes } from "./programmes";
+export {
+  parentTopics,
+  parentQuestions,
+  schoolProgrammeFormats,
+  schoolOutcomes,
+} from "./programmes";
 
 /** Student stories live in testimonials.ts. */
 export { testimonials as successStories, hasUnverifiedTestimonials } from "./testimonials";

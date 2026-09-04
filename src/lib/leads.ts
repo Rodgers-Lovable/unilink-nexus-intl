@@ -36,7 +36,7 @@ const STORAGE_KEY = "unilink.leads";
 
 /**
  * Mock persistence layer. Replace `saveLead` with a server function backed by
- * Lovable Cloud when the CRM is introduced — the call site stays identical.
+ * a real backend/CRM when one is introduced — the call site stays identical.
  */
 export async function saveLead(lead: Omit<Lead, "id" | "createdAt" | "status">): Promise<Lead> {
   const record: Lead = {

@@ -1,3 +1,5 @@
+"use client";
+
 import { useId, useState, type ReactNode } from "react";
 import { AlertCircle, Check, ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -122,10 +124,7 @@ export function TextAreaField(props: BaseProps & { rows?: number }) {
 }
 
 /** Native select — reliable, accessible and comfortable on mobile. */
-export function SelectField({
-  options,
-  ...props
-}: BaseProps & { options: readonly string[] }) {
+export function SelectField({ options, ...props }: BaseProps & { options: readonly string[] }) {
   const id = useId();
   const { label, value, onChange, required, hint, error, placeholder = "Select an option" } = props;
   return (
@@ -151,13 +150,18 @@ export function SelectField({
 }
 
 /** Searchable single-select, used for country fields. */
-export function ComboboxField({
-  options,
-  ...props
-}: BaseProps & { options: readonly string[] }) {
+export function ComboboxField({ options, ...props }: BaseProps & { options: readonly string[] }) {
   const id = useId();
   const [open, setOpen] = useState(false);
-  const { label, value, onChange, required, hint, error, placeholder = "Search and select" } = props;
+  const {
+    label,
+    value,
+    onChange,
+    required,
+    hint,
+    error,
+    placeholder = "Search and select",
+  } = props;
 
   return (
     <FieldShell id={id} label={label} required={required} hint={hint} error={error}>
@@ -168,6 +172,7 @@ export function ComboboxField({
             type="button"
             role="combobox"
             aria-expanded={open}
+            aria-controls={`${id}-listbox`}
             aria-invalid={error ? true : undefined}
             aria-describedby={cn(hint && `${id}-hint`, error && `${id}-error`) || undefined}
             className="flex h-12 w-full items-center justify-between rounded-md border border-input bg-background px-3 text-left text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
@@ -179,7 +184,7 @@ export function ComboboxField({
         <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
           <Command>
             <CommandInput placeholder={`Search ${label.toLowerCase()}…`} />
-            <CommandList>
+            <CommandList id={`${id}-listbox`}>
               <CommandEmpty>No match found.</CommandEmpty>
               <CommandGroup>
                 {options.map((option) => (
@@ -313,13 +318,25 @@ export function StepNav({
   return (
     <div className="flex flex-col-reverse gap-3 border-t border-border pt-6 sm:flex-row sm:justify-between">
       {onBack ? (
-        <Button type="button" variant="outline" size="lg" className="w-full sm:w-auto" onClick={onBack}>
+        <Button
+          type="button"
+          variant="outline"
+          size="lg"
+          className="w-full sm:w-auto"
+          onClick={onBack}
+        >
           {backLabel}
         </Button>
       ) : (
         <span />
       )}
-      <Button type="submit" variant="cta" size="lg" className="w-full sm:w-auto" disabled={submitting}>
+      <Button
+        type="submit"
+        variant="cta"
+        size="lg"
+        className="w-full sm:w-auto"
+        disabled={submitting}
+      >
         {submitting ? "Submitting…" : nextLabel}
       </Button>
     </div>

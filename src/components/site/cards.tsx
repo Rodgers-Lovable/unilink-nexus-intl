@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import Image from "next/image";
 import {
   Compass,
   Route as RouteIcon,
@@ -20,7 +20,7 @@ import auImg from "@/assets/dest-australia.jpg";
 import usImg from "@/assets/dest-united-states.jpg";
 import deImg from "@/assets/dest-germany.jpg";
 
-export const destinationImages: Record<string, string> = {
+export const destinationImages: Record<string, typeof ukImg> = {
   "united-kingdom": ukImg,
   canada: caImg,
   australia: auImg,
@@ -38,18 +38,21 @@ export const serviceIcons: Record<Service["icon"], LucideIcon> = {
   school: School,
 };
 
-export function DestinationCard({ destination, detailed = false }: { destination: Destination; detailed?: boolean }) {
+export function DestinationCard({
+  destination,
+  detailed = false,
+}: {
+  destination: Destination;
+  detailed?: boolean;
+}) {
   const img = destinationImages[destination.slug];
   return (
     <article className="group overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift">
-      <div className="aspect-[3/2] overflow-hidden bg-surface">
+      <div className="aspect-3/2 overflow-hidden bg-surface">
         {img && (
-          <img
+          <Image
             src={img}
             alt={`${destination.name} study environment`}
-            loading="lazy"
-            width={900}
-            height={600}
             className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         )}
@@ -71,13 +74,9 @@ export function DestinationCard({ destination, detailed = false }: { destination
           </dl>
         )}
         <div className="pt-2">
-          <Link
-            to="/destinations/$slug"
-            params={{ slug: destination.slug }}
-            className="text-sm font-semibold text-blue hover:underline"
-          >
-            {detailed ? "View Destination" : "Explore Destination"} →
-          </Link>
+          <TextLink to={`/destinations/${destination.slug}`}>
+            {detailed ? "View Destination" : "Explore Destination"}
+          </TextLink>
         </div>
       </div>
     </article>
@@ -87,20 +86,14 @@ export function DestinationCard({ destination, detailed = false }: { destination
 export function ServiceCard({ service }: { service: Service }) {
   const Icon = serviceIcons[service.icon];
   return (
-    <Card>
+    <Card interactive>
       <span className="mb-4 inline-flex size-11 items-center justify-center rounded-lg bg-blue/8 text-blue">
         <Icon className="size-5" aria-hidden="true" />
       </span>
       <h3 className="text-base font-bold">{service.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.short}</p>
       <div className="mt-4">
-        <Link
-          to="/services/$slug"
-          params={{ slug: service.slug }}
-          className="text-sm font-semibold text-blue hover:underline"
-        >
-          Learn More →
-        </Link>
+        <TextLink to={`/services/${service.slug}`}>Learn More</TextLink>
       </div>
     </Card>
   );
@@ -108,19 +101,15 @@ export function ServiceCard({ service }: { service: Service }) {
 
 export function ArticleCard({ resource }: { resource: Resource }) {
   return (
-    <Card className="flex h-full flex-col">
+    <Card interactive className="flex h-full flex-col">
       <p className="eyebrow">{resource.category}</p>
       <h3 className="mt-3 text-base font-bold">{resource.title}</h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{resource.excerpt}</p>
+      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+        {resource.excerpt}
+      </p>
       <p className="mt-4 text-xs text-muted-foreground">{resource.readTime}</p>
       <div className="mt-3">
-        <Link
-          to="/resources/$slug"
-          params={{ slug: resource.slug }}
-          className="text-sm font-semibold text-blue hover:underline"
-        >
-          Read Article →
-        </Link>
+        <TextLink to={`/resources/${resource.slug}`}>Read Article</TextLink>
       </div>
     </Card>
   );
@@ -132,7 +121,7 @@ export function StoryCard({
   story: { slug: string; student: string; destination: string; programme: string; excerpt: string };
 }) {
   return (
-    <Card className="flex h-full flex-col">
+    <Card interactive className="flex h-full flex-col">
       <div className="mb-4 flex items-center gap-3">
         <div
           className="flex size-12 items-center justify-center rounded-full bg-blue-soft/50 text-xs font-bold text-navy"
@@ -164,7 +153,7 @@ export function TeamCard({
   return (
     <Card>
       <div
-        className="mb-4 flex aspect-[4/3] items-center justify-center rounded-lg bg-surface text-xs font-semibold text-muted-foreground"
+        className="mb-4 flex aspect-4/3 items-center justify-center rounded-lg bg-surface text-xs font-semibold text-muted-foreground"
         aria-hidden="true"
       >
         Photo placeholder
