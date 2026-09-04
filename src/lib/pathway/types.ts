@@ -51,6 +51,36 @@ export const countryOptions = [
   "Other",
 ] as const;
 
+/**
+ * Flag emoji for the real countries in `countryOptions` and
+ * `destinationOptions`. Catch-all entries ("Other", "Show me everything",
+ * region names like "Africa") are deliberately left out — `ChoiceCards`
+ * renders those options unchanged when no flag is found.
+ */
+export const countryFlags: Record<string, string> = {
+  Burundi: "🇧🇮",
+  Rwanda: "🇷🇼",
+  Uganda: "🇺🇬",
+  Kenya: "🇰🇪",
+  Tanzania: "🇹🇿",
+  Malaysia: "🇲🇾",
+  Malta: "🇲🇹",
+  Mauritius: "🇲🇺",
+  UAE: "🇦🇪",
+  "United Kingdom": "🇬🇧",
+  Canada: "🇨🇦",
+  "United States": "🇺🇸",
+  Australia: "🇦🇺",
+  Germany: "🇩🇪",
+  France: "🇫🇷",
+  Netherlands: "🇳🇱",
+  Ireland: "🇮🇪",
+  Türkiye: "🇹🇷",
+  India: "🇮🇳",
+  China: "🇨🇳",
+  "South Africa": "🇿🇦",
+};
+
 export const stageOptions = [
   "Lower secondary",
   "Upper secondary",
