@@ -5,6 +5,12 @@
  * placeholder. Filling a value in here updates the legal pages, the contact
  * page and the footer at once — do not hardcode these anywhere else.
  */
+export interface IAddress {
+  city: string;
+  country: string;
+  address: string;
+  phone: string;
+}
 
 export const company = {
   legalName: "UniLink Nexus International",
@@ -15,7 +21,7 @@ export const company = {
   email: "info@unilink-nexus.com",
   legalEmail: "info@unilink-nexus.com",
   privacyEmail: "info@unilink-nexus.com",
-  phone: "+25766518377, +254717425553",
+  phone: "+257 66 518 377, +254 717 425 553",
   whatsapp: "25766518377",
   address:
     "Burundi: Patrice Lumumba Ave. Opp KCB Siege, Nairobi: Westlands, Waiyaki Way. Dunhill Towers",
@@ -33,12 +39,20 @@ export const company = {
   disclaimerUpdated: "01/09/2026",
 } as const;
 
+export const developer = {
+  name: "Brian Mawira",
+  preferred_name: "Mawira",
+  whatsapp: "+254712413243",
+  tel: "+254712413243",
+  email: "brianmawira2@gmail.com",
+} as const;
+
 /** True when a field still holds a bracketed placeholder. */
 export function isPlaceholder(value: string): boolean {
   return value.trim().startsWith("[") && value.trim().endsWith("]");
 }
 
-/** Back-compatible contact shape used by the footer and contact page. */
+/** Back-compatible contact shape used by the consultation form's short summary. */
 export const contactInfo = {
   phone: company.phone,
   whatsapp: company.whatsapp,
@@ -46,6 +60,36 @@ export const contactInfo = {
   hours: company.hours,
   address: company.address,
 };
+
+export const offices: IAddress[] = [
+  {
+    city: "Bujumbura",
+    country: "Burundi",
+    address: "Patrice Lumumba Ave, Opp KCB Siege",
+    phone: "+257 66 518 377",
+  },
+  {
+    city: "Nairobi",
+    country: "Kenya",
+    address: "Westlands, Waiyaki Way, Dunhill Towers",
+    phone: "+254 717 425 553",
+  },
+] as const;
+
+/** Same opening hours across offices, split into rows instead of one dense sentence. */
+export const officeHours = [
+  { days: "Mon – Fri", time: "9:00 AM – 6:00 PM" },
+  { days: "Sat – Sun", time: "11:00 AM – 4:00 PM" },
+] as const;
+
+export function telHref(phone: string): string {
+  return `tel:${phone.replace(/[^+\d]/g, "")}`;
+}
+
+/** `wa.me`-safe version of a formatted phone number (digits only, no leading +). */
+export function whatsappHref(phone: string): string {
+  return `https://wa.me/${phone.replace(/[^\d]/g, "")}`;
+}
 
 export const socialLinks = [
   {
