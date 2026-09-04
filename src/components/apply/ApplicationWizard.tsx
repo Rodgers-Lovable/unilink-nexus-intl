@@ -2,8 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { CheckCircle2, Pencil } from "lucide-react";
+import { Check, CheckCircle2, Copy, Pencil } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { countries } from "@/data/countries";
@@ -44,6 +45,7 @@ import { formatEmailBody } from "@/lib/email/format";
 import { sendEmail } from "@/lib/email/resend";
 import { trackEvent } from "@/lib/analytics/umami";
 import { cn } from "@/lib/utils";
+import { Placeholder } from "../site/primitives";
 
 function ProgressHeader({ current }: { current: number }) {
   const total = applicationSteps.length;
@@ -88,6 +90,38 @@ function ProgressHeader({ current }: { current: number }) {
         ))}
       </ol>
     </div>
+  );
+}
+
+function ReferenceCode({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      toast.success("Reference copied");
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("Couldn't copy reference");
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      className="mt-2 inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 font-mono text-lg font-extrabold tracking-wide text-navy transition-colors hover:border-blue/40 hover:bg-blue/5"
+      title="Copy reference number"
+    >
+      <span>{value}</span>
+      {copied ? (
+        <Check className="size-4 text-green" aria-hidden="true" />
+      ) : (
+        <Copy className="size-4 text-muted-foreground" aria-hidden="true" />
+      )}
+      <span className="sr-only">{copied ? "Copied" : "Copy reference number"}</span>
+    </button>
   );
 }
 
@@ -147,9 +181,13 @@ export function ApplicationWizard() {
     if (saved) next = mergeDraft(next, saved);
     if (handoff) {
       next = mergeDraft(next, handoff);
+      clearApplicationHandoff();
+      /* eslint-disable react-hooks/set-state-in-effect -- one-time hydration from a
+         localStorage-backed handoff on mount; must stay in an effect to avoid an
+         SSR/hydration mismatch. */
       setSource("pathway_advisor");
       setPrefilled(true);
-      clearApplicationHandoff();
+      /* eslint-enable react-hooks/set-state-in-effect */
     }
     setDraft(next);
   }, []);
@@ -177,6 +215,7 @@ export function ApplicationWizard() {
         startedTracked.current = true;
         trackEvent("application-started", { source });
       }
+
       trackEvent("application-step-completed", { step: stepIndex + 1 });
       goTo(stepIndex + 1);
       return;
@@ -184,6 +223,7 @@ export function ApplicationWizard() {
 
     setSubmitting(true);
     setDeliveryFailed(false);
+
     try {
       const record = await submitApplication(draft, source);
 
@@ -224,6 +264,7 @@ export function ApplicationWizard() {
         delivery: delivery.status,
         targetLevel: record.studyPlan.targetLevel,
       });
+
       setSubmitted(record);
       requestAnimationFrame(() => {
         headingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -270,9 +311,7 @@ export function ApplicationWizard() {
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
               Your reference number
             </p>
-            <p className="mt-2 text-lg font-extrabold tracking-wide text-navy">
-              {submitted.reference}
-            </p>
+            <ReferenceCode value={submitted.reference} />
             <p className="mt-2 text-xs text-muted-foreground">
               Keep this reference for any follow-up.
             </p>
@@ -296,7 +335,7 @@ export function ApplicationWizard() {
           </div>
         </div>
         <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground">
-          {APPLICATION_DISCLAIMER}
+          <Placeholder>{APPLICATION_DISCLAIMER}</Placeholder>
         </p>
       </div>
     );
@@ -596,7 +635,9 @@ export function ApplicationWizard() {
         />
       </form>
 
-      <p className="mt-6 text-xs leading-relaxed text-muted-foreground">{APPLICATION_DISCLAIMER}</p>
+      <div className="mt-10 max-w-4xl mx-auto">
+        <Placeholder>{APPLICATION_DISCLAIMER}</Placeholder>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Clock, Compass, Sparkles } from "lucide-react";
 import { Breadcrumbs } from "@/components/site/primitives";
 import { PathwayWizard } from "@/components/pathway/PathwayWizard";
-import { PATHWAY_DISCLAIMER } from "@/lib/pathway/pathwayService";
 
 export const metadata: Metadata = {
   title: "UniLink Pathway Advisor: Discover Your Future",
@@ -60,9 +59,6 @@ export default function PathwayAdvisorPage() {
       <section className="section-y">
         <div className="container-page">
           <PathwayWizard />
-          <p className="mx-auto mt-12 max-w-3xl rounded-lg border border-dashed border-border bg-surface p-4 text-xs leading-relaxed text-muted-foreground">
-            {PATHWAY_DISCLAIMER}
-          </p>
         </div>
       </section>
     </>

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion";
 import { heroImages, type HeroImageKey } from "@/components/site/hero-images";
@@ -16,19 +16,37 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  /** "inverted" is for headings sitting directly on a dark photo background. */
+  tone = "default",
   className,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   align?: "left" | "center";
+  tone?: "default" | "inverted";
   className?: string;
 }) {
+  const inverted = tone === "inverted";
   return (
     <Reveal className={cn("max-w-2xl", align === "center" && "mx-auto text-center", className)}>
-      {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
-      <h2 className="text-h2">{title}</h2>
-      {description && <p className="lead mt-4">{description}</p>}
+      {eyebrow && (
+        <p
+          className={
+            inverted
+              ? "mb-3 text-[0.8125rem] font-bold tracking-[0.12em] text-white/80 uppercase"
+              : "eyebrow mb-3"
+          }
+        >
+          {eyebrow}
+        </p>
+      )}
+      <h2 className={cn("text-h2", inverted && "text-white")}>{title}</h2>
+      {description && (
+        <p className={inverted ? "mt-4 text-[1.0625rem] leading-[1.7] text-white/80" : "lead mt-4"}>
+          {description}
+        </p>
+      )}
     </Reveal>
   );
 }
@@ -68,7 +86,7 @@ export function PageHero({
               <Image
                 src={heroImage.src}
                 alt={heroImage.alt}
-                className="aspect-[6/5] w-full object-cover"
+                className="aspect-6/5 w-full object-cover"
                 priority
               />
             </div>
@@ -142,13 +160,15 @@ export function TextLink({ to, children }: { to: string; children: ReactNode }) 
   return (
     <Link
       href={to}
-      className="group link-underline inline-flex items-center gap-1.5 text-sm font-semibold text-blue"
+      className="group link-underline inline-flex items-center gap-1 text-sm font-semibold text-blue"
     >
       {children}
-      <ArrowRight
-        className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"
+      <span
+        className="inline-block transition-transform duration-200 group-hover:translate-x-0.5"
         aria-hidden="true"
-      />
+      >
+        →
+      </span>
     </Link>
   );
 }

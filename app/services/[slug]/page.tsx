@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Breadcrumbs, CTABanner, CheckList, PageHero } from "@/components/site/primitives";
+import {
+  Breadcrumbs,
+  CTABanner,
+  CheckList,
+  PageHero,
+  TextLink,
+} from "@/components/site/primitives";
 import { ServiceCard, serviceIcons } from "@/components/site/cards";
 import { getService, services } from "@/data/services";
 
@@ -84,12 +90,7 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
               counselling and application support.
             </p>
             <p className="mt-5">
-              <Link
-                href="/study-abroad/how-it-works"
-                className="text-sm font-semibold text-blue hover:underline"
-              >
-                See how the process works →
-              </Link>
+              <TextLink to="/study-abroad/how-it-works">See how the process works</TextLink>
             </p>
           </div>
         </div>

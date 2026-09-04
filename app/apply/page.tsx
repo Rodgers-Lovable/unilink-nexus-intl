@@ -46,7 +46,7 @@ export default function ApplyPage() {
         description="Tell us where you are academically and where you'd like to go. A UniLink adviser will review your profile and guide you through the steps that follow."
       />
 
-      <section className="section-padding bg-surface">
+      <section className="section-padding py-4 border-b shadow-xl">
         <div className="container-page">
           <ul className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-3">
             {assurances.map((item) => (
@@ -63,7 +63,7 @@ export default function ApplyPage() {
         </div>
       </section>
 
-      <section className="section-padding">
+      <section className="section-padding my-16">
         <div className="container-page">
           <ApplicationWizard />
         </div>

@@ -72,6 +72,40 @@ export const testimonials: Testimonial[] = [
       "I'd written off an entire country over an assumption I never checked. Finding the English-taught programmes changed where I even looked.",
     verified: false,
   },
+  {
+    slug: "grace-n-australia",
+    student: "Grace N.",
+    destination: "Australia",
+    programme: "BSc Nursing",
+    level: "Bachelor's",
+    excerpt:
+      "Wanted nursing in Australia but the distance and cost made it feel out of reach next to closer options.",
+    challenge:
+      "Grace's grades didn't quite meet direct entry for the nursing programmes she wanted, and she assumed that ruled Australia out entirely rather than just closing one route into it.",
+    help: "We found a foundation year that bridged the entry gap and mapped the full cost, from foundation year through to graduation, against her other shortlisted countries so the real trade-off was visible before she committed.",
+    outcome:
+      "Grace was accepted onto a foundation year with a conditional offer into the nursing degree the following year.",
+    quote:
+      "I thought my grades had closed the door. Turned out there was a second door I didn't know to look for.",
+    verified: false,
+  },
+  {
+    slug: "peter-k-united-states",
+    student: "Peter K.",
+    destination: "United States",
+    programme: "MSc Computer Science",
+    level: "Master's",
+    excerpt:
+      "Ten different application deadlines across ten universities, no clear order to tackle them in.",
+    challenge:
+      "Peter was applying to US graduate programmes for the first time and found a system with more moving parts than anywhere else he'd researched: separate test scores, recommendation letters, financial documentation and deadlines that didn't line up.",
+    help: "We broke the whole process into a single timeline ordered by deadline, not by preference, so nothing on the list got missed while he focused on the applications that mattered most.",
+    outcome:
+      "Peter was accepted into an MSc Computer Science programme with a partial scholarship covering part of the first year.",
+    quote:
+      "Every school had its own version of the process. Having one timeline instead of ten meant I stopped missing things.",
+    verified: false,
+  },
 ];
 
 /** True while any story on the site is still sample content. */

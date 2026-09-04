@@ -6,7 +6,8 @@ import { SectionHeading, CTABanner, TextLink } from "@/components/site/primitive
 import { Card } from "@/components/site/Card";
 import { TrackedLink } from "@/components/site/TrackedLink";
 import { JourneyStages } from "@/components/site/JourneyStages";
-import { DestinationCard, ServiceCard, ArticleCard, StoryCard } from "@/components/site/cards";
+import { DestinationCard, ServiceCard, ArticleCard } from "@/components/site/cards";
+import { StoryCarousel } from "@/components/site/StoryCarousel";
 import { destinations } from "@/data/destinations";
 import { services } from "@/data/services";
 import { resources } from "@/data/resources";
@@ -19,6 +20,8 @@ import {
   ParallaxImage,
 } from "@/components/motion";
 import heroImg from "@/assets/hero-network.jpg";
+import whyUnilinkBg from "@/assets/hero-about.jpg";
+import resourcesBg from "@/assets/hero-resources.jpg";
 
 const audienceIcons: Record<string, LucideIcon> = {
   graduation: GraduationCap,
@@ -217,9 +220,17 @@ export default function Home() {
       </section>
 
       {/* Why UniLink */}
-      <section className="section-y bg-surface">
-        <div className="container-page">
-          <SectionHeading eyebrow="Why UniLink" title="Guidance built around you" />
+      <section className="section-y relative overflow-hidden bg-navy">
+        <ParallaxImage
+          src={whyUnilinkBg.src}
+          alt=""
+          containerClassName="absolute inset-0"
+          className="absolute -top-[15%] left-0 h-[130%] w-full object-cover"
+          speed={0.12}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy/90 via-navy/80 to-navy/90" />
+        <div className="container-page relative">
+          <SectionHeading eyebrow="Why UniLink" title="Guidance built around you" tone="inverted" />
           <StaggerContainer className="mt-10 grid gap-6 sm:grid-cols-2">
             {whyUnilink.map((item) => (
               <StaggerItem key={item.title}>
@@ -243,23 +254,28 @@ export default function Home() {
             title="Student stories"
             description="Sample stories shown as editable placeholders until verified student stories are supplied."
           />
-          <StaggerContainer className="mt-10 grid gap-6 md:grid-cols-3">
-            {successStories.map((story) => (
-              <StaggerItem key={story.slug}>
-                <StoryCard story={story} />
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+          <div className="mt-10">
+            <StoryCarousel stories={successStories} />
+          </div>
         </div>
       </section>
 
       {/* Resources */}
-      <section className="section-y bg-surface">
-        <div className="container-page">
+      <section className="section-y relative overflow-hidden bg-navy">
+        <ParallaxImage
+          src={resourcesBg.src}
+          alt=""
+          containerClassName="absolute inset-0"
+          className="absolute -top-[15%] left-0 h-[130%] w-full object-cover"
+          speed={0.12}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy/90 via-navy/80 to-navy/90" />
+        <div className="container-page relative">
           <SectionHeading
             eyebrow="Resources"
             title="Plan with better information"
             description="Practical guides on careers, subjects, applications and international study."
+            tone="inverted"
           />
           <StaggerContainer className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {resources.slice(0, 4).map((r) => (

@@ -19,6 +19,7 @@ export function ConsultationForm() {
 
   const send = async (data: FormData) => {
     setStatus("sending");
+
     const values = {
       fullName: String(data.get("fullName") ?? ""),
       email: String(data.get("email") ?? ""),
@@ -60,6 +61,7 @@ export function ConsultationForm() {
     setStatus(
       result.status === "error" ? "error" : result.status === "skipped" ? "skipped" : "sent",
     );
+
     trackEvent(
       result.status === "error"
         ? "consultation-failed"
@@ -79,7 +81,7 @@ export function ConsultationForm() {
 
   return (
     <section className="section-y bg-surface min-h-screen">
-      <div className="container-page grid gap-10 lg:grid-cols-2 lg:items-start">
+      <div className="container-page grid gap-14 lg:grid-cols-2 lg:items-start">
         <div>
           <p className="eyebrow">Free consultation</p>
           <h1 className="text-h1 mt-3">Book your consultation</h1>
