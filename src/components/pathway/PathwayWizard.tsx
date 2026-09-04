@@ -13,6 +13,7 @@ import { trackEvent } from "@/lib/analytics/umami";
 import {
   budgetOptions,
   countryOptions,
+  countryFlags,
   curriculumOptions,
   destinationOptions,
   emptyPathwayProfile,
@@ -198,6 +199,7 @@ export function PathwayWizard() {
                   value={profile.country}
                   onSelect={(v) => set("country", v)}
                   columns={2}
+                  flags={countryFlags}
                 />
               </QuestionBlock>
 
@@ -257,6 +259,7 @@ export function PathwayWizard() {
               onSelect={toggle("preferredDestinations")}
               multiple
               columns={3}
+              flags={countryFlags}
             />
             {errors["preferredDestinations"] && (
               <p role="alert" className="mt-3 text-xs font-medium text-destructive">

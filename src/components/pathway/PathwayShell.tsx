@@ -64,6 +64,7 @@ export function ChoiceCards({
   onSelect,
   multiple = false,
   columns = 2,
+  flags,
 }: {
   legend: string;
   options: readonly string[];
@@ -71,6 +72,8 @@ export function ChoiceCards({
   onSelect: (option: string) => void;
   multiple?: boolean;
   columns?: 1 | 2 | 3;
+  /** Option label -> flag emoji, for country/destination lists. Options without an entry render unchanged. */
+  flags?: Record<string, string>;
 }) {
   const isSelected = (opt: string) => (Array.isArray(value) ? value.includes(opt) : value === opt);
 
@@ -100,7 +103,14 @@ export function ChoiceCards({
                   : "border-border bg-card text-foreground hover:-translate-y-0.5 hover:border-blue/40 hover:shadow-card",
               )}
             >
-              <span>{opt}</span>
+              <span className="flex items-center gap-2">
+                {flags?.[opt] && (
+                  <span aria-hidden="true" className="text-base leading-none">
+                    {flags[opt]}
+                  </span>
+                )}
+                {opt}
+              </span>
               <span
                 aria-hidden="true"
                 className={cn(
