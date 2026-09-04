@@ -9,8 +9,7 @@ import { CheckList } from "@/components/site/primitives";
 import { Card } from "@/components/site/Card";
 import { destinations } from "@/data/destinations";
 import { saveLead } from "@/lib/leads";
-import { formatEmailBody } from "@/lib/email/format";
-import { sendEmail } from "@/lib/email/resend";
+import { sendEmail } from "@/lib/email/sendgrid";
 import { company, contactInfo, isPlaceholder } from "@/data/company";
 import { trackEvent } from "@/lib/analytics/umami";
 
@@ -45,9 +44,7 @@ export function ConsultationForm() {
       form_name: "Consultation request",
       from_name: values.fullName,
       reply_to: values.email,
-      phone: values.phone,
-      message: values.message || "No additional notes",
-      summary: formatEmailBody({
+      details: {
         "Full name": values.fullName,
         Email: values.email,
         "Phone / WhatsApp": values.phone,
@@ -55,7 +52,7 @@ export function ConsultationForm() {
         "Preferred destination": values.destination,
         Notes: values.message,
         Submitted: new Date().toLocaleString(),
-      }),
+      },
     });
 
     setStatus(

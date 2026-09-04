@@ -41,8 +41,7 @@ import {
   TextAreaField,
   TextField,
 } from "./fields";
-import { formatEmailBody } from "@/lib/email/format";
-import { sendEmail } from "@/lib/email/resend";
+import { sendEmail } from "@/lib/email/sendgrid";
 import { trackEvent } from "@/lib/analytics/umami";
 import { cn } from "@/lib/utils";
 import { Placeholder } from "../site/primitives";
@@ -231,10 +230,7 @@ export function ApplicationWizard() {
         form_name: "Student application profile",
         from_name: record.personal.fullName,
         reply_to: record.personal.email,
-        phone: record.personal.phone,
-        reference: record.reference,
-        message: record.additionalInformation || "No additional information",
-        summary: formatEmailBody({
+        details: {
           Reference: record.reference,
           Source: record.source,
           "Full name": record.personal.fullName,
@@ -254,7 +250,7 @@ export function ApplicationWizard() {
           "Additional information": record.additionalInformation,
           "Consent given": record.consent ? "Yes" : "No",
           Submitted: new Date(record.createdAt).toLocaleString(),
-        }),
+        },
       });
 
       if (delivery.status === "error") setDeliveryFailed(true);
