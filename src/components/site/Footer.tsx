@@ -115,36 +115,43 @@ export function Footer() {
               </a>
             </li>
           </ul>
+        </div>
 
-          <div className="mt-5 space-y-1 border-t border-white/10 pt-5 text-xs text-white/60">
+        <div>
+          <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-white">Office Hours</h2>
+          <div className="mt-4 space-y-3 text-sm text-white/70">
             {officeHours.map((row) => (
-              <div key={row.days} className="flex justify-between gap-4">
+              <div key={row.days} className="flex items-center justify-between gap-4">
                 <span>{row.days}</span>
-                <span>{row.time}</span>
+                <span className="font-medium text-white">{row.time}</span>
               </div>
             ))}
           </div>
         </div>
-
-        <nav aria-label="Legal">
-          <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-white">Legal</h2>
-          <ul className="mt-4 space-y-3 text-sm">
-            {legalLinks.map((l) => (
-              <li key={l.page}>
-                <Link href={`/legal/${l.page}`} className="transition-colors hover:text-white">
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
 
       <div className="border-t border-white/10 tracking-wide text-white/50">
-        <div className="container-page flex flex-col gap-2 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-page flex flex-col gap-4 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {company.legalName}. All rights reserved.
           </p>
+
+          <nav aria-label="Legal" className="order-last sm:order-0">
+            <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              {legalLinks.map((l, i) => (
+                <li key={l.page} className="flex items-center gap-4">
+                  <Link href={`/legal/${l.page}`} className="transition-colors hover:text-white">
+                    {l.label}
+                  </Link>
+                  {i < legalLinks.length - 1 && (
+                    <span aria-hidden="true" className="text-white/30">
+                      ·
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           <p>
             Developed &amp; Maintained by{" "}
