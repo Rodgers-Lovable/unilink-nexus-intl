@@ -181,9 +181,13 @@ export function ApplicationWizard() {
     if (saved) next = mergeDraft(next, saved);
     if (handoff) {
       next = mergeDraft(next, handoff);
+      clearApplicationHandoff();
+      /* eslint-disable react-hooks/set-state-in-effect -- one-time hydration from a
+         localStorage-backed handoff on mount; must stay in an effect to avoid an
+         SSR/hydration mismatch. */
       setSource("pathway_advisor");
       setPrefilled(true);
-      clearApplicationHandoff();
+      /* eslint-enable react-hooks/set-state-in-effect */
     }
     setDraft(next);
   }, []);
