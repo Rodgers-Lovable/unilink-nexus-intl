@@ -119,10 +119,10 @@ export default function CareerSubjectGuidancePage() {
               </Card>
             ))}
           </div>
-          <div className="mt-10 max-w-2xl">
+          <div className="mt-10 max-w-4xl mx-auto text-center">
             <Placeholder>
               Subject-to-degree relationships vary between curricula and institutions. Always verify
-              entry requirements with the institution. [Content to be confirmed]
+              entry requirements with the institution.
             </Placeholder>
           </div>
         </div>

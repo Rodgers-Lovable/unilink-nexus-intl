@@ -103,7 +103,7 @@ export function PathwayResults({
 
   return (
     <div className="mx-auto max-w-4xl">
-      <div className="rounded-2xl border border-border bg-gradient-to-br from-surface to-background p-6 shadow-card sm:p-10">
+      <div className="rounded-2xl border border-border bg-linear-to-br from-surface to-background p-6 shadow-card sm:p-10">
         <p className="eyebrow">Your UniLink pathway</p>
         <h2 className="text-h2 mt-3">{result.headline}</h2>
         <p className="lead mt-4">{result.narrative}</p>

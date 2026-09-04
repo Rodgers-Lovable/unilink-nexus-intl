@@ -71,15 +71,19 @@ export function PathwayWizard() {
 
   const next = async () => {
     if (!validate()) return;
+
     if (!startedTracked.current) {
       startedTracked.current = true;
       trackEvent("pathway-advisor-started");
     }
+
     if (step === LAST_STEP - 1) {
       setLoading(true);
+
       const generated = await pathwayService.generatePathway(profile);
       setResult(generated);
       setLoading(false);
+
       trackEvent("pathway-advisor-completed", {
         country: profile.country,
         level: profile.level,
@@ -87,13 +91,14 @@ export function PathwayWizard() {
         destinations: generated.destinations.map((d) => d.name).join(", "),
       });
     }
+
     setStep((s) => Math.min(s + 1, LAST_STEP));
-    scrollUp();
+    // scrollUp();
   };
 
   const back = () => {
     setStep((s) => Math.max(s - 1, 0));
-    scrollUp();
+    // scrollUp();
   };
 
   const restart = () => {
@@ -260,7 +265,7 @@ export function PathwayWizard() {
             )}
             <p className="mt-5 rounded-lg border border-dashed border-border bg-surface p-4 text-xs leading-relaxed text-muted-foreground">
               These are exploratory destination options. UniLink does not claim to represent
-              institutions in these destinations. [Content to be confirmed]
+              institutions in these destinations.
             </p>
           </motion.div>
         )}
