@@ -1,9 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { Facebook, Instagram, Mail, MessageCircle, Phone } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Logo } from "./Logo";
-import { contactInfo, socialLinks, company } from "@/data/company";
+import {
+  contactInfo,
+  socialLinks,
+  company,
+  offices,
+  officeHours,
+  telHref,
+  whatsappHref,
+} from "@/data/company";
 import { legalLinks } from "@/data/legal";
 import { trackEvent } from "@/lib/analytics/umami";
 
@@ -17,7 +25,7 @@ const quickLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-navy text-white/80">
+    <footer className="bg-navy text-white/80 border-t border-white/10">
       <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
           <Logo variant="light" size="h-30" />
@@ -64,21 +72,57 @@ export function Footer() {
 
         <div>
           <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-white">Contact</h2>
-          <ul className="mt-4 space-y-3 text-sm">
-            <li className="flex items-start gap-2">
-              <Phone className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-              {contactInfo.phone}
-            </li>
-            <li className="flex items-start gap-2">
-              <MessageCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-              {contactInfo.whatsapp}
-            </li>
-            <li className="flex items-start gap-2">
-              <Mail className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-              {contactInfo.email}
-            </li>
-            <li className="text-white/60">{contactInfo.hours}</li>
+
+          <ul className="mt-4 space-y-4 text-sm">
+            {offices.map((office) => (
+              <li key={office.city}>
+                <p className="flex items-start gap-2 font-semibold text-white">
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-white/50" aria-hidden="true" />
+                  {office.city}, {office.country}
+                </p>
+                <p className="mt-1 pl-6 text-white/70">{office.address}</p>
+                <a
+                  href={telHref(office.phone)}
+                  className="mt-1 flex items-center gap-2 pl-6 transition-colors hover:text-white"
+                >
+                  <Phone className="size-3.5 shrink-0" aria-hidden="true" />
+                  {office.phone}
+                </a>
+              </li>
+            ))}
           </ul>
+
+          <ul className="mt-5 space-y-2 border-t border-white/10 pt-5 text-sm">
+            <li>
+              <a
+                href={whatsappHref(contactInfo.whatsapp)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 transition-colors hover:text-white"
+              >
+                <MessageCircle className="size-4 shrink-0" aria-hidden="true" />
+                WhatsApp us
+              </a>
+            </li>
+            <li>
+              <a
+                href={`mailto:${contactInfo.email}`}
+                className="flex items-center gap-2 transition-colors hover:text-white"
+              >
+                <Mail className="size-4 shrink-0" aria-hidden="true" />
+                {contactInfo.email}
+              </a>
+            </li>
+          </ul>
+
+          <div className="mt-5 space-y-1 border-t border-white/10 pt-5 text-xs text-white/60">
+            {officeHours.map((row) => (
+              <div key={row.days} className="flex justify-between gap-4">
+                <span>{row.days}</span>
+                <span>{row.time}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         <nav aria-label="Legal">
@@ -95,12 +139,18 @@ export function Footer() {
         </nav>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/10 tracking-wide">
         <div className="container-page flex flex-col gap-2 py-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {company.legalName}. All rights reserved.
           </p>
-          <p>Guidance only. Requirements vary by country, institution and programme.</p>
+
+          <p className="text-muted-foreground">
+            Developed and maintained by{" "}
+            <a href="mailto:brianmawira2@gmail.com" className="text-primary-foreground underline">
+              Mawira
+            </a>
+          </p>
         </div>
       </div>
     </footer>

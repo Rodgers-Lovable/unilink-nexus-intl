@@ -2,13 +2,21 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { PageHero } from "@/components/site/primitives";
 import { Card } from "@/components/site/Card";
-import { contactInfo, company, isPlaceholder } from "@/data/company";
+import {
+  contactInfo,
+  company,
+  isPlaceholder,
+  offices,
+  officeHours,
+  telHref,
+  whatsappHref,
+} from "@/data/company";
 import { saveLead } from "@/lib/leads";
 import { formatEmailBody } from "@/lib/email/format";
 import { sendEmail } from "@/lib/email/resend";
@@ -80,24 +88,71 @@ export function ContactForm() {
         <div className="container-page grid gap-10 lg:grid-cols-2">
           <div className="space-y-6">
             <Card>
-              <ul className="space-y-4 text-sm">
-                <li className="flex items-start gap-3">
-                  <Phone className="mt-0.5 size-4 shrink-0 text-blue" aria-hidden="true" />
-                  {showDetail(contactInfo.phone)}
-                </li>
-                <li className="flex items-start gap-3">
-                  <MessageCircle className="mt-0.5 size-4 shrink-0 text-blue" aria-hidden="true" />
-                  {showDetail(contactInfo.whatsapp)}
-                </li>
-                <li className="flex items-start gap-3">
-                  <Mail className="mt-0.5 size-4 shrink-0 text-blue" aria-hidden="true" />
-                  {showDetail(contactInfo.email)}
-                </li>
+              <ul className="space-y-5 text-sm">
+                {offices.map((office) => (
+                  <li key={office.city}>
+                    <p className="flex items-start gap-3 font-semibold text-navy">
+                      <MapPin className="mt-0.5 size-4 shrink-0 text-blue" aria-hidden="true" />
+                      {office.city}, {office.country}
+                    </p>
+                    <p className="mt-1 pl-7 text-muted-foreground">{office.address}</p>
+                    <a
+                      href={telHref(office.phone)}
+                      className="mt-1 flex items-center gap-3 pl-7 font-medium text-blue hover:underline"
+                    >
+                      <Phone className="size-3.5 shrink-0" aria-hidden="true" />
+                      {office.phone}
+                    </a>
+                  </li>
+                ))}
               </ul>
-              <p className="mt-4 text-sm text-muted-foreground">{showDetail(contactInfo.hours)}</p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {showDetail(contactInfo.address)}
-              </p>
+
+              <div className="mt-6 space-y-3 border-t border-border pt-5 text-sm">
+                {isPlaceholder(contactInfo.whatsapp) ? (
+                  <p className="flex items-center gap-3 text-muted-foreground">
+                    <MessageCircle className="size-4 shrink-0 text-blue" aria-hidden="true" />
+                    WhatsApp available on request
+                  </p>
+                ) : (
+                  <a
+                    href={whatsappHref(contactInfo.whatsapp)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 transition-colors hover:text-blue"
+                  >
+                    <MessageCircle className="size-4 shrink-0 text-blue" aria-hidden="true" />
+                    WhatsApp us
+                  </a>
+                )}
+                {isPlaceholder(contactInfo.email) ? (
+                  <p className="flex items-center gap-3 text-muted-foreground">
+                    <Mail className="size-4 shrink-0 text-blue" aria-hidden="true" />
+                    Available on request
+                  </p>
+                ) : (
+                  <a
+                    href={`mailto:${contactInfo.email}`}
+                    className="flex items-center gap-3 transition-colors hover:text-blue"
+                  >
+                    <Mail className="size-4 shrink-0 text-blue" aria-hidden="true" />
+                    {contactInfo.email}
+                  </a>
+                )}
+              </div>
+
+              <div className="mt-6 border-t border-border pt-5">
+                <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                  Office hours
+                </p>
+                <div className="mt-2 space-y-1 text-sm text-muted-foreground">
+                  {officeHours.map((row) => (
+                    <div key={row.days} className="flex justify-between gap-4">
+                      <span>{row.days}</span>
+                      <span>{row.time}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </Card>
             <p className="text-sm leading-relaxed text-muted-foreground">
               {company.legalName} provides education advisory guidance. We do not guarantee
