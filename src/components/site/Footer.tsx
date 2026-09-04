@@ -11,6 +11,7 @@ import {
   officeHours,
   telHref,
   whatsappHref,
+  developer,
 } from "@/data/company";
 import { legalLinks } from "@/data/legal";
 import { trackEvent } from "@/lib/analytics/umami";
@@ -139,16 +140,21 @@ export function Footer() {
         </nav>
       </div>
 
-      <div className="border-t border-white/10 tracking-wide">
-        <div className="container-page flex flex-col gap-2 py-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-t border-white/10 tracking-wide text-white/50">
+        <div className="container-page flex flex-col gap-2 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {company.legalName}. All rights reserved.
           </p>
 
-          <p className="text-muted-foreground">
-            Developed and maintained by{" "}
-            <a href="mailto:brianmawira2@gmail.com" className="text-primary-foreground underline">
-              Mawira
+          <p>
+            Developed &amp; Maintained by{" "}
+            <a
+              href={whatsappHref(developer.whatsapp)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-foreground hover:underline hover:ease-in-out underline-offset-2"
+            >
+              {developer.preferred_name}
             </a>
           </p>
         </div>

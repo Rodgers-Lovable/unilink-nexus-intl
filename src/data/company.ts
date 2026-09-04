@@ -39,6 +39,14 @@ export const company = {
   disclaimerUpdated: "01/09/2026",
 } as const;
 
+export const developer = {
+  name: "Brian Mawira",
+  preferred_name: "Mawira",
+  whatsapp: "+254712413243",
+  tel: "+254712413243",
+  email: "brianmawira2@gmail.com",
+} as const;
+
 /** True when a field still holds a bracketed placeholder. */
 export function isPlaceholder(value: string): boolean {
   return value.trim().startsWith("[") && value.trim().endsWith("]");
@@ -74,7 +82,6 @@ export const officeHours = [
   { days: "Sat – Sun", time: "11:00 AM – 4:00 PM" },
 ] as const;
 
-/** `tel:`-safe version of a formatted phone number. */
 export function telHref(phone: string): string {
   return `tel:${phone.replace(/[^+\d]/g, "")}`;
 }
