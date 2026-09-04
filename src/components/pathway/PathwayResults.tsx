@@ -9,8 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { QuestionBlock } from "./PathwayShell";
 import { leadFromPathway, saveLead, type ContactMethod } from "@/lib/leads";
-import { formatEmailBody } from "@/lib/email/format";
-import { sendEmail } from "@/lib/email/resend";
+import { sendEmail } from "@/lib/email/sendgrid";
 import { company } from "@/data/company";
 import { trackEvent } from "@/lib/analytics/umami";
 import type { PathwayProfile, PathwayResult } from "@/lib/pathway/types";
@@ -59,9 +58,7 @@ export function PathwayResults({
       form_name: "Pathway Advisor enquiry",
       from_name: form.fullName,
       reply_to: form.email,
-      phone: form.phone || "Not provided",
-      message: notes || "No additional notes",
-      summary: formatEmailBody({
+      details: {
         "Full name": form.fullName,
         Email: form.email,
         "Phone / WhatsApp": form.phone,
@@ -82,7 +79,7 @@ export function PathwayResults({
         "Pathway summary": result.narrative,
         Notes: notes,
         Submitted: new Date().toLocaleString(),
-      }),
+      },
     });
 
     setSaving(false);

@@ -18,8 +18,7 @@ import {
   whatsappHref,
 } from "@/data/company";
 import { saveLead } from "@/lib/leads";
-import { formatEmailBody } from "@/lib/email/format";
-import { sendEmail } from "@/lib/email/resend";
+import { sendEmail } from "@/lib/email/sendgrid";
 import { trackEvent } from "@/lib/analytics/umami";
 
 type Status = "idle" | "sending" | "sent" | "skipped" | "error";
@@ -45,15 +44,13 @@ export function ContactForm() {
       form_name: "Website contact form",
       from_name: values.fullName,
       reply_to: values.email,
-      phone: values.phone || "Not provided",
-      message: values.message,
-      summary: formatEmailBody({
+      details: {
         "Full name": values.fullName,
         Email: values.email,
         "Phone / WhatsApp": values.phone,
         Message: values.message,
         Submitted: new Date().toLocaleString(),
-      }),
+      },
     });
 
     setStatus(
