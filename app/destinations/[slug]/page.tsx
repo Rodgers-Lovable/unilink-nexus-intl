@@ -109,7 +109,7 @@ export default async function DestinationDetail({ params }: { params: Promise<{ 
               <div className="mt-4">
                 <Placeholder>
                   Entry requirements differ by institution and programme and must be verified
-                  individually. [Content to be confirmed]
+                  individually.
                 </Placeholder>
               </div>
             </div>

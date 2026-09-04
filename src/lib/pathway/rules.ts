@@ -483,7 +483,7 @@ const costBandRank: Record<DestinationFacts["costBand"], number> = {
 
 const budgetLabel: Record<DestinationFacts["costBand"], string> = {
   lower: "Often explored by students working with a lower budget.",
-  moderate: "Costs vary widely — plan in ranges. [Content to be confirmed]",
+  moderate: "Costs vary widely — plan in ranges.",
   higher: "Typically a higher-cost option; funding planning matters.",
 };
 

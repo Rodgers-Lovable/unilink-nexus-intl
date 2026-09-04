@@ -140,8 +140,7 @@ export const applicationStages = [
   },
   {
     title: "Visa preparation",
-    description:
-      "Preparing documentation according to the destination's process. [Content to be confirmed]",
+    description: "Preparing documentation according to the destination's process.",
   },
   {
     title: "Pre-departure",
@@ -156,7 +155,7 @@ export const documentChecklist = [
   "Personal statement or motivation letter, where required",
   "References or recommendation letters, where required",
   "Curriculum vitae, where required",
-  "Financial documentation, where required [Content to be confirmed]",
+  "Financial documentation, where required",
 ];
 
 export const preparationTopics = [
@@ -168,7 +167,7 @@ export const preparationTopics = [
   {
     title: "Language preparation",
     description:
-      "Language expectations differ by destination and programme. Confirm requirements from official sources. [Content to be confirmed]",
+      "Language expectations differ by destination and programme. Confirm requirements from official sources.",
   },
   {
     title: "Financial planning",
@@ -220,7 +219,7 @@ export const studyAbroadFaqs = [
   },
   {
     q: "When should I start planning?",
-    a: "Earlier planning generally provides more options, particularly around subject choices, testing and document preparation. Timelines vary by destination and intake. [Content to be confirmed]",
+    a: "Earlier planning generally provides more options, particularly around subject choices, testing and document preparation. Timelines vary by destination and intake.",
   },
   {
     q: "Is the Pathway Advisor a guarantee of anything?",
@@ -228,7 +227,7 @@ export const studyAbroadFaqs = [
   },
   {
     q: "Which destinations can I explore?",
-    a: "A range of destinations across Africa, Europe, Asia, the Middle East, North America and Oceania are included as exploratory options. Supported destinations are listed on the Destinations page. [Content to be confirmed]",
+    a: "A range of destinations across Africa, Europe, Asia, the Middle East, North America and Oceania are included as exploratory options. Supported destinations are listed on the Destinations page.",
   },
   {
     q: "What does a conversation with an adviser involve?",
@@ -236,7 +235,7 @@ export const studyAbroadFaqs = [
   },
   {
     q: "What if my grades are not strong?",
-    a: "Pathway, foundation and vocational options exist in several destinations. Suitability depends on your specific profile. [Content to be confirmed]",
+    a: "Pathway, foundation and vocational options exist in several destinations. Suitability depends on your specific profile.",
   },
 ];
 

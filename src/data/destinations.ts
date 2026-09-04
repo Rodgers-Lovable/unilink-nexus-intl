@@ -1,6 +1,6 @@
 /**
  * Editable destination data.
- * NOTE: [Content to be confirmed] — supported destinations and all
+ * NOTE: — supported destinations and all
  * requirement/cost details must be verified before publication.
  */
 
@@ -30,7 +30,7 @@ export const destinations: Destination[] = [
     intro:
       "Compact, well-structured degrees and a long tradition of internationally recognised universities.",
     overview:
-      "The United Kingdom hosts a wide range of universities across England, Scotland, Wales and Northern Ireland, with programmes designed to be completed in a relatively short time. [Content to be confirmed]",
+      "The United Kingdom hosts a wide range of universities across England, Scotland, Wales and Northern Ireland, with programmes designed to be completed in a relatively short time.",
     whyStudy: [
       "Shorter programme durations at several study levels",
       "Wide subject choice across universities and colleges",
@@ -38,7 +38,7 @@ export const destinations: Destination[] = [
       "Strong international student communities",
     ],
     educationSystem:
-      "Undergraduate, taught postgraduate and research pathways, with entry usually assessed on prior qualifications and English proficiency. [Content to be confirmed]",
+      "Undergraduate, taught postgraduate and research pathways, with entry usually assessed on prior qualifications and English proficiency.",
     popularAreas: [
       "Business & Management",
       "Computing & Data",
@@ -52,21 +52,20 @@ export const destinations: Destination[] = [
       "Evidence of English proficiency where required",
       "Supporting documents such as transcripts and identification",
     ],
-    costsPlaceholder:
-      "Tuition and living costs vary by institution, city and programme. [Content to be confirmed]",
+    costsPlaceholder: "Tuition and living costs vary by institution, city and programme.",
     intakes: ["September / October", "January (selected programmes)"],
     visaOverview:
-      "Student visa requirements are set by the UK government and change over time. Requirements should be checked against official sources at the time of application. [Content to be confirmed]",
+      "Student visa requirements are set by the UK government and change over time. Requirements should be checked against official sources at the time of application.",
     studentLife:
-      "Campus life ranges from large city universities to smaller campus towns, with student unions, societies and part-time work rules that vary by visa type. [Content to be confirmed]",
+      "Campus life ranges from large city universities to smaller campus towns, with student unions, societies and part-time work rules that vary by visa type.",
     faqs: [
       {
         q: "How long do programmes usually take?",
-        a: "Programme length varies by level and institution. Your advisor can outline options relevant to your profile. [Content to be confirmed]",
+        a: "Programme length varies by level and institution. Your advisor can outline options relevant to your profile.",
       },
       {
         q: "Do I need an English test?",
-        a: "Requirements differ by institution and programme. Some applicants may qualify for alternative evidence. [Content to be confirmed]",
+        a: "Requirements differ by institution and programme. Some applicants may qualify for alternative evidence.",
       },
     ],
   },
@@ -77,7 +76,7 @@ export const destinations: Destination[] = [
     intro:
       "A broad mix of universities and colleges, with study options in both large cities and smaller communities.",
     overview:
-      "Canada offers university and college pathways across provinces, each with its own institutions and admission practices. [Content to be confirmed]",
+      "Canada offers university and college pathways across provinces, each with its own institutions and admission practices.",
     whyStudy: [
       "University and college pathways at several levels",
       "Multicultural student communities",
@@ -85,7 +84,7 @@ export const destinations: Destination[] = [
       "Study options across a range of city sizes",
     ],
     educationSystem:
-      "Provincially regulated institutions offering diplomas, bachelor's, master's and doctoral programmes. [Content to be confirmed]",
+      "Provincially regulated institutions offering diplomas, bachelor's, master's and doctoral programmes.",
     popularAreas: [
       "Computing & IT",
       "Business",
@@ -99,17 +98,16 @@ export const destinations: Destination[] = [
       "Language proficiency evidence where required",
       "Programme-specific documents",
     ],
-    costsPlaceholder:
-      "Costs differ by province, institution and programme. [Content to be confirmed]",
+    costsPlaceholder: "Costs differ by province, institution and programme.",
     intakes: ["September", "January", "May (selected programmes)"],
     visaOverview:
-      "Study permit requirements are determined by Canadian immigration authorities and should be verified directly. [Content to be confirmed]",
+      "Study permit requirements are determined by Canadian immigration authorities and should be verified directly.",
     studentLife:
-      "Student services, housing options and work rules vary between institutions and provinces. [Content to be confirmed]",
+      "Student services, housing options and work rules vary between institutions and provinces.",
     faqs: [
       {
         q: "Are colleges different from universities?",
-        a: "Institution types differ in focus and programme structure. An advisor can help you compare them against your goals. [Content to be confirmed]",
+        a: "Institution types differ in focus and programme structure. An advisor can help you compare them against your goals.",
       },
     ],
   },
@@ -120,7 +118,7 @@ export const destinations: Destination[] = [
     intro:
       "Universities spread across coastal and inland cities, with a strong focus on research and applied study.",
     overview:
-      "Australia's higher education sector includes universities and vocational providers with nationally regulated qualifications. [Content to be confirmed]",
+      "Australia's higher education sector includes universities and vocational providers with nationally regulated qualifications.",
     whyStudy: [
       "Nationally regulated qualification framework",
       "Research-active universities",
@@ -128,7 +126,7 @@ export const destinations: Destination[] = [
       "Established international student support services",
     ],
     educationSystem:
-      "Qualifications are mapped to a national framework covering certificates, diplomas, bachelor's and postgraduate awards. [Content to be confirmed]",
+      "Qualifications are mapped to a national framework covering certificates, diplomas, bachelor's and postgraduate awards.",
     popularAreas: [
       "Nursing & Health",
       "Information Technology",
@@ -142,17 +140,16 @@ export const destinations: Destination[] = [
       "English proficiency evidence where required",
       "Genuine study intention documentation",
     ],
-    costsPlaceholder:
-      "Tuition and living costs vary widely by city and provider. [Content to be confirmed]",
+    costsPlaceholder: "Tuition and living costs vary widely by city and provider.",
     intakes: ["February", "July"],
     visaOverview:
-      "Student visa conditions are set by Australian authorities and should be reviewed at the time of application. [Content to be confirmed]",
+      "Student visa conditions are set by Australian authorities and should be reviewed at the time of application.",
     studentLife:
-      "Student life differs between metropolitan and regional campuses, including housing and transport. [Content to be confirmed]",
+      "Student life differs between metropolitan and regional campuses, including housing and transport.",
     faqs: [
       {
         q: "When should I start my application?",
-        a: "Timelines depend on the intake you target. Earlier preparation generally allows more options. [Content to be confirmed]",
+        a: "Timelines depend on the intake you target. Earlier preparation generally allows more options.",
       },
     ],
   },
@@ -163,7 +160,7 @@ export const destinations: Destination[] = [
     intro:
       "A large and varied higher education landscape, from liberal arts colleges to major research universities.",
     overview:
-      "The United States has thousands of accredited institutions with differing admission processes and academic structures. [Content to be confirmed]",
+      "The United States has thousands of accredited institutions with differing admission processes and academic structures.",
     whyStudy: [
       "Very wide choice of institutions and programmes",
       "Flexible curriculum structures at undergraduate level",
@@ -171,7 +168,7 @@ export const destinations: Destination[] = [
       "Large, diverse student populations",
     ],
     educationSystem:
-      "Associate, bachelor's, master's and doctoral degrees offered by public and private institutions. [Content to be confirmed]",
+      "Associate, bachelor's, master's and doctoral degrees offered by public and private institutions.",
     popularAreas: [
       "Computer Science",
       "Business & Finance",
@@ -185,17 +182,16 @@ export const destinations: Destination[] = [
       "English proficiency evidence where required",
       "Essays or recommendation letters at some institutions",
     ],
-    costsPlaceholder:
-      "Costs vary substantially between institutions and states. [Content to be confirmed]",
+    costsPlaceholder: "Costs vary substantially between institutions and states.",
     intakes: ["Fall (August / September)", "Spring (January)"],
     visaOverview:
-      "Student visa categories and interview processes are administered by US authorities. [Content to be confirmed]",
+      "Student visa categories and interview processes are administered by US authorities.",
     studentLife:
-      "Campus culture, housing and student support differ considerably between institutions. [Content to be confirmed]",
+      "Campus culture, housing and student support differ considerably between institutions.",
     faqs: [
       {
         q: "Do all universities require standardised tests?",
-        a: "Requirements differ by institution and have changed in recent years. Each institution should be checked individually. [Content to be confirmed]",
+        a: "Requirements differ by institution and have changed in recent years. Each institution should be checked individually.",
       },
     ],
   },
@@ -206,7 +202,7 @@ export const destinations: Destination[] = [
     intro:
       "Strong engineering and applied science traditions, with public and private institutions across the country.",
     overview:
-      "Germany has universities and universities of applied sciences, with programmes taught in German and, in some cases, English. [Content to be confirmed]",
+      "Germany has universities and universities of applied sciences, with programmes taught in German and, in some cases, English.",
     whyStudy: [
       "Established engineering and applied science provision",
       "Public and private institution options",
@@ -214,7 +210,7 @@ export const destinations: Destination[] = [
       "Central location within Europe",
     ],
     educationSystem:
-      "Bachelor's, master's and doctoral degrees, with applied-science institutions offering practice-oriented study. [Content to be confirmed]",
+      "Bachelor's, master's and doctoral degrees, with applied-science institutions offering practice-oriented study.",
     popularAreas: [
       "Mechanical Engineering",
       "Computer Science",
@@ -228,17 +224,15 @@ export const destinations: Destination[] = [
       "Language evidence in German or English depending on programme",
       "Documented academic records",
     ],
-    costsPlaceholder:
-      "Tuition arrangements differ between federal states and institution types. [Content to be confirmed]",
+    costsPlaceholder: "Tuition arrangements differ between federal states and institution types.",
     intakes: ["Winter semester", "Summer semester (selected programmes)"],
     visaOverview:
-      "National student visa and residence requirements apply and should be verified officially. [Content to be confirmed]",
-    studentLife:
-      "Student housing, transport passes and city living costs vary between regions. [Content to be confirmed]",
+      "National student visa and residence requirements apply and should be verified officially.",
+    studentLife: "Student housing, transport passes and city living costs vary between regions.",
     faqs: [
       {
         q: "Do I need to speak German?",
-        a: "It depends on the programme's language of instruction. Some programmes are taught in English. [Content to be confirmed]",
+        a: "It depends on the programme's language of instruction. Some programmes are taught in English.",
       },
     ],
   },

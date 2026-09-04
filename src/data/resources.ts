@@ -45,7 +45,7 @@ export const resources: Resource[] = [
       {
         heading: "Set a working timeline",
         paragraphs: [
-          "Work backwards from your intended intake. Document preparation, testing and visa processing all take time, and timelines vary by destination. [Content to be confirmed]",
+          "Work backwards from your intended intake. Document preparation, testing and visa processing all take time, and timelines vary by destination.",
         ],
       },
     ],
@@ -62,7 +62,7 @@ export const resources: Resource[] = [
       {
         heading: "Core academic documents",
         paragraphs: [
-          "Most applications request transcripts and certificates for your highest completed qualification. Requirements for certification and translation vary by institution. [Content to be confirmed]",
+          "Most applications request transcripts and certificates for your highest completed qualification. Requirements for certification and translation vary by institution.",
         ],
       },
       {
@@ -120,7 +120,7 @@ export const resources: Resource[] = [
       {
         heading: "About support and cost",
         paragraphs: [
-          "What student support exists for international students, and what is the realistic total cost of studying and living there? [Content to be confirmed]",
+          "What student support exists for international students, and what is the realistic total cost of studying and living there?",
         ],
       },
     ],
@@ -136,7 +136,7 @@ export const resources: Resource[] = [
       {
         heading: "Beyond tuition",
         paragraphs: [
-          "Accommodation, transport, insurance, study materials and everyday living costs all belong in your plan. Figures differ significantly by city. [Content to be confirmed]",
+          "Accommodation, transport, insurance, study materials and everyday living costs all belong in your plan. Figures differ significantly by city.",
         ],
       },
       {

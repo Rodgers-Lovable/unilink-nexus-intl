@@ -36,11 +36,11 @@ const blocks = [
   },
   {
     title: "Understanding Entry Requirements",
-    body: "Requirements are set by each institution and programme. Two universities in the same country can assess the same profile differently. [Content to be confirmed]",
+    body: "Requirements are set by each institution and programme. Two universities in the same country can assess the same profile differently.",
   },
   {
     title: "Planning Your Finances",
-    body: "Plan in ranges covering tuition, accommodation, transport, insurance and living costs. Figures vary by city and institution. [Content to be confirmed]",
+    body: "Plan in ranges covering tuition, accommodation, transport, insurance and living costs. Figures vary by city and institution.",
   },
   {
     title: "Application Timelines",
@@ -48,7 +48,7 @@ const blocks = [
   },
   {
     title: "Visa Preparation",
-    body: "Student visa processes differ by country and change over time. Requirements should always be verified against official government sources. [Content to be confirmed]",
+    body: "Student visa processes differ by country and change over time. Requirements should always be verified against official government sources.",
   },
 ];
 

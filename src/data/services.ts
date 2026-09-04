@@ -95,7 +95,7 @@ export const services: Service[] = [
       "An overview of common funding routes to investigate",
       "How to build a profile that supports funding applications",
       "Budget planning beyond tuition",
-      "Guidance on verifying availability directly with providers [Content to be confirmed]",
+      "Guidance on verifying availability directly with providers",
     ],
   },
   {
