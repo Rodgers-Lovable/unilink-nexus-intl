@@ -86,7 +86,7 @@ export function PageHero({
               <Image
                 src={heroImage.src}
                 alt={heroImage.alt}
-                className="aspect-[6/5] w-full object-cover"
+                className="aspect-6/5 w-full object-cover"
                 priority
               />
             </div>
