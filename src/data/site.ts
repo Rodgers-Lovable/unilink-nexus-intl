@@ -69,10 +69,35 @@ export const audienceCards = [
   },
   {
     title: "Schools",
-    copy: "Bring career guidance, pathway planning and international education programmes to your students.",
+    copy: "Partner on student pathway sessions, career guidance workshops, parent engagement and international education programmes.",
     cta: "Explore School Programmes",
     to: "/schools",
     icon: "school" as const,
+  },
+] as const;
+
+/** Homepage groupings of `services` into three broad categories, to keep the "How We Help" section scannable. */
+export const howWeHelpCategories = [
+  {
+    title: "Find your direction",
+    description:
+      "Understand your strengths, subjects and possible career directions before choosing a course or country.",
+    items: ["Career & subject guidance", "Strengths & interests", "Pathway planning"],
+    to: "/services/career-guidance",
+  },
+  {
+    title: "Plan international study",
+    description:
+      "Compare destinations, education systems and funding routes on your own criteria, not rankings.",
+    items: ["Destination guidance", "Education systems", "Funding & scholarships"],
+    to: "/services/international-education",
+  },
+  {
+    title: "Prepare your next step",
+    description:
+      "Get documents, applications and timelines in order with structured, honest support.",
+    items: ["Application support", "Document readiness", "Advisory support"],
+    to: "/services/application-support",
   },
 ] as const;
 
