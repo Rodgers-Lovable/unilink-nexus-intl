@@ -322,7 +322,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-linear-to-b from-navy/90 via-navy/80 to-navy/90" />
         <div className="container-page relative">
           <SectionHeading eyebrow="Why UniLink" title="Guidance built around you" tone="inverted" />
-          <StaggerContainer className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+          <StaggerContainer className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 sm:gap-y-8">
             {whyUnilink.map((item, i) => {
               const Icon = whyUnilinkIcons[i] ?? MapPin;
               return (
