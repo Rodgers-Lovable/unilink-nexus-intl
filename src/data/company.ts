@@ -91,6 +91,11 @@ export function whatsappHref(phone: string): string {
   return `https://wa.me/${phone.replace(/[^\d]/g, "")}`;
 }
 
+/** Google Maps search URL built from a verified address — no coordinates invented. */
+export function mapsHref(address: string): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}
+
 export const socialLinks = [
   {
     label: "Instagram",
