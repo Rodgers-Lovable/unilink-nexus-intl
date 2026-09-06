@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { PageHero, CTABanner, Placeholder } from "@/components/site/primitives";
+import { PageHero, CTABanner } from "@/components/site/primitives";
 import { ResourceList } from "@/components/resources/ResourceList";
-import { resourceCategories, resources } from "@/data/resources";
+import { activeCategories, getFeaturedResource, resources } from "@/data/resources";
 
 export const metadata: Metadata = {
   title: "Study Abroad Resources & Guides | Unilink Nexus",
@@ -18,29 +18,33 @@ export const metadata: Metadata = {
 };
 
 export default function ResourcesPage() {
+  const featured = getFeaturedResource();
+
   return (
     <>
       <PageHero
         image="resources"
         eyebrow="Resources"
         title="Guides for every stage of studying abroad"
-        description="Practical, plainly written guides on planning, applications, visas and student life."
+        description="Practical guides to help you make informed decisions — from your first questions about studying abroad to preparing for life at your destination."
       />
 
       <section className="section-y">
         <div className="container-page">
-          <ResourceList resources={resources} categories={resourceCategories} />
-
-          <div className="mt-10 max-w-2xl">
-            <Placeholder>
-              Articles are sample editorial content and should be reviewed and verified before
-              publication. [Content to be confirmed]
-            </Placeholder>
-          </div>
+          <ResourceList resources={resources} categories={activeCategories} featured={featured} />
         </div>
       </section>
 
-      <CTABanner />
+      <CTABanner
+        title="Have a question the guides haven't answered?"
+        description="Talk it through with a UniLink advisor."
+        primary={{ label: "Talk to an Advisor", href: "/book-consultation", cta: "advisor" }}
+        secondary={{
+          label: "Discover My Pathway",
+          href: "/explore/pathway-advisor",
+          cta: "pathway-advisor",
+        }}
+      />
     </>
   );
 }

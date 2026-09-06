@@ -15,6 +15,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Card, TextLink } from "./primitives";
+import { cn } from "@/lib/utils";
 import type { Destination } from "@/data/destinations";
 import type { Service } from "@/data/services";
 import type { Resource, ResourceCategory } from "@/data/resources";
@@ -49,6 +50,63 @@ export const resourceCategoryIcons: Record<ResourceCategory, LucideIcon> = {
   "Financial Planning": Banknote,
   "Student Life": Home,
 };
+
+/**
+ * Branded visual for a resource: real photography when a resource has one,
+ * otherwise a consistent category icon on a UniLink gradient with a subtle
+ * route/node motif — one visual system, not per-article stock photography.
+ */
+export function ResourceArtwork({
+  category,
+  image,
+  imageAlt,
+  iconClassName = "size-8",
+}: {
+  category: ResourceCategory;
+  image?: string | undefined;
+  imageAlt?: string | undefined;
+  iconClassName?: string;
+}) {
+  const Icon = resourceCategoryIcons[category] ?? BookOpen;
+
+  if (image) {
+    return (
+      <Image
+        src={image}
+        alt={imageAlt ?? ""}
+        fill
+        className="object-cover"
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+      />
+    );
+  }
+
+  return (
+    <div className="relative size-full overflow-hidden bg-linear-to-br from-blue/25 via-navy to-navy">
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        viewBox="0 0 200 140"
+        preserveAspectRatio="none"
+        className="absolute inset-0 size-full opacity-30"
+      >
+        <path
+          d="M -10 115 C 35 95, 65 135, 115 78 S 180 35, 215 45"
+          fill="none"
+          stroke="white"
+          strokeWidth="1.5"
+          strokeDasharray="1.5 7"
+          strokeLinecap="round"
+        />
+        <circle cx="35" cy="100" r="2.5" fill="white" />
+        <circle cx="115" cy="78" r="2.5" fill="white" />
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <Icon className={cn("text-white/75", iconClassName)} aria-hidden="true" />
+      </div>
+    </div>
+  );
+}
 
 export function DestinationCard({
   destination,
@@ -113,17 +171,24 @@ export function ServiceCard({ service }: { service: Service }) {
 
 export function ArticleCard({ resource }: { resource: Resource }) {
   return (
-    <Card interactive className="flex h-full flex-col">
-      <p className="eyebrow">{resource.category}</p>
-      <h3 className="mt-3 text-base font-bold">{resource.title}</h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-        {resource.excerpt}
-      </p>
-      <p className="mt-4 text-xs text-muted-foreground">{resource.readTime}</p>
-      <div className="mt-3">
-        <TextLink to={`/resources/${resource.slug}`}>Read Article</TextLink>
+    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift">
+      <div className="relative aspect-video overflow-hidden">
+        <ResourceArtwork
+          category={resource.category}
+          image={resource.image}
+          imageAlt={resource.imageAlt}
+        />
       </div>
-    </Card>
+      <div className="flex flex-1 flex-col p-6">
+        <p className="eyebrow">
+          {resource.category} · {resource.readTime}
+        </p>
+        <h3 className="mt-2.5 flex-1 text-base font-bold text-navy">{resource.title}</h3>
+        <p className="mt-4">
+          <TextLink to={`/resources/${resource.slug}`}>Read guide</TextLink>
+        </p>
+      </div>
+    </article>
   );
 }
 
@@ -203,25 +268,26 @@ export function AudiencePanel({
  * category rather than unrelated stock imagery.
  */
 export function FeaturedResourceCard({ resource }: { resource: Resource }) {
-  const Icon = resourceCategoryIcons[resource.category] ?? BookOpen;
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-card">
-      <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-linear-to-br from-blue/25 via-navy to-navy">
-        <Icon className="size-10 text-white/70" aria-hidden="true" />
-        <p className="absolute bottom-3 left-4 text-[0.6875rem] font-bold tracking-[0.12em] text-white/80 uppercase">
-          {resource.category}
-        </p>
+      <div className="relative aspect-video overflow-hidden">
+        <ResourceArtwork
+          category={resource.category}
+          image={resource.image}
+          imageAlt={resource.imageAlt}
+        />
       </div>
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="text-base font-bold text-white">{resource.title}</h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-white/70">{resource.excerpt}</p>
-        <p className="mt-4 text-xs text-white/50">{resource.readTime}</p>
-        <p className="mt-3">
+        <p className="text-[0.6875rem] font-bold tracking-[0.12em] text-white/60 uppercase">
+          {resource.category} · {resource.readTime}
+        </p>
+        <h3 className="mt-2.5 flex-1 text-base font-bold text-white">{resource.title}</h3>
+        <p className="mt-4">
           <Link
             href={`/resources/${resource.slug}`}
             className="group link-underline inline-flex items-center gap-1 text-sm font-semibold text-white"
           >
-            Read Article
+            Read guide
             <span
               className="inline-block transition-transform duration-200 group-hover:translate-x-0.5"
               aria-hidden="true"

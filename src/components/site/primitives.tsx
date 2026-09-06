@@ -126,9 +126,17 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
 export function CTABanner({
   title = "Ready to explore your options?",
   description = "Speak with a UniLink advisor and take the next step toward your international education goals.",
+  primary = { label: "Book a Consultation", href: "/book-consultation", cta: "book-consultation" },
+  secondary = {
+    label: "Discover My Pathway",
+    href: "/explore/pathway-advisor",
+    cta: "pathway-advisor",
+  },
 }: {
   title?: string;
   description?: string;
+  primary?: { label: string; href: string; cta: string };
+  secondary?: { label: string; href: string; cta: string };
 }) {
   return (
     <section className="section-y bg-navy">
@@ -137,17 +145,13 @@ export function CTABanner({
         <p className="lead mx-auto mt-4 max-w-2xl text-blue-soft">{description}</p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Button asChild variant="cta" size="lg">
-            <TrackedLink href="/book-consultation" cta="book-consultation" location="cta-banner">
-              Book a Consultation
+            <TrackedLink href={primary.href} cta={primary.cta} location="cta-banner">
+              {primary.label}
             </TrackedLink>
           </Button>
           <Button asChild variant="onNavy" size="lg">
-            <TrackedLink
-              href="/explore/pathway-advisor"
-              cta="pathway-advisor"
-              location="cta-banner"
-            >
-              Discover My Pathway
+            <TrackedLink href={secondary.href} cta={secondary.cta} location="cta-banner">
+              {secondary.label}
             </TrackedLink>
           </Button>
         </div>
