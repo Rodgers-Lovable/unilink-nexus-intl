@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   Compass,
   Route as RouteIcon,
@@ -8,12 +9,15 @@ import {
   Users,
   School,
   Quote,
+  BookOpen,
+  Stamp,
+  Home,
   type LucideIcon,
 } from "lucide-react";
 import { Card, TextLink } from "./primitives";
 import type { Destination } from "@/data/destinations";
 import type { Service } from "@/data/services";
-import type { Resource } from "@/data/resources";
+import type { Resource, ResourceCategory } from "@/data/resources";
 import ukImg from "@/assets/dest-united-kingdom.jpg";
 import caImg from "@/assets/dest-canada.jpg";
 import auImg from "@/assets/dest-australia.jpg";
@@ -36,6 +40,14 @@ export const serviceIcons: Record<Service["icon"], LucideIcon> = {
   banknote: Banknote,
   users: Users,
   school: School,
+};
+
+export const resourceCategoryIcons: Record<ResourceCategory, LucideIcon> = {
+  "Study Guides": BookOpen,
+  Applications: FileText,
+  "Visa Guidance": Stamp,
+  "Financial Planning": Banknote,
+  "Student Life": Home,
 };
 
 export function DestinationCard({
@@ -142,6 +154,84 @@ export function StoryCard({
         <TextLink to="/success-stories">Read Story</TextLink>
       </div>
     </Card>
+  );
+}
+
+/**
+ * Image-led panel for the homepage's "Students / Parents / Schools" section —
+ * an editorial alternative to a plain text card, image first so the
+ * audience is legible before the copy is read.
+ */
+export function AudiencePanel({
+  title,
+  copy,
+  cta,
+  to,
+  image,
+  imageAlt,
+}: {
+  title: string;
+  copy: string;
+  cta: string;
+  to: string;
+  image: typeof ukImg;
+  imageAlt: string;
+}) {
+  return (
+    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift">
+      <div className="aspect-4/3 overflow-hidden bg-surface">
+        <Image
+          src={image}
+          alt={imageAlt}
+          className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="text-base font-bold text-navy">{title}</h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{copy}</p>
+        <p className="mt-4">
+          <TextLink to={to}>{cta}</TextLink>
+        </p>
+      </div>
+    </article>
+  );
+}
+
+/**
+ * Featured resource tile for the homepage. Real article photography doesn't
+ * exist yet, so the thumbnail is a branded graphic keyed to the resource's
+ * category rather than unrelated stock imagery.
+ */
+export function FeaturedResourceCard({ resource }: { resource: Resource }) {
+  const Icon = resourceCategoryIcons[resource.category] ?? BookOpen;
+  return (
+    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-card">
+      <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-linear-to-br from-blue/25 via-navy to-navy">
+        <Icon className="size-10 text-white/70" aria-hidden="true" />
+        <p className="absolute bottom-3 left-4 text-[0.6875rem] font-bold tracking-[0.12em] text-white/80 uppercase">
+          {resource.category}
+        </p>
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="text-base font-bold text-white">{resource.title}</h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-white/70">{resource.excerpt}</p>
+        <p className="mt-4 text-xs text-white/50">{resource.readTime}</p>
+        <p className="mt-3">
+          <Link
+            href={`/resources/${resource.slug}`}
+            className="group link-underline inline-flex items-center gap-1 text-sm font-semibold text-white"
+          >
+            Read Article
+            <span
+              className="inline-block transition-transform duration-200 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            >
+              →
+            </span>
+          </Link>
+        </p>
+      </div>
+    </article>
   );
 }
 
