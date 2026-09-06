@@ -15,10 +15,21 @@ export type Resource = {
   excerpt: string;
   readTime: string;
   date: string;
+  /** Optional real photography — falls back to branded ResourceArtwork when absent. */
+  image?: string;
+  imageAlt?: string;
+  /** At most one resource should be featured at a time. */
+  featured?: boolean;
+  /**
+   * `false` marks sample content that must be reviewed and confirmed accurate
+   * before publication. Never surface unverified guidance as verified simply
+   * because a UI warning was removed — see hasUnverifiedResources below.
+   */
+  verified: boolean;
   body: { heading: string; paragraphs: string[] }[];
 };
 
-/** Sample editorial content — replace with verified articles before launch. */
+/** Sample editorial content — replace with verified, reviewed articles before launch. */
 export const resources: Resource[] = [
   {
     slug: "how-to-start-planning-your-study-abroad-journey",
@@ -28,6 +39,8 @@ export const resources: Resource[] = [
       "A calm, step-by-step way to move from a general idea about studying abroad to a realistic plan.",
     readTime: "6 min read",
     date: "2026-01-14",
+    featured: true,
+    verified: false,
     body: [
       {
         heading: "Begin with your goal, not the destination",
@@ -58,6 +71,7 @@ export const resources: Resource[] = [
       "A general checklist of the documents commonly requested during international applications.",
     readTime: "5 min read",
     date: "2026-01-22",
+    verified: false,
     body: [
       {
         heading: "Core academic documents",
@@ -87,6 +101,7 @@ export const resources: Resource[] = [
       "Five practical criteria that make destination comparison objective instead of emotional.",
     readTime: "7 min read",
     date: "2026-02-03",
+    verified: false,
     body: [
       {
         heading: "Compare on criteria, not reputation",
@@ -110,6 +125,7 @@ export const resources: Resource[] = [
       "The questions that reveal whether an institution genuinely fits your goals and circumstances.",
     readTime: "5 min read",
     date: "2026-02-18",
+    verified: false,
     body: [
       {
         heading: "About the programme",
@@ -132,6 +148,7 @@ export const resources: Resource[] = [
     excerpt: "How to build a realistic budget that covers more than tuition alone.",
     readTime: "6 min read",
     date: "2026-03-02",
+    verified: false,
     body: [
       {
         heading: "Beyond tuition",
@@ -154,6 +171,7 @@ export const resources: Resource[] = [
     excerpt: "Practical guidance for the first weeks after arrival.",
     readTime: "4 min read",
     date: "2026-03-15",
+    verified: false,
     body: [
       {
         heading: "The first two weeks",
@@ -172,3 +190,15 @@ export const resources: Resource[] = [
 ];
 
 export const getResource = (slug: string) => resources.find((r) => r.slug === slug);
+
+/** The single primary guide for the Resources hero — falls back to the first resource. */
+export const getFeaturedResource = (): Resource =>
+  resources.find((r) => r.featured) ?? resources[0]!;
+
+/** Categories with at least one published resource, in `resourceCategories` order — keeps empty filters off the page. */
+export const activeCategories = resourceCategories.filter((category) =>
+  resources.some((r) => r.category === category),
+);
+
+/** True while any resource is still unverified sample content. */
+export const hasUnverifiedResources = resources.some((r) => !r.verified);
