@@ -1,5 +1,4 @@
-import { Reveal, ParallaxImage } from "@/components/motion";
-import heroExplore from "@/assets/hero-explore.jpg";
+import { Reveal } from "@/components/motion";
 
 /**
  * TODO(unilink): "Our story" — add founding year, company origin and
@@ -9,26 +8,18 @@ import heroExplore from "@/assets/hero-explore.jpg";
 export function OurStory() {
   return (
     <section className="section-y">
-      <div className="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-        <Reveal>
+      <div className="container-page">
+        <Reveal className="max-w-2xl">
           <p className="eyebrow">Who we are</p>
           <h2 className="text-h2 mt-3">Guidance starts with understanding the student.</h2>
-          <p className="lead mt-5">
+        </Reveal>
+        <Reveal delay={0.1} className="mt-8 max-w-2xl border-l-2 border-blue/30 pl-6 md:pl-8">
+          <p className="lead">
             UniLink Nexus International is an international education consultancy supporting
             students who want to study abroad. We combine structured guidance with a genuinely
             personal approach, so each student&rsquo;s goals, qualifications and circumstances shape
             the recommendations they receive.
           </p>
-        </Reveal>
-        <Reveal delay={0.15} distance={24}>
-          <div className="overflow-hidden rounded-2xl border border-border shadow-card">
-            <ParallaxImage
-              src={heroExplore.src}
-              alt="A UniLink advisor talking through study options with a student"
-              containerClassName="aspect-4/3"
-              speed={0.08}
-            />
-          </div>
         </Reveal>
       </div>
     </section>
