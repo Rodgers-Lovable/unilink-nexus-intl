@@ -1,10 +1,19 @@
-import { Reveal } from "@/components/motion";
+import { Reveal, ParallaxImage } from "@/components/motion";
+import heroNetwork from "@/assets/hero-network.jpg";
 
-/** A typography-only visual break — no icon, no card, no border. */
+/** A typography-led visual break, given depth by a photographic layer rather than a card or icon. */
 export function MissionStatement() {
   return (
-    <section className="bg-navy py-20 lg:py-28">
-      <div className="container-page text-center">
+    <section className="relative overflow-hidden bg-navy py-20 lg:py-28">
+      <ParallaxImage
+        src={heroNetwork.src}
+        alt=""
+        containerClassName="absolute inset-0"
+        className="absolute top-[-15%] left-0 h-[130%] w-full object-cover opacity-40"
+        speed={0.12}
+      />
+      <div className="absolute inset-0 bg-linear-to-b from-navy/95 via-navy/85 to-navy/95" />
+      <div className="container-page relative text-center">
         <Reveal>
           <p className="text-[0.8125rem] font-bold tracking-[0.12em] text-white/70 uppercase">
             Our mission

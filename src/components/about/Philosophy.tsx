@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/motion";
+import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion";
 
 /**
  * Editorial rendering of the same four ideas shown as cards elsewhere on the
@@ -38,9 +38,9 @@ export function Philosophy() {
           <h2 className="text-h2 mt-3">Guidance should start with the student.</h2>
         </Reveal>
 
-        <div className="mt-12 divide-y divide-border border-t border-border">
+        <StaggerContainer className="mt-12 divide-y divide-border border-t border-border">
           {principles.map((item, i) => (
-            <Reveal key={item.title} delay={i * 0.05}>
+            <StaggerItem key={item.title}>
               <div className="grid gap-3 py-8 md:grid-cols-[minmax(0,14rem)_1fr] md:gap-10">
                 <div className="flex items-baseline gap-4 md:block md:gap-0">
                   <span className="text-h2 text-blue/30">{String(i + 1).padStart(2, "0")}</span>
@@ -50,9 +50,9 @@ export function Philosophy() {
                   {item.description}
                 </p>
               </div>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

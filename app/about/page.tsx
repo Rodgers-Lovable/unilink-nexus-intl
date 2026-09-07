@@ -3,6 +3,7 @@ import { PageHero, CTABanner } from "@/components/site/primitives";
 import { OurStory } from "@/components/about/OurStory";
 import { MissionStatement } from "@/components/about/MissionStatement";
 import { Philosophy } from "@/components/about/Philosophy";
+import { EditorialBreak } from "@/components/about/EditorialBreak";
 import { FrameworkStrip } from "@/components/about/FrameworkStrip";
 import { TeamSection } from "@/components/about/TeamSection";
 import { CredibilityStrip } from "@/components/about/CredibilityStrip";
@@ -35,6 +36,7 @@ export default function AboutPage() {
       <OurStory />
       <MissionStatement />
       <Philosophy />
+      <EditorialBreak />
       <FrameworkStrip />
       <TeamSection />
       <CredibilityStrip />

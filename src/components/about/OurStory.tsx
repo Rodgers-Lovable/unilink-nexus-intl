@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Reveal } from "@/components/motion";
+import { Reveal, ParallaxImage } from "@/components/motion";
 import heroExplore from "@/assets/hero-explore.jpg";
 
 /**
@@ -23,10 +22,11 @@ export function OurStory() {
         </Reveal>
         <Reveal delay={0.15} distance={24}>
           <div className="overflow-hidden rounded-2xl border border-border shadow-card">
-            <Image
-              src={heroExplore}
+            <ParallaxImage
+              src={heroExplore.src}
               alt="A UniLink advisor talking through study options with a student"
-              className="aspect-4/3 w-full object-cover"
+              containerClassName="aspect-4/3"
+              speed={0.08}
             />
           </div>
         </Reveal>

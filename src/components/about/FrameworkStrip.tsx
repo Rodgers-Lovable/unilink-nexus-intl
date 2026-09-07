@@ -1,5 +1,4 @@
-import { ChevronDown, ChevronRight } from "lucide-react";
-import { Reveal } from "@/components/motion";
+import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion";
 import { TextLink } from "@/components/site/primitives";
 import { unilinkJourney } from "@/data/site";
 
@@ -16,30 +15,33 @@ export function FrameworkStrip() {
           <h2 className="text-h2 mt-3">A clear framework for every student journey.</h2>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <div className="mt-10 flex flex-col items-center gap-1 sm:flex-row sm:justify-center sm:gap-2">
-            {unilinkJourney.map((stage, i) => (
-              <div key={stage.key} className="flex flex-col items-center sm:flex-row sm:gap-2">
+        <div className="mx-auto mt-12 max-w-3xl sm:mt-14">
+          <StaggerContainer className="relative flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
+            <span
+              aria-hidden="true"
+              className="absolute top-1.5 left-1.75 h-[calc(100%-0.75rem)] w-px bg-linear-to-b from-blue/10 via-blue/40 to-blue/10 sm:hidden"
+            />
+            <span
+              aria-hidden="true"
+              className="absolute top-1.5 right-0 left-0 hidden h-px bg-linear-to-r from-blue/10 via-blue/40 to-blue/10 sm:block"
+            />
+            {unilinkJourney.map((stage) => (
+              <StaggerItem
+                key={stage.key}
+                className="relative flex items-center gap-3 pl-6 sm:flex-col sm:gap-2 sm:pl-0"
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute top-1 left-0 size-3 rounded-full border-2 border-blue bg-card sm:static sm:top-auto sm:left-auto"
+                />
                 <span className="text-sm font-bold text-navy sm:text-base">{stage.title}</span>
-                {i < unilinkJourney.length - 1 && (
-                  <>
-                    <ChevronDown
-                      className="my-1 size-4 text-blue/40 sm:hidden"
-                      aria-hidden="true"
-                    />
-                    <ChevronRight
-                      className="hidden size-4 text-blue/40 sm:block"
-                      aria-hidden="true"
-                    />
-                  </>
-                )}
-              </div>
+              </StaggerItem>
             ))}
-          </div>
-        </Reveal>
+          </StaggerContainer>
+        </div>
 
         <Reveal delay={0.15}>
-          <p className="lead mx-auto mt-6 max-w-xl">
+          <p className="lead mx-auto mt-8 max-w-xl">
             The framework behind every UniLink conversation — from understanding where a student is
             today to helping them prepare for what comes next.
           </p>
