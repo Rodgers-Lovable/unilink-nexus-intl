@@ -301,23 +301,37 @@ export function FeaturedResourceCard({ resource }: { resource: Resource }) {
   );
 }
 
+/** Restrained by design: photo, name, role, optional one-line descriptor — never a biography. */
 export function TeamCard({
   member,
 }: {
-  member: { name: string; role: string; expertise: string; bio: string };
+  member: { name: string; role: string; descriptor?: string; photo?: string; photoAlt?: string };
 }) {
   return (
-    <Card>
-      <div
-        className="mb-4 flex aspect-4/3 items-center justify-center rounded-lg bg-surface text-xs font-semibold text-muted-foreground"
-        aria-hidden="true"
-      >
-        Photo placeholder
+    <div>
+      <div className="aspect-4/3 overflow-hidden rounded-xl bg-surface">
+        {member.photo ? (
+          <Image
+            src={member.photo}
+            alt={member.photoAlt ?? member.name}
+            width={400}
+            height={300}
+            className="size-full object-cover"
+          />
+        ) : (
+          <div
+            className="flex size-full items-center justify-center text-xs font-semibold text-muted-foreground"
+            aria-hidden="true"
+          >
+            Photo coming soon
+          </div>
+        )}
       </div>
-      <h3 className="text-base font-bold">{member.name}</h3>
+      <h3 className="mt-4 text-base font-bold text-navy">{member.name}</h3>
       <p className="text-sm font-semibold text-blue">{member.role}</p>
-      <p className="mt-1 text-xs text-muted-foreground">{member.expertise}</p>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{member.bio}</p>
-    </Card>
+      {member.descriptor && (
+        <p className="mt-1 text-sm text-muted-foreground">{member.descriptor}</p>
+      )}
+    </div>
   );
 }
