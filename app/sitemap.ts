@@ -5,7 +5,9 @@ import { resources } from "@/data/resources";
 import { legalDocuments } from "@/data/legal";
 import { isPlaceholder } from "@/data/company";
 
-const BASE_URL = process.env["SITE_URL"] || "https://example.com";
+export const dynamic = "force-static";
+
+const BASE_URL = process.env["SITE_URL"] || "https://unilink-nexus.com";
 
 const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/`, changeFrequency: "weekly", priority: 1.0 },
