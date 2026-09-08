@@ -16,15 +16,15 @@ export function DestinationExplorer() {
         <WorldMap activeSlug={activeSlug} onSelect={setActiveSlug} />
 
         {/* Destination names as real controls, not just map coordinates. */}
-        <ul className="mt-6 flex flex-wrap gap-2">
+        <ul className="scrollbar-hide mt-6 flex gap-2 overflow-x-auto sm:flex-wrap sm:overflow-visible">
           {worldMapDestinations.map((d) => (
-            <li key={d.slug}>
+            <li key={d.slug} className="shrink-0">
               <button
                 type="button"
                 onClick={() => setActiveSlug(d.slug)}
                 aria-pressed={d.slug === activeSlug}
                 className={cn(
-                  "rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                  "rounded-full border px-3.5 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                   d.slug === activeSlug
                     ? "border-orange bg-orange/10 text-orange"
                     : "border-border text-navy hover:border-blue/40 hover:text-blue",

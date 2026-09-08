@@ -109,37 +109,36 @@ export default function StudyAbroad() {
         </div>
       </section>
 
-      {/* Support Track */}
+      {/* Support Track + condensed services */}
       <section className="section-y bg-surface">
         <div className="container-page">
           <SectionHeading eyebrow="Support" title="Where UniLink fits in" />
           <div className="mt-12">
             <SupportTrack />
           </div>
-        </div>
-      </section>
 
-      {/* Condensed services */}
-      <section className="pb-20 lg:pb-28">
-        <div className="container-page">
-          <p className="text-sm font-semibold text-muted-foreground">
-            Three areas of support cover most of what a study-abroad decision needs:
-          </p>
-          <div className="mt-6 grid gap-8 sm:grid-cols-3">
-            {howWeHelpCategories.map((c) => (
-              <div key={c.title}>
-                <h3 className="text-base font-bold text-navy">{c.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {c.description}
-                </p>
-                <div className="mt-3">
-                  <TextLink to={c.to}>Learn more</TextLink>
+          <div className="mt-16 border-t border-border pt-12 lg:mt-20 lg:pt-14">
+            <p className="eyebrow">Where to start</p>
+            <h3 className="text-h3 mt-2 max-w-xl">
+              Three areas of support cover most of a study-abroad decision
+            </h3>
+            <div className="mt-8 grid gap-8 sm:grid-cols-3">
+              {howWeHelpCategories.map((c, i) => (
+                <div key={c.title}>
+                  <p className="text-xs font-bold text-blue">{String(i + 1).padStart(2, "0")}</p>
+                  <h4 className="mt-2 text-base font-bold text-navy">{c.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {c.description}
+                  </p>
+                  <div className="mt-3">
+                    <TextLink to={c.to}>Learn more</TextLink>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8">
-            <TextLink to="/services">Explore all UniLink services</TextLink>
+              ))}
+            </div>
+            <div className="mt-8">
+              <TextLink to="/services">Explore all UniLink services</TextLink>
+            </div>
           </div>
         </div>
       </section>
