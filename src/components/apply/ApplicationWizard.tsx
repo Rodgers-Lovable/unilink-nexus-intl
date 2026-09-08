@@ -41,7 +41,7 @@ import {
   TextAreaField,
   TextField,
 } from "./fields";
-import { sendEmail } from "@/lib/email/sendgrid";
+import { sendEmail } from "@/lib/email/emailjs";
 import { trackEvent } from "@/lib/analytics/umami";
 import { cn } from "@/lib/utils";
 import { Placeholder } from "../site/primitives";

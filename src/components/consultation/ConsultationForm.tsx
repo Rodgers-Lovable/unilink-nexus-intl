@@ -8,8 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { CheckList } from "@/components/site/primitives";
 import { Card } from "@/components/site/Card";
 import { destinations } from "@/data/destinations";
-import { saveLead } from "@/lib/leads";
-import { sendEmail } from "@/lib/email/sendgrid";
+import { sendEmail } from "@/lib/email/emailjs";
 import { company, contactInfo, isPlaceholder } from "@/data/company";
 import { trackEvent } from "@/lib/analytics/umami";
 
@@ -27,18 +26,6 @@ export function ConsultationForm() {
       destination: String(data.get("destination") ?? ""),
       message: String(data.get("message") ?? ""),
     };
-
-    await saveLead({
-      fullName: values.fullName,
-      email: values.email,
-      phone: values.phone,
-      studyLevel: values.studyLevel,
-      destinationInterest: [values.destination],
-      notes: values.message,
-      source: "book-consultation",
-      preferredContactMethod: "Phone call",
-      consent: true,
-    });
 
     const result = await sendEmail("consultation", {
       form_name: "Consultation request",
