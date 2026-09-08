@@ -6,17 +6,26 @@ import { cn } from "@/lib/utils";
  * Official Unilink Nexus International logo (globe, arrow and graduation cap
  * with the "Your Link to Global Opportunities" tagline).
  */
+const logoSources = {
+  /** Full lockup — symbol, wordmark, "INTERNATIONAL" and tagline. Footer/large use only. */
+  full: { src: "/unilink-logo.png", width: 548, height: 455 },
+  /** Simplified lockup — symbol + "UNILINK NEXUS" only. Navbar/compact use. */
+  mark: { src: "/unilink-logo-mark.png", width: 553, height: 426 },
+} as const;
+
 export function Logo({
-  variant = "dark",
+  variant = "full",
   size = "h-14",
   className,
+  priority = false,
 }: {
-  variant?: "dark" | "light";
+  variant?: keyof typeof logoSources;
   /** Tailwind height class controlling the mark's rendered size. */
   size?: string;
   className?: string;
+  priority?: boolean;
 }) {
-  const logoSrc = "/unilink-logo.png";
+  const { src, width, height } = logoSources[variant];
 
   return (
     <Link
@@ -24,26 +33,14 @@ export function Logo({
       className={cn("inline-flex items-center", className)}
       aria-label="Unilink Nexus International — home"
     >
-      {variant === "light" ? (
-        <span className="rounded-xl bg-white p-2 shadow-sm">
-          <Image
-            src={logoSrc}
-            alt="Unilink Nexus International — Your Link to Global Opportunities"
-            width={500}
-            height={500}
-            className={cn(size, "w-auto")}
-          />
-        </span>
-      ) : (
-        <Image
-          src={logoSrc}
-          alt="Unilink Nexus International — Your Link to Global Opportunities"
-          width={500}
-          height={500}
-          className={cn(size, "w-auto")}
-          priority
-        />
-      )}
+      <Image
+        src={src}
+        alt="Unilink Nexus International — Your Link to Global Opportunities"
+        width={width}
+        height={height}
+        className={cn(size, "w-auto")}
+        priority={priority}
+      />
     </Link>
   );
 }

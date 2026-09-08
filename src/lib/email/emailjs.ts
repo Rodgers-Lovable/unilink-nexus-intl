@@ -1,5 +1,4 @@
-"use server";
-
+import emailjs from "@emailjs/browser";
 import { z } from "zod";
 import { render } from "@react-email/render";
 import { formatEmailBody } from "./format";
@@ -10,11 +9,6 @@ import PathwayEmail from "@/emails/PathwayEmail";
 import ApplicationEmail from "@/emails/ApplicationEmail";
 import AutoReplyEmail from "@/emails/AutoReplyEmail";
 import type { EmailDetails } from "@/emails/layout/DetailsTable";
-
-/**
- * Server-only email delivery via SendGrid, called directly from client
- * components.
- */
 
 export type EmailTemplateKey = "contact" | "consultation" | "pathway" | "application";
 
@@ -50,7 +44,21 @@ const TEMPLATE_COMPONENTS: Record<
 };
 
 function isConfigured(): boolean {
-  return Boolean(process.env["SENDGRID_API_KEY"] && process.env["SENDGRID_FROM_EMAIL"]);
+  return Boolean(
+    process.env["NEXT_PUBLIC_EMAILJS_SERVICE_ID"] &&
+    process.env["NEXT_PUBLIC_EMAILJS_PUBLIC_KEY"] &&
+    process.env["NEXT_PUBLIC_EMAILJS_NOTIFICATION_TEMPLATE_ID"] &&
+    process.env["NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID"],
+  );
+}
+
+async function sendViaEmailJs(
+  templateId: string,
+  templateParams: Record<string, string>,
+): Promise<void> {
+  await emailjs.send(process.env["NEXT_PUBLIC_EMAILJS_SERVICE_ID"]!, templateId, templateParams, {
+    publicKey: process.env["NEXT_PUBLIC_EMAILJS_PUBLIC_KEY"]!,
+  });
 }
 
 export async function sendEmail(
@@ -67,10 +75,7 @@ export async function sendEmail(
   }
 
   try {
-    const sgMail = (await import("@sendgrid/mail")).default;
-    sgMail.setApiKey(process.env["SENDGRID_API_KEY"]!);
-
-    const toEmail = process.env["SENDGRID_TO_EMAIL"] || "info@unilink-nexus.com";
+    const toEmail = process.env["NEXT_PUBLIC_EMAILJS_TO_EMAIL"] || "info@unilink-nexus.com";
     const subject = `${TEMPLATE_SUBJECTS[template]} — ${parsedParams.data.from_name}`;
 
     const Component = TEMPLATE_COMPONENTS[template];
@@ -79,13 +84,12 @@ export async function sendEmail(
     );
     const text = formatEmailBody(parsedParams.data.details);
 
-    await sgMail.send({
-      to: toEmail,
-      from: process.env["SENDGRID_FROM_EMAIL"]!,
-      replyTo: parsedParams.data.reply_to,
+    await sendViaEmailJs(process.env["NEXT_PUBLIC_EMAILJS_NOTIFICATION_TEMPLATE_ID"]!, {
+      to_email: toEmail,
+      reply_to: parsedParams.data.reply_to,
       subject,
-      text,
-      html,
+      text_content: text,
+      html_content: html,
     });
 
     // Best-effort confirmation back to the submitter — a failure here doesn't
@@ -98,12 +102,12 @@ export async function sendEmail(
           details: parsedParams.data.details,
         }),
       );
-      await sgMail.send({
-        to: parsedParams.data.reply_to,
-        from: process.env["SENDGRID_FROM_EMAIL"]!,
+
+      await sendViaEmailJs(process.env["NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID"]!, {
+        to_email: parsedParams.data.reply_to,
         subject: `We've received your submission — ${company.shortName}`,
-        text: `Thanks for reaching out. We've received your ${parsedParams.data.form_name.toLowerCase()} and will be in touch shortly.`,
-        html: autoReplyHtml,
+        text_content: `Thanks for reaching out. We've received your ${parsedParams.data.form_name.toLowerCase()} and will be in touch shortly.`,
+        html_content: autoReplyHtml,
       });
     } catch (autoReplyError) {
       console.error("Auto-reply email failed to send:", autoReplyError);
@@ -111,18 +115,7 @@ export async function sendEmail(
 
     return { status: "sent" };
   } catch (error) {
-    const message = extractSendGridErrorMessage(error);
+    const message = error instanceof Error ? error.message : "Unknown email delivery error.";
     return { status: "error", message };
   }
-}
-
-/** SendGrid throws on failure; the useful message is nested under response.body.errors. */
-function extractSendGridErrorMessage(error: unknown): string {
-  if (error && typeof error === "object" && "response" in error) {
-    const response = (error as { response?: { body?: { errors?: { message?: string }[] } } })
-      .response;
-    const firstMessage = response?.body?.errors?.[0]?.message;
-    if (firstMessage) return firstMessage;
-  }
-  return error instanceof Error ? error.message : "Unknown email delivery error.";
 }

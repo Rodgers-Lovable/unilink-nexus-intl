@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = process.env["SITE_URL"] || "https://example.com";
+export const dynamic = "force-static";
+
+const BASE_URL = process.env["SITE_URL"] || "https://unilink-nexus.com";
 
 export default function robots(): MetadataRoute.Robots {
   return {

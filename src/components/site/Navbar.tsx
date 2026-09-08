@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -14,38 +14,67 @@ import { trackEvent } from "@/lib/analytics/umami";
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
   const pathname = usePathname();
 
   const isActive = (to: string) => (to === "/" ? pathname === "/" : pathname.startsWith(to));
 
+  useEffect(() => {
+    setOpen(false);
+    setExpanded(null);
+    setDesktopDropdown(null);
+  }, [pathname]);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-nav-background/95 backdrop-blur-md">
       <div className="container-page flex h-18 items-center justify-between gap-4 py-3">
-        <Logo />
+        <Logo variant="mark" size="h-11" priority />
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) =>
             item.children ? (
-              <div key={item.label} className="group relative">
+              <div
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => setDesktopDropdown(item.label)}
+                onMouseLeave={() => setDesktopDropdown(null)}
+                onFocus={() => setDesktopDropdown(item.label)}
+                onBlur={(e) => {
+                  if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                    setDesktopDropdown(null);
+                  }
+                }}
+              >
                 <Link
                   href={item.to}
+                  onClick={() => setDesktopDropdown(null)}
                   className={cn(
-                    "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-semibold text-navy/80 transition-colors hover:text-blue",
+                    "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-semibold text-white/85 transition-colors hover:text-blue",
                     isActive(item.to) && "text-blue",
                   )}
                 >
                   {item.label}
                   <ChevronDown
-                    className="size-3.5 transition-transform duration-200 group-hover:rotate-180"
+                    className={cn(
+                      "size-3.5 transition-transform duration-200",
+                      desktopDropdown === item.label && "rotate-180",
+                    )}
                     aria-hidden="true"
                   />
                 </Link>
-                <div className="pointer-events-none absolute left-0 top-full w-64 -translate-y-1.5 pt-2 opacity-0 transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                <div
+                  className={cn(
+                    "absolute left-0 top-full w-64 -translate-y-1.5 pt-2 opacity-0 transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none",
+                    desktopDropdown === item.label &&
+                      "pointer-events-auto translate-y-0 opacity-100",
+                  )}
+                >
                   <ul className="rounded-xl border border-border bg-popover p-2 shadow-lift">
                     {item.children.map((child) => (
                       <li key={child.to}>
                         <Link
                           href={child.to}
+                          onClick={() => setDesktopDropdown(null)}
                           className="block rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-surface hover:text-blue"
                         >
                           {child.label}
@@ -60,7 +89,7 @@ export function Navbar() {
                 key={item.to}
                 href={item.to}
                 className={cn(
-                  "relative rounded-md px-3 py-2 text-sm font-semibold text-navy/80 transition-colors hover:text-blue",
+                  "relative rounded-md px-3 py-2 text-sm font-semibold text-white/85 transition-colors hover:text-blue",
                   isActive(item.to) && "text-blue",
                 )}
               >
@@ -89,7 +118,7 @@ export function Navbar() {
           </Button>
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-lg border border-border text-navy lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-lg border border-white/25 text-white lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -108,7 +137,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-border bg-background lg:hidden"
+            className="overflow-hidden border-t border-white/10 bg-nav-background lg:hidden"
           >
             <nav aria-label="Mobile" className="container-page space-y-1 py-4">
               {navItems.map((item, i) =>
@@ -118,11 +147,11 @@ export function Navbar() {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05, duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                    className="border-b border-border/70 pb-1"
+                    className="border-b border-white/10 pb-1"
                   >
                     <button
                       type="button"
-                      className="flex w-full items-center justify-between px-1 py-3 text-left text-base font-semibold text-navy"
+                      className="flex w-full items-center justify-between px-1 py-3 text-left text-base font-semibold text-white"
                       aria-expanded={expanded === item.label}
                       onClick={() => setExpanded((v) => (v === item.label ? null : item.label))}
                     >
@@ -149,7 +178,7 @@ export function Navbar() {
                               <Link
                                 href={child.to}
                                 onClick={() => setOpen(false)}
-                                className="block py-2.5 text-sm text-muted-foreground hover:text-blue"
+                                className="block py-2.5 text-sm text-white/60 hover:text-blue"
                               >
                                 {child.label}
                               </Link>
@@ -169,7 +198,7 @@ export function Navbar() {
                     <Link
                       href={item.to}
                       onClick={() => setOpen(false)}
-                      className="block border-b border-border/70 px-1 py-3 text-base font-semibold text-navy"
+                      className="block border-b border-white/10 px-1 py-3 text-base font-semibold text-white"
                     >
                       {item.label}
                     </Link>
@@ -196,7 +225,7 @@ export function Navbar() {
                     Start My Application
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="w-full">
+                <Button asChild variant="onNavy" size="lg" className="w-full">
                   <Link
                     href="/book-consultation"
                     onClick={() => {
@@ -210,7 +239,7 @@ export function Navbar() {
                     Book a Consultation
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="w-full">
+                <Button asChild variant="onNavy" size="lg" className="w-full">
                   <Link
                     href="/explore/pathway-advisor"
                     onClick={() => {

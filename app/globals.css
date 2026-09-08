@@ -7,7 +7,9 @@
 
 /*
  * Unilink Nexus International design system.
- * Navy dominates, blue supports, green signals success, orange is CTA only.
+ * Cyan is the dominant brand/interaction color; navy (with a teal undertone)
+ * anchors dark surfaces (navbar/footer) and heading text; orange and green
+ * are restrained secondary/tertiary accents, never competing CTA colors.
  */
 
 @theme inline {
@@ -52,44 +54,66 @@
   --color-green-bright: var(--green-bright);
   --color-orange: var(--orange);
 
+  --color-nav-background: var(--nav-background);
+  --color-nav-foreground: var(--nav-foreground);
+
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-hover: var(--brand-primary-hover);
+  --color-brand-primary-soft: var(--brand-primary-soft);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-secondary-soft: var(--brand-secondary-soft);
+  --color-brand-tertiary: var(--brand-tertiary);
+
   --shadow-card:
-    0 1px 2px oklch(0.289 0.105 260.6 / 0.04), 0 8px 24px oklch(0.289 0.105 260.6 / 0.06);
+    0 1px 2px oklch(0.24 0.07 235 / 0.04), 0 8px 24px oklch(0.24 0.07 235 / 0.06);
   --shadow-lift:
-    0 2px 4px oklch(0.289 0.105 260.6 / 0.05), 0 16px 40px oklch(0.289 0.105 260.6 / 0.1);
+    0 2px 4px oklch(0.24 0.07 235 / 0.05), 0 16px 40px oklch(0.24 0.07 235 / 0.1);
 }
 
 :root {
   --radius: 0.75rem;
 
-  --navy: oklch(0.289 0.105 260.6);
-  --navy-soft: oklch(0.36 0.1 260.6);
-  --blue: oklch(0.466 0.143 254);
-  --blue-bright: oklch(0.669 0.124 239.8);
-  --blue-soft: oklch(0.855 0.052 237.8);
-  --green: oklch(0.489 0.149 142.9);
-  --green-bright: oklch(0.737 0.187 132.5);
-  --orange: oklch(0.702 0.175 53.1);
+  --navy: oklch(0.24 0.07 235);
+  --navy-soft: oklch(0.32 0.075 235);
+  --blue: oklch(0.48 0.14 195);
+  --blue-bright: oklch(0.72 0.16 195);
+  --blue-soft: oklch(0.93 0.045 195);
+  --green: oklch(0.5 0.155 138);
+  --green-bright: oklch(0.74 0.19 128);
+  --orange: oklch(0.68 0.16 50);
 
   --background: oklch(1 0 0);
-  --foreground: oklch(0.243 0.04 259.3);
-  --surface: oklch(0.981 0.005 258.3);
+  --foreground: oklch(0.24 0.035 225);
+  --surface: oklch(0.98 0.008 205);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.243 0.04 259.3);
+  --card-foreground: var(--foreground);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.243 0.04 259.3);
-  --primary: oklch(0.289 0.105 260.6);
+  --popover-foreground: var(--foreground);
+  --primary: var(--navy);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.981 0.005 258.3);
-  --secondary-foreground: oklch(0.289 0.105 260.6);
-  --muted: oklch(0.981 0.005 258.3);
-  --muted-foreground: oklch(0.544 0.035 265.1);
-  --accent: oklch(0.96 0.02 250);
-  --accent-foreground: oklch(0.289 0.105 260.6);
+  --secondary: var(--surface);
+  --secondary-foreground: var(--navy);
+  --muted: var(--surface);
+  --muted-foreground: oklch(0.54 0.03 220);
+  --accent: oklch(0.95 0.025 200);
+  --accent-foreground: var(--navy);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.927 0.007 260.7);
-  --input: oklch(0.927 0.007 260.7);
-  --ring: oklch(0.466 0.143 254);
+  --border: oklch(0.92 0.008 220);
+  --input: oklch(0.92 0.008 220);
+  --ring: var(--blue);
+
+  /* Dark branded surfaces (navbar, mobile menu) — footer uses --navy directly. */
+  --nav-background: oklch(0.18 0.055 235);
+  --nav-foreground: oklch(1 0 0);
+
+  /* Semantic brand aliases (spec §18) — thin wrappers over the palette above. */
+  --brand-primary: var(--blue);
+  --brand-primary-hover: var(--blue-bright);
+  --brand-primary-soft: var(--blue-soft);
+  --brand-secondary: var(--orange);
+  --brand-secondary-soft: oklch(0.95 0.05 50);
+  --brand-tertiary: var(--green);
 }
 
 @layer base {

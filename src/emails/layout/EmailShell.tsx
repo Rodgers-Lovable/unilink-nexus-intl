@@ -5,16 +5,12 @@ import {
   Heading,
   Hr,
   Html,
-  Img,
   Preview,
   Section,
   Text,
 } from "@react-email/components";
 import type { ReactNode } from "react";
 import { company } from "@/data/company";
-
-const SITE_URL = process.env["SITE_URL"] || "https://example.com";
-const LOGO_URL = `${SITE_URL}/unilink-logo.png`;
 
 interface EmailShellProps {
   previewText: string;
@@ -30,7 +26,6 @@ export function EmailShell({ previewText, title, children }: EmailShellProps) {
       <Preview>{previewText}</Preview>
       <Body style={styles.main}>
         <Container style={styles.container}>
-          <Img src={LOGO_URL} alt={company.legalName} width={40} height={40} style={styles.logo} />
           <Text style={styles.eyebrow}>{company.shortName}</Text>
           <Heading style={styles.heading}>{title}</Heading>
           <Section>{children}</Section>
@@ -56,10 +51,6 @@ const styles = {
     padding: "32px",
     maxWidth: "560px",
     margin: "0 auto",
-  },
-  logo: {
-    borderRadius: "8px",
-    margin: "0 0 16px",
   },
   eyebrow: {
     color: "#2563eb",
