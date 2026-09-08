@@ -111,12 +111,18 @@ export const worldMapLandBlocks: { rows: [number, number]; cols: [number, number
 ];
 
 /**
- * The five verified destinations, positioned on the grid above plus a couple
- * of "considerations" bullets pulled from each destination's existing data
- * (studyLevels / popularAreas / intakes) — nothing invented here.
+ * Every destination from destinations.ts, positioned on the grid above plus
+ * a couple of "considerations" bullets pulled from each destination's
+ * existing data (studyLevels / popularAreas / intakes) — nothing invented
+ * here. Marker positions are a stylised approximation, not survey data.
  */
 export const worldMapDestinations = destinations.map((d) => {
   const position: Record<string, { row: number; col: number }> = {
+    malaysia: { row: 11, col: 36 },
+    uae: { row: 7, col: 30 },
+    mauritius: { row: 17, col: 30 },
+    malta: { row: 6, col: 24 },
+    hungary: { row: 4, col: 25 },
     "united-kingdom": { row: 3, col: 21 },
     canada: { row: 3, col: 9 },
     australia: { row: 16, col: 38 },

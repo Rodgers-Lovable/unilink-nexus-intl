@@ -1,7 +1,7 @@
 "use client";
 
-import { useId, useState, type ReactNode } from "react";
-import { AlertCircle, Check, ChevronsUpDown } from "lucide-react";
+import { useId, useRef, useState, type ReactNode } from "react";
+import { AlertCircle, Check, ChevronsUpDown, FileText, Paperclip, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,6 +16,16 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
+import {
+  ACCEPTED_ATTACHMENT_EXTENSIONS,
+  ACCEPTED_ATTACHMENT_TYPES,
+  formatBytes,
+  MAX_ATTACHMENT_BYTES,
+  MAX_ATTACHMENTS,
+  readApplicationDocument,
+  totalEncodedBytes,
+  type ApplicationDocument,
+} from "@/lib/application/attachments";
 
 export function FieldShell({
   id,
@@ -212,10 +222,46 @@ export function ComboboxField({ options, ...props }: BaseProps & { options: read
   );
 }
 
-/** Accessible multi-select rendered as toggleable chips. */
+function ChipGroup({
+  options,
+  values,
+  onToggle,
+}: {
+  options: readonly string[];
+  values: string[];
+  onToggle: (value: string) => void;
+}) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {options.map((option) => {
+        const selected = values.includes(option);
+        return (
+          <button
+            key={option}
+            type="button"
+            aria-pressed={selected}
+            onClick={() => onToggle(option)}
+            className={cn(
+              "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm font-medium transition-colors",
+              selected
+                ? "border-blue bg-blue/10 text-blue"
+                : "border-border bg-background text-foreground hover:border-blue/50 hover:text-blue",
+            )}
+          >
+            {selected && <Check className="size-3.5" aria-hidden="true" />}
+            {option}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Accessible multi-select rendered as toggleable chips, optionally grouped under labelled sections. */
 export function MultiSelectField({
   label,
   options,
+  groups,
   values,
   onToggle,
   required,
@@ -223,7 +269,8 @@ export function MultiSelectField({
   error,
 }: {
   label: string;
-  options: readonly string[];
+  options?: readonly string[];
+  groups?: { label: string; options: readonly string[] }[];
   values: string[];
   onToggle: (value: string) => void;
   required?: boolean | undefined;
@@ -250,28 +297,22 @@ export function MultiSelectField({
           {hint}
         </p>
       )}
-      <div className="mt-3 flex flex-wrap gap-2">
-        {options.map((option) => {
-          const selected = values.includes(option);
-          return (
-            <button
-              key={option}
-              type="button"
-              aria-pressed={selected}
-              onClick={() => onToggle(option)}
-              className={cn(
-                "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm font-medium transition-colors",
-                selected
-                  ? "border-blue bg-blue/10 text-blue"
-                  : "border-border bg-background text-foreground hover:border-blue/50 hover:text-blue",
-              )}
-            >
-              {selected && <Check className="size-3.5" aria-hidden="true" />}
-              {option}
-            </button>
-          );
-        })}
-      </div>
+      {groups ? (
+        <div className="mt-3 space-y-4">
+          {groups.map((group) => (
+            <div key={group.label}>
+              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                {group.label}
+              </p>
+              <ChipGroup options={group.options} values={values} onToggle={onToggle} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-3">
+          <ChipGroup options={options ?? []} values={values} onToggle={onToggle} />
+        </div>
+      )}
       {error && (
         <p
           id={`${id}-error`}
@@ -283,6 +324,126 @@ export function MultiSelectField({
         </p>
       )}
     </fieldset>
+  );
+}
+
+/** Optional document upload — client-side only, base64-attached to the EmailJS notification. */
+export function FileUploadField({
+  label,
+  hint,
+  documents,
+  onChange,
+  error,
+  onError,
+}: {
+  label: string;
+  hint?: string | undefined;
+  documents: ApplicationDocument[];
+  onChange: (documents: ApplicationDocument[]) => void;
+  error?: string | undefined;
+  onError: (message: string | null) => void;
+}) {
+  const id = useId();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [reading, setReading] = useState(false);
+  const usedBytes = totalEncodedBytes(documents);
+
+  const addFiles = async (fileList: FileList) => {
+    onError(null);
+    const files = Array.from(fileList);
+    if (documents.length + files.length > MAX_ATTACHMENTS) {
+      onError(`You can attach up to ${MAX_ATTACHMENTS} files.`);
+      return;
+    }
+
+    setReading(true);
+    try {
+      let running = usedBytes;
+      const accepted: ApplicationDocument[] = [];
+      for (const file of files) {
+        if (!ACCEPTED_ATTACHMENT_TYPES.includes(file.type)) {
+          onError(`"${file.name}" isn't a supported file type. Use PDF, JPG, PNG or WEBP.`);
+          continue;
+        }
+        const doc = await readApplicationDocument(file);
+        if (running + doc.encodedBytes > MAX_ATTACHMENT_BYTES) {
+          onError(
+            `Adding "${file.name}" would go over the ${formatBytes(MAX_ATTACHMENT_BYTES)} attachment limit. Remove a file or attach a smaller one.`,
+          );
+          continue;
+        }
+        running += doc.encodedBytes;
+        accepted.push(doc);
+      }
+      if (accepted.length > 0) onChange([...documents, ...accepted]);
+    } finally {
+      setReading(false);
+      if (inputRef.current) inputRef.current.value = "";
+    }
+  };
+
+  const removeDocument = (docId: string) => {
+    onError(null);
+    onChange(documents.filter((d) => d.id !== docId));
+  };
+
+  return (
+    <FieldShell id={id} label={label} hint={hint} error={error}>
+      <div className="space-y-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => inputRef.current?.click()}
+            disabled={reading || documents.length >= MAX_ATTACHMENTS}
+          >
+            <Paperclip className="mr-1.5 size-4" aria-hidden="true" />
+            {reading ? "Adding…" : "Attach document"}
+          </Button>
+          <p className="text-xs text-muted-foreground">
+            {formatBytes(usedBytes)} of {formatBytes(MAX_ATTACHMENT_BYTES)} used · up to{" "}
+            {MAX_ATTACHMENTS} files
+          </p>
+        </div>
+        <input
+          ref={inputRef}
+          id={id}
+          type="file"
+          multiple
+          accept={ACCEPTED_ATTACHMENT_EXTENSIONS}
+          className="sr-only"
+          onChange={(e) => {
+            if (e.target.files && e.target.files.length > 0) void addFiles(e.target.files);
+          }}
+        />
+        {documents.length > 0 && (
+          <ul className="space-y-2">
+            {documents.map((doc) => (
+              <li
+                key={doc.id}
+                className="flex items-center justify-between gap-3 rounded-lg border border-border bg-background px-3 py-2 text-sm"
+              >
+                <span className="flex min-w-0 items-center gap-2">
+                  <FileText className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                  <span className="truncate text-foreground">{doc.file.name}</span>
+                  <span className="shrink-0 text-xs text-muted-foreground">
+                    {formatBytes(doc.encodedBytes)}
+                  </span>
+                </span>
+                <button
+                  type="button"
+                  onClick={() => removeDocument(doc.id)}
+                  className="shrink-0 rounded-full p-1 text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                  aria-label={`Remove ${doc.file.name}`}
+                >
+                  <X className="size-4" aria-hidden="true" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </FieldShell>
   );
 }
 

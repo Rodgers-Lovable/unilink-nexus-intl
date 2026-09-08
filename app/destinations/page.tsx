@@ -18,6 +18,9 @@ export const metadata: Metadata = {
 };
 
 export default function DestinationsPage() {
+  const flagship = destinations.filter((d) => d.tier === "flagship");
+  const legacy = destinations.filter((d) => d.tier === "legacy");
+
   return (
     <>
       <PageHero
@@ -30,15 +33,30 @@ export default function DestinationsPage() {
       <section className="section-y">
         <div className="container-page">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {destinations.map((d) => (
+            {flagship.map((d) => (
               <DestinationCard key={d.slug} destination={d} detailed />
             ))}
           </div>
+
+          {legacy.length > 0 && (
+            <div className="mt-14">
+              <h2 className="text-h3">Also available</h2>
+              <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+                We can still advise on these destinations if they fit your plans.
+              </p>
+              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {legacy.map((d) => (
+                  <DestinationCard key={d.slug} destination={d} detailed />
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="mt-10 max-w-2xl">
             <Placeholder>
-              Destination content is editable placeholder material. Supported destinations, costs,
-              requirements and visa details must be verified before publication. [Content to be
-              confirmed]
+              Figures above are indicative and can shift with the institution, programme and
+              exchange rate. Your adviser will confirm current costs, requirements and visa details
+              for the destination you choose.
             </Placeholder>
           </div>
         </div>

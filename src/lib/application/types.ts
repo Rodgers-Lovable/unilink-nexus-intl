@@ -39,16 +39,28 @@ export const targetLevelOptions = [
   "Not sure yet",
 ] as const;
 
-export const applicationDestinationOptions = [
+/** Flagship destinations UniLink is actively building toward. */
+export const flagshipDestinationOptions = [
   "Malaysia",
-  "Malta",
-  "Mauritius",
   "UAE",
+  "Mauritius",
+  "Malta",
+  "Hungary",
+] as const;
+
+/**
+ * Previously the core offering, now secondary. Kept on the form (demoted,
+ * not removed) until the client asks for them to come off entirely.
+ */
+export const legacyDestinationOptions = [
   "United Kingdom",
   "Canada",
   "United States",
   "Australia",
   "Germany",
+] as const;
+
+export const otherDestinationOptions = [
   "France",
   "Netherlands",
   "Ireland",
@@ -56,6 +68,12 @@ export const applicationDestinationOptions = [
   "India",
   "China",
   "South Africa",
+] as const;
+
+export const applicationDestinationOptions = [
+  ...flagshipDestinationOptions,
+  ...legacyDestinationOptions,
+  ...otherDestinationOptions,
   "I'm not sure yet",
 ] as const;
 
