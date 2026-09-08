@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { PageHero, SectionHeading, CTABanner, CheckList } from "@/components/site/primitives";
-import { Card } from "@/components/site/Card";
-import { ServiceCard } from "@/components/site/cards";
-import { services } from "@/data/services";
-import { destinations } from "@/data/destinations";
+import { PageHero, SectionHeading, CTABanner, TextLink } from "@/components/site/primitives";
+import { DecisionCompass } from "@/components/study-abroad/DecisionCompass";
+import { DestinationExplorer } from "@/components/study-abroad/DestinationExplorer";
+import { StudyAbroadJourney } from "@/components/study-abroad/StudyAbroadJourney";
+import { ApplicationCalendar } from "@/components/study-abroad/ApplicationCalendar";
+import { SupportTrack } from "@/components/study-abroad/SupportTrack";
+import { Reveal } from "@/components/motion";
+import { heroImages } from "@/components/site/hero-images";
+import { howWeHelpCategories } from "@/data/site";
+import { compassIntro, breathingStatement } from "@/data/study-abroad";
 
 export const metadata: Metadata = {
   title: "Study Abroad: A Plan That Fits You | Unilink Nexus International",
@@ -21,37 +27,6 @@ export const metadata: Metadata = {
   },
 };
 
-const blocks = [
-  {
-    title: "Why Study Abroad",
-    body: "Studying internationally can broaden your academic options, expose you to different teaching approaches and expand your professional network. The value depends on choosing a pathway that fits your goals.",
-  },
-  {
-    title: "Choosing the Right Destination",
-    body: "Compare destinations on entry requirements, language expectations, intake timing and total cost rather than reputation alone.",
-  },
-  {
-    title: "Choosing the Right Study Level",
-    body: "Your highest completed qualification usually determines which levels you can enter directly, and where a pathway or bridging option may be needed.",
-  },
-  {
-    title: "Understanding Entry Requirements",
-    body: "Requirements are set by each institution and programme. Two universities in the same country can assess the same profile differently.",
-  },
-  {
-    title: "Planning Your Finances",
-    body: "Plan in ranges covering tuition, accommodation, transport, insurance and living costs. Figures vary by city and institution.",
-  },
-  {
-    title: "Application Timelines",
-    body: "Work backwards from your intended intake. Testing, documents and processing all need time before submission deadlines.",
-  },
-  {
-    title: "Visa Preparation",
-    body: "Student visa processes differ by country and change over time. Requirements should always be verified against official government sources.",
-  },
-];
-
 export default function StudyAbroad() {
   return (
     <>
@@ -65,73 +40,125 @@ export default function StudyAbroad() {
           <Link href="/explore/pathway-advisor">Discover My Pathway</Link>
         </Button>
         <Button asChild variant="outline" size="lg">
-          <Link href="/apply">Start My Application</Link>
-        </Button>
-        <Button asChild variant="outline" size="lg">
           <Link href="/study-abroad/how-it-works">See How It Works</Link>
         </Button>
       </PageHero>
 
+      {/* Decision Compass */}
       <section className="section-y">
         <div className="container-page">
-          <SectionHeading eyebrow="The essentials" title="What to understand before you apply" />
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {blocks.map((b) => (
-              <Card key={b.title}>
-                <h3 className="text-base font-bold">{b.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{b.body}</p>
-              </Card>
-            ))}
+          <SectionHeading
+            eyebrow={compassIntro.eyebrow}
+            title={compassIntro.title}
+            description={compassIntro.description}
+          />
+          <div className="mt-12">
+            <DecisionCompass />
           </div>
         </div>
       </section>
 
+      {/* Breathing point */}
+      <section className="bg-blue-soft/25 py-20 lg:py-28">
+        <div className="container-page">
+          <Reveal>
+            <p className="text-h2 mx-auto max-w-3xl text-center text-navy">{breathingStatement}</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Destination Explorer */}
       <section className="section-y bg-surface">
-        <div className="container-page grid gap-12 lg:grid-cols-2">
-          <div>
-            <SectionHeading
-              eyebrow="Destinations"
-              title="Popular destinations to compare"
-              description="Supported destinations will be confirmed. These are shown as editable placeholders."
-            />
-            <ul className="mt-8 space-y-2">
-              {destinations.map((d) => (
-                <li key={d.slug}>
-                  <Link
-                    href={`/destinations/${d.slug}`}
-                    className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3.5 text-sm font-semibold text-navy transition-colors hover:border-blue/40 hover:text-blue"
-                  >
-                    {d.name}
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Destinations"
+            title="Explore where you could study"
+            description="Select a destination to see what matters most when comparing it to the others."
+          />
+          <div className="mt-12">
+            <DestinationExplorer />
           </div>
-          <div>
-            <SectionHeading eyebrow="Support" title="How Unilink supports you" />
+        </div>
+      </section>
+
+      {/* Study Abroad Journey */}
+      <section className="section-y bg-navy">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Your journey"
+            title="What happens between considering it and actually going"
+            tone="inverted"
+          />
+          <div className="mt-12">
+            <StudyAbroadJourney />
+          </div>
+        </div>
+      </section>
+
+      {/* Application Calendar */}
+      <section className="section-y">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Timing"
+            title="Studying abroad takes planning ahead"
+            description="Intakes vary by university, country and programme, so there's no single deadline to work from. Here's the sequence to plan around instead."
+          />
+          <div className="mt-12">
+            <ApplicationCalendar />
+          </div>
+        </div>
+      </section>
+
+      {/* Support Track + condensed services */}
+      <section className="section-y bg-surface">
+        <div className="container-page">
+          <SectionHeading eyebrow="Support" title="Where UniLink fits in" />
+          <div className="mt-12">
+            <SupportTrack />
+          </div>
+
+          <div className="mt-16 border-t border-border pt-12 lg:mt-20 lg:pt-14">
+            <p className="eyebrow">Where to start</p>
+            <h3 className="text-h3 mt-2 max-w-xl">
+              Three areas of support cover most of a study-abroad decision
+            </h3>
+            <div className="mt-8 grid gap-8 sm:grid-cols-3">
+              {howWeHelpCategories.map((c, i) => (
+                <div key={c.title}>
+                  <p className="text-xs font-bold text-blue">{String(i + 1).padStart(2, "0")}</p>
+                  <h4 className="mt-2 text-base font-bold text-navy">{c.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {c.description}
+                  </p>
+                  <div className="mt-3">
+                    <TextLink to={c.to}>Learn more</TextLink>
+                  </div>
+                </div>
+              ))}
+            </div>
             <div className="mt-8">
-              <CheckList
-                items={[
-                  "A structured review of your academic profile",
-                  "Destination and programme comparison against your goals",
-                  "Document preparation and application review",
-                  "Guidance through visa preparation and pre-departure planning",
-                ]}
-              />
+              <TextLink to="/services">Explore all UniLink services</TextLink>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section-y">
-        <div className="container-page">
-          <SectionHeading eyebrow="Services" title="Where guidance makes the difference" />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <ServiceCard key={s.slug} service={s} />
-            ))}
+      {/* Pre-CTA photo strip */}
+      <section className="border-t border-border bg-surface">
+        <div className="container-page grid items-center gap-8 py-16 lg:grid-cols-[1fr_1.3fr] lg:py-20">
+          <div className="overflow-hidden rounded-2xl border border-border shadow-card">
+            <Image
+              src={heroImages.destinations.src}
+              alt={heroImages.destinations.alt}
+              className="aspect-4/3 w-full object-cover"
+            />
           </div>
+          <Reveal>
+            <p className="text-h3 max-w-md text-navy">
+              Every study-abroad plan eventually leads to a departure date. The work now is making
+              sure you&apos;re ready for it.
+            </p>
+          </Reveal>
         </div>
       </section>
 
