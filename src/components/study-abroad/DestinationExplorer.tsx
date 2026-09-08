@@ -11,12 +11,12 @@ export function DestinationExplorer() {
   const active = worldMapDestinations.find((d) => d.slug === activeSlug)!;
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:items-center lg:gap-12">
-      <div>
+    <div className="grid min-w-0 gap-10 lg:grid-cols-[3fr_2fr] lg:items-center lg:gap-12">
+      <div className="min-w-0">
         <WorldMap activeSlug={activeSlug} onSelect={setActiveSlug} />
 
         {/* Destination names as real controls, not just map coordinates. */}
-        <ul className="scrollbar-hide mt-6 flex gap-2 overflow-x-auto sm:flex-wrap sm:overflow-visible">
+        <ul className="scrollbar-hide mt-6 flex min-w-0 gap-2 overflow-x-auto sm:flex-wrap sm:overflow-visible">
           {worldMapDestinations.map((d) => (
             <li key={d.slug} className="shrink-0">
               <button
