@@ -119,6 +119,7 @@ export async function sendEmail(
           details: parsedParams.data.details,
         }),
       );
+
       await sendViaEmailJs(process.env["EMAILJS_AUTOREPLY_TEMPLATE_ID"]!, {
         to_email: parsedParams.data.reply_to,
         subject: `We've received your submission — ${company.shortName}`,
