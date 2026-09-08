@@ -8,6 +8,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { unilinkJourney } from "@/data/site";
+import { cn } from "@/lib/utils";
 
 const icons: Record<string, LucideIcon> = {
   compass: Compass,
@@ -42,7 +43,12 @@ export function JourneyStages() {
                 />
               </>
             )}
-            <span className="absolute left-0 top-0 z-10 inline-flex size-12 items-center justify-center rounded-full border border-border bg-card text-blue shadow-card md:static">
+            <span
+              className={cn(
+                "absolute left-0 top-0 z-10 inline-flex size-12 items-center justify-center rounded-full border bg-card shadow-card md:static",
+                i % 2 === 0 ? "border-blue/30 text-blue" : "border-orange/30 text-orange",
+              )}
+            >
               <Icon className="size-5" aria-hidden="true" />
             </span>
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground md:mt-4">
