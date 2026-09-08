@@ -130,7 +130,7 @@ export default function Home() {
               />
             </div>
             <div className="absolute -bottom-5 left-6 hidden rounded-full border border-border bg-card px-5 py-2.5 shadow-lift sm:block">
-              <p className="text-xs font-bold tracking-[0.1em] text-navy uppercase">
+              <p className="text-xs font-bold tracking-widest text-navy uppercase">
                 Discover <span className="text-blue">·</span> Explore{" "}
                 <span className="text-blue">·</span> Plan <span className="text-blue">·</span>{" "}
                 Prepare <span className="text-blue">·</span> Connect
@@ -269,7 +269,7 @@ export default function Home() {
       </section>
 
       {/* Editorial break */}
-      <section className="relative flex min-h-[22rem] items-center overflow-hidden py-20">
+      <section className="relative flex min-h-88 items-center overflow-hidden py-20">
         <ParallaxImage
           src={editorialBreakImg.src}
           alt=""
