@@ -1,5 +1,4 @@
-"use server";
-
+import emailjs from "@emailjs/browser";
 import { z } from "zod";
 import { render } from "@react-email/render";
 import { formatEmailBody } from "./format";
@@ -10,8 +9,6 @@ import PathwayEmail from "@/emails/PathwayEmail";
 import ApplicationEmail from "@/emails/ApplicationEmail";
 import AutoReplyEmail from "@/emails/AutoReplyEmail";
 import type { EmailDetails } from "@/emails/layout/DetailsTable";
-
-const EMAILJS_ENDPOINT = "https://api.emailjs.com/api/v1.0/email/send";
 
 export type EmailTemplateKey = "contact" | "consultation" | "pathway" | "application";
 
@@ -48,11 +45,10 @@ const TEMPLATE_COMPONENTS: Record<
 
 function isConfigured(): boolean {
   return Boolean(
-    process.env["EMAILJS_SERVICE_ID"] &&
-    process.env["EMAILJS_PUBLIC_KEY"] &&
-    process.env["EMAILJS_PRIVATE_KEY"] &&
-    process.env["EMAILJS_NOTIFICATION_TEMPLATE_ID"] &&
-    process.env["EMAILJS_AUTOREPLY_TEMPLATE_ID"],
+    process.env["NEXT_PUBLIC_EMAILJS_SERVICE_ID"] &&
+    process.env["NEXT_PUBLIC_EMAILJS_PUBLIC_KEY"] &&
+    process.env["NEXT_PUBLIC_EMAILJS_NOTIFICATION_TEMPLATE_ID"] &&
+    process.env["NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID"],
   );
 }
 
@@ -60,22 +56,9 @@ async function sendViaEmailJs(
   templateId: string,
   templateParams: Record<string, string>,
 ): Promise<void> {
-  const response = await fetch(EMAILJS_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      service_id: process.env["EMAILJS_SERVICE_ID"],
-      template_id: templateId,
-      user_id: process.env["EMAILJS_PUBLIC_KEY"],
-      accessToken: process.env["EMAILJS_PRIVATE_KEY"],
-      template_params: templateParams,
-    }),
+  await emailjs.send(process.env["NEXT_PUBLIC_EMAILJS_SERVICE_ID"]!, templateId, templateParams, {
+    publicKey: process.env["NEXT_PUBLIC_EMAILJS_PUBLIC_KEY"]!,
   });
-
-  if (!response.ok) {
-    const message = (await response.text()).trim();
-    throw new Error(message || `EmailJS request failed with status ${response.status}`);
-  }
 }
 
 export async function sendEmail(
@@ -92,7 +75,7 @@ export async function sendEmail(
   }
 
   try {
-    const toEmail = process.env["EMAILJS_TO_EMAIL"] || "info@unilink-nexus.com";
+    const toEmail = process.env["NEXT_PUBLIC_EMAILJS_TO_EMAIL"] || "info@unilink-nexus.com";
     const subject = `${TEMPLATE_SUBJECTS[template]} — ${parsedParams.data.from_name}`;
 
     const Component = TEMPLATE_COMPONENTS[template];
@@ -101,7 +84,7 @@ export async function sendEmail(
     );
     const text = formatEmailBody(parsedParams.data.details);
 
-    await sendViaEmailJs(process.env["EMAILJS_NOTIFICATION_TEMPLATE_ID"]!, {
+    await sendViaEmailJs(process.env["NEXT_PUBLIC_EMAILJS_NOTIFICATION_TEMPLATE_ID"]!, {
       to_email: toEmail,
       reply_to: parsedParams.data.reply_to,
       subject,
@@ -120,7 +103,7 @@ export async function sendEmail(
         }),
       );
 
-      await sendViaEmailJs(process.env["EMAILJS_AUTOREPLY_TEMPLATE_ID"]!, {
+      await sendViaEmailJs(process.env["NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID"]!, {
         to_email: parsedParams.data.reply_to,
         subject: `We've received your submission — ${company.shortName}`,
         text_content: `Thanks for reaching out. We've received your ${parsedParams.data.form_name.toLowerCase()} and will be in touch shortly.`,
