@@ -370,6 +370,14 @@ const destinationFacts: DestinationFacts[] = [
     why: "A small English-speaking European base worth comparing.",
   },
   {
+    name: "Hungary",
+    region: "Europe",
+    language: "English-taught programmes exist alongside Hungarian.",
+    costBand: "moderate",
+    distance: "far",
+    why: "Affordable EU degrees, strong in medicine, with a scholarship open to Burundian students.",
+  },
+  {
     name: "Türkiye",
     region: "Europe",
     language: "English-taught programmes exist alongside Turkish.",

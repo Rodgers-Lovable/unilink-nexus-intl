@@ -10,10 +10,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { countries } from "@/data/countries";
 import {
   academicLevelOptions,
-  applicationDestinationOptions,
   applicationSteps,
   emptyApplicationDraft,
   getIntakeOptions,
+  legacyDestinationOptions,
+  flagshipDestinationOptions,
+  otherDestinationOptions,
   performanceOptions,
   targetLevelOptions,
   type ApplicationDraft,
@@ -21,6 +23,11 @@ import {
   type ApplicationStepKey,
   type StudentApplication,
 } from "@/lib/application/types";
+import {
+  formatBytes,
+  totalEncodedBytes,
+  type ApplicationDocument,
+} from "@/lib/application/attachments";
 import { validateStep, type FieldErrors } from "@/lib/application/validation";
 import {
   APPLICATION_DISCLAIMER,
@@ -35,6 +42,7 @@ import {
 import {
   ComboboxField,
   ErrorSummary,
+  FileUploadField,
   MultiSelectField,
   SelectField,
   StepNav,
@@ -166,10 +174,13 @@ export function ApplicationWizard() {
   const [submitted, setSubmitted] = useState<StudentApplication | null>(null);
   const [source, setSource] = useState<ApplicationSource>("direct_application");
   const [prefilled, setPrefilled] = useState(false);
+  const [documents, setDocuments] = useState<ApplicationDocument[]>([]);
+  const [documentsError, setDocumentsError] = useState<string | null>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const startedTracked = useRef(false);
 
   const intakeOptions = useMemo(() => getIntakeOptions(), []);
+  const totalDocumentBytes = useMemo(() => totalEncodedBytes(documents), [documents]);
   const step = applicationSteps[stepIndex]?.key as ApplicationStepKey;
 
   // Hydrate from a saved draft and/or a Pathway Advisor handoff.
@@ -251,6 +262,7 @@ export function ApplicationWizard() {
           "Consent given": record.consent ? "Yes" : "No",
           Submitted: new Date(record.createdAt).toLocaleString(),
         },
+        attachments: documents.map((doc) => ({ name: doc.file.name, dataUrl: doc.dataUrl })),
       });
 
       if (delivery.status === "error") setDeliveryFailed(true);
@@ -501,7 +513,12 @@ export function ApplicationWizard() {
                 <MultiSelectField
                   label="Where would you like to study?"
                   required
-                  options={applicationDestinationOptions}
+                  groups={[
+                    { label: "Flagship destinations", options: flagshipDestinationOptions },
+                    { label: "Also available", options: legacyDestinationOptions },
+                    { label: "Other destinations", options: otherDestinationOptions },
+                    { label: "", options: ["I'm not sure yet"] },
+                  ]}
                   values={draft.studyPlan.preferredDestinations}
                   onToggle={toggleDestination}
                   error={errors["preferredDestinations"]}
@@ -514,6 +531,14 @@ export function ApplicationWizard() {
                   onChange={(v) => setStudyPlan({ preferredIntake: v })}
                   error={errors["preferredIntake"]}
                   placeholder="Optional"
+                />
+                <FileUploadField
+                  label="Supporting documents (optional)"
+                  hint="Already have transcripts, certificates or your passport bio page ready? Attach them now so your adviser has everything at once. PDF, JPG, PNG or WEBP."
+                  documents={documents}
+                  onChange={setDocuments}
+                  error={documentsError ?? undefined}
+                  onError={setDocumentsError}
                 />
                 <TextAreaField
                   label="Anything else you'd like your UniLink adviser to know?"
@@ -577,6 +602,13 @@ export function ApplicationWizard() {
                       value: draft.studyPlan.preferredDestinations.join(", "),
                     },
                     { label: "Preferred intake", value: draft.studyPlan.preferredIntake },
+                    {
+                      label: "Documents attached",
+                      value:
+                        documents.length > 0
+                          ? `${documents.length} file${documents.length > 1 ? "s" : ""} (${formatBytes(totalDocumentBytes)})`
+                          : "None",
+                    },
                     { label: "Additional information", value: draft.additionalInformation },
                   ]}
                 />

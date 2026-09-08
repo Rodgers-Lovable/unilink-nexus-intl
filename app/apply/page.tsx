@@ -26,8 +26,8 @@ const assurances = [
   },
   {
     icon: ClipboardList,
-    title: "No documents needed yet",
-    body: "Share what you know now. Transcripts and certificates come later, with adviser support.",
+    title: "Documents optional at this stage",
+    body: "Already have transcripts or a passport copy ready? Attach them in Study Plans. Otherwise, share what you know now and bring documents later with adviser support.",
   },
   {
     icon: ShieldCheck,

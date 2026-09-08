@@ -19,11 +19,17 @@ export type EmailSendResult =
 
 const detailValueSchema = z.union([z.string(), z.array(z.string())]);
 
+const attachmentSchema = z.object({
+  name: z.string(),
+  dataUrl: z.string(),
+});
+
 const paramsSchema = z.object({
   form_name: z.string(),
   from_name: z.string(),
   reply_to: z.string(),
   details: z.record(detailValueSchema.optional()),
+  attachments: z.array(attachmentSchema).max(3).optional(),
 });
 
 const TEMPLATE_SUBJECTS: Record<EmailTemplateKey, string> = {
@@ -63,7 +69,13 @@ async function sendViaEmailJs(
 
 export async function sendEmail(
   template: EmailTemplateKey,
-  params: { form_name: string; from_name: string; reply_to: string; details: EmailDetails },
+  params: {
+    form_name: string;
+    from_name: string;
+    reply_to: string;
+    details: EmailDetails;
+    attachments?: { name: string; dataUrl: string }[];
+  },
 ): Promise<EmailSendResult> {
   const parsedParams = paramsSchema.safeParse(params);
   if (!parsedParams.success) {
@@ -84,12 +96,22 @@ export async function sendEmail(
     );
     const text = formatEmailBody(parsedParams.data.details);
 
+    // Attachment slots the EmailJS notification template must declare as "File
+    // Attachments" variables (attachment_1..3) for these to actually deliver —
+    // see src/lib/application/attachments.ts for the size-limit reasoning.
+    const attachmentParams: Record<string, string> = {};
+    (parsedParams.data.attachments ?? []).forEach((attachment, index) => {
+      attachmentParams[`attachment_${index + 1}`] = attachment.dataUrl;
+      attachmentParams[`attachment_${index + 1}_name`] = attachment.name;
+    });
+
     await sendViaEmailJs(process.env["NEXT_PUBLIC_EMAILJS_NOTIFICATION_TEMPLATE_ID"]!, {
       to_email: toEmail,
       reply_to: parsedParams.data.reply_to,
       subject,
       text_content: text,
       html_content: html,
+      ...attachmentParams,
     });
 
     // Best-effort confirmation back to the submitter — a failure here doesn't

@@ -24,8 +24,18 @@ import caImg from "@/assets/dest-canada.jpg";
 import auImg from "@/assets/dest-australia.jpg";
 import usImg from "@/assets/dest-united-states.jpg";
 import deImg from "@/assets/dest-germany.jpg";
+import myImg from "@/assets/dest-malaysia.jpg";
+import aeImg from "@/assets/dest-uae.jpg";
+import muImg from "@/assets/dest-mauritius.jpg";
+import mtImg from "@/assets/dest-malta.jpg";
+import huImg from "@/assets/dest-hungary.jpg";
 
 export const destinationImages: Record<string, typeof ukImg> = {
+  malaysia: myImg,
+  uae: aeImg,
+  mauritius: muImg,
+  malta: mtImg,
+  hungary: huImg,
   "united-kingdom": ukImg,
   canada: caImg,
   australia: auImg,
