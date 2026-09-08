@@ -27,8 +27,7 @@ import {
   mapsHref,
   type IAddress,
 } from "@/data/company";
-import { saveLead } from "@/lib/leads";
-import { sendEmail } from "@/lib/email/sendgrid";
+import { sendEmail } from "@/lib/email/emailjs";
 import { trackEvent } from "@/lib/analytics/umami";
 
 type Status = "idle" | "sending" | "sent" | "skipped" | "error";
@@ -172,16 +171,6 @@ export function ContactForm() {
 
   const send = async () => {
     setStatus("sending");
-
-    await saveLead({
-      fullName: values.fullName,
-      email: values.email,
-      phone: values.phone,
-      notes: `I am a: ${values.audience}\n\n${values.message}`,
-      source: "contact-form",
-      preferredContactMethod: "Email",
-      consent: true,
-    });
 
     const result = await sendEmail("contact", {
       form_name: "Website contact form",

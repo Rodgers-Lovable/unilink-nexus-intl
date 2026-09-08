@@ -8,8 +8,8 @@ import { storeApplicationHandoff } from "@/lib/application/applicationService";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { QuestionBlock } from "./PathwayShell";
-import { leadFromPathway, saveLead, type ContactMethod } from "@/lib/leads";
-import { sendEmail } from "@/lib/email/sendgrid";
+import type { ContactMethod } from "@/lib/leads";
+import { sendEmail } from "@/lib/email/emailjs";
 import { company } from "@/data/company";
 import { trackEvent } from "@/lib/analytics/umami";
 import type { PathwayProfile, PathwayResult } from "@/lib/pathway/types";
@@ -44,15 +44,6 @@ export function PathwayResults({
     setSendError(false);
 
     const notes = [profile.notes, form.notes].filter(Boolean).join(" | ");
-    await saveLead({
-      ...leadFromPathway(profile, result, {
-        fullName: form.fullName,
-        email: form.email,
-        phone: form.phone,
-        preferredContactMethod: method,
-      }),
-      notes,
-    });
 
     const delivery = await sendEmail("pathway", {
       form_name: "Pathway Advisor enquiry",
