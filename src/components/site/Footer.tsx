@@ -29,7 +29,7 @@ export function Footer() {
     <footer className="bg-navy text-white/80 border-t border-white/10">
       <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
-          <Logo variant="light" size="h-30" />
+          <Logo variant="full" size="h-24" />
           <p className="max-w-xs text-sm leading-relaxed">
             Personalised international education guidance, from first questions to departure.
           </p>
@@ -58,13 +58,13 @@ export function Footer() {
           <ul className="mt-4 space-y-3 text-sm">
             {quickLinks.map((l) => (
               <li key={l.to}>
-                <Link href={l.to} className="transition-colors hover:text-white">
+                <Link href={l.to} className="transition-colors hover:text-blue">
                   {l.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/contact" className="transition-colors hover:text-white">
+              <Link href="/contact" className="transition-colors hover:text-blue">
                 Contact
               </Link>
             </li>
@@ -84,7 +84,7 @@ export function Footer() {
                 <p className="mt-1 pl-6 text-white/70">{office.address}</p>
                 <a
                   href={telHref(office.phone)}
-                  className="mt-1 flex items-center gap-2 pl-6 transition-colors hover:text-white"
+                  className="mt-1 flex items-center gap-2 pl-6 transition-colors hover:text-blue"
                 >
                   <Phone className="size-3.5 shrink-0" aria-hidden="true" />
                   {office.phone}
@@ -99,7 +99,7 @@ export function Footer() {
                 href={whatsappHref(contactInfo.whatsapp)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-white"
+                className="flex items-center gap-2 transition-colors hover:text-blue"
               >
                 <MessageCircle className="size-4 shrink-0" aria-hidden="true" />
                 WhatsApp us
@@ -108,7 +108,7 @@ export function Footer() {
             <li>
               <a
                 href={`mailto:${contactInfo.email}`}
-                className="flex items-center gap-2 transition-colors hover:text-white"
+                className="flex items-center gap-2 transition-colors hover:text-blue"
               >
                 <Mail className="size-4 shrink-0" aria-hidden="true" />
                 {contactInfo.email}
@@ -140,7 +140,7 @@ export function Footer() {
             <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
               {legalLinks.map((l, i) => (
                 <li key={l.page} className="flex items-center gap-4">
-                  <Link href={`/legal/${l.page}`} className="transition-colors hover:text-white">
+                  <Link href={`/legal/${l.page}`} className="transition-colors hover:text-blue">
                     {l.label}
                   </Link>
                   {i < legalLinks.length - 1 && (
